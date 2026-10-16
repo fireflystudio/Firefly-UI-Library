@@ -17,7 +17,7 @@ export function Dashboard({ items, categories }: { items: CatalogueItem[]; categ
   const visible = filter === "all" ? groups : groups.filter((g) => g.category.id === filter);
 
   return (
-    <div className="flex flex-col gap-14 pb-24 pt-8 md:gap-16 md:pt-10">
+    <div className="flex flex-col gap-14 pb-24 md:gap-16">
       {visible.map((g) => (
         <Reveal
           key={`${g.category.id}-${filter}`}
