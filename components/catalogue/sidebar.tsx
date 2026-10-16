@@ -36,6 +36,17 @@ export function Sidebar({ categories, total, itemCategories }: Props) {
           {c.name}
         </SidebarLink>
       ))}
+      <div aria-hidden className="my-3 h-px bg-border-06" />
+      <Link
+        href="/components/firefly-base"
+        aria-current={active === "base" ? "page" : undefined}
+        className={`flex flex-col gap-0.5 rounded-tile px-3 py-[7px] transition-[background-color,color] duration-200 ease-out ${
+          active === "base" ? "bg-surface-muted text-text-primary" : "text-text-nav hover:bg-surface-muted/60 hover:text-text-primary"
+        }`}
+      >
+        <span className="text-[13px] font-medium leading-[normal]">Base package</span>
+        <span className="text-[12px] leading-[normal] text-text-quaternary">Tokens, motion, buttons · install first</span>
+      </Link>
     </nav>
   );
 }
@@ -72,6 +83,9 @@ export function CategoryBar({ categories, total, itemCategories }: Props) {
           {c.name} <span className="font-mono text-[11px] opacity-70">{c.count}</span>
         </Link>
       ))}
+      <Link href="/components/firefly-base" aria-current={active === "base" ? "page" : undefined} className={pill(active === "base")}>
+        Base package
+      </Link>
     </nav>
   );
 }

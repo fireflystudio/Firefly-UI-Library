@@ -11,6 +11,7 @@ export function Dashboard({ items, categories }: { items: CatalogueItem[]; categ
   const params = useSearchParams();
   const filter = params.get("category") ?? "all";
   const groups = categories
+    .filter((c) => c.id !== "base")
     .map((c) => ({ category: c, items: items.filter((i) => i.category === c.id) }))
     .filter((g) => g.items.length > 0);
   const visible = filter === "all" ? groups : groups.filter((g) => g.category.id === filter);
