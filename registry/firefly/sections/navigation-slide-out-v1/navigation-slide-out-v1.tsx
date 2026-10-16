@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type ReactNode } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+  type ReactNode,
+} from "react";
 import { Button } from "@/components/ui/button";
 
 export type SlideOutLink = { label: string; href: string };
@@ -104,7 +111,7 @@ export function NavigationSlideOut({
   const trapFocus = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     if (e.key !== "Tab" || !panelRef.current) return;
     const focusable = panelRef.current.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
     if (!focusable.length) return;
     const first = focusable[0];
@@ -130,7 +137,9 @@ export function NavigationSlideOut({
         <div
           aria-hidden
           className={`absolute inset-x-0 top-0 h-[72px] origin-top border-b transition-transform duration-300 ease-out md:h-[76px] ${
-            scrolled ? "scale-y-[0.842] border-border-06 bg-surface-page/85 backdrop-blur-xl" : "border-transparent bg-surface-page"
+            scrolled
+              ? "scale-y-[0.842] border-border-06 bg-surface-page/85 backdrop-blur-xl"
+              : "border-transparent bg-surface-page"
           }`}
         />
         <nav
@@ -140,7 +149,11 @@ export function NavigationSlideOut({
           }`}
         >
           <div className="flex min-w-0 items-center gap-10">
-            <Link href={brandHref} aria-label={brandLabel} className="flex min-w-0 items-center rounded-chip">
+            <Link
+              href={brandHref}
+              aria-label={brandLabel}
+              className="flex min-w-0 items-center rounded-chip"
+            >
               {brand ?? <DefaultBrand />}
             </Link>
             <ul className="hidden items-center gap-6 md:flex">
@@ -162,7 +175,10 @@ export function NavigationSlideOut({
 
           <div className="flex shrink-0 items-center gap-3 md:gap-4">
             {secondaryLink ? (
-              <Link href={secondaryLink.href} className={`hidden md:inline-block ${quietLink}`}>
+              <Link
+                href={secondaryLink.href}
+                className={`hidden md:inline-block ${quietLink}`}
+              >
                 {secondaryLink.label}
               </Link>
             ) : null}
@@ -191,7 +207,9 @@ export function NavigationSlideOut({
         aria-hidden
         onClick={close}
         className={`fixed inset-0 z-[60] bg-surface-inverse/40 duration-[350ms] ease-out motion-reduce:transition-none ${
-          open ? "visible opacity-100 transition-[opacity]" : "invisible opacity-0 transition-[opacity,visibility]"
+          open
+            ? "visible opacity-100 transition-[opacity]"
+            : "invisible opacity-0 transition-[opacity,visibility]"
         }`}
       />
 
@@ -205,14 +223,22 @@ export function NavigationSlideOut({
         inert={!open}
         onKeyDown={trapFocus}
         className={`fixed inset-y-0 right-0 z-[70] flex w-[min(460px,92vw)] flex-col overflow-y-auto rounded-l-[24px] bg-surface-primary p-6 duration-[400ms] ease-out-soft motion-reduce:transition-none md:p-8 ${
-          open ? "visible translate-x-0 transition-[translate]" : "invisible translate-x-full transition-[translate,visibility]"
+          open
+            ? "visible translate-x-0 transition-[translate]"
+            : "invisible translate-x-full transition-[translate,visibility]"
         }`}
       >
         <div className="flex items-start justify-between gap-4">
-          <p className="text-[24px] font-normal leading-[1.1] tracking-[-0.02em] text-text-primary md:text-[28px]">{menuTitle}</p>
+          <p className="text-[24px] font-normal leading-[1.1] tracking-[-0.02em] text-text-primary md:text-[28px]">
+            {menuTitle}
+          </p>
           <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-2 md:gap-x-4">
             {secondaryLink ? (
-              <Link href={secondaryLink.href} onClick={close} className={quietLink}>
+              <Link
+                href={secondaryLink.href}
+                onClick={close}
+                className={quietLink}
+              >
                 {secondaryLink.label}
               </Link>
             ) : null}
@@ -221,13 +247,21 @@ export function NavigationSlideOut({
                 {cta.label}
               </Button>
             ) : null}
-            <button ref={closeButtonRef} type="button" aria-label="Close menu" onClick={close} className={iconButton}>
+            <button
+              ref={closeButtonRef}
+              type="button"
+              aria-label="Close menu"
+              onClick={close}
+              className={iconButton}
+            >
               <DotGrid />
             </button>
           </div>
         </div>
 
-        <p className="mt-10 font-mono text-[12px] uppercase leading-[1.3] tracking-[0.08em] text-text-quaternary">{exploreLabel}</p>
+        <p className="mt-10 font-mono text-[12px] uppercase leading-[1.3] tracking-[0.08em] text-text-quaternary">
+          {exploreLabel}
+        </p>
         <ul className="mb-12 mt-3 flex flex-col">
           {links.map((l) => (
             <li key={l.href}>
@@ -244,10 +278,14 @@ export function NavigationSlideOut({
         </ul>
 
         {groups.length ? (
-          <div className={`mt-auto grid gap-6 border-t border-border-06 pt-6 ${groups.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
+          <div
+            className={`mt-auto grid gap-6 border-t border-border-06 pt-6 ${groups.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}
+          >
             {groups.slice(0, 2).map((group) => (
               <div key={group.title} className="flex min-w-0 flex-col gap-2.5">
-                <p className="text-[13px] leading-[1.3] text-text-quaternary">{group.title}</p>
+                <p className="text-[13px] leading-[1.3] text-text-quaternary">
+                  {group.title}
+                </p>
                 <ul className="flex flex-col gap-2.5">
                   {group.links.map((l) => (
                     <li key={l.href}>
@@ -285,7 +323,9 @@ function DefaultBrand() {
   return (
     <span className="flex items-center gap-2">
       <span aria-hidden className="block size-6 rounded-chip bg-text-primary" />
-      <span className="text-[16px] font-medium leading-none tracking-[-0.01em] text-text-primary">Brand</span>
+      <span className="text-[16px] font-medium leading-none tracking-[-0.01em] text-text-primary">
+        Brand
+      </span>
     </span>
   );
 }

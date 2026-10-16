@@ -48,21 +48,8 @@ export default function Example({ inBuild }: PreviewProps) {
         cta={{ label: "Join waitlist", href: "#cta" }}
       />
       {inBuild ? null : (
-        /* Demo page body so the scroll compaction can be seen (not part of the component): the Startupmap homepage headline */
-        <div aria-hidden className="bg-surface-page px-5 pb-24 pt-[calc(72px+56px)] md:px-6 md:pt-[calc(76px+80px)] xl:pt-[calc(76px+120px)]">
-          <div className="mx-auto flex max-w-[1392px] flex-col items-center gap-9 md:gap-12 xl:gap-14">
-            <p className="max-w-[350px] text-center text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:max-w-[720px] md:text-[48px] xl:max-w-[1148px] xl:text-[64px]">
-              <span className="block">Every deal, founder and fund.</span>
-              <span className="block text-text-muted">On one map.</span>
-            </p>
-            <div className="aspect-[350/420] w-full rounded-frame bg-surface-muted md:aspect-[1392/720]" />
-            <div className="grid w-full grid-cols-2 gap-4 md:grid-cols-3">
-              <div className="aspect-[4/3] rounded-frame bg-surface-muted" />
-              <div className="aspect-[4/3] rounded-frame bg-surface-muted" />
-              <div className="aspect-[4/3] rounded-frame bg-surface-muted" />
-            </div>
-          </div>
-        </div>
+        /* Blank page below the bar so the frame can scroll and the menu has room; nothing else to look at */
+        <div aria-hidden className="h-[640px] bg-surface-page" />
       )}
     </>
   );

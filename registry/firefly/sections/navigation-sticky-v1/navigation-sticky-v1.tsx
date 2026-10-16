@@ -67,7 +67,9 @@ export function NavigationSticky({
       <div
         aria-hidden
         className={`absolute inset-x-0 top-0 h-[72px] origin-top border-b transition-transform duration-300 ease-out md:h-[76px] ${
-          scrolled || open ? "border-border-06 bg-surface-page/85 backdrop-blur-xl" : "border-transparent bg-surface-page"
+          scrolled || open
+            ? "border-border-06 bg-surface-page/85 backdrop-blur-xl"
+            : "border-transparent bg-surface-page"
         } ${scrolled && !open ? "scale-y-[0.842]" : ""}`}
       />
       <nav
@@ -77,7 +79,11 @@ export function NavigationSticky({
         }`}
       >
         <div className="flex min-w-0 items-center gap-10">
-          <Link href={brandHref} aria-label={brandLabel} className="flex min-w-0 items-center rounded-chip">
+          <Link
+            href={brandHref}
+            aria-label={brandLabel}
+            className="flex min-w-0 items-center rounded-chip"
+          >
             {brand ?? <DefaultBrand />}
           </Link>
           <ul className="hidden items-center gap-6 md:flex">
@@ -111,15 +117,25 @@ export function NavigationSticky({
             onClick={() => setOpen((o) => !o)}
             className="flex h-8 w-[26px] cursor-pointer flex-col items-center justify-center gap-[5px] md:hidden"
           >
-            <span className={`block h-[1.5px] w-[18px] bg-icon-primary transition-transform duration-200 ease-out ${open ? "translate-y-[6.5px] rotate-45" : ""}`} />
-            <span className={`block h-[1.5px] w-[18px] bg-icon-primary transition-opacity duration-200 ease-out ${open ? "opacity-0" : ""}`} />
-            <span className={`block h-[1.5px] w-[18px] bg-icon-primary transition-transform duration-200 ease-out ${open ? "-translate-y-[6.5px] -rotate-45" : ""}`} />
+            <span
+              className={`block h-[1.5px] w-[18px] bg-icon-primary transition-transform duration-200 ease-out ${open ? "translate-y-[6.5px] rotate-45" : ""}`}
+            />
+            <span
+              className={`block h-[1.5px] w-[18px] bg-icon-primary transition-opacity duration-200 ease-out ${open ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block h-[1.5px] w-[18px] bg-icon-primary transition-transform duration-200 ease-out ${open ? "-translate-y-[6.5px] -rotate-45" : ""}`}
+            />
           </button>
         </div>
       </nav>
 
       {/* Mobile panel */}
-      <div id={menuId} hidden={!open} className="relative border-b border-border-06 bg-surface-page px-5 pb-6 md:hidden">
+      <div
+        id={menuId}
+        hidden={!open}
+        className="relative border-b border-border-06 bg-surface-page px-5 pb-6 md:hidden"
+      >
         <ul className="flex flex-col">
           {links.map((l) => (
             <li key={l.href}>
@@ -143,7 +159,9 @@ function DefaultBrand() {
   return (
     <span className="flex items-center gap-2">
       <span aria-hidden className="block size-6 rounded-chip bg-text-primary" />
-      <span className="text-[16px] font-medium leading-none tracking-[-0.01em] text-text-primary">Brand</span>
+      <span className="text-[16px] font-medium leading-none tracking-[-0.01em] text-text-primary">
+        Brand
+      </span>
     </span>
   );
 }
