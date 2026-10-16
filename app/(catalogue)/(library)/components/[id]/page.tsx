@@ -57,6 +57,7 @@ export default async function ComponentPage({ params }: { params: Params }) {
           src={`/preview/${item.id}`}
           title={item.name}
           scrollInside={item.previewScroll}
+          exampleSrc={item.hasExample ? `/preview/${item.id}/example` : undefined}
           actions={<AddToBuild id={item.id} name={item.name} compact />}
         />
       </div>

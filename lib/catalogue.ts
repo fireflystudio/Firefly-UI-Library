@@ -1,5 +1,5 @@
 // Server-side only (reads the registry folder). Pages pass the resulting data to client components.
-import { readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { CATEGORIES } from "./categories";
 import { BASE_ITEM_ID } from "./registry-url";
@@ -28,7 +28,7 @@ export async function getItems(): Promise<CatalogueItem[]> {
       if (mod.meta.id !== id) {
         throw new Error(`registry/firefly/sections/${id}/meta.ts declares id "${mod.meta.id}" — it must equal the folder name.`);
       }
-      return mod.meta;
+      return { ...mod.meta, hasExample: hasExample(id) };
     })
   );
   const categoryRank = new Map(CATEGORIES.map((c, i) => [c.id, i]));
@@ -45,5 +45,11 @@ export async function getItems(): Promise<CatalogueItem[]> {
 export async function getItem(id: string): Promise<CatalogueItem | undefined> {
   if (id === BASE_ITEM_ID) return (await import("@/registry/firefly/base/meta")).meta;
   if (!listSectionIds().includes(id)) return undefined;
-  return (await import(`@/registry/firefly/sections/${id}/meta`)).meta as CatalogueItem;
+  const meta = (await import(`@/registry/firefly/sections/${id}/meta`)).meta as CatalogueItem;
+  return { ...meta, hasExample: hasExample(id) };
+}
+
+/** A section has a "final" example when its folder contains example.tsx */
+export function hasExample(id: string): boolean {
+  return existsSync(join(SECTIONS_DIR, id, "example.tsx"));
 }

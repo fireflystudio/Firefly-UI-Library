@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { ScaledFrame } from "./scaled-frame";
+import { ViewSwitch, useViewMode } from "./view-mode";
 
 export const DEVICES = [
   { id: "mobile", label: "Mobile", width: 390 },
@@ -27,6 +28,7 @@ export function ComponentPreview({
   defaultDevice = "desktop",
   scrollInside = false,
   actions,
+  exampleSrc,
 }: {
   src: string;
   title: string;
@@ -35,7 +37,11 @@ export function ComponentPreview({
   scrollInside?: boolean;
   /** Extra toolbar buttons rendered after "Open" (e.g. Add to build) */
   actions?: ReactNode;
+  /** URL of the "final" example preview; enables the Wireframe / Final switch */
+  exampleSrc?: string;
 }) {
+  const { mode } = useViewMode();
+  const activeSrc = mode === "final" && exampleSrc ? exampleSrc : src;
   const [device, setDevice] = useState<DeviceId>(defaultDevice);
   const [reloadKey, setReloadKey] = useState(0);
   const [zoom, setZoom] = useState(1);
@@ -48,6 +54,7 @@ export function ComponentPreview({
   useEffect(() => {
     if (!fullscreen) return;
     const previous = document.documentElement.style.overflow;
+    const opener = openButtonRef.current;
     document.documentElement.style.overflow = "hidden";
     closeButtonRef.current?.focus();
     const onKey = (e: KeyboardEvent) =>
@@ -56,7 +63,7 @@ export function ComponentPreview({
     return () => {
       document.documentElement.style.overflow = previous;
       window.removeEventListener("keydown", onKey);
-      openButtonRef.current?.focus();
+      opener?.focus();
     };
   }, [fullscreen]);
   const [contentHeight, setContentHeight] = useState(0);
@@ -119,35 +126,38 @@ export function ComponentPreview({
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div
-          role="tablist"
-          aria-label="Preview width"
-          className="flex items-center rounded-pill border border-border-06 bg-surface-muted p-[3px]"
-        >
-          {DEVICES.map((d) => {
-            const active = d.id === device;
-            return (
-              <button
-                key={d.id}
-                type="button"
-                role="tab"
-                aria-selected={active}
-                onClick={() => setDevice(d.id)}
-                className={`inline-flex h-[30px] cursor-pointer items-center gap-2 rounded-pill px-3.5 text-[13px] font-medium leading-none transition-[background-color,color,box-shadow] duration-200 ease-out ${
-                  active
-                    ? "bg-surface-primary text-text-primary shadow-[0_1px_2px_0_#0000000f,0_0_0_1px_#0000000a]"
-                    : "text-text-nav hover:text-text-primary"
-                }`}
-              >
-                {d.label}
-                <span
-                  className={`hidden font-mono text-[11px] sm:inline ${active ? "text-text-quaternary" : "text-text-placeholder"}`}
+        <div className="flex flex-wrap items-center gap-2">
+          {exampleSrc ? <ViewSwitch /> : null}
+          <div
+            role="tablist"
+            aria-label="Preview width"
+            className="flex items-center rounded-pill border border-border-06 bg-surface-muted p-[3px]"
+          >
+            {DEVICES.map((d) => {
+              const active = d.id === device;
+              return (
+                <button
+                  key={d.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setDevice(d.id)}
+                  className={`inline-flex h-[30px] cursor-pointer items-center gap-2 rounded-pill px-3.5 text-[13px] font-medium leading-none transition-[background-color,color,box-shadow] duration-200 ease-out ${
+                    active
+                      ? "bg-surface-primary text-text-primary shadow-[0_1px_2px_0_#0000000f,0_0_0_1px_#0000000a]"
+                      : "text-text-nav hover:text-text-primary"
+                  }`}
                 >
-                  {d.width}
-                </span>
-              </button>
-            );
-          })}
+                  {d.label}
+                  <span
+                    className={`hidden font-mono text-[11px] sm:inline ${active ? "text-text-quaternary" : "text-text-placeholder"}`}
+                  >
+                    {d.width}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
@@ -253,10 +263,10 @@ export function ComponentPreview({
 
       <div
         ref={stageRef}
-        className="rounded-card border border-border-06 bg-surface-primary p-3 [background-image:radial-gradient(color-mix(in_srgb,var(--color-text-primary)_7%,transparent)_1px,transparent_1px)] [background-size:16px_16px] md:p-6"
+        className="rounded-card border border-border-06 bg-catalogue-bg p-3 [background-image:radial-gradient(color-mix(in_srgb,var(--color-text-primary)_9%,transparent)_1px,transparent_1px)] [background-size:16px_16px] md:p-6"
       >
         <div
-          className={`mx-auto overflow-clip border border-border-10 bg-surface-page shadow-soft transition-[width] duration-300 ease-out motion-reduce:transition-none ${
+          className={`mx-auto overflow-clip border border-border-06 bg-surface-page transition-[width] duration-300 ease-out motion-reduce:transition-none ${
             device === "desktop" ? "rounded-tile" : "rounded-frame"
           }`}
           style={{
@@ -265,7 +275,7 @@ export function ComponentPreview({
           }}
         >
           <ScaledFrame
-            src={src}
+            src={activeSrc}
             deviceWidth={current.width}
             title={`${title} at ${current.width}px`}
             reloadKey={reloadKey}
@@ -284,7 +294,7 @@ export function ComponentPreview({
           className="fixed inset-0 z-[100] bg-surface-page"
         >
           <iframe
-            src={src}
+            src={activeSrc}
             title={`${title}, full screen`}
             className="block h-full w-full border-0"
           />
@@ -293,7 +303,7 @@ export function ComponentPreview({
             type="button"
             onClick={() => setFullscreen(false)}
             aria-label="Close full-screen preview"
-            className="fixed right-4 top-4 z-10 inline-flex size-9 cursor-pointer items-center justify-center rounded-pill border border-border-10 bg-surface-primary/90 text-text-primary shadow-soft backdrop-blur-xl transition-[translate,scale,opacity] duration-200 ease-out hover:-translate-y-px active:scale-[0.98] motion-reduce:transition-none"
+            className="fixed right-4 top-4 z-10 inline-flex size-9 cursor-pointer items-center justify-center rounded-pill border border-border-10 bg-surface-primary/90 text-text-primary backdrop-blur-xl transition-[translate,scale,opacity] duration-200 ease-out hover:-translate-y-px active:scale-[0.98] motion-reduce:transition-none"
           >
             <svg
               width="14"

@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="11.2" height="11.2" viewBox="0 0 11.2 11.2" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Mask" clip-path="url(#clip0_0_6)">
+<g id="image" clip-path="url(#clip1_0_6)">
+<path id="Icon" d="M9.97422 -0.00078125C7.55782 -0.00078125 5.59922 1.95782 5.59922 4.37422V-0.00078125H-0.00078125V1.22422C-0.00078125 3.64027 1.95782 5.59922 4.37422 5.59922H-0.00078125V11.1992H1.22422C3.64027 11.1992 5.59922 9.24062 5.59922 6.82422V11.1992H11.1992V9.97422C11.1992 7.55782 9.24062 5.59922 6.82422 5.59922H11.1992V-0.00078125H9.97422Z" fill="black"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_6">
+<rect width="11.2" height="11.2" fill="white"/>
+</clipPath>
+<clipPath id="clip1_0_6">
+<rect width="11.2" height="11.2" fill="white" transform="translate(-0.000390625 -0.000390625)"/>
+</clipPath>
+</defs>
+</svg>

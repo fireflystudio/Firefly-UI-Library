@@ -137,6 +137,15 @@ export default function Preview({ inBuild }: PreviewProps) {
 ```
 `inBuild` is true when the section is stacked with others on the Build page: skip any demo filler then (only navigation needs filler). Drop the parameter if unused (lint fails on unused variables).
 
+## 7b. Final example (`example.tsx`) — the "Final" switch
+
+Next to `preview.tsx` (content-free wireframe) a section may have `example.tsx`: the **same component** filled with real, final content so the catalogue can show how the finished design looks. The catalogue detects the file automatically and offers a Wireframe / Final switch; the example is **not** shipped to sites (it is not in `meta.files`).
+
+- Default export, same shape as the preview: `export default function Example() { return <HeroSplit … /> }`. Never change the component for the example; if the real design needs something the component can't do, note it in your report (that is a component gap, not an example problem).
+- Content: exact copy from the source site (Startupmap is the agreed source for the first examples: `../startupmap/components/sections/...`). Images: copy the files from `../startupmap/public/images/...` into `public/images/examples/<id>/` (keep names) and render them with `next/image` (`fill` + `sizes` inside visual slots, `width/height` elsewhere). Logos as SVG. Do not hotlink or use Figma URLs.
+- When the source visual is an **HTML mockup** (tables, kanban, app UI built in JSX), do not rebuild it: take an element screenshot of that frame from the running Startupmap site (production build on http://localhost:3005 — a 2x PNG via Playwright `locator.screenshot({ scale: "device" })` with `deviceScaleFactor: 2`) and save it to `public/images/examples/<id>/`.
+- Verify at `/preview/<id>/example` with the same QA script (overflow, errors, reveals) at 1440 / 834 / 390, and look at the screenshot: the example should read like the real page section.
+
 ## 8. Verify before you report (the dev server is already running on http://localhost:3000 — do not start, stop or build it)
 
 1. `npx tsc --noEmit` — zero errors. `npm run lint` — zero warnings. **Never run `npm run build` while the dev server runs.**

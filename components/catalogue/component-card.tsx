@@ -5,54 +5,51 @@ import type { CatalogueItem } from "@/lib/types";
 import { CardPreview } from "./card-preview";
 import { useSelection } from "./selection";
 import { VersionPill } from "./version-pill";
+import { previewSrc, useViewMode } from "./view-mode";
 
+/** Dashboard card: live preview + name + version. The whole card opens the component; the checkbox adds it to the build. */
 export function ComponentCard({ item }: { item: CatalogueItem }) {
   const { isSelected, toggle, ready } = useSelection();
+  const { mode } = useViewMode();
+  const wireframeOnly = mode === "final" && !item.hasExample;
   const href = `/components/${item.id}`;
   const checked = ready && isSelected(item.id);
 
   return (
     <article
-      className={`group relative flex h-full flex-col overflow-clip rounded-card border bg-surface-primary transition-[translate,box-shadow,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-card-drop motion-reduce:transition-none ${
+      className={`group relative flex h-full flex-col overflow-clip rounded-card border bg-surface-primary transition-[translate,border-color] duration-200 ease-out hover:-translate-y-0.5 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-border-interactive motion-reduce:transition-none ${
         checked ? "border-text-primary/40" : "border-border-06"
       }`}
     >
-      <Link href={href} aria-label={`Open ${item.name} v${item.version}`} className="block border-b border-border-06">
-        <CardPreview src={`/preview/${item.id}`} short={item.previewSize === "short"} label={item.name} />
-      </Link>
+      <div className="relative border-b border-border-06">
+        <CardPreview src={previewSrc(item.id, mode, item.hasExample)} short={item.previewSize === "short"} label={item.name} />
+        {wireframeOnly ? (
+          <span className="absolute right-3 top-3 rounded-pill border border-border-10 bg-surface-primary/90 px-2 py-1 font-mono text-[11px] text-text-nav backdrop-blur-xl">
+            wireframe only
+          </span>
+        ) : null}
+      </div>
 
-      <div className="flex flex-1 flex-col gap-2.5 p-5">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="text-[16px] font-medium leading-[normal] text-text-primary">
-            <Link href={href} className="rounded-chip">
-              {item.name}
-            </Link>
-          </h3>
-          <VersionPill version={item.version} />
-        </div>
-        <p className="line-clamp-2 text-[14px] leading-[1.5] text-text-nav">{item.description}</p>
-
-        <div className="mt-auto flex items-center justify-between pt-3">
-          <label className="flex cursor-pointer items-center gap-2 text-[13px] font-medium text-text-nav">
-            <input
-              type="checkbox"
-              className="catalogue-checkbox"
-              checked={checked}
-              onChange={() => toggle(item.id)}
-              aria-label={`Add ${item.name} v${item.version} to the build`}
-            />
-            {checked ? "In build" : "Add to build"}
-          </label>
-          <Link
-            href={href}
-            className="inline-flex items-center gap-1 text-[13px] font-medium text-text-primary transition-opacity duration-200 ease-out hover:opacity-60"
-          >
-            Open
-            <span aria-hidden className="inline-block transition-[translate] duration-200 ease-out group-hover:translate-x-[3px] motion-reduce:transition-none">
-              →
+      <div className="flex items-center justify-between gap-4 px-5 py-4">
+        <h3 className="min-w-0 text-[16px] font-medium leading-[normal] text-text-primary">
+          {/* Stretched link: the whole card is clickable, the accessible name is the component name */}
+          <Link href={href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
+            <span className="inline-flex items-center gap-2.5">
+              <span className="truncate">{item.name}</span>
+              <VersionPill version={item.version} />
             </span>
           </Link>
-        </div>
+        </h3>
+        <label className="relative z-10 flex shrink-0 cursor-pointer items-center gap-2 text-[13px] font-medium text-text-nav">
+          <input
+            type="checkbox"
+            className="catalogue-checkbox"
+            checked={checked}
+            onChange={() => toggle(item.id)}
+            aria-label={`Add ${item.name} v${item.version} to the build`}
+          />
+          {checked ? "In build" : "Add to build"}
+        </label>
       </div>
     </article>
   );

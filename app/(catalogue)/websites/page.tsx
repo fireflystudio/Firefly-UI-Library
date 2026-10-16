@@ -20,7 +20,7 @@ export default function WebsitesPage() {
       <Reveal as="ul" amount={0.05} className="grid grid-cols-1 gap-5 pb-24 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
         {WEBSITES.map((site) => (
           <li key={site.id} {...reveal} className="min-w-0">
-            <article className="group flex h-full flex-col overflow-clip rounded-card border border-border-06 bg-surface-primary transition-[translate,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-card-drop motion-reduce:transition-none">
+            <article className="group flex h-full flex-col overflow-clip rounded-card border border-border-06 bg-surface-primary transition-[translate] duration-200 ease-out hover:-translate-y-0.5 motion-reduce:transition-none">
               <div className="relative aspect-[16/10] overflow-clip border-b border-border-06 bg-surface-secondary">
                 {site.thumbnail ? (
                   <Image

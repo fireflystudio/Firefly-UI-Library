@@ -77,4 +77,6 @@ export type CatalogueItem = {
   previewSize?: "short" | "tall";
   /** Cap the preview frame height so the user scrolls inside it (needed to show scroll behaviour, e.g. a sticky nav) */
   previewScroll?: boolean;
+  /** Set by the catalogue: the folder has an example.tsx (final design example with real content) */
+  hasExample?: boolean;
 };
