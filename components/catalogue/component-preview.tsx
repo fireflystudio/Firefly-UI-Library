@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { ScaledFrame } from "./scaled-frame";
-import { ViewSwitch, useViewMode } from "./view-mode";
+import { useViewMode } from "./view-mode";
 
 export const DEVICES = [
   { id: "mobile", label: "Mobile", width: 390 },
@@ -127,7 +127,6 @@ export function ComponentPreview({
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-2">
-          {exampleSrc ? <ViewSwitch /> : null}
           <div
             role="tablist"
             aria-label="Preview width"

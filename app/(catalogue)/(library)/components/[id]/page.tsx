@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AddToBuild } from "@/components/catalogue/add-to-build";
 import { ComponentPreview } from "@/components/catalogue/component-preview";
+import { ViewSwitch } from "@/components/catalogue/view-mode";
 import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
 import { getItem, getItems } from "@/lib/catalogue";
@@ -35,15 +36,11 @@ export default async function ComponentPage({ params }: { params: Params }) {
   return (
     <article className="pb-16">
       <Reveal className="flex flex-col gap-6">
-        <div
-          {...reveal}
-          className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-8"
-        >
-          <div className="flex flex-col">
-            <h1 className="text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[44px]">
-              {item.name}
-            </h1>
-          </div>
+        <div {...reveal} className="flex items-center justify-between gap-4">
+          <h1 className="text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[44px]">
+            {item.name}
+          </h1>
+          <ViewSwitch />
         </div>
       </Reveal>
 
