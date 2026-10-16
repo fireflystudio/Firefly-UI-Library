@@ -33,6 +33,7 @@ export function ComponentPreview({
   const [device, setDevice] = useState<DeviceId>(defaultDevice);
   const [reloadKey, setReloadKey] = useState(0);
   const [zoom, setZoom] = useState(1);
+  const [fitted, setFitted] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
   const stageRef = useRef<HTMLDivElement>(null);
   const [stageWidth, setStageWidth] = useState(0);
@@ -58,14 +59,33 @@ export function ComponentPreview({
   const frameWidth = Math.round(current.width * scale);
   const percent = Math.round(zoom * 100);
 
-  const zoomOut = () => setZoom((z) => [...ZOOMS].reverse().find((s) => s < z - 0.001) ?? ZOOMS[0]);
-  const zoomIn = () => setZoom((z) => ZOOMS.find((s) => s > z + 0.001) ?? 1);
+  const frameCap = scrollInside ? (device === "mobile" ? 760 : 720) : undefined;
+  const zoomOut = () => {
+    setFitted(false);
+    setZoom((z) => [...ZOOMS].reverse().find((s) => s < z - 0.001) ?? ZOOMS[0]);
+  };
+  const zoomIn = () => {
+    setFitted(false);
+    setZoom((z) => ZOOMS.find((s) => s > z + 0.001) ?? 1);
+  };
+  const reset = () => {
+    setFitted(false);
+    setZoom(1);
+  };
   const fitScreen = () => {
-    if (!contentHeight) return;
-    // Space left for the frame under the page header and toolbar
-    const available = window.innerHeight - 240;
-    const z = available / (contentHeight * fitScale);
-    setZoom(Math.min(1, Math.max(0.2, Math.round(z * 100) / 100)));
+    const stage = stageRef.current;
+    if (!contentHeight || !stage) return;
+    // The frame's real height (a capped frame scrolls inside, so only the cap counts)
+    const frameHeight = frameCap ? Math.min(contentHeight, frameCap) : contentHeight;
+    // Space between the stage's top edge (or the viewport top, if scrolled past it) and the bottom of the window
+    const stageTop = Math.max(stage.getBoundingClientRect().top, 0);
+    const padding = window.matchMedia("(min-width: 768px)").matches ? 24 : 12;
+    const available = window.innerHeight - stageTop - padding * 2 - 24;
+    const z = Math.min(1, Math.max(0.2, Math.floor((available / (frameHeight * fitScale)) * 100) / 100));
+    if (z < 1) {
+      setZoom(z);
+      setFitted(true);
+    }
   };
   const onContentHeight = useCallback((h: number) => setContentHeight(h), []);
 
@@ -110,12 +130,21 @@ export function ComponentPreview({
               +
             </button>
           </div>
-          <button type="button" onClick={fitScreen} disabled={!contentHeight} className={toolBtn} title="Scale the whole section to fit the screen height">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden>
-              <path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Fit
-          </button>
+          {fitted ? (
+            <button type="button" onClick={reset} className={toolBtn} title="Back to full width (100%)">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden>
+                <path d="M6 2v4H2M10 2v4h4M14 10h-4v4M2 10h4v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Reset
+            </button>
+          ) : (
+            <button type="button" onClick={fitScreen} disabled={!contentHeight} className={toolBtn} title="Scale the whole section to fit the screen height">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden>
+                <path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Fit
+            </button>
+          )}
           <button type="button" onClick={() => setReloadKey((k) => k + 1)} className={toolBtn}>
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden>
               <path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v2.6h-2.6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -146,7 +175,7 @@ export function ComponentPreview({
             reloadKey={reloadKey}
             scale={stageWidth > 0 ? scale : undefined}
             onContentHeight={onContentHeight}
-            maxHeight={scrollInside ? (device === "mobile" ? 760 : 720) : undefined}
+            maxHeight={frameCap}
           />
         </div>
       </div>
