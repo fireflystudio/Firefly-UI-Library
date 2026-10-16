@@ -117,6 +117,19 @@
       ]
     },
     {
+      "name": "hero-portrait-v1",
+      "type": "registry:block",
+      "title": "Hero Portrait v1",
+      "description": "Portrait visual on the left, copy on the right: a two-tone h1 that reveals word by word, a short body and the CTA pair. Full-width visual on mobile, side by side from tablet.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/hero-portrait-v1/hero-portrait-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-portrait-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "hero-news-bento-v1",
       "type": "registry:block",
       "title": "Hero News Bento v1",

@@ -49,9 +49,6 @@ export default async function ComponentPage({ params }: { params: Params }) {
               />
             </h1>
           </div>
-          <div className="shrink-0">
-            <AddToBuild id={item.id} name={item.name} />
-          </div>
         </div>
       </Reveal>
 
@@ -60,6 +57,7 @@ export default async function ComponentPage({ params }: { params: Params }) {
           src={`/preview/${item.id}`}
           title={item.name}
           scrollInside={item.previewScroll}
+          actions={<AddToBuild id={item.id} name={item.name} compact />}
         />
       </div>
     </article>
