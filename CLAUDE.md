@@ -8,7 +8,7 @@ Rules live in the Firefly Web Guide Book: `../Firefly web guide book/FIREFLY-WEB
 - Folder: `FIREFLY/firefly-ui-library`
 - Figma: none (components are seeded from Startupmap patterns, rebuilt content-free; the catalogue is designed here in Firefly style)
 - GitHub: https://github.com/lukasznosekk/Firefly-UI-Library (public)
-- Vercel: (pending — add the `*.vercel.app` URL after the import, then set it in `lib/registry-url.ts` and rebuild the registry)
+- Vercel: https://firefly-ui-library.vercel.app (auto-deploys from `main`; same URL is the registry base in `lib/registry-url.ts`)
 
 ## How this repo is organised
 - `app/` — the catalogue site: `(catalogue)/` (UI Components dashboard, `/components/[id]`, `/websites`, `/build`) and `preview/` (bare pages rendered inside the preview iframes).
