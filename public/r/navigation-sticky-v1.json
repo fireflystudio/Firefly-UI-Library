@@ -4,9 +4,6 @@
   "type": "registry:block",
   "title": "Navigation Sticky v1",
   "description": "Fixed header with a brand, text links and a primary pill. Turns translucent and compacts after a few pixels of scroll; on mobile a hamburger opens a simple panel.",
-  "registryDependencies": [
-    "https://firefly-ui-library.vercel.app/r/firefly-base.json"
-  ],
   "files": [
     {
       "path": "registry/firefly/sections/navigation-sticky-v1/navigation-sticky-v1.tsx",

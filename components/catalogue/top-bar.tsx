@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { useSelection } from "./selection";
 
 const TABS = [
-  { href: "/", label: "UI Components", match: (p: string) => p === "/" || p.startsWith("/components") },
-  { href: "/websites", label: "Websites", match: (p: string) => p.startsWith("/websites") },
+  { href: "/", label: "UI Components", short: "Components", match: (p: string) => p === "/" || p.startsWith("/components") },
+  { href: "/websites", label: "Websites", short: "Websites", match: (p: string) => p.startsWith("/websites") },
 ];
 
 export function TopBar() {
@@ -24,22 +24,23 @@ export function TopBar() {
 
   const onBuild = pathname.startsWith("/build");
   const count = ready ? selected.length : 0;
+  const filled = count > 0 || onBuild;
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div
         aria-hidden
-        className={`absolute inset-0 border-b transition-opacity duration-300 ease-out ${
-          scrolled ? "border-border-06 bg-surface-page/85 opacity-100 backdrop-blur-xl" : "border-transparent bg-surface-page opacity-100"
+        className={`absolute inset-0 border-b transition-[background-color,border-color] duration-300 ease-out ${
+          scrolled ? "border-border-06 bg-surface-page/85 backdrop-blur-xl" : "border-transparent bg-surface-page"
         }`}
       />
-      <nav aria-label="Catalogue" className="relative mx-auto flex h-16 max-w-[1392px] items-center justify-between gap-4 px-5 md:px-8">
-        <Link href="/" className="flex items-baseline gap-2 rounded-chip">
+      <nav aria-label="Catalogue" className="relative mx-auto flex h-16 max-w-[1392px] items-center justify-between gap-3 px-5 md:gap-4 md:px-8">
+        <Link href="/" className="flex shrink-0 items-baseline gap-2 rounded-chip">
           <span className="text-[16px] font-medium leading-none tracking-[-0.01em] text-text-primary">Firefly</span>
-          <span className="text-[16px] font-normal leading-none text-text-muted">UI Library</span>
+          <span className="hidden text-[16px] font-normal leading-none text-text-muted sm:inline">UI Library</span>
         </Link>
 
-        <div className="flex items-center rounded-pill border border-border-06 bg-surface-muted p-[3px]">
+        <div className="flex shrink-0 items-center rounded-pill border border-border-06 bg-surface-muted p-[3px]">
           {TABS.map((tab) => {
             const active = !onBuild && tab.match(pathname);
             return (
@@ -47,19 +48,20 @@ export function TopBar() {
                 key={tab.href}
                 href={tab.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-pill px-3.5 py-1.5 text-[13px] font-medium leading-none transition-[background-color,color,box-shadow] duration-200 ease-out ${
+                className={`whitespace-nowrap rounded-pill px-3 py-1.5 text-[13px] font-medium leading-none transition-[background-color,color,box-shadow] duration-200 ease-out md:px-3.5 ${
                   active
                     ? "bg-surface-primary text-text-primary shadow-[0_1px_2px_0_#0000000f,0_0_0_1px_#0000000a]"
                     : "text-text-nav hover:text-text-primary"
                 }`}
               >
-                {tab.label}
+                <span className="md:hidden">{tab.short}</span>
+                <span className="hidden md:inline">{tab.label}</span>
               </Link>
             );
           })}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <a
             href="https://github.com/lukasznosekk/Firefly-UI-Library"
             target="_blank"
@@ -74,17 +76,20 @@ export function TopBar() {
           <Link
             href="/build"
             aria-current={onBuild ? "page" : undefined}
-            className={`inline-flex h-[34px] items-center gap-2 rounded-pill px-4 text-[13px] font-medium leading-none transition-[translate,scale,opacity] duration-200 ease-out hover:-translate-y-px hover:opacity-85 active:translate-y-0 active:scale-[0.98] motion-reduce:transition-none ${
-              count > 0 || onBuild
-                ? "bg-button-primary text-button-content-primary"
-                : "border border-border-light bg-surface-primary text-text-primary"
+            aria-label={`Build site, ${count} selected`}
+            className={`inline-flex h-[34px] items-center gap-2 rounded-pill px-3 text-[13px] font-medium leading-none transition-[translate,scale,opacity] duration-200 ease-out hover:-translate-y-px hover:opacity-85 active:translate-y-0 active:scale-[0.98] motion-reduce:transition-none md:px-4 ${
+              filled ? "bg-button-primary text-button-content-primary" : "border border-border-light bg-surface-primary text-text-primary"
             }`}
           >
-            Build site
+            {/* Stack icon on mobile, label from md */}
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden className="md:hidden">
+              <path d="M2 4.5h12M2 8h12M2 11.5h12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+            <span className="hidden md:inline">Build site</span>
             <span
-              aria-label={`${count} selected`}
+              aria-hidden
               className={`inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-pill px-1 font-mono text-[11px] ${
-                count > 0 || onBuild ? "bg-surface-primary/20 text-button-content-primary" : "bg-surface-muted text-text-nav"
+                filled ? "bg-surface-primary/20 text-button-content-primary" : "bg-surface-muted text-text-nav"
               }`}
             >
               {count}

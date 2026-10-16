@@ -8,7 +8,7 @@
 import { mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { getItems } from "../lib/catalogue";
-import { REGISTRY_URL, itemUrl } from "../lib/registry-url";
+import { REGISTRY_URL } from "../lib/registry-url";
 
 async function main() {
 const root = process.cwd();
@@ -33,6 +33,9 @@ for (const item of ITEMS) {
     content: readFileSync(join(root, f.path), "utf8"),
   }));
 
+  // `registryDependencies` is deliberately NOT emitted: shadcn would re-download and overwrite
+  // firefly-base on every section install (and fail while the catalogue is offline). Sites install
+  // the base once, explicitly; the catalogue shows the requirement from `meta.registryDependencies`.
   const registryItem = {
     $schema: "https://ui.shadcn.com/schema/registry-item.json",
     name: item.id,
@@ -40,7 +43,6 @@ for (const item of ITEMS) {
     title: `${item.name} v${item.version}`,
     description: item.description,
     ...(item.dependencies?.length ? { dependencies: item.dependencies } : {}),
-    ...(item.registryDependencies?.length ? { registryDependencies: item.registryDependencies.map(itemUrl) } : {}),
     files,
   };
 
@@ -51,7 +53,6 @@ for (const item of ITEMS) {
     title: registryItem.title,
     description: item.description,
     ...(item.dependencies?.length ? { dependencies: item.dependencies } : {}),
-    ...(item.registryDependencies?.length ? { registryDependencies: item.registryDependencies.map(itemUrl) } : {}),
     files: item.files.map((f) => ({ path: f.path, type: f.type, target: f.target })),
   });
   console.log(`✓ ${item.id} (${files.length} ${files.length === 1 ? "file" : "files"})`);

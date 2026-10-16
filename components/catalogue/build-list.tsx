@@ -82,7 +82,8 @@ export function BuildList({ items }: { items: CatalogueItem[] }) {
         </ol>
         <InstallCommand label="Install everything (base included)" command={installCommand(installIds)} />
         <p className="text-[13px] leading-[1.55] text-text-nav">
-          Run it inside the site&rsquo;s folder. Each section lands in <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">components/sections/</code>; then
+          Run it inside the site&rsquo;s folder (a site needs the library&rsquo;s{" "}
+          <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">components.json</code> once, see Firefly Base). Each section lands in <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">components/sections/</code>; then
           compose them in <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">app/page.tsx</code> in this order.
         </p>
       </aside>

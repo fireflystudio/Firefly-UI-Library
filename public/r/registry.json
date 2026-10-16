@@ -65,18 +65,216 @@
       ]
     },
     {
+      "name": "navigation-slide-out-v1",
+      "type": "registry:block",
+      "title": "Navigation Slide-out v1",
+      "description": "Fixed header with a brand, text links, a quiet secondary link, a primary pill and a dot-grid menu button on every breakpoint. The button opens a right-side panel that slides in over a dimmed page: big primary links, the CTA again and small link groups at the bottom. Compacts on scroll like Navigation Sticky.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/navigation-slide-out-v1/navigation-slide-out-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/navigation-slide-out-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "navigation-sticky-v1",
       "type": "registry:block",
       "title": "Navigation Sticky v1",
       "description": "Fixed header with a brand, text links and a primary pill. Turns translucent and compacts after a few pixels of scroll; on mobile a hamburger opens a simple panel.",
-      "registryDependencies": [
-        "https://firefly-ui-library.vercel.app/r/firefly-base.json"
-      ],
       "files": [
         {
           "path": "registry/firefly/sections/navigation-sticky-v1/navigation-sticky-v1.tsx",
           "type": "registry:component",
           "target": "components/sections/navigation-sticky-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-centered-v1",
+      "type": "registry:block",
+      "title": "Hero Centered v1",
+      "description": "Centred copy with a stacked two-tone h1, optional eyebrow and body, the dark + ghost CTA pair, and a large visual underneath. The copy reveals line by line on load; the visual follows and drifts down as it scrolls out.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/hero-centered-v1/hero-centered-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-centered-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-split-v1",
+      "type": "registry:block",
+      "title": "Hero Split v1",
+      "description": "Copy on one side, visual on the other: left-aligned two-tone h1, optional eyebrow, body and mono note, the dark + ghost CTA pair. Stacks copy-first on mobile; `reverse` puts the visual on the left.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/hero-split-v1/hero-split-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-split-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-news-bento-v1",
+      "type": "registry:block",
+      "title": "Hero News Bento v1",
+      "description": "Editorial front page: masthead with a stacked two-tone h1 and intro, then a bento of stories — one large lead card with the image behind a dark gradient and 3–5 smaller cards with kicker, title and an optional image slot.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/hero-news-bento-v1/hero-news-bento-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-news-bento-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "feature-row-interactive-v1",
+      "type": "registry:block",
+      "title": "Feature Row Interactive v1",
+      "description": "Two-tone headline and a list of steps on one side, a 720×560 visual frame on the other. The steps are an accordion: one open at a time, and opening a step crossfades the frame to that step's visual.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/feature-row-interactive-v1/feature-row-interactive-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/feature-row-interactive-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "feature-row-checks-v1",
+      "type": "registry:block",
+      "title": "Feature Row Checks v1",
+      "description": "Compact two-tone headline and a static list of ✓ + title + body items on one side, one 720×560 visual on the other. Every item is open; nothing collapses.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/feature-row-checks-v1/feature-row-checks-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/feature-row-checks-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "lenses-list-v1",
+      "type": "registry:block",
+      "title": "Lenses List v1",
+      "description": "Two-tone headline with a portrait visual under it, next to a list of large clickable names. The active name is black with a short description, the others grey; choosing one crossfades the visual.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/lenses-list-v1/lenses-list-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/lenses-list-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stats-rows-v1",
+      "type": "registry:block",
+      "title": "Stats Rows v1",
+      "description": "Two-tone headline with an optional eyebrow, intro and ghost pill above a list of hairline-separated rows: a large value or step number on the left, a title and short description on the right. Three columns from tablet up, stacked on mobile.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/stats-rows-v1/stats-rows-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/stats-rows-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stats-grid-v1",
+      "type": "registry:block",
+      "title": "Stats Grid v1",
+      "description": "Dark (or light) results section: an optional two-tone heading, an optional large quote with attribution, and a grid of 3–4 big numbers with a hairline above each. Two columns on mobile, one column per stat from tablet up.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/stats-grid-v1/stats-grid-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/stats-grid-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "before-after-compare-v1",
+      "type": "registry:block",
+      "title": "Before/After Compare v1",
+      "description": "Two-tone headline above two rounded panels: a neutral “before” panel with dash-marked pain points and a dark “after” panel with check-marked gains. Each panel has a mono label, a visual slot and an optional lead line. Side by side from tablet up, stacked on mobile.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/before-after-compare-v1/before-after-compare-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/before-after-compare-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "carousel-coverflow-v1",
+      "type": "registry:block",
+      "title": "Carousel Coverflow v1",
+      "description": "Two-tone headline over a cover-flow of portrait cards: the centre card full size, the neighbours smaller and faded. Prev/next buttons, click a side card, arrow keys, mouse and touch drag with snap and flick, a mono counter, and autoplay with a visible pause button that is off under reduced motion.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/firefly/sections/carousel-coverflow-v1/carousel-coverflow-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/carousel-coverflow-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "logo-marquee-v1",
+      "type": "registry:block",
+      "title": "Logo Marquee v1",
+      "description": "A compact strip of logos sliding sideways on a CSS transform loop, with an optional mono eyebrow and soft edge fades. One row, or two rows moving in opposite directions; pauses on hover and stands still under reduced motion.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/logo-marquee-v1/logo-marquee-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/logo-marquee-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bento-cards-v1",
+      "type": "registry:block",
+      "title": "Bento Cards v1",
+      "description": "Two-tone headline and a grid of equal-height cards in three tones: a photo filling the card under a gradient, a dark surface or a light surface with a visual slot in the middle. One column on mobile, two on tablet, four on desktop (three for 5–6 cards). Cards lift on hover and can be links.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/bento-cards-v1/bento-cards-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/bento-cards-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "testimonial-quote-v1",
+      "type": "registry:block",
+      "title": "Testimonial Quote v1",
+      "description": "One large centred quote with a 48px avatar, name and role, on a dark or light background. Optional mono eyebrow and company mark; eyebrow, quote and attribution fade in one after another.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/testimonial-quote-v1/testimonial-quote-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/testimonial-quote-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "faq-centered-v1",
+      "type": "registry:block",
+      "title": "FAQ Centered v1",
+      "description": "Two-tone headline on top, a centred accordion (640px tablet / 760px desktop) below and a contact line with a ghost pill at the bottom. One question open at a time, the first open by default, with a rotating +/– glyph.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/firefly/sections/faq-centered-v1/faq-centered-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/faq-centered-v1.tsx"
         }
       ]
     },
@@ -88,14 +286,50 @@
       "dependencies": [
         "motion"
       ],
-      "registryDependencies": [
-        "https://firefly-ui-library.vercel.app/r/firefly-base.json"
-      ],
       "files": [
         {
           "path": "registry/firefly/sections/faq-split-v1/faq-split-v1.tsx",
           "type": "registry:component",
           "target": "components/sections/faq-split-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cta-demo-pill-v1",
+      "type": "registry:block",
+      "title": "CTA Demo Pill v1",
+      "description": "Centred closing call to action: a small mono pill tag, a big two-tone heading, a short body, the primary + ghost button pair and a small note. Optional product visual below in a rounded frame with a 30px parallax. Dark or light.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/cta-demo-pill-v1/cta-demo-pill-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/cta-demo-pill-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cta-newsletter-v1",
+      "type": "registry:block",
+      "title": "CTA Newsletter v1",
+      "description": "Centred email sign-up: two-tone heading, one line of body and a pill form with a labelled email field and a dark submit button. The confirmation appears in a reserved status slot, so nothing shifts. Optional ticked benefits and a visual slot. Nothing is sent until a backend is connected.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/cta-newsletter-v1/cta-newsletter-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/cta-newsletter-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-v1",
+      "type": "registry:block",
+      "title": "Footer v1",
+      "description": "Dark footer with a top hairline: brand and tagline, link columns and an email sign-up form with an inline confirmation. Stacked on mobile, brand and columns side by side on tablet, three columns on desktop. Optional legal line.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/footer-v1/footer-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/footer-v1.tsx"
         }
       ]
     }

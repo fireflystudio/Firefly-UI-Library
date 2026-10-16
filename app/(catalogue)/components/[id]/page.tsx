@@ -10,7 +10,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
 import { getItem, getItems } from "@/lib/catalogue";
 import { categoryById } from "@/lib/categories";
-import { BASE_ITEM_ID, installCommand } from "@/lib/registry-url";
+import { BASE_ITEM_ID, REGISTRY_URL, installCommand } from "@/lib/registry-url";
 
 type Params = Promise<{ id: string }>;
 
@@ -111,6 +111,10 @@ export default async function ComponentPage({ params }: { params: Params }) {
             )}
             {isBase ? (
               <ol className="flex list-decimal flex-col gap-1.5 pl-5 text-[13.5px] leading-[1.55] text-text-nav">
+                <li>
+                  First time in a site: save <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">{REGISTRY_URL}/components.json</code> as{" "}
+                  <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">components.json</code> in the project root, so shadcn knows where files go.
+                </li>
                 <li>
                   Add <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">@import &quot;./firefly.css&quot;;</code> under the Tailwind import in{" "}
                   <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">app/globals.css</code>.

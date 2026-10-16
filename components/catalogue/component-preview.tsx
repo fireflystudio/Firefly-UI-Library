@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ScaledFrame } from "./scaled-frame";
 
 export const DEVICES = [
@@ -29,6 +29,11 @@ export function ComponentPreview({
 }) {
   const [device, setDevice] = useState<DeviceId>(defaultDevice);
   const [reloadKey, setReloadKey] = useState(0);
+
+  // On a phone, start with the mobile width: a 1440px frame scaled to 350px is unreadable.
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) setDevice("mobile");
+  }, []);
   const current = DEVICES.find((d) => d.id === device)!;
 
   return (

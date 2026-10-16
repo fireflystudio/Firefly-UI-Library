@@ -7,9 +7,6 @@
   "dependencies": [
     "motion"
   ],
-  "registryDependencies": [
-    "https://firefly-ui-library.vercel.app/r/firefly-base.json"
-  ],
   "files": [
     {
       "path": "registry/firefly/sections/faq-split-v1/faq-split-v1.tsx",
