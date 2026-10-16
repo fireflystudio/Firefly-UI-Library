@@ -73,8 +73,10 @@ export type CatalogueItem = {
   registryDependencies?: string[];
   /** Position inside its category (lower first, default 50) */
   order?: number;
-  /** "short" components (nav bar, marquee, footer) are centred in the dashboard card preview */
-  previewSize?: "short" | "tall";
+  /** Viewport width the dashboard card renders the component at (default 1440) */
+  previewDevice?: 390 | 834 | 1440;
+  /** Where a component shorter than the card window sits: top (default), center or bottom */
+  previewAlign?: "top" | "center" | "bottom";
   /** Cap the preview frame height so the user scrolls inside it (needed to show scroll behaviour, e.g. a sticky nav) */
   previewScroll?: boolean;
   /** Set by the catalogue: the folder has an example.tsx (final design example with real content) */

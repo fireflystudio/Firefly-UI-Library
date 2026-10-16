@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRef, useState } from "react";
 import type { CatalogueItem } from "@/lib/types";
 import { CardPreview } from "./card-preview";
 import { useSelection } from "./selection";
@@ -13,9 +14,19 @@ export function ComponentCard({ item }: { item: CatalogueItem }) {
   const wireframeOnly = mode === "final" && !item.hasExample;
   const href = `/components/${item.id}`;
   const checked = ready && isSelected(item.id);
+  // Hovering the card replays the component's reveal animation (at most once per 1.5s)
+  const [replayTick, setReplayTick] = useState(0);
+  const lastReplay = useRef(0);
+  const replay = () => {
+    const now = Date.now();
+    if (now - lastReplay.current < 1500) return;
+    lastReplay.current = now;
+    setReplayTick((t) => t + 1);
+  };
 
   return (
     <article
+      onMouseEnter={replay}
       className={`group relative flex h-full flex-col overflow-clip rounded-card border bg-surface-primary transition-[translate,border-color] duration-200 ease-out hover:-translate-y-0.5 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-border-interactive motion-reduce:transition-none ${
         checked ? "border-text-primary/40" : "border-border-06"
       }`}
@@ -23,8 +34,10 @@ export function ComponentCard({ item }: { item: CatalogueItem }) {
       <div className="relative border-b border-border-06">
         <CardPreview
           src={previewSrc(item.id, mode, item.hasExample)}
-          short={item.previewSize === "short"}
           label={item.name}
+          deviceWidth={item.previewDevice}
+          align={item.previewAlign}
+          replayTick={replayTick}
         />
         {wireframeOnly ? (
           <span className="absolute right-3 top-3 rounded-pill border border-border-10 bg-surface-primary/90 px-2 py-1 font-mono text-[11px] text-text-nav backdrop-blur-xl">

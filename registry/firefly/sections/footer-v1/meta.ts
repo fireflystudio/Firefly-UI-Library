@@ -38,5 +38,5 @@ export const meta: CatalogueItem = {
   ],
   registryDependencies: ["firefly-base"],
   order: 10,
-  previewSize: "short",
+  previewAlign: "bottom",
 };

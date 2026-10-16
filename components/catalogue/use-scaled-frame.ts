@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export const PREVIEW_HEIGHT_MESSAGE = "firefly-preview-height";
+export const PREVIEW_REPLAY_MESSAGE = "firefly-preview-replay";
 
 /**
  * Renders a page at a fixed viewport width inside an iframe and scales it to the

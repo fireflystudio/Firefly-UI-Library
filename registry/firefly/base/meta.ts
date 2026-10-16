@@ -39,5 +39,4 @@ export const meta: CatalogueItem = {
     { path: "registry/firefly/ui/placeholder.tsx", target: "components/ui/placeholder.tsx", type: "registry:ui" },
   ],
   dependencies: ["motion"],
-  previewSize: "tall",
 };

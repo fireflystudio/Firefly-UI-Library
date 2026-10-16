@@ -120,7 +120,8 @@ export const meta: CatalogueItem = {
   dependencies: ["motion"],       // only if the file imports motion
   registryDependencies: ["firefly-base"],
   order: 20,                      // position inside the category (10, 20, 30 …)
-  previewSize: "short",           // only for bars/strips (nav, marquee, footer) so the card centres them
+  previewDevice: 834,             // card renders at this width (default 1440); bars read better at 834
+  previewAlign: "bottom",         // short components: top (default) | center | bottom inside the card window
   previewScroll: true,            // only when scrolling inside the frame is needed to see the behaviour (sticky nav)
 };
 ```
