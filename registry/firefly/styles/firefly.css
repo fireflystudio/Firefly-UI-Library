@@ -1,0 +1,155 @@
+/*
+ * Firefly base styles — design tokens + motion foundation.
+ * Installed by `firefly-base` as app/firefly.css. Import it right after Tailwind in app/globals.css:
+ *
+ *   @import "tailwindcss";
+ *   @import "./firefly.css";
+ *
+ * Fonts: load Inter (--font-inter) and IBM Plex Mono (--font-plex-mono) with next/font in app/layout.tsx.
+ * When a client's Figma has its own variables, change the VALUES here (keep the names) so every
+ * installed component picks up the client palette.
+ */
+@theme {
+  /* Text */
+  --color-text-primary: #0a0a0a;
+  --color-text-secondary: #515258;
+  --color-text-tertiary: #696969;
+  --color-text-quaternary: #878787;
+  --color-text-placeholder: #9e9e9e;
+  /* Grey half of two-tone headlines and muted copy. 3.0:1 on the page background (WCAG AA large text). */
+  --color-text-muted: #919191;
+  --color-text-nav: #6b6b6b;
+  --color-text-inverse: #fafafa;
+  --color-text-on-dark: #f5f7fa;
+
+  /* Icons */
+  --color-icon-primary: #0a0a0a;
+  --color-icon-secondary: #636363;
+  --color-icon-tertiary: #878787;
+  --color-icon-quaternary: #b2b2b2;
+
+  /* Surfaces */
+  --color-surface-page: #fdfcfc;
+  --color-surface-primary: #ffffff;
+  --color-surface-secondary: #f8f8fb;
+  --color-surface-muted: #f5f5f5;
+  --color-surface-card-light: #f2f2f2;
+  --color-surface-card-dark: #1b1b1b;
+  --color-surface-inverse: #0a0a0a;
+  --color-surface-dark: #0f1115;
+
+  /* Borders */
+  --color-border-04: #0000000a;
+  --color-border-06: #0000000f;
+  --color-border-10: #0000001a;
+  --color-border-16: #00000029;
+  --color-border-24: #0000003d;
+  --color-border-light: #e8e8e8;
+  --color-border-dark: #2a2a2a;
+  --color-border-on-dark: #2a2f3a;
+  --color-border-interactive: #3f51f4;
+
+  /* Buttons */
+  --color-button-primary: #0a0a0a;
+  --color-button-content-primary: #ffffff;
+  --color-button-secondary: #0000000f;
+  --color-button-content-secondary: #0a0a0a;
+
+  /* Status (tags, dots) */
+  --color-status-positive: #166534;
+  --color-status-positive-bg: #f0fdf4;
+  --color-status-negative: #b91c1c;
+  --color-status-negative-bg: #fff5f5;
+  --color-status-warning: #b94020;
+  --color-status-warning-bg: #fff1ec;
+
+  /* Radii (named to avoid clashing with Tailwind's rounded-s / rounded-l side utilities) */
+  --radius-chip: 6px;
+  --radius-tile: 8px;
+  --radius-frame: 12px;
+  --radius-card: 14px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-card-drop: 0 30px 70px 0 #0000000a;
+  --shadow-soft: 0 16px 40px 0 #0000000f;
+
+  /* Type */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 80px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    background: var(--color-surface-page);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-border-interactive);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/*
+ * Scroll reveals.
+ * Content is fully visible by default (SSR, no JS, crawlers, reduced motion). Only when the
+ * <MotionScript> head script adds `.motion-ok` to <html> are [data-reveal] elements hidden until
+ * <Reveal> marks them `data-in`. Only transform + opacity animate.
+ */
+.motion-ok [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 20px), 0);
+  transition:
+    opacity 0.8s var(--ease-out-soft),
+    transform 0.9s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.motion-ok [data-reveal][data-in] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Body of an accordion / step list fading in when its item opens */
+@keyframes feature-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+}
+
+/* Marquees: the track holds two identical copies and moves by half its width */
+@keyframes marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes marquee-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}

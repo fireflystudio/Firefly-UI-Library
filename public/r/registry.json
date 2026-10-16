@@ -1,0 +1,103 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "firefly",
+  "homepage": "https://firefly-ui-library.vercel.app",
+  "items": [
+    {
+      "name": "firefly-base",
+      "type": "registry:block",
+      "title": "Firefly Base v1",
+      "description": "Install this first in every site. Design tokens for Tailwind v4, the scroll-reveal system, parallax, art-scale, pill buttons, the hero CTA pair, a two-tone headline helper and a content-free visual placeholder.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/firefly/styles/firefly.css",
+          "type": "registry:file",
+          "target": "app/firefly.css"
+        },
+        {
+          "path": "registry/firefly/ui/motion-script.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-script.tsx"
+        },
+        {
+          "path": "registry/firefly/ui/reveal.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/reveal.tsx"
+        },
+        {
+          "path": "registry/firefly/ui/reveal-attr.ts",
+          "type": "registry:ui",
+          "target": "components/ui/reveal-attr.ts"
+        },
+        {
+          "path": "registry/firefly/ui/parallax.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/parallax.tsx"
+        },
+        {
+          "path": "registry/firefly/ui/art-scale.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/art-scale.tsx"
+        },
+        {
+          "path": "registry/firefly/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        },
+        {
+          "path": "registry/firefly/ui/hero-cta.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/hero-cta.tsx"
+        },
+        {
+          "path": "registry/firefly/ui/two-tone.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/two-tone.tsx"
+        },
+        {
+          "path": "registry/firefly/ui/placeholder.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/placeholder.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navigation-sticky-v1",
+      "type": "registry:block",
+      "title": "Navigation Sticky v1",
+      "description": "Fixed header with a brand, text links and a primary pill. Turns translucent and compacts after a few pixels of scroll; on mobile a hamburger opens a simple panel.",
+      "registryDependencies": [
+        "https://firefly-ui-library.vercel.app/r/firefly-base.json"
+      ],
+      "files": [
+        {
+          "path": "registry/firefly/sections/navigation-sticky-v1/navigation-sticky-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/navigation-sticky-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "faq-split-v1",
+      "type": "registry:block",
+      "title": "FAQ Split v1",
+      "description": "Two-tone headline and a ghost button on the left, accordion on the right. One question open at a time, the first open by default, with a rotating +/– glyph.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "https://firefly-ui-library.vercel.app/r/firefly-base.json"
+      ],
+      "files": [
+        {
+          "path": "registry/firefly/sections/faq-split-v1/faq-split-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/faq-split-v1.tsx"
+        }
+      ]
+    }
+  ]
+}
