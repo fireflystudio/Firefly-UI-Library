@@ -182,6 +182,19 @@
       ]
     },
     {
+      "name": "steps-cards-v1",
+      "type": "registry:block",
+      "title": "Steps Cards v1",
+      "description": "A process in a row: two-tone heading with a short intro on the right, then one bordered card per step with an icon slot (numbered tile by default), title and body. Side by side on desktop, a 3-column grid on tablet, hairline rows on mobile.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/steps-cards-v1/steps-cards-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/steps-cards-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "stats-grid-v1",
       "type": "registry:block",
       "title": "Stats Grid v1",
