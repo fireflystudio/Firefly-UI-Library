@@ -10,7 +10,6 @@ const STATS = [
 export default function Preview() {
   return (
     <StatsGrid
-      eyebrow="In numbers"
       headline="Less time in review,"
       headlineMuted="more time building."
       quote={{

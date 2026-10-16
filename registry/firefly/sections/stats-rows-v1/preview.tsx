@@ -26,7 +26,6 @@ const ITEMS = [
 export default function Preview() {
   return (
     <StatsRows
-      eyebrow="How it works"
       headline="Four steps from sign-up to first result."
       headlineMuted="No setup project required."
       intro="Most teams finish setup in a single session. Here is what happens along the way."

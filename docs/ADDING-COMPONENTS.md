@@ -61,6 +61,9 @@ Need a colour that doesn't exist (a dark green section, a brand accent)? Expose 
 - Logos in a marquee: `logos: ReactNode[]`, default = 8 neutral placeholder tiles (rounded pill with a mono word like "Logo"), content-free.
 - The **preview** supplies placeholder copy: generic, plausible, short, SaaS-neutral, invented by you (not copied from Startupmap). Headlines must still split two-tone. Numbers are fine as placeholders ("2.4×", "98%", "12 min").
 
+## 4b. No eyebrow labels (house preference, 2026-10-16)
+No mono uppercase labels above headlines (section eyebrows, "tags" above a CTA heading) and no kickers above card titles — the user removed them from every preview. Keep `eyebrow` / `kicker` / `label` props optional (a client Figma may need one), render them only when passed, and **never pass them in previews**. Functional labels that carry meaning stay (Before / After panel labels, footer column titles, the slide-out menu's "Explore").
+
 ## 5. Rules from the Web Guide Book (checked in review)
 
 **Typography**

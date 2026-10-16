@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToBuild } from "@/components/catalogue/add-to-build";
 import { ComponentPreview } from "@/components/catalogue/component-preview";
@@ -9,7 +8,6 @@ import { VersionPill } from "@/components/catalogue/version-pill";
 import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
 import { getItem, getItems } from "@/lib/catalogue";
-import { categoryById } from "@/lib/categories";
 import { BASE_ITEM_ID, REGISTRY_URL, installCommand } from "@/lib/registry-url";
 
 type Params = Promise<{ id: string }>;
@@ -30,26 +28,11 @@ export default async function ComponentPage({ params }: { params: Params }) {
   const { id } = await params;
   const item = await getItem(id);
   if (!item) notFound();
-  const category = categoryById(item.category);
   const isBase = item.id === BASE_ITEM_ID;
 
   return (
-    <article className="mx-auto max-w-[1392px] pb-24">
-      <Reveal className="flex flex-col gap-6 pt-[calc(64px+32px)] md:pt-[calc(64px+48px)]">
-        <nav aria-label="Breadcrumb" {...reveal} className="catalogue-eyebrow flex flex-wrap items-center gap-2">
-          <Link href="/" className="transition-opacity duration-200 ease-out hover:opacity-60">
-            Components
-          </Link>
-          <span aria-hidden>/</span>
-          <Link href={`/#${category.id}`} className="transition-opacity duration-200 ease-out hover:opacity-60">
-            {category.name}
-          </Link>
-          <span aria-hidden>/</span>
-          <span className="text-text-primary">
-            {item.name} v{item.version}
-          </span>
-        </nav>
-
+    <article className="pb-24">
+      <Reveal className="flex flex-col gap-6">
         <div {...reveal} className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-8">
           <div className="flex flex-col gap-3">
             <h1 className="flex flex-wrap items-center gap-3 text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[44px]">
@@ -83,7 +66,7 @@ export default async function ComponentPage({ params }: { params: Params }) {
         </Reveal>
       ) : null}
 
-      <div className="mt-14 grid gap-12 md:mt-16 xl:grid-cols-[minmax(0,1fr)_400px] xl:gap-16">
+      <div className="mt-14 grid gap-12 md:mt-16 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-12">
         <Reveal as="section" aria-labelledby="props-heading" className="flex min-w-0 flex-col gap-5">
           <h2 {...reveal} id="props-heading" className="text-[24px] font-normal leading-[1.1] tracking-[-0.02em] text-text-primary">
             {isBase ? "What it installs" : "Props"}

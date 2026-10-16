@@ -9,7 +9,7 @@ export type BentoTone = "photo" | "dark" | "light";
 
 export type BentoItem = {
   /** Small line at the top of the card, e.g. "Story" */
-  label: string;
+  label?: string;
   title: string;
   body?: string;
   /** photo = image filling the card under a gradient; dark / light = solid surfaces with a visual slot in the middle */
@@ -93,15 +93,15 @@ function BentoCard({ item }: { item: BentoItem }) {
         </>
       ) : null}
 
-      <p className={`text-[13px] leading-[normal] ${onDark ? "text-text-on-dark/60" : "text-text-tertiary"}`}>{item.label}</p>
+      {item.label ? <p className={`text-[13px] leading-[normal] ${onDark ? "text-text-on-dark/60" : "text-text-tertiary"}`}>{item.label}</p> : null}
 
       {tone !== "photo" ? (
-        <div className={`relative my-5 min-h-0 flex-1 overflow-clip rounded-tile border ${onDark ? "border-border-on-dark" : "border-border-06"} ${visualMotion}`}>
+        <div className={`relative mb-5 min-h-0 flex-1 overflow-clip rounded-tile border ${item.label ? "mt-5" : ""} ${onDark ? "border-border-on-dark" : "border-border-06"} ${visualMotion}`}>
           {item.visual ?? <Placeholder tone={onDark ? "dark" : "light"} label="Mockup" />}
         </div>
       ) : null}
 
-      <div className="flex flex-col gap-2">
+      <div className="mt-auto flex flex-col gap-2">
         <h3 className="line-clamp-3 text-pretty text-[20px] font-medium leading-[1.3] tracking-[-0.02em]">
           {item.href ? (
             // Stretched link: the whole card is clickable, the accessible name stays the title

@@ -22,9 +22,6 @@ export default function BasePreview() {
     <div className="bg-surface-page px-5 py-12 md:px-10 md:py-16 xl:px-16 xl:py-20">
       <Reveal className="mx-auto flex max-w-[1200px] flex-col gap-12 md:gap-16">
         <div className="flex flex-col gap-5">
-          <p {...reveal} className="font-mono text-[12px] uppercase tracking-[0.08em] text-text-quaternary">
-            Firefly Base · tokens, type, motion
-          </p>
           <h1 {...reveal} className="max-w-[900px] text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[48px] xl:text-[64px]">
             <TwoTone text="Two-tone headlines on every page." muted="The second half always grey." />
           </h1>

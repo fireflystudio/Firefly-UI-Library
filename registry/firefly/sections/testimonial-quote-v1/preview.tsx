@@ -3,7 +3,6 @@ import { TestimonialQuote } from "./testimonial-quote-v1";
 export default function Preview() {
   return (
     <TestimonialQuote
-      eyebrow="From our customers"
       quote="It took the team a week to stop opening the old spreadsheet. Nobody has since."
       name="Maya Lindqvist"
       role="Head of Operations"

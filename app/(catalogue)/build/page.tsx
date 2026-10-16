@@ -12,14 +12,8 @@ export default async function BuildPage() {
   const items = await getItems();
   return (
     <>
-      <div className="pb-10 md:pb-12">
-        <PageHeader
-          size="md"
-          eyebrow="Build site"
-          title="Stack the sections you picked,"
-          titleMuted="then install them in one go."
-          lead="Reorder the list to match the page from top to bottom. The preview shows the assembled page; the command installs the base and every section into a site."
-        />
+      <div className="mx-auto max-w-[1392px] pb-8 pt-[calc(64px+24px)] md:pb-10 md:pt-[calc(64px+32px)]">
+        <PageHeader title="Build site" />
       </div>
       <div className="pb-24">
         <BuildList items={items} />

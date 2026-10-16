@@ -14,13 +14,8 @@ export const metadata: Metadata = {
 export default function WebsitesPage() {
   return (
     <>
-      <div className="pb-10 md:pb-12">
-        <PageHeader
-          eyebrow={`Websites · ${WEBSITES.length} ${WEBSITES.length === 1 ? "site" : "sites"}`}
-          title="Sites built with these patterns,"
-          titleMuted="live and in the wild."
-          lead="Every Firefly website ships from the same rules. New sites appear here as they go live."
-        />
+      <div className="mx-auto max-w-[1392px] pb-8 pt-[calc(64px+24px)] md:pb-10 md:pt-[calc(64px+32px)]">
+        <PageHeader title="Websites" />
       </div>
       <Reveal as="ul" amount={0.05} className="mx-auto grid max-w-[1392px] grid-cols-1 gap-5 pb-24 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
         {WEBSITES.map((site) => (

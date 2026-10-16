@@ -7,7 +7,7 @@ import { reveal } from "@/components/ui/reveal-attr";
 
 export type NewsLead = {
   /** Small mono label, e.g. a category */
-  kicker: string;
+  kicker?: string;
   title: string;
   /** One-line standfirst under the title */
   dek?: string;
@@ -17,7 +17,7 @@ export type NewsLead = {
 };
 
 export type NewsItem = {
-  kicker: string;
+  kicker?: string;
   title: string;
   href: string;
   /** 2:1 image slot at the top of the card. Defaults to a light Placeholder; null removes the slot. */
@@ -153,7 +153,7 @@ function LeadCard({ kicker, title, dek, href, image }: NewsLead) {
         )}
       </div>
       <div aria-hidden className="absolute inset-0 -z-10 bg-linear-to-b from-transparent from-30% to-surface-inverse/80" />
-      <p className={`${kickerClass} text-text-on-dark/70`}>{kicker}</p>
+      {kicker ? <p className={`${kickerClass} text-text-on-dark/70`}>{kicker}</p> : null}
       <h3 className="max-w-[18em] text-balance text-[24px] font-normal leading-[1.15] tracking-[-0.015em] md:text-[28px] xl:text-[32px]">
         <Link href={href} className={stretchedLink}>
           {title}
@@ -176,7 +176,7 @@ function StoryCard({ kicker, title, href, image }: NewsItem) {
         </div>
       ) : null}
       <div className={`flex flex-1 flex-col p-5 ${hasImage ? "gap-3" : "justify-between gap-8"}`}>
-        <p className={`${kickerClass} text-text-quaternary`}>{kicker}</p>
+        {kicker ? <p className={`${kickerClass} text-text-quaternary`}>{kicker}</p> : null}
         <h3 className="text-pretty text-[18px] font-medium leading-[1.3] tracking-[-0.01em] text-text-primary">
           <Link href={href} className={stretchedLink}>
             {title}
