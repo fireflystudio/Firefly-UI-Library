@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ScaledFrame } from "./scaled-frame";
 
 export const DEVICES = [
@@ -11,9 +11,12 @@ export const DEVICES = [
 
 export type DeviceId = (typeof DEVICES)[number]["id"];
 
+/** Zoom steps relative to "fits the stage width" (= 100%) */
+const ZOOMS = [0.25, 0.33, 0.5, 0.67, 0.75, 1];
+
 /**
- * Live preview panel with a device-width switcher, a replay button (reloads the frame so the
- * entrance animations run again) and a link to open the bare preview in a new tab.
+ * Live preview panel: device-width switcher, zoom (− / % / + and "Fit" to the screen height),
+ * a replay button (reloads the frame so entrance animations run again) and a link to the bare preview.
  */
 export function ComponentPreview({
   src,
@@ -29,12 +32,45 @@ export function ComponentPreview({
 }) {
   const [device, setDevice] = useState<DeviceId>(defaultDevice);
   const [reloadKey, setReloadKey] = useState(0);
+  const [zoom, setZoom] = useState(1);
+  const [contentHeight, setContentHeight] = useState(0);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [stageWidth, setStageWidth] = useState(0);
+  const current = DEVICES.find((d) => d.id === device)!;
 
   // On a phone, start with the mobile width: a 1440px frame scaled to 350px is unreadable.
   useEffect(() => {
     if (window.matchMedia("(max-width: 767px)").matches) setDevice("mobile");
   }, []);
-  const current = DEVICES.find((d) => d.id === device)!;
+
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const update = () => setStageWidth(el.clientWidth);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const fitScale = stageWidth > 0 ? Math.min(1, stageWidth / current.width) : 1;
+  const scale = fitScale * zoom;
+  const frameWidth = Math.round(current.width * scale);
+  const percent = Math.round(zoom * 100);
+
+  const zoomOut = () => setZoom((z) => [...ZOOMS].reverse().find((s) => s < z - 0.001) ?? ZOOMS[0]);
+  const zoomIn = () => setZoom((z) => ZOOMS.find((s) => s > z + 0.001) ?? 1);
+  const fitScreen = () => {
+    if (!contentHeight) return;
+    // Space left for the frame under the page header and toolbar
+    const available = window.innerHeight - 240;
+    const z = available / (contentHeight * fitScale);
+    setZoom(Math.min(1, Math.max(0.2, Math.round(z * 100) / 100)));
+  };
+  const onContentHeight = useCallback((h: number) => setContentHeight(h), []);
+
+  const toolBtn =
+    "inline-flex h-[30px] cursor-pointer items-center justify-center gap-1.5 rounded-pill border border-border-light bg-surface-primary px-3 text-[13px] font-medium leading-none text-text-primary transition-opacity duration-200 ease-out hover:opacity-70 disabled:cursor-default disabled:opacity-40 disabled:hover:opacity-40";
 
   return (
     <div className="flex flex-col gap-3">
@@ -62,41 +98,54 @@ export function ComponentPreview({
           })}
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setReloadKey((k) => k + 1)}
-            className="inline-flex h-[30px] cursor-pointer items-center gap-1.5 rounded-pill border border-border-light bg-surface-primary px-3 text-[13px] font-medium leading-none text-text-primary transition-opacity duration-200 ease-out hover:opacity-70"
-          >
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center rounded-pill border border-border-light bg-surface-primary" role="group" aria-label="Zoom">
+            <button type="button" onClick={zoomOut} disabled={zoom <= ZOOMS[0] + 0.001} aria-label="Zoom out" className="inline-flex h-[30px] w-8 cursor-pointer items-center justify-center rounded-l-full text-[15px] leading-none text-text-primary transition-opacity duration-200 ease-out hover:opacity-70 disabled:cursor-default disabled:opacity-30">
+              −
+            </button>
+            <span aria-live="polite" className="min-w-[44px] text-center font-mono text-[12px] text-text-primary">
+              {percent}%
+            </span>
+            <button type="button" onClick={zoomIn} disabled={zoom >= 1 - 0.001} aria-label="Zoom in" className="inline-flex h-[30px] w-8 cursor-pointer items-center justify-center rounded-r-full text-[15px] leading-none text-text-primary transition-opacity duration-200 ease-out hover:opacity-70 disabled:cursor-default disabled:opacity-30">
+              +
+            </button>
+          </div>
+          <button type="button" onClick={fitScreen} disabled={!contentHeight} className={toolBtn} title="Scale the whole section to fit the screen height">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden>
+              <path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Fit
+          </button>
+          <button type="button" onClick={() => setReloadKey((k) => k + 1)} className={toolBtn}>
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden>
               <path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v2.6h-2.6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             Replay
           </button>
-          <a
-            href={src}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-[30px] items-center gap-1.5 rounded-pill border border-border-light bg-surface-primary px-3 text-[13px] font-medium leading-none text-text-primary transition-opacity duration-200 ease-out hover:opacity-70"
-          >
+          <a href={src} target="_blank" rel="noreferrer" className={toolBtn}>
             Open
             <span aria-hidden>↗</span>
           </a>
         </div>
       </div>
 
-      <div className="rounded-card border border-border-06 bg-surface-primary p-3 [background-image:radial-gradient(color-mix(in_srgb,var(--color-text-primary)_7%,transparent)_1px,transparent_1px)] [background-size:16px_16px] md:p-6">
+      <div
+        ref={stageRef}
+        className="rounded-card border border-border-06 bg-surface-primary p-3 [background-image:radial-gradient(color-mix(in_srgb,var(--color-text-primary)_7%,transparent)_1px,transparent_1px)] [background-size:16px_16px] md:p-6"
+      >
         <div
-          className={`mx-auto overflow-clip border border-border-10 bg-surface-page shadow-soft transition-[max-width] duration-300 ease-out motion-reduce:transition-none ${
+          className={`mx-auto overflow-clip border border-border-10 bg-surface-page shadow-soft transition-[width] duration-300 ease-out motion-reduce:transition-none ${
             device === "desktop" ? "rounded-tile" : "rounded-frame"
           }`}
-          style={{ maxWidth: current.width }}
+          style={{ width: stageWidth > 0 ? frameWidth : undefined, maxWidth: "100%" }}
         >
           <ScaledFrame
             src={src}
             deviceWidth={current.width}
             title={`${title} at ${current.width}px`}
             reloadKey={reloadKey}
+            scale={stageWidth > 0 ? scale : undefined}
+            onContentHeight={onContentHeight}
             maxHeight={scrollInside ? (device === "mobile" ? 760 : 720) : undefined}
           />
         </div>

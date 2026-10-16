@@ -1,10 +1,11 @@
 "use client";
 
+import { useEffect } from "react";
 import { useScaledFrame } from "./use-scaled-frame";
 
 /**
  * Full-height scaled preview: the iframe is as tall as its content and scaled to fit the
- * container width. Used on component pages and the Build page.
+ * container width (or to an explicit `scale`). Used on component pages and the Build page.
  */
 export function ScaledFrame({
   src,
@@ -13,6 +14,8 @@ export function ScaledFrame({
   minHeight = 240,
   maxHeight,
   reloadKey = 0,
+  scale: scaleProp,
+  onContentHeight,
 }: {
   src: string;
   deviceWidth: number;
@@ -21,10 +24,19 @@ export function ScaledFrame({
   /** Cap in CSS px of the framed viewport; taller content scrolls inside the frame */
   maxHeight?: number;
   reloadKey?: number;
+  /** Explicit scale; when omitted the frame fits its container width */
+  scale?: number;
+  /** Reports the framed page's natural content height (CSS px at scale 1) */
+  onContentHeight?: (height: number) => void;
 }) {
-  const { containerRef, iframeRef, scale, contentHeight } = useScaledFrame(deviceWidth);
+  const { containerRef, iframeRef, scale: fitScale, contentHeight } = useScaledFrame(deviceWidth);
+  const scale = scaleProp ?? fitScale;
   const natural = Math.max(contentHeight, minHeight);
   const height = maxHeight ? Math.min(natural, maxHeight) : natural;
+
+  useEffect(() => {
+    if (contentHeight > 0) onContentHeight?.(contentHeight);
+  }, [contentHeight, onContentHeight]);
 
   return (
     <div
