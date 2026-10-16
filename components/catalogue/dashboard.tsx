@@ -29,10 +29,7 @@ export function Dashboard({
 
   return (
     <div className="flex flex-col gap-14 pb-24 md:gap-16">
-      <div className="-mb-8 flex justify-end md:-mb-10">
-        <ViewSwitch />
-      </div>
-      {visible.map((g) => (
+      {visible.map((g, i) => (
         <Reveal
           key={`${g.category.id}-${filter}`}
           as="section"
@@ -41,19 +38,22 @@ export function Dashboard({
           amount={0.05}
           className="flex scroll-mt-28 flex-col gap-5"
         >
-          <div {...reveal} className="flex items-center gap-3">
-            <h2
-              id={`${g.category.id}-heading`}
-              className="text-[22px] font-normal leading-[1.1] tracking-[-0.02em] text-text-primary md:text-[24px]"
-            >
-              {g.category.name}
-            </h2>
-            <span
-              aria-label={`${g.items.length} ${g.items.length === 1 ? "component" : "components"}`}
-              className="inline-flex h-7 min-w-7 items-center justify-center rounded-pill border border-border-10 bg-surface-primary px-2 text-[13px] font-medium leading-none text-text-primary"
-            >
-              {g.items.length}
-            </span>
+          <div {...reveal} className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <h2
+                id={`${g.category.id}-heading`}
+                className="text-[22px] font-normal leading-[1.1] tracking-[-0.02em] text-text-primary md:text-[24px]"
+              >
+                {g.category.name}
+              </h2>
+              <span
+                aria-label={`${g.items.length} ${g.items.length === 1 ? "component" : "components"}`}
+                className="inline-flex h-7 min-w-7 items-center justify-center rounded-pill border border-border-10 bg-surface-primary px-2 text-[13px] font-medium leading-none text-text-primary"
+              >
+                {g.items.length}
+              </span>
+            </div>
+            {i === 0 ? <ViewSwitch /> : null}
           </div>
           <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
             {g.items.map((item) => (

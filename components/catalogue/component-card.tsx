@@ -4,7 +4,6 @@ import Link from "next/link";
 import type { CatalogueItem } from "@/lib/types";
 import { CardPreview } from "./card-preview";
 import { useSelection } from "./selection";
-import { VersionPill } from "./version-pill";
 import { previewSrc, useViewMode } from "./view-mode";
 
 /** Dashboard card: live preview + name + version. The whole card opens the component; the checkbox adds it to the build. */
@@ -22,7 +21,11 @@ export function ComponentCard({ item }: { item: CatalogueItem }) {
       }`}
     >
       <div className="relative border-b border-border-06">
-        <CardPreview src={previewSrc(item.id, mode, item.hasExample)} short={item.previewSize === "short"} label={item.name} />
+        <CardPreview
+          src={previewSrc(item.id, mode, item.hasExample)}
+          short={item.previewSize === "short"}
+          label={item.name}
+        />
         {wireframeOnly ? (
           <span className="absolute right-3 top-3 rounded-pill border border-border-10 bg-surface-primary/90 px-2 py-1 font-mono text-[11px] text-text-nav backdrop-blur-xl">
             wireframe only
@@ -33,11 +36,11 @@ export function ComponentCard({ item }: { item: CatalogueItem }) {
       <div className="flex items-center justify-between gap-4 px-5 py-4">
         <h3 className="min-w-0 text-[16px] font-medium leading-[normal] text-text-primary">
           {/* Stretched link: the whole card is clickable, the accessible name is the component name */}
-          <Link href={href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
-            <span className="inline-flex items-center gap-2.5">
-              <span className="truncate">{item.name}</span>
-              <VersionPill version={item.version} />
-            </span>
+          <Link
+            href={href}
+            className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+          >
+            <span className="block truncate">{item.name}</span>
           </Link>
         </h3>
         <label className="relative z-10 flex shrink-0 cursor-pointer items-center gap-2 text-[13px] font-medium text-text-nav">
