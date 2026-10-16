@@ -12,7 +12,7 @@ export default async function BuildPage() {
   const items = await getItems();
   return (
     <>
-      <div className="mx-auto max-w-[1392px] pb-8 pt-[calc(64px+24px)] md:pb-10 md:pt-[calc(64px+32px)]">
+      <div className="pb-8 md:pb-10">
         <PageHeader title="Build site" />
       </div>
       <div className="pb-24">

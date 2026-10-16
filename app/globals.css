@@ -4,6 +4,7 @@
 
 /* Catalogue-only tokens (not shipped to sites) */
 @theme {
+  --color-catalogue-bg: #f5f5f7; /* app background: slightly grey so white cards and panels stand out */
   --color-catalogue-code: #f4f4f6; /* install command box, inline code */
 }
 

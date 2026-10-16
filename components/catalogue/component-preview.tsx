@@ -85,7 +85,7 @@ export function ComponentPreview({
         </div>
       </div>
 
-      <div className="rounded-card border border-border-06 bg-surface-secondary p-3 [background-image:radial-gradient(color-mix(in_srgb,var(--color-text-primary)_7%,transparent)_1px,transparent_1px)] [background-size:16px_16px] md:p-6">
+      <div className="rounded-card border border-border-06 bg-surface-primary p-3 [background-image:radial-gradient(color-mix(in_srgb,var(--color-text-primary)_7%,transparent)_1px,transparent_1px)] [background-size:16px_16px] md:p-6">
         <div
           className={`mx-auto overflow-clip border border-border-10 bg-surface-page shadow-soft transition-[max-width] duration-300 ease-out motion-reduce:transition-none ${
             device === "desktop" ? "rounded-tile" : "rounded-frame"

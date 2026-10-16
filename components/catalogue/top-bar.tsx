@@ -27,14 +27,14 @@ export function TopBar() {
   const filled = count > 0 || onBuild;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-50 xl:hidden">
       <div
         aria-hidden
         className={`absolute inset-0 border-b transition-[background-color,border-color] duration-300 ease-out ${
-          scrolled ? "border-border-06 bg-surface-page/85 backdrop-blur-xl" : "border-transparent bg-surface-page"
+          scrolled ? "border-border-06 bg-catalogue-bg/85 backdrop-blur-xl" : "border-transparent bg-catalogue-bg"
         }`}
       />
-      <nav aria-label="Catalogue" className="relative mx-auto flex h-16 max-w-[1392px] items-center justify-between gap-3 px-5 md:gap-4 md:px-8">
+      <nav aria-label="Catalogue" className="relative flex h-16 items-center justify-between gap-3 px-5 md:gap-4 md:px-8">
         <Link href="/" className="flex shrink-0 items-baseline gap-2 rounded-chip">
           <span className="text-[16px] font-medium leading-none tracking-[-0.01em] text-text-primary">Firefly</span>
           <span className="hidden text-[16px] font-normal leading-none text-text-muted sm:inline">UI Library</span>

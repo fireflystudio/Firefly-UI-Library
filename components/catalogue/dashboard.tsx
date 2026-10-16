@@ -38,7 +38,7 @@ export function Dashboard({ items, categories }: { items: CatalogueItem[]; categ
             </div>
             <p className="max-w-[640px] text-[14px] leading-[1.5] text-text-nav">{g.category.description}</p>
           </div>
-          <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
+          <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
             {g.items.map((item) => (
               <li key={item.id} {...reveal} className="min-w-0">
                 <ComponentCard item={item} />

@@ -2,72 +2,158 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import type { MenuProps } from "@/lib/menu";
 import type { CategoryId } from "@/lib/types";
+import { useSelection } from "./selection";
 
-export type SidebarCategory = { id: CategoryId; name: string; count: number };
-
-type Props = {
-  categories: SidebarCategory[];
-  total: number;
-  /** component id → category, so a component page highlights its category */
-  itemCategories: Record<string, CategoryId>;
-};
-
-function useActiveCategory(itemCategories: Record<string, CategoryId>): CategoryId | "all" {
+function useActiveCategory(itemCategories: Record<string, CategoryId>): CategoryId | "all" | null {
   const pathname = usePathname();
   const params = useSearchParams();
   const match = pathname.match(/^\/components\/([^/]+)/);
   if (match) return itemCategories[match[1]] ?? "all";
+  if (pathname !== "/") return null;
   const c = params.get("category");
   return c && c !== "all" ? (c as CategoryId) : "all";
 }
 
-/** Left menu with every category (desktop). Links filter the dashboard. */
-export function Sidebar({ categories, total, itemCategories }: Props) {
+const itemBase =
+  "group flex items-center justify-between gap-3 rounded-tile px-3 py-[7px] text-[14px] font-medium leading-[normal] transition-[background-color,color,box-shadow] duration-200 ease-out";
+const itemOn = "bg-surface-primary text-text-primary shadow-[0_1px_2px_0_#0000000f,0_0_0_1px_#0000000a]";
+const itemOff = "text-text-nav hover:bg-surface-primary/70 hover:text-text-primary";
+
+/** Full-height product sidebar: brand, main sections, categories, base package and GitHub. */
+export function Sidebar({ categories, total, itemCategories }: MenuProps) {
+  const pathname = usePathname();
   const active = useActiveCategory(itemCategories);
+  const { selected, ready } = useSelection();
+  const count = ready ? selected.length : 0;
+  const onLibrary = pathname === "/" || pathname.startsWith("/components");
+  const onWebsites = pathname.startsWith("/websites");
+  const onBuild = pathname.startsWith("/build");
+
   return (
-    <nav aria-label="Categories" className="flex flex-col gap-0.5">
-      <SidebarLink href="/" active={active === "all"} count={total}>
-        All components
-      </SidebarLink>
-      <div aria-hidden className="my-3 h-px bg-border-06" />
-      {categories.map((c) => (
-        <SidebarLink key={c.id} href={`/?category=${c.id}`} active={active === c.id} count={c.count}>
-          {c.name}
-        </SidebarLink>
-      ))}
-      <div aria-hidden className="my-3 h-px bg-border-06" />
-      <Link
-        href="/components/firefly-base"
-        aria-current={active === "base" ? "page" : undefined}
-        className={`flex flex-col gap-0.5 rounded-tile px-3 py-[7px] transition-[background-color,color] duration-200 ease-out ${
-          active === "base" ? "bg-surface-muted text-text-primary" : "text-text-nav hover:bg-surface-muted/60 hover:text-text-primary"
-        }`}
-      >
-        <span className="text-[13px] font-medium leading-[normal]">Base package</span>
-        <span className="text-[12px] leading-[normal] text-text-quaternary">Tokens, motion, buttons · install first</span>
+    <div className="flex h-full flex-col gap-6">
+      <Link href="/" className="flex items-baseline gap-2 rounded-chip px-3 pt-1">
+        <span className="text-[16px] font-medium leading-none tracking-[-0.01em] text-text-primary">Firefly</span>
+        <span className="text-[16px] font-normal leading-none text-text-muted">UI Library</span>
       </Link>
-    </nav>
+
+      <nav aria-label="Sections" className="flex flex-col gap-0.5">
+        <Link href="/" aria-current={onLibrary ? "page" : undefined} className={`${itemBase} ${onLibrary ? itemOn : itemOff}`}>
+          <span className="flex items-center gap-2.5">
+            <Icon name="components" />
+            UI Components
+          </span>
+        </Link>
+        <Link href="/websites" aria-current={onWebsites ? "page" : undefined} className={`${itemBase} ${onWebsites ? itemOn : itemOff}`}>
+          <span className="flex items-center gap-2.5">
+            <Icon name="websites" />
+            Websites
+          </span>
+        </Link>
+        <Link href="/build" aria-current={onBuild ? "page" : undefined} className={`${itemBase} ${onBuild ? itemOn : itemOff}`}>
+          <span className="flex items-center gap-2.5">
+            <Icon name="build" />
+            Build site
+          </span>
+          <span
+            aria-label={`${count} selected`}
+            className={`inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-pill px-1 font-mono text-[11px] ${
+              count > 0 ? "bg-button-primary text-button-content-primary" : "text-text-quaternary"
+            }`}
+          >
+            {count}
+          </span>
+        </Link>
+      </nav>
+
+      <div aria-hidden className="h-px bg-border-10" />
+
+      <nav aria-label="Categories" className="flex flex-col gap-0.5">
+        <CategoryLink href="/" active={active === "all"} count={total}>
+          All components
+        </CategoryLink>
+        {categories.map((c) => (
+          <CategoryLink key={c.id} href={`/?category=${c.id}`} active={active === c.id} count={c.count}>
+            {c.name}
+          </CategoryLink>
+        ))}
+      </nav>
+
+      <div className="mt-auto flex flex-col gap-0.5 pt-6">
+        <div aria-hidden className="mb-3 h-px bg-border-10" />
+        <Link
+          href="/components/firefly-base"
+          aria-current={active === "base" ? "page" : undefined}
+          className={`flex flex-col gap-0.5 rounded-tile px-3 py-[7px] transition-[background-color,color,box-shadow] duration-200 ease-out ${active === "base" ? itemOn : itemOff}`}
+        >
+          <span className="text-[13px] font-medium leading-[normal]">Base package</span>
+          <span className="text-[12px] leading-[normal] text-text-quaternary">Tokens · motion · buttons</span>
+        </Link>
+        <a
+          href="https://github.com/lukasznosekk/Firefly-UI-Library"
+          target="_blank"
+          rel="noreferrer"
+          className={`${itemBase} ${itemOff} text-[13px]`}
+        >
+          <span className="flex items-center gap-2.5">
+            <Icon name="github" />
+            GitHub
+          </span>
+          <span aria-hidden className="text-text-quaternary">
+            ↗
+          </span>
+        </a>
+      </div>
+    </div>
   );
 }
 
-function SidebarLink({ href, active, count, children }: { href: string; active: boolean; count: number; children: React.ReactNode }) {
+function CategoryLink({ href, active, count, children }: { href: string; active: boolean; count: number; children: React.ReactNode }) {
   return (
-    <Link
-      href={href}
-      aria-current={active ? "page" : undefined}
-      className={`group flex items-center justify-between gap-3 rounded-tile px-3 py-[7px] text-[14px] font-medium leading-[normal] transition-[background-color,color] duration-200 ease-out ${
-        active ? "bg-surface-muted text-text-primary" : "text-text-nav hover:bg-surface-muted/60 hover:text-text-primary"
-      }`}
-    >
+    <Link href={href} aria-current={active ? "page" : undefined} className={`${itemBase} ${active ? itemOn : itemOff}`}>
       <span className="truncate transition-[translate] duration-200 ease-out group-hover:translate-x-[3px] motion-reduce:transition-none">{children}</span>
       <span className={`font-mono text-[11px] ${active ? "text-text-tertiary" : "text-text-quaternary"}`}>{count}</span>
     </Link>
   );
 }
 
+function Icon({ name }: { name: "components" | "websites" | "build" | "github" }) {
+  const common = { width: 16, height: 16, viewBox: "0 0 16 16", fill: "none", "aria-hidden": true } as const;
+  switch (name) {
+    case "components":
+      return (
+        <svg {...common}>
+          <rect x="2" y="2" width="5" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
+          <rect x="9" y="2" width="5" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
+          <rect x="2" y="9" width="5" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
+          <rect x="9" y="9" width="5" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
+        </svg>
+      );
+    case "websites":
+      return (
+        <svg {...common}>
+          <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
+          <path d="M2 6h12" stroke="currentColor" strokeWidth="1.4" />
+        </svg>
+      );
+    case "build":
+      return (
+        <svg {...common}>
+          <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+        </svg>
+      );
+    case "github":
+      return (
+        <svg {...common} fill="currentColor">
+          <path d="M8 .2a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.48-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.23 1.88.87 2.33.67.07-.52.28-.87.5-1.07-1.77-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.94.29.25.54.74.54 1.49v2.21c0 .21.15.46.55.38A8 8 0 0 0 8 .2Z" />
+        </svg>
+      );
+  }
+}
+
 /** Same categories as a horizontal row for tablet and mobile (no room for a side menu). */
-export function CategoryBar({ categories, total, itemCategories }: Props) {
+export function CategoryBar({ categories, total, itemCategories }: MenuProps) {
   const active = useActiveCategory(itemCategories);
   const pill = (isActive: boolean) =>
     `inline-flex h-8 shrink-0 items-center gap-1.5 rounded-pill border px-3.5 text-[13px] font-medium leading-none transition-[background-color,color,border-color] duration-200 ease-out ${

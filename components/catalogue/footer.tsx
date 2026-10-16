@@ -3,7 +3,7 @@ import Link from "next/link";
 export function CatalogueFooter() {
   return (
     <footer className="border-t border-border-06">
-      <div className="mx-auto flex max-w-[1392px] flex-col gap-3 px-5 py-8 text-[13px] text-text-nav md:flex-row md:items-center md:justify-between md:px-8">
+      <div className="flex flex-col gap-3 px-5 py-8 text-[13px] text-text-nav md:flex-row md:items-center md:justify-between md:px-8 xl:px-10">
         <p>
           <span className="font-medium text-text-primary">Firefly UI Library</span> · content-free, versioned sections for Firefly websites.
         </p>

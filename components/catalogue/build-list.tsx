@@ -25,7 +25,7 @@ export function BuildList({ items }: { items: CatalogueItem[] }) {
 
   if (chosen.length === 0) {
     return (
-      <div className="mx-auto flex max-w-[1392px] flex-col items-start gap-4 rounded-card border border-dashed border-border-16 p-8 md:p-12">
+      <div className="flex flex-col items-start gap-4 rounded-card border border-dashed border-border-16 bg-surface-primary p-8 md:p-12">
         <p className="text-[18px] font-medium text-text-primary">Nothing selected yet.</p>
         <p className="max-w-[480px] text-[14px] leading-[1.55] text-text-nav">
           Tick &ldquo;Add to build&rdquo; on any component card. The sections will stack here in the order you pick them, with one
@@ -43,7 +43,7 @@ export function BuildList({ items }: { items: CatalogueItem[] }) {
   const installIds = [BASE_ITEM_ID, ...sectionIds];
 
   return (
-    <div className="mx-auto flex max-w-[1392px] flex-col gap-10 xl:grid xl:grid-cols-[380px_minmax(0,1fr)] xl:items-start xl:gap-12">
+    <div className="flex flex-col gap-10 xl:grid xl:grid-cols-[380px_minmax(0,1fr)] xl:items-start xl:gap-12">
       <aside className="flex flex-col gap-6 xl:sticky xl:top-24">
         <div className="flex items-center justify-between">
           <h2 className="text-[18px] font-medium text-text-primary">
@@ -80,12 +80,14 @@ export function BuildList({ items }: { items: CatalogueItem[] }) {
             </li>
           ))}
         </ol>
+        <div className="flex flex-col gap-3 rounded-card border border-border-06 bg-surface-primary p-4">
         <InstallCommand label="Install everything (base included)" command={installCommand(installIds)} />
         <p className="text-[13px] leading-[1.55] text-text-nav">
           Run it inside the site&rsquo;s folder (a site needs the library&rsquo;s{" "}
           <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">components.json</code> once, see Firefly Base). Each section lands in <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">components/sections/</code>; then
           compose them in <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">app/page.tsx</code> in this order.
         </p>
+        </div>
       </aside>
 
       <div className="min-w-0">

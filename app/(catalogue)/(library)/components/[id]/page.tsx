@@ -76,8 +76,8 @@ export default async function ComponentPage({ params }: { params: Params }) {
           </div>
         </Reveal>
 
-        <Reveal as="aside" className="flex flex-col gap-10">
-          <section aria-labelledby="install-heading" {...reveal} className="flex flex-col gap-4">
+        <Reveal as="aside" className="flex flex-col gap-6">
+          <section aria-labelledby="install-heading" {...reveal} className="flex flex-col gap-4 rounded-card border border-border-06 bg-surface-primary p-5">
             <h2 id="install-heading" className="text-[24px] font-normal leading-[1.1] tracking-[-0.02em] text-text-primary">
               Install
             </h2>
@@ -115,11 +115,11 @@ export default async function ComponentPage({ params }: { params: Params }) {
             ) : null}
           </section>
 
-          <section aria-labelledby="files-heading" {...reveal} className="flex flex-col gap-3">
+          <section aria-labelledby="files-heading" {...reveal} className="flex flex-col gap-3 rounded-card border border-border-06 bg-surface-primary p-5">
             <h2 id="files-heading" className="catalogue-eyebrow">
               Files
             </h2>
-            <ul className="flex flex-col divide-y divide-border-06 rounded-tile border border-border-06 bg-surface-primary">
+            <ul className="flex flex-col divide-y divide-border-06 rounded-tile border border-border-06 bg-surface-muted/60">
               {item.files.map((f) => (
                 <li key={f.path} className="px-3.5 py-2.5 font-mono text-[12px] leading-[1.5] text-text-primary">
                   {f.target}
@@ -137,7 +137,7 @@ export default async function ComponentPage({ params }: { params: Params }) {
             ) : null}
           </section>
 
-          <section aria-labelledby="changelog-heading" {...reveal} className="flex flex-col gap-3">
+          <section aria-labelledby="changelog-heading" {...reveal} className="flex flex-col gap-3 rounded-card border border-border-06 bg-surface-primary p-5">
             <h2 id="changelog-heading" className="catalogue-eyebrow">
               Changelog
             </h2>
