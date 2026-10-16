@@ -20,6 +20,18 @@ npx shadcn@latest add https://<catalogue>/r/hero-split-v1.json
 
 After the base: add `@import "./firefly.css";` under the Tailwind import in `app/globals.css`, load Inter and IBM Plex Mono with `next/font` (`--font-inter`, `--font-plex-mono`) and put `<MotionScript />` in the root layout's `<head>`.
 
+## Build site (AI planner)
+
+`/build` has a chat: describe the site (audience, offer, tone) and the planner composes a page from the library, writes the copy in the house style and proposes one photo per image slot. "Generate images" renders those photos in the cinematic style from the Web Guide Book. The plan lives in the browser (localStorage + IndexedDB) and can be refined in conversation.
+
+Environment variables (Vercel → Settings → Environment Variables, and `.env.local` locally — see `.env.example`):
+
+| Variable | Used for | Without it |
+| --- | --- | --- |
+| `ANTHROPIC_API_KEY` | the planner (Claude Opus 5.5) | production returns a clear error; development returns a sample plan |
+| `OPENAI_API_KEY` | photo generation (gpt-image-1) | production returns a clear error; development returns gradient stand-ins |
+| `AI_MOCK=1` | force the offline sample mode | — |
+
 ## Develop
 
 ```bash

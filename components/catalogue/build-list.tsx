@@ -3,167 +3,96 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import type { CatalogueItem } from "@/lib/types";
-import { categoryById } from "@/lib/categories";
 import { BASE_ITEM_ID, installCommand } from "@/lib/registry-url";
 import { ComponentPreview } from "./component-preview";
 import { InstallCommand } from "./install-command";
 import { useSelection } from "./selection";
 
 /**
- * Build page body: the ordered selection (move up/down, remove), the combined install
- * command and a stacked preview of the chosen sections in page order.
+ * The assembled page: ordered sections (move / remove), the live preview and one install command.
+ * Sections come from the builder chat (with content) or from "Add to build" on the cards (wireframe).
  */
 export function BuildList({ items }: { items: CatalogueItem[] }) {
-  const { selected, ready, move, remove, clear } = useSelection();
+  const { plan, sections, ready, move, remove } = useSelection();
   const byId = useMemo(() => new Map(items.map((i) => [i.id, i])), [items]);
-  const chosen = selected
-    .map((id) => byId.get(id))
-    .filter((x): x is CatalogueItem => Boolean(x));
 
-  if (!ready) {
-    return <div className="h-40" aria-busy />;
-  }
+  if (!ready) return <div className="h-40" aria-busy />;
 
-  if (chosen.length === 0) {
+  if (sections.length === 0) {
     return (
       <div className="flex flex-col items-start gap-4 rounded-card border border-dashed border-border-16 bg-surface-primary p-8 md:p-12">
-        <p className="text-[18px] font-medium text-text-primary">
-          Nothing selected yet.
+        <p className="text-[18px] font-medium text-text-primary">No sections yet.</p>
+        <p className="max-w-[520px] text-[14px] leading-[1.55] text-text-nav">
+          Describe the site in the chat and the planner will propose a page, or tick &ldquo;Add to build&rdquo; on component cards to assemble one by hand.
         </p>
-        <p className="max-w-[480px] text-[14px] leading-[1.55] text-text-nav">
-          Tick &ldquo;Add to build&rdquo; on any component card. The sections
-          will stack here in the order you pick them, with one command that
-          installs them all.
-        </p>
-        <Link
-          href="/"
-          className="inline-flex h-[43px] items-center rounded-pill bg-button-primary px-5 text-[14px] font-medium text-button-content-primary transition-opacity duration-200 ease-out hover:opacity-85"
-        >
+        <Link href="/" className="inline-flex h-[34px] items-center rounded-pill border border-border-light bg-surface-primary px-3.5 text-[13px] font-medium text-text-primary transition-opacity duration-200 ease-out hover:opacity-70">
           Browse components
         </Link>
       </div>
     );
   }
 
-  const sectionIds = chosen
-    .filter((c) => c.id !== BASE_ITEM_ID)
-    .map((c) => c.id);
-  const previewSrc = `/preview/build?items=${sectionIds.join(",")}`;
-  const installIds = [BASE_ITEM_ID, ...sectionIds];
+  const componentIds = Array.from(new Set(sections.map((s) => s.component).filter((c) => byId.has(c))));
+  const installIds = [BASE_ITEM_ID, ...componentIds];
 
   return (
-    <div className="flex flex-col gap-10 xl:grid xl:grid-cols-[380px_minmax(0,1fr)] xl:items-start xl:gap-12">
-      <aside className="flex flex-col gap-6 xl:sticky xl:top-24">
-        <div className="flex items-center justify-between">
-          <h2 className="text-[18px] font-medium text-text-primary">
-            Page order{" "}
-            <span className="font-mono text-[12px] font-normal text-text-quaternary">
-              {chosen.length}
-            </span>
-          </h2>
-          <button
-            type="button"
-            onClick={clear}
-            className="cursor-pointer text-[13px] font-medium text-text-nav transition-opacity duration-200 ease-out hover:opacity-60"
-          >
-            Clear all
-          </button>
+    <div className="flex flex-col gap-8">
+      {plan?.summary ? (
+        <div className="flex flex-col gap-1">
+          <h2 className="text-[20px] font-medium leading-[1.2] text-text-primary">{plan.title}</h2>
+          <p className="text-[14px] leading-[1.5] text-text-nav">{plan.summary}</p>
         </div>
-        <ol className="flex flex-col divide-y divide-border-06 rounded-card border border-border-06 bg-surface-primary">
-          {chosen.map((item, i) => (
-            <li
-              key={item.id}
-              className="group flex items-center gap-3 px-4 py-3"
-            >
-              <span className="w-5 shrink-0 font-mono text-[12px] text-text-quaternary">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                <div className="flex items-center gap-2">
-                  <Link
-                    href={`/components/${item.id}`}
-                    className="truncate text-[14px] font-medium text-text-primary transition-[translate] duration-200 ease-out group-hover:translate-x-[3px] motion-reduce:transition-none"
-                  >
-                    {item.name}
-                  </Link>
-                </div>
-                <span className="text-[12px] text-text-quaternary">
-                  {categoryById(item.category).name}
-                </span>
-              </div>
-              <div className="flex shrink-0 items-center gap-1">
-                <IconButton
-                  label={`Move ${item.name} up`}
-                  disabled={i === 0}
-                  onClick={() => move(item.id, -1)}
-                >
-                  ↑
-                </IconButton>
-                <IconButton
-                  label={`Move ${item.name} down`}
-                  disabled={i === chosen.length - 1}
-                  onClick={() => move(item.id, 1)}
-                >
-                  ↓
-                </IconButton>
-                <IconButton
-                  label={`Remove ${item.name}`}
-                  onClick={() => remove(item.id)}
-                >
-                  ×
-                </IconButton>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <div className="flex flex-col gap-3 rounded-card border border-border-06 bg-surface-primary p-4">
-          <InstallCommand
-            label="Install everything (base included)"
-            command={installCommand(installIds)}
-          />
-          <p className="text-[13px] leading-[1.55] text-text-nav">
-            Run it inside the site&rsquo;s folder (a site needs the
-            library&rsquo;s{" "}
-            <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">
-              components.json
-            </code>{" "}
-            once, see Firefly Base). Each section lands in{" "}
-            <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">
-              components/sections/
-            </code>
-            ; then compose them in{" "}
-            <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">
-              app/page.tsx
-            </code>{" "}
-            in this order.
-          </p>
-        </div>
-      </aside>
+      ) : null}
 
-      <div className="min-w-0">
-        {sectionIds.length > 0 ? (
-          <ComponentPreview src={previewSrc} title="Assembled page" />
-        ) : (
-          <p className="text-[14px] text-text-nav">
-            Add at least one section to preview the page.
+      <ComponentPreview src="/preview/plan" title="Assembled page" />
+
+      <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_380px] xl:gap-10">
+        <section aria-labelledby="order-heading" className="flex flex-col gap-3">
+          <h2 id="order-heading" className="text-[16px] font-medium text-text-primary">
+            Page order <span className="font-mono text-[12px] font-normal text-text-quaternary">{sections.length}</span>
+          </h2>
+          <ol className="flex flex-col divide-y divide-border-06 rounded-card border border-border-06 bg-surface-primary">
+            {sections.map((section, i) => {
+              const item = byId.get(section.component);
+              const headline = section.props?.headline ? [section.props.headline, section.props.headlineMuted].filter(Boolean).join(" ") : null;
+              return (
+                <li key={section.id} className="group flex items-center gap-3 px-4 py-3">
+                  <span className="w-5 shrink-0 font-mono text-[12px] text-text-quaternary">{String(i + 1).padStart(2, "0")}</span>
+                  <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                    <Link href={`/components/${section.component}`} className="truncate text-[14px] font-medium text-text-primary transition-[translate] duration-200 ease-out group-hover:translate-x-[3px] motion-reduce:transition-none">
+                      {item?.name ?? section.component}
+                    </Link>
+                    {headline ? <span className="truncate text-[12.5px] text-text-nav">{headline}</span> : section.reason ? <span className="truncate text-[12.5px] text-text-quaternary">{section.reason}</span> : null}
+                  </div>
+                  <div className="flex shrink-0 items-center gap-1">
+                    <IconButton label={`Move ${item?.name ?? section.component} up`} disabled={i === 0} onClick={() => move(section.id!, -1)}>
+                      ↑
+                    </IconButton>
+                    <IconButton label={`Move ${item?.name ?? section.component} down`} disabled={i === sections.length - 1} onClick={() => move(section.id!, 1)}>
+                      ↓
+                    </IconButton>
+                    <IconButton label={`Remove ${item?.name ?? section.component}`} onClick={() => remove(section.id!)}>
+                      ×
+                    </IconButton>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+
+        <aside className="flex flex-col gap-3 rounded-card border border-border-06 bg-surface-primary p-4">
+          <InstallCommand label="Install the components (base included)" command={installCommand(installIds)} />
+          <p className="text-[13px] leading-[1.55] text-text-nav">
+            Run it inside the site&rsquo;s folder, then compose the sections in <code className="rounded-chip bg-catalogue-code px-1 font-mono text-[12px]">app/page.tsx</code> in this order with the copy from the plan.
           </p>
-        )}
+        </aside>
       </div>
     </div>
   );
 }
 
-function IconButton({
-  label,
-  onClick,
-  disabled,
-  children,
-}: {
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
-  children: React.ReactNode;
-}) {
+function IconButton({ label, onClick, disabled, children }: { label: string; onClick: () => void; disabled?: boolean; children: React.ReactNode }) {
   return (
     <button
       type="button"

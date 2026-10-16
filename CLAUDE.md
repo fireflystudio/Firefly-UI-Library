@@ -21,6 +21,12 @@ Rules live in the Firefly Web Guide Book: `../Firefly web guide book/FIREFLY-WEB
 - `public/components.json` — the shadcn config a fresh Firefly site should copy before its first `npx shadcn add`.
 - `docs/ADDING-COMPONENTS.md` — the complete brief for adding a component (conventions, tokens, rules, QA). Follow it for every new item; hand it to parallel builders as their brief.
 
+## Site builder (`/build`)
+- `components/catalogue/build-chat.tsx` → `POST /api/plan` (Claude Opus 5.5 via `@anthropic-ai/sdk`, system prompt in `lib/plan/prompt.ts`, component contracts in `lib/plan/catalogue-schema.ts`, plan schema in `lib/plan/types.ts`) → plan stored in localStorage (`components/catalogue/selection.tsx`) → rendered by `lib/plan/render.tsx` on `/preview/plan`.
+- Images: `POST /api/images` (OpenAI gpt-image-1, house style appended from `IMAGE_STYLE`), stored in IndexedDB (`lib/plan/image-store.ts`), referenced as `idb:<key>`.
+- Keys: `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` (Vercel env + `.env.local`). `AI_MOCK=1` or missing keys in development → `lib/plan/mock-plan.ts` and gradient images, so the UI can be tested offline.
+- When a component's props change, update its entry in `catalogue-schema.ts` and the mapping in `render.tsx`.
+
 ## Working rules
 - Components never contain client content, brands or logos. Props for everything, `<Placeholder>` for every visual by default.
 - Never hardcode hex in components — token utilities only (`text-text-primary`, `bg-surface-page` …). Tokens are defined once in `registry/firefly/styles/firefly.css`.
