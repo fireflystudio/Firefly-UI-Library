@@ -23,11 +23,7 @@ export function HeroCta({
         {primary.label}
       </Button>
       {secondary ? (
-        <Button
-          href={secondary.href}
-          variant="ghost"
-          className={onDark ? "border-text-on-dark/25 bg-transparent text-text-on-dark" : ""}
-        >
+        <Button href={secondary.href} variant={onDark ? "ghost-dark" : "ghost"}>
           {secondary.label}
         </Button>
       ) : null}

@@ -61,7 +61,7 @@ export function FeatureRowInteractive({
           <h2
             {...reveal}
             id={headingId}
-            className="text-balance text-[26px] font-normal leading-[1.06] tracking-[-0.045em] text-text-primary md:pr-10 md:text-[28px] xl:pr-16 xl:text-[37px]"
+            className="text-pretty text-[26px] font-normal leading-[1.06] tracking-[-0.045em] text-text-primary md:pr-6 md:text-[28px] xl:pr-8 xl:text-[37px]"
           >
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>

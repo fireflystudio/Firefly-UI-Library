@@ -56,7 +56,7 @@ export default function BasePreview() {
               <Button href="#" variant="light">
                 Light · on dark
               </Button>
-              <Button href="#" variant="ghost" className="border-text-on-dark/25 bg-transparent text-text-on-dark">
+              <Button href="#" variant="ghost-dark">
                 Ghost · on dark
               </Button>
             </div>

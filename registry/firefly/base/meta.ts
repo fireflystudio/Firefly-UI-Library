@@ -18,7 +18,7 @@ export const meta: CatalogueItem = {
     { name: "reveal", type: "attribute object", description: "Spread on any element inside <Reveal> to make it a staggered child. Imported from reveal-attr (safe in Server Components)." },
     { name: "<Parallax>", type: "component", default: 'distance 30 · mode "through"', description: 'Vertical drift on scroll for large visuals. mode "exit" for the hero (starts at 0, drifts down ~60px).' },
     { name: "<ArtScale />", type: "component", default: "designWidth 1440", description: "Sets --art-scale on its parent so a 1440px composition scales up on wide screens." },
-    { name: "<Button>", type: "component", default: 'variant "dark" · size "md"', description: 'Pill button. Renders a Link with href, otherwise a <button>. Variants: dark, ghost, light (for dark backgrounds). Sizes: sm (34px), md (43px).' },
+    { name: "<Button>", type: "component", default: 'variant "dark" · size "md"', description: 'Pill button. Renders a Link with href, otherwise a <button>. Variants: dark, ghost, light and ghost-dark (the last two for dark backgrounds). Sizes: sm (34px), md (43px).' },
     { name: "<HeroCta>", type: "component", default: "Join waitlist / Book a demo", description: "Dark primary + ghost secondary pill pair. Props: primary, secondary, onDark." },
     { name: "<TwoTone>", type: "component", description: "Renders a headline as primary text + muted grey second half. Props: text, muted, stack, onDark." },
     { name: "<Placeholder>", type: "component", default: 'label "Visual"', description: "Hatched stand-in for an image or mockup. Props: label, ratio, tone." },

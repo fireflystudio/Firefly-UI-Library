@@ -88,7 +88,7 @@ export function NavigationSlideOut({
     const root = document.documentElement;
     const previousOverflow = root.style.overflow;
     root.style.overflow = "hidden";
-    closeButtonRef.current?.focus();
+    closeButtonRef.current?.focus({ preventScroll: true });
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
@@ -185,16 +185,16 @@ export function NavigationSlideOut({
         </nav>
       </header>
 
-      {/* Page overlay: opacity only; stays clickable until the fade-out ends */}
+      {/* Page overlay: opacity only. Visibility is transitioned only while closing, so it stays clickable until the fade-out ends and appears instantly on open */}
       <div
         aria-hidden
         onClick={close}
-        className={`fixed inset-0 z-[60] bg-surface-inverse/40 transition-[opacity,visibility] duration-[350ms] ease-out motion-reduce:transition-none ${
-          open ? "visible opacity-100" : "invisible opacity-0"
+        className={`fixed inset-0 z-[60] bg-surface-inverse/40 duration-[350ms] ease-out motion-reduce:transition-none ${
+          open ? "visible opacity-100 transition-[opacity]" : "invisible opacity-0 transition-[opacity,visibility]"
         }`}
       />
 
-      {/* Slide-out panel: translate only; invisible + inert once the slide-out has finished */}
+      {/* Slide-out panel: translate only. Visibility is transitioned only while closing (hidden + inert once the slide-out has finished); on open it is visible at once so focus can move in */}
       <div
         ref={panelRef}
         id={panelId}
@@ -203,8 +203,8 @@ export function NavigationSlideOut({
         aria-label={menuTitle}
         inert={!open}
         onKeyDown={trapFocus}
-        className={`fixed inset-y-0 right-0 z-[70] flex w-[min(460px,92vw)] flex-col overflow-y-auto rounded-l-[24px] bg-surface-primary p-6 transition-[translate,visibility] duration-[400ms] ease-out-soft motion-reduce:transition-none md:p-8 ${
-          open ? "visible translate-x-0" : "invisible translate-x-full"
+        className={`fixed inset-y-0 right-0 z-[70] flex w-[min(460px,92vw)] flex-col overflow-y-auto rounded-l-[24px] bg-surface-primary p-6 duration-[400ms] ease-out-soft motion-reduce:transition-none md:p-8 ${
+          open ? "visible translate-x-0 transition-[translate]" : "invisible translate-x-full transition-[translate,visibility]"
         }`}
       >
         <div className="flex items-start justify-between gap-4">

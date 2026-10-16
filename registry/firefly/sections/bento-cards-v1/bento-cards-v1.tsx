@@ -82,18 +82,18 @@ function BentoCard({ item }: { item: BentoItem }) {
 
   return (
     <article
-      className={`group relative flex h-full flex-col justify-between overflow-clip rounded-card p-6 transition-[translate,scale,opacity] duration-200 ease-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-border-interactive ${SURFACE[tone]}`}
+      className={`group relative isolate flex h-full flex-col justify-between overflow-clip rounded-card p-6 transition-[translate,scale,opacity] duration-200 ease-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-border-interactive ${SURFACE[tone]}`}
     >
       {tone === "photo" ? (
         <>
-          <div aria-hidden className={`absolute inset-0 ${visualMotion}`}>
+          <div aria-hidden className={`absolute inset-0 -z-10 ${visualMotion}`}>
             {item.visual ?? <Placeholder tone="dark" label="Photo" />}
           </div>
-          <div aria-hidden className="absolute inset-0 bg-linear-to-t from-surface-inverse/70 via-surface-inverse/10 to-transparent" />
+          <div aria-hidden className="absolute inset-0 -z-10 bg-linear-to-t from-surface-inverse/70 via-surface-inverse/10 to-transparent" />
         </>
       ) : null}
 
-      <p className={`relative text-[13px] leading-[normal] ${onDark ? "text-text-on-dark/60" : "text-text-tertiary"}`}>{item.label}</p>
+      <p className={`text-[13px] leading-[normal] ${onDark ? "text-text-on-dark/60" : "text-text-tertiary"}`}>{item.label}</p>
 
       {tone !== "photo" ? (
         <div className={`relative my-5 min-h-0 flex-1 overflow-clip rounded-tile border ${onDark ? "border-border-on-dark" : "border-border-06"} ${visualMotion}`}>
@@ -101,7 +101,7 @@ function BentoCard({ item }: { item: BentoItem }) {
         </div>
       ) : null}
 
-      <div className="relative flex flex-col gap-2">
+      <div className="flex flex-col gap-2">
         <h3 className="line-clamp-3 text-pretty text-[20px] font-medium leading-[1.3] tracking-[-0.02em]">
           {item.href ? (
             // Stretched link: the whole card is clickable, the accessible name stays the title

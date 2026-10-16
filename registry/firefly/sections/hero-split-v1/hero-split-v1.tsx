@@ -62,7 +62,7 @@ export function HeroSplit({
       aria-labelledby={headingId}
       className={`bg-surface-page px-5 pb-14 pt-[calc(72px+56px)] md:px-10 md:pb-20 md:pt-[calc(76px+80px)] xl:px-16 xl:pb-24 xl:pt-[calc(76px+120px)] ${className}`}
     >
-      <div className="mx-auto grid max-w-[1312px] grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-8 xl:gap-16">
+      <div className="mx-auto grid max-w-[1312px] grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-8 xl:gap-12">
         {/* Copy */}
         <Reveal stagger={100} className="flex min-w-0 flex-col items-start gap-6 md:col-span-6 md:gap-7 xl:col-span-5">
           <div className="flex flex-col items-start gap-4 md:gap-5">

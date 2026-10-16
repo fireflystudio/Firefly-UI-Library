@@ -20,7 +20,7 @@ export type NewsItem = {
   kicker: string;
   title: string;
   href: string;
-  /** Image slot at the top of the card. Defaults to a light Placeholder; null removes the slot. */
+  /** 2:1 image slot at the top of the card. Defaults to a light Placeholder; null removes the slot. */
   image?: ReactNode | null;
 };
 
@@ -50,15 +50,21 @@ const kickerClass = "font-mono text-[12px] uppercase leading-[normal] tracking-[
 /** Covers the whole card so the entire card is the link (the card is `relative`). */
 const stretchedLink = "after:absolute after:inset-0 after:content-['']";
 
+/** The grid reveals 250ms after the masthead; each card adds a 90ms step in DOM order. */
+const GRID_DELAY = 250;
+const CARD_STAGGER = 90;
+
 /**
  * Hero News Bento v1
  * Editorial front page: masthead (eyebrow, stacked two-tone h1, intro) above a story grid.
  * The lead story is a large dark card with the image behind a bottom gradient; 3–5 smaller
- * light cards show a kicker and title with an optional image slot. One column on mobile, two
- * on tablet (lead full width), on desktop the lead takes the left 592/1312 and the small cards
- * fill a 2-column grid beside it (an odd last card spans both columns). Cards lift 4px and their
- * images scale 1.03 on hover; the lead drifts ±30px as it crosses the viewport. Renders the
- * page's only h1; story titles are h3.
+ * light cards show a kicker and title with an optional 2:1 image slot. One column on mobile
+ * (lead as a 4:5 poster), two on tablet (lead full width at 16:9), on desktop the lead takes
+ * the left 592/1312 and the small cards fill a 2-column grid beside it (an odd last card spans
+ * both columns). Each card is its own reveal so cards below the fold wait until they scroll in;
+ * when everything is in view they stagger 90ms in order. Cards lift 4px and their images scale
+ * 1.03 on hover; the lead drifts ±30px as it crosses the viewport. Renders the page's only h1;
+ * story titles are h3.
  */
 export function HeroNewsBento({
   id = "hero",
@@ -108,27 +114,28 @@ export function HeroNewsBento({
         </Reveal>
 
         {/* Front page */}
-        <Reveal
-          delay={250}
-          stagger={90}
-          className="grid grid-cols-1 gap-3 md:gap-4 xl:grid-cols-[minmax(0,592fr)_minmax(0,704fr)]"
-        >
-          {/* Lead story: parallax "through" on this card only */}
-          <div {...reveal} className="min-w-0">
+        <div className="grid grid-cols-1 gap-3 md:gap-4 xl:grid-cols-[minmax(0,592fr)_minmax(0,704fr)]">
+          {/* Lead story: its own reveal, parallax "through" on this card only */}
+          <Reveal {...reveal} delay={GRID_DELAY} className="min-w-0">
             <Parallax distance={30} className="h-full">
               <LeadCard {...lead} />
             </Parallax>
-          </div>
+          </Reveal>
 
           {/* Smaller stories */}
           <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 xl:auto-rows-fr">
             {items.map((item, i) => (
-              <div key={item.href + i} {...reveal} className={`min-w-0 ${oddCount && i === items.length - 1 ? "md:col-span-2" : ""}`}>
+              <Reveal
+                key={item.href + i}
+                {...reveal}
+                delay={GRID_DELAY + CARD_STAGGER * (i + 1)}
+                className={`min-w-0 ${oddCount && i === items.length - 1 ? "md:col-span-2" : ""}`}
+              >
                 <StoryCard {...item} />
-              </div>
+              </Reveal>
             ))}
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -137,9 +144,14 @@ export function HeroNewsBento({
 function LeadCard({ kicker, title, dek, href, image }: NewsLead) {
   return (
     <article
-      className={`group relative isolate flex aspect-[4/3] h-full w-full flex-col justify-end gap-3 overflow-clip rounded-frame bg-surface-inverse p-5 text-text-on-dark md:aspect-[16/9] md:p-6 xl:aspect-[592/560] xl:p-8 ${cardHover}`}
+      className={`group relative isolate flex aspect-[4/5] h-full w-full flex-col justify-end gap-3 overflow-clip rounded-frame bg-surface-inverse p-5 text-text-on-dark md:aspect-[16/9] md:p-6 xl:aspect-[592/560] xl:p-8 ${cardHover}`}
     >
-      <div className={`absolute inset-0 -z-10 ${mediaHover}`}>{image ?? <Placeholder tone="dark" label="Lead image" />}</div>
+      <div className={`absolute inset-0 -z-10 ${mediaHover}`}>
+        {image ?? (
+          /* Label pinned to the top so it never sits behind the story text */
+          <Placeholder tone="dark" label="Lead image" style={{ alignItems: "flex-start", paddingTop: 24 }} />
+        )}
+      </div>
       <div aria-hidden className="absolute inset-0 -z-10 bg-linear-to-b from-transparent from-30% to-surface-inverse/80" />
       <p className={`${kickerClass} text-text-on-dark/70`}>{kicker}</p>
       <h3 className="max-w-[18em] text-balance text-[24px] font-normal leading-[1.15] tracking-[-0.015em] md:text-[28px] xl:text-[32px]">
@@ -159,11 +171,11 @@ function StoryCard({ kicker, title, href, image }: NewsItem) {
       className={`group relative flex h-full w-full flex-col overflow-clip rounded-frame border border-border-06 bg-surface-primary ${cardHover}`}
     >
       {hasImage ? (
-        <div className="relative min-h-[160px] flex-1 overflow-clip xl:min-h-[120px]">
+        <div className="relative aspect-[2/1] w-full overflow-clip">
           <div className={`absolute inset-0 ${mediaHover}`}>{image ?? <Placeholder label="Image" />}</div>
         </div>
       ) : null}
-      <div className={`flex flex-col gap-3 p-5 ${hasImage ? "" : "flex-1 justify-between gap-8"}`}>
+      <div className={`flex flex-1 flex-col p-5 ${hasImage ? "gap-3" : "justify-between gap-8"}`}>
         <p className={`${kickerClass} text-text-quaternary`}>{kicker}</p>
         <h3 className="text-pretty text-[18px] font-medium leading-[1.3] tracking-[-0.01em] text-text-primary">
           <Link href={href} className={stretchedLink}>

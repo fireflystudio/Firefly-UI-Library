@@ -144,6 +144,11 @@ export default function Preview({ inBuild }: PreviewProps) {
 4. Check interactions with a short ad-hoc Playwright script in the scratchpad (click a step, press ArrowRight, drag…) if the component has them.
 5. Also open http://localhost:3000/components/<id> once and make sure the page renders (the card and the device switcher use your preview).
 
+## 8b. Known non-issues
+- Under `reduce`, components that use `motion` hooks log one console *warning* ("You have Reduced Motion enabled on your device…"). That is the motion library's dev notice, not a defect.
+- Never override a `Button` variant's colours via `className` (Tailwind v4 orders same-property utilities alphabetically, so the override may lose). Add or use a variant (`dark`, `ghost`, `light`, `ghost-dark`).
+- When several builders work in parallel, give ad-hoc QA scripts unique names in the scratchpad.
+
 ## 9. What to report back
 
 Files created · the props API · placeholder copy you wrote · any deviation from the Startupmap original and why · QA results (the JSON numbers for each width) · anything you were unsure about.

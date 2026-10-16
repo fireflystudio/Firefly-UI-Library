@@ -54,7 +54,7 @@ export function FeatureRowChecks({
           <h2
             {...reveal}
             id={headingId}
-            className="text-balance text-[26px] font-normal leading-[1.1] tracking-[-0.025em] text-text-primary md:pr-10 md:text-[24px] xl:pr-16 xl:text-[32px]"
+            className="text-pretty text-[26px] font-normal leading-[1.1] tracking-[-0.025em] text-text-primary md:pr-6 md:text-[24px] xl:pr-8 xl:text-[32px]"
           >
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>

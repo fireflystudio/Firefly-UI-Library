@@ -27,4 +27,5 @@ export const meta: CatalogueItem = {
   ],
   dependencies: ["motion"],
   registryDependencies: ["firefly-base"],
+  order: 10,
 };

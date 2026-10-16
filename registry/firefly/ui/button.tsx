@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
-export type ButtonVariant = "dark" | "ghost" | "light";
+export type ButtonVariant = "dark" | "ghost" | "light" | "ghost-dark";
 export type ButtonSize = "sm" | "md";
 
 const base =
@@ -16,6 +16,8 @@ const variants: Record<ButtonVariant, string> = {
   ghost: "border border-border-light bg-surface-primary text-text-primary hover:opacity-70",
   /** Primary pill on dark backgrounds */
   light: "bg-surface-primary text-text-primary hover:opacity-85",
+  /** Secondary pill on dark backgrounds (never override a variant's colours via className: Tailwind orders utilities alphabetically) */
+  "ghost-dark": "border border-text-on-dark/25 bg-transparent text-text-on-dark hover:opacity-70",
 };
 
 // nav button 13px / 34px tall; hero button 14px / 43px tall

@@ -9,7 +9,7 @@ export const meta: CatalogueItem = {
     "Editorial front page: masthead with a stacked two-tone h1 and intro, then a bento of stories — one large lead card with the image behind a dark gradient and 3–5 smaller cards with kicker, title and an optional image slot.",
   interactions: [
     "Hover a card: it lifts 4px and its image scales to 1.03.",
-    "Scroll: the lead card drifts ±30px as it crosses the viewport.",
+    "Scroll: the lead card drifts ±30px as it crosses the viewport; on mobile each card fades in as it reaches the viewport.",
     "Resize: one column on mobile, two on tablet, lead + 2-column stack on desktop.",
   ],
   props: [
@@ -25,7 +25,7 @@ export const meta: CatalogueItem = {
     {
       name: "items",
       type: "{ kicker; title; href; image?: ReactNode | null }[]",
-      description: "3–5 smaller stories. `image` defaults to a light Placeholder at the top of the card; null removes the slot. An odd last card spans both columns.",
+      description: "3–5 smaller stories. `image` fills a 2:1 slot at the top of the card (defaults to a light Placeholder); null removes the slot. An odd last card spans both columns.",
     },
     { name: "id", type: "string", default: '"hero"', description: "Section id for anchor links; the heading id is <id>-heading." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },

@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "Firefly UI Library — every section Firefly builds, content-free and ready to install.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

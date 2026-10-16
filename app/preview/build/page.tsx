@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useMemo, type ComponentType } from "react";
+import { Fragment, Suspense, useMemo, type ComponentType } from "react";
 import { PreviewHost } from "@/components/catalogue/preview-host";
 import type { PreviewProps } from "@/lib/types";
 
@@ -26,9 +26,18 @@ function Assembled() {
   const ids = Array.from(new Set((params.get("items") ?? "").split(",").filter((id) => ID_PATTERN.test(id))));
   return (
     <PreviewHost>
-      {ids.map((id) => (
-        <Section key={id} id={id} />
-      ))}
+      {ids.map((id, i) => {
+        // A fixed nav covers the top of the page; heroes carry their own top padding, other
+        // sections placed right after a nav get a spacer the height of the bar.
+        const next = ids[i + 1];
+        const spacer = id.startsWith("navigation-") && next && !next.startsWith("hero-");
+        return (
+          <Fragment key={id}>
+            <Section id={id} />
+            {spacer ? <div aria-hidden className="h-[72px] md:h-[76px]" /> : null}
+          </Fragment>
+        );
+      })}
     </PreviewHost>
   );
 }
