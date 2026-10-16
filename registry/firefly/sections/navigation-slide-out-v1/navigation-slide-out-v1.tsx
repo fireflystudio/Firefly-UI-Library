@@ -64,7 +64,8 @@ export function NavigationSlideOut({
   const panelRef = useRef<HTMLDivElement>(null);
   const wasOpen = useRef(false);
   const current = activeHref ?? pathname;
-  const isActive = (href: string) => !href.includes("#") && current === href;
+  // pathname never contains "#", so anchor links are only active when a site passes a matching activeHref
+  const isActive = (href: string) => current === href;
   const close = () => setOpen(false);
 
   useEffect(() => {

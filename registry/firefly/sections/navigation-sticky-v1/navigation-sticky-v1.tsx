@@ -44,7 +44,8 @@ export function NavigationSticky({
   const pathname = usePathname();
   const menuId = useId();
   const current = activeHref ?? pathname;
-  const isActive = (href: string) => !href.includes("#") && current === href;
+  // pathname never contains "#", so anchor links are only active when a site passes a matching activeHref
+  const isActive = (href: string) => current === href;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
