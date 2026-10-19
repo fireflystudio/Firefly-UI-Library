@@ -163,8 +163,9 @@ function Icon({ name }: { name: "components" | "websites" | "build" | "design-sy
     case "design-system":
       return (
         <svg {...common}>
-          {/* One rounded diamond: a token / atom, same 1.4px stroke as the icons above */}
-          <rect x="3.5" y="3.5" width="9" height="9" rx="1.6" transform="rotate(45 8 8)" stroke="currentColor" strokeWidth="1.4" />
+          {/* Layers: one rhombus on top of a second layer, same 1.4px stroke as the icons above */}
+          <path d="M8 2.5 13.5 5.75 8 9 2.5 5.75 8 2.5Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+          <path d="M2.5 9.25 8 12.5l5.5-3.25" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       );
     case "github":
