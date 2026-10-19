@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FireflySymbol } from "./firefly-symbol";
 import { useSelection } from "./selection";
 
 const TABS = [
@@ -36,7 +37,8 @@ export function TopBar() {
         }`}
       />
       <nav aria-label="Catalogue" className="relative flex h-16 items-center justify-between gap-3 px-5 md:gap-4 md:px-8">
-        <Link href="/" className="flex shrink-0 items-baseline gap-2 rounded-chip">
+        <Link href="/" className="flex shrink-0 items-center gap-2 rounded-chip">
+          <FireflySymbol className="h-[15px] text-text-primary" />
           <span className="text-[16px] font-medium leading-none tracking-[-0.01em] text-text-primary">Firefly</span>
           <span className="hidden text-[16px] font-normal leading-none text-text-muted sm:inline">UI Library</span>
         </Link>
