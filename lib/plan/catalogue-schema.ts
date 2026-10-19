@@ -19,6 +19,11 @@ export const CONTRACTS: ComponentContract[] = [
     fields: "links[{label}] (3–5), secondaryLink{label} (optional, e.g. Log in), primaryCta{label}",
   },
   {
+    component: "navigation-centered-v1",
+    use: "Top bar with the links on the left and the brand centred; pick it for brand-led sites or when the hero is a full photo (the bar starts transparent over it).",
+    fields: "links[{label}] (3–5), secondaryLink{label} (optional, e.g. Log in), primaryCta{label}",
+  },
+  {
     component: "navigation-slide-out-v1",
     use: "Alternative top bar with a dot-grid menu that slides out a panel; for sites with many pages.",
     fields: "links[{label}] (3–5), secondaryLink{label} (e.g. Log in), primaryCta{label}, groups[{title, links[{label}]}] (2 groups of 3)",

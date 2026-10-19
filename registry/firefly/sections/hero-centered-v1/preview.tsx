@@ -5,7 +5,7 @@ export default function Preview() {
     <HeroCentered
       headline="Everything your team ships."
       headlineMuted="Seen in one place."
-      body="Plan, track and review work from a single calm view. Connect the tools you already use and get a clear picture in minutes."
+      body="Plan, track and review work from one calm view. Connect the tools you already use and get a clear picture in minutes."
     />
   );
 }

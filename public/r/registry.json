@@ -98,6 +98,19 @@
       ]
     },
     {
+      "name": "navigation-centered-v1",
+      "type": "registry:block",
+      "title": "Navigation Centered v1",
+      "description": "Fixed 64px header with the links on the left, the brand centred and the CTAs on the right. Same styling as the other navigations (14px pill links with a grey hover fill, 36px pills, round hamburger). With overHero it starts transparent over a hero photo in light text with a thin divider, and becomes the standard bar on scroll.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/navigation-centered-v1/navigation-centered-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/navigation-centered-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "navigation-slide-out-v1",
       "type": "registry:block",
       "title": "Navigation Slide-out v1",

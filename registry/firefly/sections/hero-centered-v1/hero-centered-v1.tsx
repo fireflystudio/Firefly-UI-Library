@@ -14,7 +14,7 @@ export type HeroCenteredProps = {
   headline: string;
   /** Grey second line of the h1 (stacked under the first) */
   headlineMuted: string;
-  /** Short paragraph under the headline */
+  /** Short paragraph under the headline. Max 120 characters so it stays on 2 lines (tablet + desktop). */
   body?: string;
   /** Dark pill. Defaults to "Join waitlist → #cta". */
   primaryCta?: CtaLink;
@@ -36,6 +36,9 @@ export type HeroCenteredProps = {
  * (100ms stagger), the visual follows 300ms later and drifts down up to 60px as it scrolls
  * out. Top padding leaves room for a fixed nav (64px). Renders the page's only h1.
  */
+/** Body limit: 2 lines at 560px / 18px (~62 characters per line). */
+export const BODY_MAX = 120;
+
 export function HeroCentered({
   id = "hero",
   eyebrow,
@@ -50,6 +53,9 @@ export function HeroCentered({
   className = "",
 }: HeroCenteredProps) {
   const headingId = `${id}-heading`;
+  if (process.env.NODE_ENV !== "production" && body && body.length > BODY_MAX) {
+    console.warn(`HeroCentered: body is ${body.length} characters; keep it to ${BODY_MAX} so it stays on two lines.`);
+  }
 
   return (
     <section

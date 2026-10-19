@@ -16,7 +16,7 @@ export const meta: CatalogueItem = {
     { name: "headline", type: "string", description: "First, primary-coloured line of the h1." },
     { name: "headlineMuted", type: "string", description: "Grey second line, stacked under the first." },
     { name: "eyebrow", type: "string", description: "Small mono uppercase line above the headline." },
-    { name: "body", type: "string", description: "Short paragraph under the headline (max 560px wide)." },
+    { name: "body", type: "string", description: "Short paragraph under the headline. Max 120 characters: always 2 lines on tablet and desktop (560px wide). Longer text warns in dev." },
     { name: "primaryCta", type: "{ label; href }", default: "Join waitlist → #cta", description: "Dark pill." },
     { name: "secondaryCta", type: "{ label; href } | null", default: "Book a demo → #cta", description: "Ghost pill. null hides it." },
     { name: "visual", type: "ReactNode", default: "<Placeholder label=\"Hero visual\" />", description: "Visual under the copy, in a clipped rounded frame. Pass your <Image fill> or mockup." },
@@ -28,6 +28,7 @@ export const meta: CatalogueItem = {
   changelog: [
     { version: "1.0", date: "2026-10-16", notes: "First release: stacked two-tone h1, staggered load reveal, exit parallax on the visual." },
     { version: "1.1", date: "2026-10-19", notes: "Optional visualRatioMobile for a taller phone crop (default look unchanged)." },
+    { version: "1.2", date: "2026-10-19", notes: "Body limited to 120 characters (2 lines on tablet/desktop); dev warning when longer." },
   ],
   files: [
     {

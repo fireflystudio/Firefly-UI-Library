@@ -18,6 +18,7 @@ import { HeroPortrait } from "@/registry/firefly/sections/hero-portrait-v1/hero-
 import { HeroSplit } from "@/registry/firefly/sections/hero-split-v1/hero-split-v1";
 import { LensesList } from "@/registry/firefly/sections/lenses-list-v1/lenses-list-v1";
 import { LogoMarquee } from "@/registry/firefly/sections/logo-marquee-v1/logo-marquee-v1";
+import { NavigationCentered } from "@/registry/firefly/sections/navigation-centered-v1/navigation-centered-v1";
 import { NavigationSlideOut } from "@/registry/firefly/sections/navigation-slide-out-v1/navigation-slide-out-v1";
 import { NavigationSticky } from "@/registry/firefly/sections/navigation-sticky-v1/navigation-sticky-v1";
 import { StatsGrid } from "@/registry/firefly/sections/stats-grid-v1/stats-grid-v1";
@@ -80,6 +81,8 @@ export function renderPlanSection(section: PlanSection): ReactNode | null {
   switch (section.component) {
     case "navigation-sticky-v1":
       return <NavigationSticky links={links(p.links)} cta={ctaOrNull(p.primaryCta)} activeHref={links(p.links)[0]?.href} />;
+    case "navigation-centered-v1":
+      return <NavigationCentered links={links(p.links)} secondaryCta={p.secondaryLink ? link(p.secondaryLink) : null} cta={ctaOrNull(p.primaryCta)} activeHref={links(p.links)[0]?.href} />;
     case "navigation-slide-out-v1":
       return (
         <NavigationSlideOut

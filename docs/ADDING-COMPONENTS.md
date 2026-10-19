@@ -2,7 +2,7 @@
 
 Read this whole file before writing code. Then read the two reference implementations and copy their shape exactly:
 
-- `registry/firefly/sections/navigation-sticky-v1/` (client component with scroll behaviour, demo filler in the preview)
+- `registry/firefly/sections/navigation-sticky-v1/` (client component with scroll behaviour, demo filler in the preview); `navigation-centered-v1/` shows the `overHero` pattern (bar over a photo, `tone="on-dark"` atoms)
 - `registry/firefly/sections/faq-split-v1/` (accordion, two-tone headline, motion)
 
 The house rules are the **Firefly Web Guide Book**: `../Firefly web guide book/FIREFLY-WEB-GUIDEBOOK.md`. Read it too. Sections 3–6 and 8 apply to every component.
@@ -37,7 +37,7 @@ registry/firefly/sections/<id>/
 | `Segmented` | Switch / tab pills with a sliding white indicator (`items`, `value`, `onChange`, `size`, `ariaLabel`). Client component. |
 | `PaginationDots` | Dots + sliding active line for carousels (`count`, `index`, `onSelect`). Client component. Put it between two `IconButton`s. |
 | `HeroCta` | Primary + secondary pair, 44px, 8px apart (`primary`, `secondary`, `onDark`, `size`). Use in heroes and CTAs. |
-| `NavLink`, `navIconButtonClasses`, `BurgerIcon` from `@/components/ui/nav-link` | Navigation bar atoms: 14px links in 36px pills with the grey hover fill (`active` = aria-current only), the round 36px bar control, the two-line hamburger. |
+| `NavLink`, `navIconButtonClasses`, `BurgerIcon` from `@/components/ui/nav-link` | Navigation bar atoms: 14px links in 36px pills with the grey hover fill (`active` = aria-current only; `tone="on-dark"` over photos), the round 36px bar control, the two-line hamburger. |
 | `TwoTone` | `<h2><TwoTone text={headline} muted={headlineMuted} /></h2>`. Every h1/h2 is two-tone. `stack` puts the grey part on its own line, `onDark` for dark sections. |
 | `Placeholder` | `<Placeholder label="Image" ratio="4 / 3" tone="light" \| "dark" />`. The default for every image/mockup slot. |
 

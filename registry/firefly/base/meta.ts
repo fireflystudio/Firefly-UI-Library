@@ -23,7 +23,7 @@ export const meta: CatalogueItem = {
     { name: "<Segmented>", type: "component", default: 'size "md"', description: "Switch / tab pills: the white indicator slides to the active item, inactive items get a warm hover layer. Props: items [{ id, label }], value, onChange, size, ariaLabel. Arrow keys move the selection." },
     { name: "<PaginationDots>", type: "component", description: "Carousel pagination: 4px dots, the active one a 24px line that slides between positions. Props: count, index, onSelect, label." },
     { name: "<HeroCta>", type: "component", default: "Join waitlist / Book a demo · lg", description: "Primary + secondary pill pair, 8px apart. Props: primary, secondary, onDark, size." },
-    { name: "<NavLink>", type: "component", description: "Navigation bar link (ElevenLabs bar): 14px regular in a 36px pill that fills grey on hover; `active` sets aria-current. Also exports navIconButtonClasses (round 36px bar control) and <BurgerIcon>." },
+    { name: "<NavLink>", type: "component", description: "Navigation bar link (ElevenLabs bar): 14px regular in a 36px pill that fills grey on hover; `active` sets aria-current; tone on-dark for bars over a hero photo. Also exports navIconButtonClassesFor(tone) (round 36px bar control) and <BurgerIcon>." },
     { name: "<TwoTone>", type: "component", description: "Renders a headline as primary text + muted grey second half. Props: text, muted, stack, onDark." },
     { name: "<Placeholder>", type: "component", default: 'label "Visual"', description: "Hatched stand-in for an image or mockup. Props: label, ratio, tone." },
   ],
