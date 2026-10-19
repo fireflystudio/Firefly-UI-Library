@@ -58,7 +58,7 @@ export function NavigationCentered({
   secondaryCta = null,
   overHero = false,
   activeHref,
-  containerClassName = "max-w-[1328px] px-5 md:px-10 xl:px-16",
+  containerClassName = "max-w-[1440px] px-5 md:px-10",
   className = "",
 }: NavigationCenteredProps) {
   const [scrolled, setScrolled] = useState(false);

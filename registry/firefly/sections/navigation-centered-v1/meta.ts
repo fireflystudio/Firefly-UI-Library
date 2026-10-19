@@ -21,11 +21,12 @@ export const meta: CatalogueItem = {
     { name: "secondaryCta", type: "{ label; href } | null", default: "null", description: "White secondary pill before the primary one (e.g. Log in). Hidden on phones." },
     { name: "overHero", type: "boolean", default: "false", description: "Start transparent over a hero photo with light text and a thin divider; switch to the standard bar after 8px of scroll." },
     { name: "activeHref", type: "string", default: "current pathname", description: "Marks the matching link with aria-current." },
-    { name: "containerClassName", type: "string", default: '"max-w-[1328px] px-5 md:px-10 xl:px-16"', description: "Width + side padding of the bar's content, so it lines up with the site's sections (pass the site's container classes)." },
+    { name: "containerClassName", type: "string", default: '"max-w-[1440px] px-5 md:px-10"', description: "Width + side padding of the bar's content, so it lines up with the site's sections (pass the site's container classes)." },
     { name: "className", type: "string", description: "Extra classes on the <header>." },
   ],
   changelog: [
     { version: "1.0", date: "2026-10-19", notes: "First release: the Solve layout (links left, brand centred, CTA right) on the Firefly navigation rules; overHero mode." },
+    { version: "1.1", date: "2026-10-19", notes: "Wider bar: content up to 1440px with 40px side padding (was 1328px / 64px), so the brand and CTA sit closer to the screen edges." },
   ],
   files: [
     {

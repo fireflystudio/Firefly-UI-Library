@@ -20,12 +20,13 @@ export const meta: CatalogueItem = {
     { name: "cta", type: "{ label; href } | null", default: "Join waitlist → #cta", description: "Primary pill on the right. null hides it." },
     { name: "secondaryCta", type: "{ label; href } | null", default: "null", description: "White secondary pill before the primary one (e.g. Log in). Hidden on phones." },
     { name: "activeHref", type: "string", default: "current pathname", description: "Marks the matching link with aria-current." },
-    { name: "containerClassName", type: "string", default: '"max-w-[1328px] px-5 md:px-10 xl:px-16"', description: "Width + side padding of the bar's content, so it lines up with the site's sections." },
+    { name: "containerClassName", type: "string", default: '"max-w-[1440px] px-5 md:px-10"', description: "Width + side padding of the bar's content, so it lines up with the site's sections." },
     { name: "className", type: "string", description: "Extra classes on the <header>." },
   ],
   changelog: [
     { version: "1.0", date: "2026-10-16", notes: "First release: scroll compaction, active link, mobile panel." },
     { version: "1.1", date: "2026-10-19", notes: "Restyled 1:1 after the ElevenLabs bar: 64px, 14px regular links in 36px pills with a grey hover fill (Base NavLink), secondary + primary 36px pills, round hamburger, no scroll compaction." },
+    { version: "1.2", date: "2026-10-19", notes: "Wider bar: content up to 1440px with 40px side padding (was 1328px / 64px), so the brand and CTA sit closer to the screen edges." },
   ],
   files: [
     {

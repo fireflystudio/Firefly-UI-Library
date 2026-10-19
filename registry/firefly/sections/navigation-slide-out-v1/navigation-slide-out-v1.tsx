@@ -64,7 +64,7 @@ export function NavigationSlideOut({
   menuTitle = "Menu",
   exploreLabel = "Explore",
   activeHref,
-  containerClassName = "max-w-[1328px] px-5 md:px-10 xl:px-16",
+  containerClassName = "max-w-[1440px] px-5 md:px-10",
   className = "",
 }: NavigationSlideOutProps) {
   const [scrolled, setScrolled] = useState(false);

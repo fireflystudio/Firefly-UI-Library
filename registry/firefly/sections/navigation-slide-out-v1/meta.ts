@@ -23,12 +23,13 @@ export const meta: CatalogueItem = {
     { name: "menuTitle", type: "string", default: '"Menu"', description: "Title in the panel's top row and the dialog's accessible name." },
     { name: "exploreLabel", type: "string", default: '"Explore"', description: "Mono label above the big links in the panel." },
     { name: "activeHref", type: "string", default: "current pathname", description: "Marks the matching link with aria-current." },
-    { name: "containerClassName", type: "string", default: '"max-w-[1328px] px-5 md:px-10 xl:px-16"', description: "Width + side padding of the bar's content, so it lines up with the site's sections." },
+    { name: "containerClassName", type: "string", default: '"max-w-[1440px] px-5 md:px-10"', description: "Width + side padding of the bar's content, so it lines up with the site's sections." },
     { name: "className", type: "string", description: "Extra classes on the <header>." },
   ],
   changelog: [
     { version: "1.0", date: "2026-10-16", notes: "First release: scroll compaction, dot-grid button, slide-out dialog with overlay, focus return, scroll lock." },
     { version: "1.1", date: "2026-10-19", notes: "Bar restyled after the ElevenLabs header (64px, 14px pill links with grey hover fill, secondary + primary 36px pills, round dot-grid button, no compaction)." },
+    { version: "1.2", date: "2026-10-19", notes: "Wider bar: content up to 1440px with 40px side padding (was 1328px / 64px), so the brand and CTA sit closer to the screen edges." },
   ],
   files: [
     {
