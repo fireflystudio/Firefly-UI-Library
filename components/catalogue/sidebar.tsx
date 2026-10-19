@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { DESIGN_SYSTEM_PAGES } from "@/lib/design-system/pages";
+import { DESIGN_SYSTEM_HOME, DESIGN_SYSTEM_PAGES } from "@/lib/design-system/pages";
 import type { MenuProps } from "@/lib/menu";
 import type { CategoryId } from "@/lib/types";
 import { useSelection } from "./selection";
@@ -101,7 +101,7 @@ export function Sidebar({ categories, total, itemCategories }: MenuProps) {
 
       <div className="mt-auto flex flex-col gap-0.5 pt-6">
         <div aria-hidden className="mb-3 h-px bg-border-10" />
-        <Link href="/design-system" aria-current={onDesignSystem ? "page" : undefined} className={`${itemBase} ${onDesignSystem ? itemOn : itemOff}`}>
+        <Link href={DESIGN_SYSTEM_HOME} aria-current={onDesignSystem ? "page" : undefined} className={`${itemBase} ${onDesignSystem ? itemOn : itemOff}`}>
           <span className="flex items-center gap-2.5">
             <Icon name="design-system" />
             Design system

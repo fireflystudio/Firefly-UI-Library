@@ -21,7 +21,7 @@ export default async function CatalogueLayout({
       <ViewModeProvider>
         <a
           href="#main"
-          className="sr-only rounded-pill bg-button-primary px-4 py-2 text-[13px] font-medium text-button-content-primary focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60]"
+          className="sr-only rounded-pill bg-button-primary px-4 py-2 text-[13px] font-medium text-button-content-primary focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-[60]"
         >
           Skip to content
         </a>
