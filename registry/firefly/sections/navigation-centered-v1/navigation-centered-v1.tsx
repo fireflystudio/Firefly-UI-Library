@@ -5,9 +5,17 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useState, type ReactNode } from "react";
 import { FireflyMark } from "@/components/ui/brand-mark";
 import { Button } from "@/components/ui/button";
-import { BurgerIcon, NavLink, navIconButtonClassesFor } from "@/components/ui/nav-link";
+import {
+  BurgerIcon,
+  NavLink,
+  navIconButtonClassesFor,
+} from "@/components/ui/nav-link";
 
-export type CenteredNavLink = { label: string; href: string; prefetch?: boolean };
+export type CenteredNavLink = {
+  label: string;
+  href: string;
+  prefetch?: boolean;
+};
 
 export type NavigationCenteredProps = {
   /** Logo or wordmark. Defaults to the Firefly mark + "Brand" text; pass your <Image> or SVG (use currentColor so it follows the bar's tone). */
@@ -68,6 +76,8 @@ export function NavigationCentered({
   const current = activeHref ?? pathname;
   // pathname never contains "#", so anchor links are only active when a site passes a matching activeHref
   const isActive = (href: string) => current === href;
+  // One-page sites may pass no links: then there is nothing to open on phones, so no hamburger
+  const hasMenu = links.length > 0 || Boolean(secondaryCta);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -100,7 +110,9 @@ export function NavigationCentered({
       <div
         aria-hidden
         className={`absolute inset-x-0 top-0 h-16 border-b transition-[background-color,border-color,opacity] duration-200 ease-out motion-reduce:transition-none ${
-          solid ? "border-border-06 bg-surface-page/85 backdrop-blur-xl" : "border-transparent bg-surface-page"
+          solid
+            ? "border-border-06 bg-surface-page/85 backdrop-blur-xl"
+            : "border-transparent bg-surface-page"
         } ${overHero && !solid ? "opacity-0" : "opacity-100"}`}
       />
       <nav
@@ -124,7 +136,12 @@ export function NavigationCentered({
           <ul className="hidden min-w-0 items-center md:flex">
             {links.map((l) => (
               <li key={l.href}>
-                <NavLink href={l.href} prefetch={l.prefetch} active={isActive(l.href)} tone={tone}>
+                <NavLink
+                  href={l.href}
+                  prefetch={l.prefetch}
+                  active={isActive(l.href)}
+                  tone={tone}
+                >
                   {l.label}
                 </NavLink>
               </li>
@@ -143,43 +160,72 @@ export function NavigationCentered({
           <div className="flex shrink-0 items-center gap-2">
             {secondaryCta ? (
               <span className="hidden md:contents">
-                <Button href={secondaryCta.href} prefetch={secondaryCta.prefetch} variant={onDark ? "secondary-on-dark" : "secondary"} size="sm">
+                <Button
+                  href={secondaryCta.href}
+                  prefetch={secondaryCta.prefetch}
+                  variant={onDark ? "secondary-on-dark" : "secondary"}
+                  size="sm"
+                >
                   {secondaryCta.label}
                 </Button>
               </span>
             ) : null}
             {cta ? (
-              <Button href={cta.href} prefetch={cta.prefetch} variant={onDark ? "secondary-on-dark" : "primary"} size="sm">
+              <Button
+                href={cta.href}
+                prefetch={cta.prefetch}
+                variant={onDark ? "secondary-on-dark" : "primary"}
+                size="sm"
+              >
                 {cta.label}
               </Button>
             ) : null}
-            <button
-              type="button"
-              aria-label={open ? "Close menu" : "Open menu"}
-              aria-expanded={open}
-              aria-controls={menuId}
-              onClick={() => setOpen((o) => !o)}
-              className={`${navIconButtonClassesFor(tone)} ml-0.5 md:hidden`}
-            >
-              <BurgerIcon open={open} />
-            </button>
+            {hasMenu ? (
+              <button
+                type="button"
+                aria-label={open ? "Close menu" : "Open menu"}
+                aria-expanded={open}
+                aria-controls={menuId}
+                onClick={() => setOpen((o) => !o)}
+                className={`${navIconButtonClassesFor(tone)} ml-0.5 md:hidden`}
+              >
+                <BurgerIcon open={open} />
+              </button>
+            ) : null}
           </div>
         </div>
       </nav>
 
-      {/* Mobile panel */}
-      <div id={menuId} hidden={!open} className="relative border-b border-border-06 bg-surface-page px-5 pb-5 pt-1 md:hidden">
+      {/* Mobile panel (only when there are links or a secondary CTA to show) */}
+      <div
+        id={menuId}
+        hidden={!open || !hasMenu}
+        className="relative border-b border-border-06 bg-surface-page px-5 pb-5 pt-1 md:hidden"
+      >
         <ul className="flex flex-col gap-0.5">
           {links.map((l) => (
             <li key={l.href}>
-              <NavLink href={l.href} prefetch={l.prefetch} active={isActive(l.href)} onClick={() => setOpen(false)} className="h-11 w-full">
+              <NavLink
+                href={l.href}
+                prefetch={l.prefetch}
+                active={isActive(l.href)}
+                onClick={() => setOpen(false)}
+                className="h-11 w-full"
+              >
                 {l.label}
               </NavLink>
             </li>
           ))}
         </ul>
         {secondaryCta ? (
-          <Button href={secondaryCta.href} prefetch={secondaryCta.prefetch} variant="secondary" size="md" className="mt-3 w-full" onClick={() => setOpen(false)}>
+          <Button
+            href={secondaryCta.href}
+            prefetch={secondaryCta.prefetch}
+            variant="secondary"
+            size="md"
+            className="mt-3 w-full"
+            onClick={() => setOpen(false)}
+          >
             {secondaryCta.label}
           </Button>
         ) : null}
@@ -192,7 +238,9 @@ function DefaultBrand() {
   return (
     <span className="flex items-center gap-2">
       <FireflyMark className="h-[17px]" />
-      <span className="text-[16px] font-medium leading-none tracking-[-0.01em]">Brand</span>
+      <span className="text-[16px] font-medium leading-none tracking-[-0.01em]">
+        Brand
+      </span>
     </span>
   );
 }
