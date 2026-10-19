@@ -44,36 +44,50 @@ export function Sidebar({ categories, total, itemCategories }: MenuProps) {
         <span className="text-[16px] font-normal leading-none text-text-muted">UI Library</span>
       </Link>
 
-      <nav aria-label="Sections" className="flex flex-col gap-0.5">
-        <Link href="/" aria-current={onLibrary ? "page" : undefined} className={`${itemBase} ${onLibrary ? itemOn : itemOff}`}>
-          <span className="flex items-center gap-2.5">
-            <Icon name="components" />
+      {onDesignSystem ? (
+        /* Inside the design system the main sections step aside: one back link above the pages */
+        <Link href="/" className={`${itemBase} ${itemOff} -mt-2`}>
+          <span className="flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+              <path d="M9.5 3.5 5 8l4.5 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
             UI Components
           </span>
         </Link>
-        <Link href="/websites" aria-current={onWebsites ? "page" : undefined} className={`${itemBase} ${onWebsites ? itemOn : itemOff}`}>
-          <span className="flex items-center gap-2.5">
-            <Icon name="websites" />
-            Websites
-          </span>
-        </Link>
-        <Link href="/build" aria-current={onBuild ? "page" : undefined} className={`${itemBase} ${onBuild ? itemOn : itemOff}`}>
-          <span className="flex items-center gap-2.5">
-            <Icon name="build" />
-            Build site
-          </span>
-          <span
-            aria-label={`${count} selected`}
-            className={`inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-pill px-1 font-mono text-[11px] ${
-              count > 0 ? "bg-button-primary text-button-content-primary" : "text-text-quaternary"
-            }`}
-          >
-            {count}
-          </span>
-        </Link>
-      </nav>
+      ) : (
+        <>
+        <nav aria-label="Sections" className="flex flex-col gap-0.5">
+          <Link href="/" aria-current={onLibrary ? "page" : undefined} className={`${itemBase} ${onLibrary ? itemOn : itemOff}`}>
+            <span className="flex items-center gap-2.5">
+              <Icon name="components" />
+              UI Components
+            </span>
+          </Link>
+          <Link href="/websites" aria-current={onWebsites ? "page" : undefined} className={`${itemBase} ${onWebsites ? itemOn : itemOff}`}>
+            <span className="flex items-center gap-2.5">
+              <Icon name="websites" />
+              Websites
+            </span>
+          </Link>
+          <Link href="/build" aria-current={onBuild ? "page" : undefined} className={`${itemBase} ${onBuild ? itemOn : itemOff}`}>
+            <span className="flex items-center gap-2.5">
+              <Icon name="build" />
+              Build site
+            </span>
+            <span
+              aria-label={`${count} selected`}
+              className={`inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-pill px-1 font-mono text-[11px] ${
+                count > 0 ? "bg-button-primary text-button-content-primary" : "text-text-quaternary"
+              }`}
+            >
+              {count}
+            </span>
+          </Link>
+        </nav>
 
-      <div aria-hidden className="h-px bg-border-10" />
+        <div aria-hidden className="h-px bg-border-10" />
+        </>
+      )}
 
       {onDesignSystem ? (
         <nav aria-label="Design system pages" className="flex flex-col gap-0.5">
