@@ -75,13 +75,13 @@ export default function ButtonsPage() {
         </Specimen>
       </div>
 
-      <Specimen title="Navigation links" note="NavLink: 18px regular in a 36px pill, grey fill on hover; the current page keeps the fill. The round 36px control is the hamburger / menu button. Bar height 64px.">
-        <Item caption="links · active first · hamburger 36px">
+      <Specimen title="Navigation links" note="NavLink: 14px regular in a 36px pill (padding 0 12px), grey fill on hover, no permanent fill for the current page. The round 36px control is the hamburger / menu button. Bar height 64px.">
+        <Item caption="links 14px · pill 36px · hamburger 36px">
           <div className="flex items-center gap-6">
             <ul className="flex items-center">
               {["Product", "Customers", "Pricing", "About"].map((label, i) => (
                 <li key={label}>
-                  <NavLink href="#" active={i === 0}>
+                  <NavLink href="#" active={i === 0} className="pointer-events-auto">
                     {label}
                   </NavLink>
                 </li>

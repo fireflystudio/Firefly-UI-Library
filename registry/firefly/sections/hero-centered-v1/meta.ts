@@ -21,10 +21,14 @@ export const meta: CatalogueItem = {
     { name: "secondaryCta", type: "{ label; href } | null", default: "Book a demo → #cta", description: "Ghost pill. null hides it." },
     { name: "visual", type: "ReactNode", default: "<Placeholder label=\"Hero visual\" />", description: "Visual under the copy, in a clipped rounded frame. Pass your <Image fill> or mockup." },
     { name: "visualRatio", type: "string", default: '"1392 / 720"', description: "CSS aspect-ratio of the visual frame." },
+    { name: "visualRatioMobile", type: "string", default: "visualRatio", description: "Taller frame below 768px, e.g. \"350 / 420\". Pair it with an art-directed <picture> so phones get their own crop." },
     { name: "id", type: "string", default: '"hero"', description: "Section id for anchor links; the heading id is <id>-heading." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: stacked two-tone h1, staggered load reveal, exit parallax on the visual." }],
+  changelog: [
+    { version: "1.0", date: "2026-10-16", notes: "First release: stacked two-tone h1, staggered load reveal, exit parallax on the visual." },
+    { version: "1.1", date: "2026-10-19", notes: "Optional visualRatioMobile for a taller phone crop (default look unchanged)." },
+  ],
   files: [
     {
       path: "registry/firefly/sections/hero-centered-v1/hero-centered-v1.tsx",

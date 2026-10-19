@@ -37,7 +37,7 @@ registry/firefly/sections/<id>/
 | `Segmented` | Switch / tab pills with a sliding white indicator (`items`, `value`, `onChange`, `size`, `ariaLabel`). Client component. |
 | `PaginationDots` | Dots + sliding active line for carousels (`count`, `index`, `onSelect`). Client component. Put it between two `IconButton`s. |
 | `HeroCta` | Primary + secondary pair, 44px, 8px apart (`primary`, `secondary`, `onDark`, `size`). Use in heroes and CTAs. |
-| `NavLink`, `navIconButtonClasses`, `BurgerIcon` from `@/components/ui/nav-link` | Navigation bar atoms: 18px links in 36px pills with the grey hover fill (`active` for the current page), the round 36px bar control, the two-line hamburger. |
+| `NavLink`, `navIconButtonClasses`, `BurgerIcon` from `@/components/ui/nav-link` | Navigation bar atoms: 14px links in 36px pills with the grey hover fill (`active` = aria-current only), the round 36px bar control, the two-line hamburger. |
 | `TwoTone` | `<h2><TwoTone text={headline} muted={headlineMuted} /></h2>`. Every h1/h2 is two-tone. `stack` puts the grey part on its own line, `onDark` for dark sections. |
 | `Placeholder` | `<Placeholder label="Image" ratio="4 / 3" tone="light" \| "dark" />`. The default for every image/mockup slot. |
 
@@ -74,7 +74,7 @@ No mono uppercase labels above headlines (section eyebrows, "tags" above a CTA h
 - Two-tone h1/h2 everywhere via `TwoTone` (or the same pattern). Section headings are `h2`, card titles `h3`. A component never renders an `h1` unless it is a hero (then exactly one).
 - `leading-[normal]`, `leading-[1.1]`, `leading-[1.55]` … **never** `leading-normal`. Tracking in `em` (`tracking-[-0.03em]`).
 - No forced `<br>` in long text; use `text-balance` / `text-pretty` + `max-w`.
-- Minimum text size 12px; body 14–16px; card titles 18px; nav links 18px regular in 36px pills (`NavLink` from the Base).
+- Minimum text size 12px; body 14–16px; card titles 18px; nav links 14px regular in 36px pills (`NavLink` from the Base).
 
 **Layout**
 - Mobile-first. Breakpoints: base < 768, `md:` 768–1279, `xl:` ≥ 1280. Section padding like the references: `px-5 md:px-10 xl:px-16` (or `xl:px-[120px]` for narrow content), vertical `py-16 md:py-24 xl:py-[120px]`.

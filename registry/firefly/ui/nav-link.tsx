@@ -2,22 +2,23 @@ import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
 /**
- * Navigation bar atoms, matched to the ElevenLabs header: 64px bar, 18px regular links sitting in
- * 36px pills that fill with a soft grey on hover (150ms, fill only), the current page keeping the
- * fill. Pair them with <Button size="sm"> for the bar's CTAs.
+ * Navigation bar atoms, matched to the ElevenLabs header: 64px bar, 14px regular links (20px line)
+ * sitting in 36px pills (padding 8px 12px) that fill with a soft grey on hover (150ms, fill only).
+ * The current page only gets aria-current, no permanent fill (as in the reference). Pair them with
+ * <Button size="sm"> for the bar's CTAs.
  */
 export const navLinkClasses =
-  "inline-flex h-9 items-center whitespace-nowrap rounded-pill px-3 text-[18px] font-normal leading-none text-text-primary " +
+  "inline-flex h-9 items-center whitespace-nowrap rounded-pill px-3 text-[14px] font-normal leading-5 text-text-primary " +
   "transition-[background-color,color] duration-150 ease-standard hover:bg-surface-hover " +
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-interactive motion-reduce:transition-none";
 
-/** Text link for the bar and mobile panels. `active` marks the current page (aria-current + the fill). */
+/** Text link for the bar and mobile panels. `active` marks the current page with aria-current. */
 export function NavLink({
   active = false,
   className = "",
   ...rest
 }: { active?: boolean; className?: string } & Omit<ComponentPropsWithoutRef<typeof Link>, "className">) {
-  return <Link aria-current={active ? "page" : undefined} className={`${navLinkClasses} ${active ? "bg-surface-hover" : ""} ${className}`} {...rest} />;
+  return <Link aria-current={active ? "page" : undefined} className={`${navLinkClasses} ${className}`} {...rest} />;
 }
 
 /** Round 36px icon-only control for the bar (hamburger, dot grid): transparent, same hover fill. Always pass aria-label. */

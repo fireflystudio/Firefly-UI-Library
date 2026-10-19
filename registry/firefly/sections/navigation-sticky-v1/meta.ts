@@ -6,9 +6,9 @@ export const meta: CatalogueItem = {
   version: 1,
   category: "navigation",
   description:
-    "Fixed 64px header styled after the ElevenLabs bar: brand, 18px links in pills that fill grey on hover, an optional white Log in pill and the primary pill. Turns translucent with a hairline after a few pixels of scroll; on mobile a round hamburger opens a simple panel.",
+    "Fixed 64px header styled after the ElevenLabs bar: brand, 14px links in pills that fill grey on hover, an optional white Log in pill and the primary pill. Turns translucent with a hairline after a few pixels of scroll; on mobile a round hamburger opens a simple panel.",
   interactions: [
-    "Hover a link: a soft grey pill fills behind it; the current page keeps the fill.",
+    "Hover a link: a soft grey pill fills behind it.",
     "Scroll inside the frame: the bar blurs and gains a hairline.",
     "Switch to Mobile and tap the hamburger.",
   ],
@@ -24,7 +24,7 @@ export const meta: CatalogueItem = {
   ],
   changelog: [
     { version: "1.0", date: "2026-10-16", notes: "First release: scroll compaction, active link, mobile panel." },
-    { version: "1.1", date: "2026-10-19", notes: "Restyled 1:1 after the ElevenLabs bar: 64px, 18px regular links in 36px pills with a grey hover fill (Base NavLink), secondary + primary 36px pills, round hamburger, no scroll compaction." },
+    { version: "1.1", date: "2026-10-19", notes: "Restyled 1:1 after the ElevenLabs bar: 64px, 14px regular links in 36px pills with a grey hover fill (Base NavLink), secondary + primary 36px pills, round hamburger, no scroll compaction." },
   ],
   files: [
     {

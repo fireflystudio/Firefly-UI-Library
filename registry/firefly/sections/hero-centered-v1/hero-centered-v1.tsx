@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { HeroCta, type CtaLink } from "@/components/ui/hero-cta";
 import { Parallax } from "@/components/ui/parallax";
 import { Placeholder } from "@/components/ui/placeholder";
@@ -24,6 +24,8 @@ export type HeroCenteredProps = {
   visual?: ReactNode;
   /** CSS aspect-ratio of the visual frame, e.g. "1392 / 720" */
   visualRatio?: string;
+  /** Optional taller frame below 768px, e.g. "350 / 420" (pass an art-directed <picture> as visual). Defaults to visualRatio. */
+  visualRatioMobile?: string;
   className?: string;
 };
 
@@ -44,6 +46,7 @@ export function HeroCentered({
   secondaryCta,
   visual,
   visualRatio = "1392 / 720",
+  visualRatioMobile,
   className = "",
 }: HeroCenteredProps) {
   const headingId = `${id}-heading`;
@@ -88,7 +91,10 @@ export function HeroCentered({
       <Reveal delay={300} className="mx-auto mt-10 w-full max-w-[1392px] md:mt-12 xl:mt-14">
         <div {...reveal}>
           <Parallax distance={60} mode="exit">
-            <div className="relative w-full overflow-clip rounded-frame" style={{ aspectRatio: visualRatio }}>
+            <div
+              className="relative aspect-(--hero-ratio-mobile) w-full overflow-clip rounded-frame md:aspect-(--hero-ratio)"
+              style={{ "--hero-ratio": visualRatio, "--hero-ratio-mobile": visualRatioMobile ?? visualRatio } as CSSProperties}
+            >
               {visual ?? <Placeholder label="Hero visual" />}
             </div>
           </Parallax>

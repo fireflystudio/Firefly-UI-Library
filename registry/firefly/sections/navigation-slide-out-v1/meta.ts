@@ -6,7 +6,7 @@ export const meta: CatalogueItem = {
   version: 1,
   category: "navigation",
   description:
-    "Fixed 64px header in the ElevenLabs style (18px links in pills with a grey hover fill, white Log in pill, primary pill) plus a round dot-grid menu button on every breakpoint. The button opens a right-side panel that slides in over a dimmed page: big primary links, the CTAs again and small link groups at the bottom.",
+    "Fixed 64px header in the ElevenLabs style (14px links in pills with a grey hover fill, white Log in pill, primary pill) plus a round dot-grid menu button on every breakpoint. The button opens a right-side panel that slides in over a dimmed page: big primary links, the CTAs again and small link groups at the bottom.",
   interactions: [
     "Hover a link: a soft grey pill fills behind it.",
     "Click the dot grid: the panel slides in from the right.",
@@ -27,7 +27,7 @@ export const meta: CatalogueItem = {
   ],
   changelog: [
     { version: "1.0", date: "2026-10-16", notes: "First release: scroll compaction, dot-grid button, slide-out dialog with overlay, focus return, scroll lock." },
-    { version: "1.1", date: "2026-10-19", notes: "Bar restyled after the ElevenLabs header (64px, 18px pill links with grey hover fill, secondary + primary 36px pills, round dot-grid button, no compaction)." },
+    { version: "1.1", date: "2026-10-19", notes: "Bar restyled after the ElevenLabs header (64px, 14px pill links with grey hover fill, secondary + primary 36px pills, round dot-grid button, no compaction)." },
   ],
   files: [
     {

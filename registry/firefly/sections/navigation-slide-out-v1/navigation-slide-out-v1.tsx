@@ -41,7 +41,7 @@ export type NavigationSlideOutProps = {
 
 /**
  * Navigation Slide-out v1.1
- * Fixed 64px header styled like Navigation Sticky (ElevenLabs bar: 18px links in pills with a
+ * Fixed 64px header styled like Navigation Sticky (ElevenLabs bar: 14px links in pills with a
  * grey hover fill, white secondary + primary 36px pills, translucent background + hairline after
  * 8px of scroll). A round dot-grid button (all breakpoints) opens a right-side panel that slides
  * in (translateX 100% → 0, 0.4s) over a fading overlay (0.35s). The panel is a modal dialog:

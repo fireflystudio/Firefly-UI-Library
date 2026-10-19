@@ -26,8 +26,8 @@ export type NavigationStickyProps = {
 
 /**
  * Navigation Sticky v1.1
- * Fixed 64px header styled after the ElevenLabs bar: brand, 18px regular links in 36px pills
- * that fill with a soft grey on hover (the current page keeps the fill), then an optional white
+ * Fixed 64px header styled after the ElevenLabs bar: brand, 14px regular links in 36px pills
+ * that fill with a soft grey on hover (the current page only gets aria-current), then an optional white
  * secondary pill ("Log in") and the primary pill, both 36px. After ~8px of scroll the background
  * turns translucent with a hairline (no compaction). Mobile: a round hamburger that morphs into
  * a cross and opens a simple panel; Escape closes it.
