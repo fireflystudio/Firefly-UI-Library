@@ -60,7 +60,7 @@ export function FaqSplit({
           </h2>
           {cta ? (
             <div {...reveal}>
-              <Button href={cta.href} variant="ghost">
+              <Button href={cta.href} variant="secondary">
                 {cta.label}
               </Button>
             </div>

@@ -74,7 +74,7 @@ export function FaqCentered({
           <div {...reveal} className="flex w-full flex-col items-center gap-3 text-center md:flex-row md:justify-center md:gap-4">
             {footerText ? <p className="text-balance text-[14px] font-normal leading-[normal] text-text-nav">{footerText}</p> : null}
             {cta ? (
-              <Button href={cta.href} variant="ghost">
+              <Button href={cta.href} variant="secondary">
                 {cta.label}
               </Button>
             ) : null}

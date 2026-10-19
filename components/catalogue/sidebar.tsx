@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { DESIGN_SYSTEM_PAGES } from "@/lib/design-system/pages";
 import type { MenuProps } from "@/lib/menu";
 import type { CategoryId } from "@/lib/types";
 import { useSelection } from "./selection";
@@ -21,7 +22,11 @@ const itemBase =
 const itemOn = "bg-surface-primary text-text-primary shadow-[0_1px_2px_0_#0000000f,0_0_0_1px_#0000000a]";
 const itemOff = "text-text-nav hover:bg-surface-primary/70 hover:text-text-primary";
 
-/** Full-height product sidebar: brand, main sections, categories, base package and GitHub. */
+/**
+ * Full-height product sidebar: brand, main sections, then either the component categories or,
+ * inside /design-system, the design-system pages (Buttons, Typography …). "Design system" sits
+ * at the bottom like a second workspace.
+ */
 export function Sidebar({ categories, total, itemCategories }: MenuProps) {
   const pathname = usePathname();
   const active = useActiveCategory(itemCategories);
@@ -30,6 +35,7 @@ export function Sidebar({ categories, total, itemCategories }: MenuProps) {
   const onLibrary = pathname === "/" || pathname.startsWith("/components");
   const onWebsites = pathname.startsWith("/websites");
   const onBuild = pathname.startsWith("/build");
+  const onDesignSystem = pathname.startsWith("/design-system");
 
   return (
     <div className="flex h-full flex-col gap-6">
@@ -69,26 +75,37 @@ export function Sidebar({ categories, total, itemCategories }: MenuProps) {
 
       <div aria-hidden className="h-px bg-border-10" />
 
-      <nav aria-label="Categories" className="flex flex-col gap-0.5">
-        <CategoryLink href="/" active={active === "all"} count={total}>
-          All components
-        </CategoryLink>
-        {categories.map((c) => (
-          <CategoryLink key={c.id} href={`/?category=${c.id}`} active={active === c.id} count={c.count}>
-            {c.name}
+      {onDesignSystem ? (
+        <nav aria-label="Design system pages" className="flex flex-col gap-0.5">
+          {DESIGN_SYSTEM_PAGES.map((page) => {
+            const isActive = pathname === page.href;
+            return (
+              <Link key={page.id} href={page.href} aria-current={isActive ? "page" : undefined} className={`${itemBase} ${isActive ? itemOn : itemOff}`}>
+                <span className="truncate transition-[translate] duration-200 ease-out group-hover:translate-x-[3px] motion-reduce:transition-none">{page.name}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      ) : (
+        <nav aria-label="Categories" className="flex flex-col gap-0.5">
+          <CategoryLink href="/" active={active === "all"} count={total}>
+            All components
           </CategoryLink>
-        ))}
-      </nav>
+          {categories.map((c) => (
+            <CategoryLink key={c.id} href={`/?category=${c.id}`} active={active === c.id} count={c.count}>
+              {c.name}
+            </CategoryLink>
+          ))}
+        </nav>
+      )}
 
       <div className="mt-auto flex flex-col gap-0.5 pt-6">
         <div aria-hidden className="mb-3 h-px bg-border-10" />
-        <Link
-          href="/components/firefly-base"
-          aria-current={active === "base" ? "page" : undefined}
-          className={`flex flex-col gap-0.5 rounded-tile px-3 py-[7px] transition-[background-color,color,box-shadow] duration-200 ease-out ${active === "base" ? itemOn : itemOff}`}
-        >
-          <span className="text-[13px] font-medium leading-[normal]">Base package</span>
-          <span className="text-[12px] leading-[normal] text-text-quaternary">Tokens · motion · buttons</span>
+        <Link href="/design-system" aria-current={onDesignSystem ? "page" : undefined} className={`${itemBase} ${onDesignSystem ? itemOn : itemOff}`}>
+          <span className="flex items-center gap-2.5">
+            <Icon name="design-system" />
+            Design system
+          </span>
         </Link>
         <a
           href="https://github.com/lukasznosekk/Firefly-UI-Library"
@@ -118,7 +135,7 @@ function CategoryLink({ href, active, count, children }: { href: string; active:
   );
 }
 
-function Icon({ name }: { name: "components" | "websites" | "build" | "github" }) {
+function Icon({ name }: { name: "components" | "websites" | "build" | "design-system" | "github" }) {
   const common = { width: 16, height: 16, viewBox: "0 0 16 16", fill: "none", "aria-hidden": true } as const;
   switch (name) {
     case "components":
@@ -141,6 +158,15 @@ function Icon({ name }: { name: "components" | "websites" | "build" | "github" }
       return (
         <svg {...common}>
           <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+        </svg>
+      );
+    case "design-system":
+      return (
+        <svg {...common}>
+          <circle cx="5" cy="5" r="2.6" stroke="currentColor" strokeWidth="1.4" />
+          <rect x="8.6" y="8.6" width="5" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
+          <path d="M11 2.4 13.6 7h-5.2L11 2.4Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+          <path d="M2.6 13.6 7.2 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
         </svg>
       );
     case "github":
@@ -169,9 +195,28 @@ export function CategoryBar({ categories, total, itemCategories }: MenuProps) {
           {c.name} <span className="font-mono text-[11px] opacity-70">{c.count}</span>
         </Link>
       ))}
-      <Link href="/components/firefly-base" aria-current={active === "base" ? "page" : undefined} className={pill(active === "base")}>
-        Base package
-      </Link>
+    </nav>
+  );
+}
+
+const barPill = (isActive: boolean) =>
+  `inline-flex h-8 shrink-0 items-center gap-1.5 rounded-pill border px-3.5 text-[13px] font-medium leading-none transition-[background-color,color,border-color] duration-200 ease-out ${
+    isActive ? "border-button-primary bg-button-primary text-button-content-primary" : "border-border-light bg-surface-primary text-text-nav hover:text-text-primary"
+  }`;
+
+/** Design-system pages as a horizontal row for tablet and mobile. */
+export function DesignSystemBar() {
+  const pathname = usePathname();
+  return (
+    <nav aria-label="Design system pages" className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] md:-mx-8 md:px-8 [&::-webkit-scrollbar]:hidden">
+      {DESIGN_SYSTEM_PAGES.map((page) => {
+        const isActive = pathname === page.href;
+        return (
+          <Link key={page.id} href={page.href} aria-current={isActive ? "page" : undefined} className={barPill(isActive)}>
+            {page.name}
+          </Link>
+        );
+      })}
     </nav>
   );
 }

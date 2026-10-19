@@ -18,6 +18,7 @@ export const meta: CatalogueItem = {
     { name: "brandLabel", type: "string", default: '"Home"', description: "Accessible name of the brand link." },
     { name: "brandHref", type: "string", default: '"/"', description: "Where the brand links to." },
     { name: "cta", type: "{ label; href } | null", default: "Join waitlist → #cta", description: "Primary pill on the right. null hides it." },
+    { name: "secondaryCta", type: "{ label; href } | null", default: "null", description: "White secondary pill before the primary one (e.g. Log in). Hidden on phones." },
     { name: "activeHref", type: "string", default: "current pathname", description: "Marks the matching link with aria-current." },
     { name: "className", type: "string", description: "Extra classes on the <header>." },
   ],

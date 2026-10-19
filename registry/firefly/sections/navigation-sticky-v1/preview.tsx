@@ -11,7 +11,7 @@ const LINKS = [
 export default function Preview({ inBuild }: PreviewProps) {
   return (
     <>
-      <NavigationSticky links={LINKS} activeHref="#customers" />
+      <NavigationSticky links={LINKS} activeHref="#customers" secondaryCta={{ label: "Log in", href: "#login" }} cta={{ label: "Sign up", href: "#signup" }} />
       {inBuild ? null : (
         /* Blank page below the bar so the frame can scroll and the menu has room; nothing else to look at */
         <div aria-hidden className="h-[640px] bg-surface-page" />

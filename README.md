@@ -2,7 +2,8 @@
 
 Shared, versioned, content-free sections and components for Firefly websites, with a public catalogue.
 
-- **Catalogue:** every component with a live preview at 390 / 834 / 1440, props, install command and changelog. Tick components to assemble a page in **Build site**.
+- **Catalogue:** every component with a live preview at 390 / 834 / 1440 (wireframe and a final example). Tick components to assemble a page in **Build site**.
+- **Design system:** `/design-system` shows the atoms every section is built from (buttons, icon buttons, switch tabs, pagination dots), the type scale, every colour token, motion rules, spacing and radii, read live from the Base code. Change an atom or a token once and every section follows.
 - **Distribution:** shadcn-style registry served from `public/r/`. Sites copy the files and own them.
 - **Versioning:** a change in look or behaviour ships as a new folder (`hero-split-v2`); old versions stay available.
 

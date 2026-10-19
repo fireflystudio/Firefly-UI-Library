@@ -6,10 +6,10 @@ export const meta: CatalogueItem = {
   version: 1,
   category: "base",
   description:
-    "Install this first in every site. Design tokens for Tailwind v4, the scroll-reveal system, parallax, art-scale, pill buttons, the hero CTA pair, a two-tone headline helper and a content-free visual placeholder.",
+    "Install this first in every site. Design tokens for Tailwind v4, the scroll-reveal system, parallax, art-scale, the button set (pill buttons, round icon buttons, switch tabs, pagination dots), the hero CTA pair, a two-tone headline helper and a content-free visual placeholder.",
   interactions: [
     "Scroll: every block fades and rises once, staggered 90ms apart.",
-    "Hover the buttons: 1px lift, press scales to 0.98.",
+    "Hover the buttons: the fill shifts (black → warm charcoal, white → off-white); no lift. The switch indicator and pagination line slide between positions.",
   ],
   props: [
     { name: "app/firefly.css", type: "stylesheet", description: "Tokens (@theme), base layer, reveal rules and marquee keyframes. Import it after Tailwind in globals.css. Change the values to a client's palette; keep the names." },
@@ -18,13 +18,17 @@ export const meta: CatalogueItem = {
     { name: "reveal", type: "attribute object", description: "Spread on any element inside <Reveal> to make it a staggered child. Imported from reveal-attr (safe in Server Components)." },
     { name: "<Parallax>", type: "component", default: 'distance 30 · mode "through"', description: 'Vertical drift on scroll for large visuals. mode "exit" for the hero (starts at 0, drifts down ~60px).' },
     { name: "<ArtScale />", type: "component", default: "designWidth 1440", description: "Sets --art-scale on its parent so a 1440px composition scales up on wide screens." },
-    { name: "<Button>", type: "component", default: 'variant "dark" · size "md"', description: 'Pill button. Renders a Link with href, otherwise a <button>. Variants: dark, ghost, light and ghost-dark (the last two for dark backgrounds). Sizes: sm (34px), md (43px).' },
-    { name: "<HeroCta>", type: "component", default: "Join waitlist / Book a demo", description: "Dark primary + ghost secondary pill pair. Props: primary, secondary, onDark." },
+    { name: "<Button>", type: "component", default: 'variant "primary" · size "lg"', description: "Pill button, regular weight. Renders a Link with href, otherwise a <button>. Variants: primary (black), secondary (white with the button shadow), primary-on-dark, secondary-on-dark. Sizes: sm 36px (nav), md 40px (tabs, inline), lg 44px (hero, section CTAs)." },
+    { name: "<IconButton>", type: "component", default: 'variant "secondary" · size "sm"', description: "Round icon-only button (32 / 40 / 44px) with the same fills and shadow as Button. Ships ChevronLeft, ChevronRight, PlayIcon, PauseIcon. Always pass aria-label." },
+    { name: "<Segmented>", type: "component", default: 'size "md"', description: "Switch / tab pills: the white indicator slides to the active item, inactive items get a warm hover layer. Props: items [{ id, label }], value, onChange, size, ariaLabel. Arrow keys move the selection." },
+    { name: "<PaginationDots>", type: "component", description: "Carousel pagination: 4px dots, the active one a 24px line that slides between positions. Props: count, index, onSelect, label." },
+    { name: "<HeroCta>", type: "component", default: "Join waitlist / Book a demo · lg", description: "Primary + secondary pill pair, 8px apart. Props: primary, secondary, onDark, size." },
     { name: "<TwoTone>", type: "component", description: "Renders a headline as primary text + muted grey second half. Props: text, muted, stack, onDark." },
     { name: "<Placeholder>", type: "component", default: 'label "Visual"', description: "Hatched stand-in for an image or mockup. Props: label, ratio, tone." },
   ],
   changelog: [
     { version: "1.0", date: "2026-10-16", notes: "First release, distilled from the Startupmap build and the Firefly Web Guide Book." },
+    { version: "1.1", date: "2026-10-19", notes: "Button set rebuilt 1:1 from the ElevenLabs reference: regular weight, 36 / 40 / 44px sizes, colour-shift hover, white secondary with a half-pixel ring + soft shadow. New IconButton, Segmented and PaginationDots atoms; new tokens for hover fills, pressed layer, pagination and --shadow-button." },
   ],
   files: [
     { path: "registry/firefly/styles/firefly.css", target: "app/firefly.css", type: "registry:file" },
@@ -34,6 +38,9 @@ export const meta: CatalogueItem = {
     { path: "registry/firefly/ui/parallax.tsx", target: "components/ui/parallax.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/art-scale.tsx", target: "components/ui/art-scale.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/button.tsx", target: "components/ui/button.tsx", type: "registry:ui" },
+    { path: "registry/firefly/ui/icon-button.tsx", target: "components/ui/icon-button.tsx", type: "registry:ui" },
+    { path: "registry/firefly/ui/segmented.tsx", target: "components/ui/segmented.tsx", type: "registry:ui" },
+    { path: "registry/firefly/ui/pagination-dots.tsx", target: "components/ui/pagination-dots.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/hero-cta.tsx", target: "components/ui/hero-cta.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/two-tone.tsx", target: "components/ui/two-tone.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/placeholder.tsx", target: "components/ui/placeholder.tsx", type: "registry:ui" },

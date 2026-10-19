@@ -11,10 +11,11 @@ Rules live in the Firefly Web Guide Book: `../Firefly web guide book/FIREFLY-WEB
 - Vercel: https://firefly-ui-library.vercel.app (auto-deploys from `main`; same URL is the registry base in `lib/registry-url.ts`)
 
 ## How this repo is organised
-- `app/` — the catalogue site: `(catalogue)/` (UI Components dashboard, `/components/[id]`, `/websites`, `/build`) and `preview/` (bare pages rendered inside the preview iframes).
-- `components/catalogue/` — catalogue UI only (top bar, cards, scaled iframe frames, selection for "Build site"). Never shipped to sites.
+- `app/` — the catalogue site: `(catalogue)/` (UI Components dashboard, `/components/[id]`, `/websites`, `/build`, `/design-system/*`) and `preview/` (bare pages rendered inside the preview iframes).
+- `components/catalogue/` — catalogue UI only (sidebar, top bar, cards, scaled iframe frames, selection for "Build site", `design-system/` specimens). Never shipped to sites.
 - `registry/firefly/` — the **source of truth** for everything that ships:
-  - `styles/firefly.css` + `ui/*` = the `firefly-base` item (tokens, reveal, parallax, buttons, placeholder…). Also used by the catalogue itself via the tsconfig alias `@/components/ui/* → registry/firefly/ui/*`.
+  - `styles/firefly.css` + `ui/*` = the `firefly-base` item (tokens, reveal, parallax, the button set, placeholder…). Also used by the catalogue itself via the tsconfig alias `@/components/ui/* → registry/firefly/ui/*`.
+  - **Design system** (`/design-system`: Buttons, Typography, Colours, Motion, Spacing & radii, Install; pages in `app/(catalogue)/design-system/`, list in `lib/design-system/pages.ts`) shows these atoms and tokens live. Colours / radii / shadows / easings are parsed from `firefly.css` at render time (`lib/design-system/tokens.ts`), so editing the CSS updates the pages. Atoms (Button, IconButton, Segmented, PaginationDots, HeroCta) are edited once in `registry/firefly/ui/` and every section follows; sites pick the change up by re-installing `firefly-base`.
   - `base/meta.ts`, `base/preview.tsx` = catalogue entry for the base.
   - `sections/<id>/` = one folder per component: `<id>.tsx` (ships), `meta.ts` (catalogue + registry data), `preview.tsx` (placeholder render). **Auto-discovered** — adding a folder is all it takes.
 - `lib/catalogue.ts` reads the folders; `scripts/build-registry.ts` writes `public/r/<id>.json` (+ `registry.json`) — runs automatically before `next build` (`prebuild`), or `npm run registry:build`.

@@ -11,6 +11,8 @@ import {
   type PointerEvent,
   type ReactNode,
 } from "react";
+import { ChevronLeft, ChevronRight, IconButton, PauseIcon, PlayIcon } from "@/components/ui/icon-button";
+import { PaginationDots } from "@/components/ui/pagination-dots";
 import { Placeholder } from "@/components/ui/placeholder";
 import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
@@ -78,7 +80,7 @@ type Drag = { id: number; startX: number; lastX: number; lastT: number; v: numbe
  * Two-tone headline + a cover-flow of portrait cards: the centre card at full size, the
  * neighbours smaller and faded (transform/opacity only, 500ms). Prev/next buttons, click a side
  * card to centre it, arrow keys on the focused region, mouse and touch drag with snap and flick,
- * a mono counter, and autoplay every `autoplayMs` that pauses on hover, focus and drag, has a
+ * pagination dots, and autoplay every `autoplayMs` that pauses on hover, focus and drag, has a
  * visible pause/play toggle and is off under prefers-reduced-motion.
  */
 export function CarouselCoverflow({
@@ -190,7 +192,6 @@ export function CarouselCoverflow({
   };
 
   const offset = dragOffset ?? 0;
-  const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
     <section id={id} aria-labelledby={headingId} className={`overflow-x-clip bg-surface-page py-16 md:py-24 xl:py-[120px] ${className}`}>
@@ -285,27 +286,21 @@ export function CarouselCoverflow({
             })}
           </div>
 
-          <div className="flex items-center gap-3">
-            <RoundButton label="Previous" onClick={() => step(-1)}>
-              <path d="M10 3.5 5.5 8l4.5 4.5" />
-            </RoundButton>
-            <p
-              className="min-w-[72px] text-center font-mono text-[12px] leading-none tracking-[0.08em] text-text-tertiary tabular-nums"
-              aria-live={running ? "off" : "polite"}
-              aria-atomic="true"
-            >
-              <span aria-hidden>
-                {pad(active + 1)} / {pad(count)}
-              </span>
-              <span className="sr-only">{`Slide ${active + 1} of ${count}: ${items[active]?.title ?? ""}`}</span>
+          <div className="flex items-center gap-5">
+            <IconButton aria-label="Previous slide" onClick={() => step(-1)}>
+              <ChevronLeft />
+            </IconButton>
+            <PaginationDots count={count} index={active} onSelect={go} />
+            <p className="sr-only" aria-live={running ? "off" : "polite"} aria-atomic="true">
+              {`Slide ${active + 1} of ${count}: ${items[active]?.title ?? ""}`}
             </p>
-            <RoundButton label="Next" onClick={() => step(1)}>
-              <path d="M6 3.5 10.5 8 6 12.5" />
-            </RoundButton>
+            <IconButton aria-label="Next slide" onClick={() => step(1)}>
+              <ChevronRight />
+            </IconButton>
             {autoplayMs > 0 && motionOk ? (
-              <RoundButton label={paused ? "Play autoplay" : "Pause autoplay"} pressed={paused} onClick={() => setPaused((p) => !p)} className="ml-2">
-                {paused ? <path d="M5.5 3.5v9l7-4.5z" fill="currentColor" stroke="none" /> : <path d="M6 4v8M10 4v8" />}
-              </RoundButton>
+              <IconButton aria-label={paused ? "Play autoplay" : "Pause autoplay"} aria-pressed={paused} onClick={() => setPaused((p) => !p)} className="ml-1">
+                {paused ? <PlayIcon /> : <PauseIcon />}
+              </IconButton>
             ) : null}
           </div>
         </div>
@@ -314,30 +309,3 @@ export function CarouselCoverflow({
   );
 }
 
-function RoundButton({
-  label,
-  onClick,
-  pressed,
-  className = "",
-  children,
-}: {
-  label: string;
-  onClick: () => void;
-  pressed?: boolean;
-  className?: string;
-  children: ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      aria-pressed={pressed}
-      onClick={onClick}
-      className={`inline-flex size-10 cursor-pointer items-center justify-center rounded-pill border border-border-light bg-surface-primary text-text-primary transition-[translate,scale,opacity] duration-200 ease-out hover:-translate-y-px hover:opacity-70 active:translate-y-0 active:scale-[0.96] motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${className}`}
-    >
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        {children}
-      </svg>
-    </button>
-  );
-}

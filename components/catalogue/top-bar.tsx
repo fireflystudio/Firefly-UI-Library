@@ -7,7 +7,8 @@ import { useSelection } from "./selection";
 
 const TABS = [
   { href: "/", label: "UI Components", short: "Components", match: (p: string) => p === "/" || p.startsWith("/components") },
-  { href: "/websites", label: "Websites", short: "Websites", match: (p: string) => p.startsWith("/websites") },
+  { href: "/websites", label: "Websites", short: "Sites", match: (p: string) => p.startsWith("/websites") },
+  { href: "/design-system", label: "Design system", short: "Design", match: (p: string) => p.startsWith("/design-system") },
 ];
 
 export function TopBar() {
@@ -48,7 +49,7 @@ export function TopBar() {
                 key={tab.href}
                 href={tab.href}
                 aria-current={active ? "page" : undefined}
-                className={`whitespace-nowrap rounded-pill px-3 py-1.5 text-[13px] font-medium leading-none transition-[background-color,color,box-shadow] duration-200 ease-out md:px-3.5 ${
+                className={`whitespace-nowrap rounded-pill px-2.5 py-1.5 text-[13px] font-medium leading-none transition-[background-color,color,box-shadow] duration-200 ease-out md:px-3.5 ${
                   active
                     ? "bg-surface-primary text-text-primary shadow-[0_1px_2px_0_#0000000f,0_0_0_1px_#0000000a]"
                     : "text-text-nav hover:text-text-primary"

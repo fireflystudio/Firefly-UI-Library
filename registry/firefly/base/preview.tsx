@@ -38,23 +38,29 @@ export default function BasePreview() {
           <div {...reveal} className="flex flex-col gap-4">
             <h2 className="text-[20px] font-medium leading-[normal] text-text-primary">Buttons</h2>
             <div className="flex flex-wrap items-center gap-2">
-              <Button href="#">Dark · md</Button>
-              <Button href="#" variant="ghost">
-                Ghost · md
+              <Button href="#">Primary · lg</Button>
+              <Button href="#" variant="secondary">
+                Secondary · lg
+              </Button>
+              <Button href="#" size="md">
+                Primary · md
+              </Button>
+              <Button href="#" variant="secondary" size="md">
+                Secondary · md
               </Button>
               <Button href="#" size="sm">
-                Dark · sm
+                Primary · sm
               </Button>
-              <Button href="#" variant="ghost" size="sm">
-                Ghost · sm
+              <Button href="#" variant="secondary" size="sm">
+                Secondary · sm
               </Button>
             </div>
             <div className="flex flex-wrap items-center gap-2 rounded-frame bg-surface-dark p-4">
-              <Button href="#" variant="light">
-                Light · on dark
+              <Button href="#" variant="primary-on-dark">
+                Primary · on dark
               </Button>
-              <Button href="#" variant="ghost-dark">
-                Ghost · on dark
+              <Button href="#" variant="secondary-on-dark">
+                Secondary · on dark
               </Button>
             </div>
           </div>

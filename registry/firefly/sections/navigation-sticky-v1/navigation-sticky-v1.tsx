@@ -16,6 +16,8 @@ export type NavigationStickyProps = {
   links: NavLink[];
   /** Primary pill on the right. null hides it. */
   cta?: NavLink | null;
+  /** Secondary (white) pill before the primary one, e.g. "Log in". null hides it. */
+  secondaryCta?: NavLink | null;
   /** Which link is current. Defaults to the pathname. */
   activeHref?: string;
   className?: string;
@@ -36,6 +38,7 @@ export function NavigationSticky({
   brandHref = "/",
   links,
   cta = { label: "Join waitlist", href: "#cta" },
+  secondaryCta = null,
   activeHref,
   className = "",
 }: NavigationStickyProps) {
@@ -104,6 +107,11 @@ export function NavigationSticky({
         </div>
 
         <div className="flex shrink-0 items-center gap-2">
+          {secondaryCta ? (
+            <Button href={secondaryCta.href} variant="secondary" size="sm" className="hidden md:inline-flex">
+              {secondaryCta.label}
+            </Button>
+          ) : null}
           {cta ? (
             <Button href={cta.href} size="sm">
               {cta.label}

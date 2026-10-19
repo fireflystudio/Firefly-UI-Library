@@ -17,6 +17,9 @@ export function CatalogueFooter() {
           <Link href="/build" className="transition-opacity duration-200 ease-out hover:opacity-60">
             Build site
           </Link>
+          <Link href="/design-system" className="transition-opacity duration-200 ease-out hover:opacity-60">
+            Design system
+          </Link>
           <a href="https://github.com/lukasznosekk/Firefly-UI-Library" target="_blank" rel="noreferrer" className="transition-opacity duration-200 ease-out hover:opacity-60">
             GitHub ↗
           </a>

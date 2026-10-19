@@ -68,7 +68,7 @@ export function StatsRows({
           ) : null}
           {cta ? (
             <div {...reveal} className="pt-1">
-              <Button href={cta.href} variant="ghost">
+              <Button href={cta.href} variant="secondary">
                 {cta.label}
               </Button>
             </div>

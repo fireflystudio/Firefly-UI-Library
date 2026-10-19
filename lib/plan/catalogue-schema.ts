@@ -16,7 +16,7 @@ export const CONTRACTS: ComponentContract[] = [
   {
     component: "navigation-sticky-v1",
     use: "Top bar for every site (always first). Compact, 3–5 links.",
-    fields: "links[{label}] (3–5), primaryCta{label}",
+    fields: "links[{label}] (3–5), secondaryLink{label} (optional, e.g. Log in), primaryCta{label}",
   },
   {
     component: "navigation-slide-out-v1",

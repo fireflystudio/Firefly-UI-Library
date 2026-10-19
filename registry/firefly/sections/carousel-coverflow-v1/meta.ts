@@ -6,9 +6,9 @@ export const meta: CatalogueItem = {
   version: 1,
   category: "carousels",
   description:
-    "Two-tone headline over a cover-flow of portrait cards: the centre card full size, the neighbours smaller and faded. Prev/next buttons, click a side card, arrow keys, mouse and touch drag with snap and flick, a mono counter, and autoplay with a visible pause button that is off under reduced motion.",
+    "Two-tone headline over a cover-flow of portrait cards: the centre card full size, the neighbours smaller and faded. Round prev/next buttons, pagination dots with a sliding line for the active card, click a side card, arrow keys, mouse and touch drag with snap and flick, and autoplay with a visible pause button that is off under reduced motion.",
   interactions: [
-    "Click the arrows or a side card: the row slides, the counter updates.",
+    "Click the arrows, a dot or a side card: the row slides, the active line moves.",
     "Drag the cards with the mouse or a finger; a quick flick moves one card.",
     "Click the region and press ← / →.",
     "Hover or focus: autoplay pauses. Click the pause button to stop it.",
@@ -28,6 +28,7 @@ export const meta: CatalogueItem = {
   ],
   changelog: [
     { version: "1.0", date: "2026-10-16", notes: "First release: cover-flow geometry, buttons, keys, drag/flick, autoplay with pause toggle, counter." },
+    { version: "1.1", date: "2026-10-19", notes: "Controls use the Base IconButton and PaginationDots (dots + sliding line) instead of bordered round buttons and the mono counter." },
   ],
   files: [
     {
