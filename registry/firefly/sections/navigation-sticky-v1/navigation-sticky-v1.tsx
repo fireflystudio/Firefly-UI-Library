@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { BurgerIcon, NavLink, navIconButtonClasses } from "@/components/ui/nav-link";
 
 export type NavLink = { label: string; href: string };
 
@@ -24,13 +25,14 @@ export type NavigationStickyProps = {
 };
 
 /**
- * Navigation Sticky v1
- * Fixed header (72px mobile / 76px tablet+). After ~8px of scroll the background turns
- * translucent with a hairline and compacts (scaleY 0.84 + content translateY -6px, transform
- * only). Links 14px medium grey, the active one primary with aria-current. Mobile: hamburger
- * that morphs into a cross and opens a simple panel; Escape closes it.
+ * Navigation Sticky v1.1
+ * Fixed 64px header styled after the ElevenLabs bar: brand, 18px regular links in 36px pills
+ * that fill with a soft grey on hover (the current page keeps the fill), then an optional white
+ * secondary pill ("Log in") and the primary pill, both 36px. After ~8px of scroll the background
+ * turns translucent with a hairline (no compaction). Mobile: a round hamburger that morphs into
+ * a cross and opens a simple panel; Escape closes it.
  *
- * Pages below need a top padding of 72px / 76px plus their own spacing.
+ * Pages below need a top padding of 64px plus their own spacing.
  */
 export function NavigationSticky({
   brand,
@@ -66,51 +68,36 @@ export function NavigationSticky({
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 ${className}`}>
-      {/* Background layer: fades in and shrinks (scaleY) on scroll */}
+      {/* Background layer: turns translucent with a hairline once the page scrolls or the panel opens */}
       <div
         aria-hidden
-        className={`absolute inset-x-0 top-0 h-[72px] origin-top border-b transition-transform duration-300 ease-out md:h-[76px] ${
-          scrolled || open
-            ? "border-border-06 bg-surface-page/85 backdrop-blur-xl"
-            : "border-transparent bg-surface-page"
-        } ${scrolled && !open ? "scale-y-[0.842]" : ""}`}
-      />
-      <nav
-        aria-label="Main"
-        className={`relative mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 transition-transform duration-300 ease-out md:h-[76px] md:px-8 ${
-          scrolled && !open ? "-translate-y-[6px]" : ""
+        className={`absolute inset-x-0 top-0 h-16 border-b transition-[background-color,border-color] duration-200 ease-out motion-reduce:transition-none ${
+          scrolled || open ? "border-border-06 bg-surface-page/85 backdrop-blur-xl" : "border-transparent bg-surface-page"
         }`}
-      >
-        <div className="flex min-w-0 items-center gap-10">
-          <Link
-            href={brandHref}
-            aria-label={brandLabel}
-            className="flex min-w-0 items-center rounded-chip"
-          >
+      />
+      <nav aria-label="Main" className="relative mx-auto flex h-16 max-w-[1328px] items-center justify-between gap-6 px-5 md:px-10 xl:px-16">
+        <div className="flex min-w-0 items-center gap-6 xl:gap-9">
+          <Link href={brandHref} aria-label={brandLabel} className="flex min-w-0 items-center rounded-chip">
             {brand ?? <DefaultBrand />}
           </Link>
-          <ul className="hidden items-center gap-6 md:flex">
+          <ul className="hidden items-center md:flex">
             {links.map((l) => (
               <li key={l.href}>
-                <Link
-                  href={l.href}
-                  aria-current={isActive(l.href) ? "page" : undefined}
-                  className={`text-[14px] font-medium transition-opacity duration-200 ease-out hover:opacity-60 ${
-                    isActive(l.href) ? "text-text-primary" : "text-text-nav"
-                  }`}
-                >
+                <NavLink href={l.href} active={isActive(l.href)}>
                   {l.label}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2 md:gap-2">
           {secondaryCta ? (
-            <Button href={secondaryCta.href} variant="secondary" size="sm" className="hidden md:inline-flex">
-              {secondaryCta.label}
-            </Button>
+            <span className="hidden md:contents">
+              <Button href={secondaryCta.href} variant="secondary" size="sm">
+                {secondaryCta.label}
+              </Button>
+            </span>
           ) : null}
           {cta ? (
             <Button href={cta.href} size="sm">
@@ -123,41 +110,29 @@ export function NavigationSticky({
             aria-expanded={open}
             aria-controls={menuId}
             onClick={() => setOpen((o) => !o)}
-            className="flex h-8 w-[26px] cursor-pointer flex-col items-center justify-center gap-[5px] md:hidden"
+            className={`${navIconButtonClasses} ml-0.5 md:hidden`}
           >
-            <span
-              className={`block h-[1.5px] w-[18px] bg-icon-primary transition-transform duration-200 ease-out ${open ? "translate-y-[6.5px] rotate-45" : ""}`}
-            />
-            <span
-              className={`block h-[1.5px] w-[18px] bg-icon-primary transition-opacity duration-200 ease-out ${open ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`block h-[1.5px] w-[18px] bg-icon-primary transition-transform duration-200 ease-out ${open ? "-translate-y-[6.5px] -rotate-45" : ""}`}
-            />
+            <BurgerIcon open={open} />
           </button>
         </div>
       </nav>
 
       {/* Mobile panel */}
-      <div
-        id={menuId}
-        hidden={!open}
-        className="relative border-b border-border-06 bg-surface-page px-5 pb-6 md:hidden"
-      >
-        <ul className="flex flex-col">
+      <div id={menuId} hidden={!open} className="relative border-b border-border-06 bg-surface-page px-5 pb-5 pt-1 md:hidden">
+        <ul className="flex flex-col gap-0.5">
           {links.map((l) => (
             <li key={l.href}>
-              <Link
-                href={l.href}
-                onClick={() => setOpen(false)}
-                aria-current={isActive(l.href) ? "page" : undefined}
-                className={`block border-b border-border-06 py-4 text-[17px] font-medium ${isActive(l.href) ? "text-text-primary" : "text-text-nav"}`}
-              >
+              <NavLink href={l.href} active={isActive(l.href)} onClick={() => setOpen(false)} className="h-11 w-full">
                 {l.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
+        {secondaryCta ? (
+          <Button href={secondaryCta.href} variant="secondary" size="md" className="mt-3 w-full" onClick={() => setOpen(false)}>
+            {secondaryCta.label}
+          </Button>
+        ) : null}
       </div>
     </header>
   );

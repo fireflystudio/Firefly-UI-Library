@@ -1,5 +1,5 @@
-/** Firefly symbol (Branding Explorations, Figma node 3395:44393). Fills with currentColor; sized by height. */
-export function FireflySymbol({ className = "h-4" }: { className?: string }) {
+/** Firefly logo (Branding Explorations, Figma node 3395:44393). Fills with currentColor; sized by height. */
+export function FireflyLogo({ className = "h-4" }: { className?: string }) {
   return (
     <svg viewBox="0 0 265.47 193.734" aria-hidden className={`w-auto shrink-0 ${className}`} fill="currentColor">
       <path d="M110.453 0L119.694 15.091H4.34692C3.54257 15.091 2.80667 15.5707 2.48151 16.3243L0 22.1312L26.8859 48.699C28.8368 50.6175 31.6264 51.4225 34.279 50.823L116.648 32.3232V36.8625C116.648 37.9246 115.981 38.8838 114.988 39.2607L49.1167 63.9784C48.6033 64.1668 48.2611 64.6636 48.2611 65.2117V68.2094C48.2611 68.8603 48.6376 69.4598 49.2194 69.7339L80.6747 84.6536C82.4374 85.493 84.5253 85.0819 85.8431 83.643L126.009 39.9801C126.711 39.2093 127.105 38.2158 127.105 37.188L127.259 15.1253C127.259 14.1832 126.848 13.2924 126.112 12.71L110.436 0.0342589L110.453 0Z" />

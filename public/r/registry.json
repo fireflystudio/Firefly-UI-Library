@@ -68,6 +68,11 @@
           "target": "components/ui/hero-cta.tsx"
         },
         {
+          "path": "registry/firefly/ui/nav-link.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/nav-link.tsx"
+        },
+        {
           "path": "registry/firefly/ui/two-tone.tsx",
           "type": "registry:ui",
           "target": "components/ui/two-tone.tsx"
@@ -83,7 +88,7 @@
       "name": "navigation-sticky-v1",
       "type": "registry:block",
       "title": "Navigation Sticky v1",
-      "description": "Fixed header with a brand, text links and a primary pill. Turns translucent and compacts after a few pixels of scroll; on mobile a hamburger opens a simple panel.",
+      "description": "Fixed 64px header styled after the ElevenLabs bar: brand, 18px links in pills that fill grey on hover, an optional white Log in pill and the primary pill. Turns translucent with a hairline after a few pixels of scroll; on mobile a round hamburger opens a simple panel.",
       "files": [
         {
           "path": "registry/firefly/sections/navigation-sticky-v1/navigation-sticky-v1.tsx",
@@ -96,7 +101,7 @@
       "name": "navigation-slide-out-v1",
       "type": "registry:block",
       "title": "Navigation Slide-out v1",
-      "description": "Fixed header with a brand, text links, a quiet secondary link, a primary pill and a dot-grid menu button on every breakpoint. The button opens a right-side panel that slides in over a dimmed page: big primary links, the CTA again and small link groups at the bottom. Compacts on scroll like Navigation Sticky.",
+      "description": "Fixed 64px header in the ElevenLabs style (18px links in pills with a grey hover fill, white Log in pill, primary pill) plus a round dot-grid menu button on every breakpoint. The button opens a right-side panel that slides in over a dimmed page: big primary links, the CTAs again and small link groups at the bottom.",
       "files": [
         {
           "path": "registry/firefly/sections/navigation-slide-out-v1/navigation-slide-out-v1.tsx",

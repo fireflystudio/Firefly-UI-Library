@@ -21,7 +21,7 @@ registry/firefly/sections/<id>/
 - The folder is auto-discovered. Do **not** edit `lib/`, `app/`, `components/catalogue/` or any other folder.
 - The component file is copied verbatim into a site as `components/sections/<id>.tsx`, so it may only import:
   - React, `next/link`, `next/image`, `motion` / `motion/react`
-  - the Base: `@/components/ui/reveal`, `@/components/ui/reveal-attr`, `@/components/ui/parallax`, `@/components/ui/art-scale`, `@/components/ui/button`, `@/components/ui/icon-button`, `@/components/ui/segmented`, `@/components/ui/pagination-dots`, `@/components/ui/hero-cta`, `@/components/ui/two-tone`, `@/components/ui/placeholder`
+  - the Base: `@/components/ui/reveal`, `@/components/ui/reveal-attr`, `@/components/ui/parallax`, `@/components/ui/art-scale`, `@/components/ui/button`, `@/components/ui/icon-button`, `@/components/ui/segmented`, `@/components/ui/pagination-dots`, `@/components/ui/hero-cta`, `@/components/ui/nav-link`, `@/components/ui/two-tone`, `@/components/ui/placeholder`
   - **never** `@/registry/...`, never another section, never `@/lib/...`.
 - `preview.tsx` and `meta.ts` are not shipped: they may import `@/lib/types` and the Base.
 
@@ -37,6 +37,7 @@ registry/firefly/sections/<id>/
 | `Segmented` | Switch / tab pills with a sliding white indicator (`items`, `value`, `onChange`, `size`, `ariaLabel`). Client component. |
 | `PaginationDots` | Dots + sliding active line for carousels (`count`, `index`, `onSelect`). Client component. Put it between two `IconButton`s. |
 | `HeroCta` | Primary + secondary pair, 44px, 8px apart (`primary`, `secondary`, `onDark`, `size`). Use in heroes and CTAs. |
+| `NavLink`, `navIconButtonClasses`, `BurgerIcon` from `@/components/ui/nav-link` | Navigation bar atoms: 18px links in 36px pills with the grey hover fill (`active` for the current page), the round 36px bar control, the two-line hamburger. |
 | `TwoTone` | `<h2><TwoTone text={headline} muted={headlineMuted} /></h2>`. Every h1/h2 is two-tone. `stack` puts the grey part on its own line, `onDark` for dark sections. |
 | `Placeholder` | `<Placeholder label="Image" ratio="4 / 3" tone="light" \| "dark" />`. The default for every image/mockup slot. |
 
@@ -48,7 +49,7 @@ Never write a hex value, `rgb()`, or a Tailwind palette colour (`bg-gray-100`, `
 - **Icons:** `text-icon-primary` `-secondary` `-tertiary` `-quaternary` (also `bg-icon-*` for hamburger bars)
 - **Surfaces:** `bg-surface-page` (#fdfcfc page) `bg-surface-primary` (white) `bg-surface-secondary` `bg-surface-muted` `bg-surface-card-light` `bg-surface-card-dark` `bg-surface-inverse` (ink) `bg-surface-dark` (footer / dark sections)
 - **Borders:** `border-border-04` `-06` `-10` `-16` `-24` `border-border-light` `border-border-dark` `border-border-on-dark` `border-border-interactive`
-- **Buttons:** `bg-button-primary` `hover:bg-button-primary-hover` `text-button-content-primary` `bg-button-secondary` `hover:bg-button-secondary-hover` `text-button-content-secondary` `shadow-button` (the white-button ring + soft shadow) `bg-surface-pressed` (hover layer under inactive tabs) `bg-pagination-dot` `bg-pagination-active`. Prefer the Base atoms over hand-made buttons.
+- **Buttons:** `bg-button-primary` `hover:bg-button-primary-hover` `text-button-content-primary` `bg-button-secondary` `hover:bg-button-secondary-hover` `text-button-content-secondary` `shadow-button` (the white-button ring + soft shadow) `bg-surface-pressed` (hover layer under inactive tabs) `bg-surface-hover` (translucent hover fill for nav links) `bg-pagination-dot` `bg-pagination-active`. Prefer the Base atoms over hand-made buttons.
 - **Status tags/dots:** `text-status-positive` `bg-status-positive-bg` `text-status-negative` `bg-status-negative-bg` `text-status-warning` `bg-status-warning-bg`
 - **Radii:** `rounded-chip` (6) `rounded-tile` (8) `rounded-frame` (12) `rounded-card` (14) `rounded-pill`. Do not use `rounded-l` / `rounded-s` (those are Tailwind side utilities).
 - **Shadows:** `shadow-card-drop` `shadow-soft`. **Easing:** `ease-out-soft` and `var(--ease-out-soft)`. **Fonts:** `font-sans` (Inter, default) `font-mono` (IBM Plex Mono, small uppercase labels).
@@ -73,14 +74,14 @@ No mono uppercase labels above headlines (section eyebrows, "tags" above a CTA h
 - Two-tone h1/h2 everywhere via `TwoTone` (or the same pattern). Section headings are `h2`, card titles `h3`. A component never renders an `h1` unless it is a hero (then exactly one).
 - `leading-[normal]`, `leading-[1.1]`, `leading-[1.55]` … **never** `leading-normal`. Tracking in `em` (`tracking-[-0.03em]`).
 - No forced `<br>` in long text; use `text-balance` / `text-pretty` + `max-w`.
-- Minimum text size 12px; body 14–16px; card titles 18px; nav links 14px medium.
+- Minimum text size 12px; body 14–16px; card titles 18px; nav links 18px regular in 36px pills (`NavLink` from the Base).
 
 **Layout**
 - Mobile-first. Breakpoints: base < 768, `md:` 768–1279, `xl:` ≥ 1280. Section padding like the references: `px-5 md:px-10 xl:px-16` (or `xl:px-[120px]` for narrow content), vertical `py-16 md:py-24 xl:py-[120px]`.
 - Content centred with `mx-auto` + `max-w-[1200px]` (or 1312 / 1392 for wide grids).
 - **No horizontal overflow from 375 to 2400px.** Fluid widths (`min-w-0`, `flex-1`, `%`), never a fixed width wider than the viewport.
 - **No viewport-height units** (`h-screen`, `min-h-[100vh]`, `svh`…): previews run in iframes sized to content. Use fixed heights / aspect ratios.
-- Heroes assume a fixed nav: top padding `pt-[calc(72px+56px)] md:pt-[calc(76px+80px)] xl:pt-[calc(76px+120px)]`.
+- Heroes assume a fixed 64px nav: top padding `pt-[calc(64px+56px)] md:pt-[calc(64px+80px)] xl:pt-[calc(64px+120px)]`.
 
 **Motion**
 - Animate only `transform`/`translate`/`scale`/`rotate` and `opacity`. No width/height/margin animations.

@@ -83,7 +83,7 @@ export function HeroNewsBento({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={`bg-surface-page px-5 pb-14 pt-[calc(72px+56px)] md:px-10 md:pb-20 md:pt-[calc(76px+80px)] xl:px-16 xl:pb-[120px] xl:pt-[calc(76px+120px)] ${className}`}
+      className={`bg-surface-page px-5 pb-14 pt-[calc(64px+56px)] md:px-10 md:pb-20 md:pt-[calc(64px+80px)] xl:px-16 xl:pb-[120px] xl:pt-[calc(64px+120px)] ${className}`}
     >
       <div className="mx-auto flex max-w-[1312px] flex-col gap-10 md:gap-12 xl:gap-16">
         {/* Masthead */}

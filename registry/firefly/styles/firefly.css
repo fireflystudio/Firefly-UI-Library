@@ -58,6 +58,8 @@
   --color-button-content-secondary: #0a0a0a;
   /* Hover / pressed layer under inactive tabs and ghost controls */
   --color-surface-pressed: #ebebeb;
+  /* Translucent hover fill for navigation links and round bar controls (works on any light background) */
+  --color-surface-hover: #0000000d;
   /* Pagination dots */
   --color-pagination-dot: #d4d4d4;
   --color-pagination-active: #333333;

@@ -11,6 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import { Button } from "@/components/ui/button";
+import { NavLink, navIconButtonClasses } from "@/components/ui/nav-link";
 
 export type SlideOutLink = { label: string; href: string };
 export type SlideOutGroup = { title: string; links: SlideOutLink[] };
@@ -23,7 +24,7 @@ export type NavigationSlideOutProps = {
   brandHref?: string;
   /** Primary links: text links in the bar (tablet+) and the big list in the panel. */
   links: SlideOutLink[];
-  /** Quiet text link next to the CTA ("Log in"). Tablet+ in the bar, always in the panel. null hides it. */
+  /** White secondary pill before the CTA ("Log in"). Tablet+ in the bar, always in the panel. null hides it. */
   secondaryLink?: SlideOutLink | null;
   /** Primary pill in the bar and in the panel. null hides it. */
   cta?: SlideOutLink | null;
@@ -39,15 +40,15 @@ export type NavigationSlideOutProps = {
 };
 
 /**
- * Navigation Slide-out v1
- * Fixed header (72px mobile / 76px tablet+) with the same scroll compaction as Navigation
- * Sticky: translucent background + hairline, scaleY 0.84 + content translateY -6px after 8px
- * of scroll (transform only). A dot-grid button (all breakpoints) opens a right-side panel
- * that slides in (translateX 100% → 0, 0.4s) over a fading overlay (0.35s). The panel is a
- * modal dialog: Escape, the overlay, the close button and every link close it; focus returns
- * to the menu button; Tab is trapped inside; body scroll is locked while open.
+ * Navigation Slide-out v1.1
+ * Fixed 64px header styled like Navigation Sticky (ElevenLabs bar: 18px links in pills with a
+ * grey hover fill, white secondary + primary 36px pills, translucent background + hairline after
+ * 8px of scroll). A round dot-grid button (all breakpoints) opens a right-side panel that slides
+ * in (translateX 100% → 0, 0.4s) over a fading overlay (0.35s). The panel is a modal dialog:
+ * Escape, the overlay, the close button and every link close it; focus returns to the menu
+ * button; Tab is trapped inside; body scroll is locked while open.
  *
- * Pages below need a top padding of 72px / 76px plus their own spacing.
+ * Pages below need a top padding of 64px plus their own spacing.
  */
 export function NavigationSlideOut({
   brand,
@@ -125,62 +126,39 @@ export function NavigationSlideOut({
     }
   };
 
-  const quietLink =
-    "text-[14px] font-medium text-text-nav transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none";
-  const iconButton =
-    "flex size-8 shrink-0 cursor-pointer items-center justify-center text-icon-primary transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none";
-
   return (
     <>
       <header className={`fixed inset-x-0 top-0 z-50 ${className}`}>
-        {/* Background layer: fades in and shrinks (scaleY) on scroll */}
+        {/* Background layer: turns translucent with a hairline once the page scrolls */}
         <div
           aria-hidden
-          className={`absolute inset-x-0 top-0 h-[72px] origin-top border-b transition-transform duration-300 ease-out md:h-[76px] ${
-            scrolled
-              ? "scale-y-[0.842] border-border-06 bg-surface-page/85 backdrop-blur-xl"
-              : "border-transparent bg-surface-page"
+          className={`absolute inset-x-0 top-0 h-16 border-b transition-[background-color,border-color] duration-200 ease-out motion-reduce:transition-none ${
+            scrolled ? "border-border-06 bg-surface-page/85 backdrop-blur-xl" : "border-transparent bg-surface-page"
           }`}
         />
-        <nav
-          aria-label="Main"
-          className={`relative mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 transition-transform duration-300 ease-out md:h-[76px] md:px-8 ${
-            scrolled ? "-translate-y-[6px]" : ""
-          }`}
-        >
-          <div className="flex min-w-0 items-center gap-10">
-            <Link
-              href={brandHref}
-              aria-label={brandLabel}
-              className="flex min-w-0 items-center rounded-chip"
-            >
+        <nav aria-label="Main" className="relative mx-auto flex h-16 max-w-[1328px] items-center justify-between gap-6 px-5 md:px-10 xl:px-16">
+          <div className="flex min-w-0 items-center gap-6 xl:gap-9">
+            <Link href={brandHref} aria-label={brandLabel} className="flex min-w-0 items-center rounded-chip">
               {brand ?? <DefaultBrand />}
             </Link>
-            <ul className="hidden items-center gap-6 md:flex">
+            <ul className="hidden items-center md:flex">
               {links.map((l) => (
                 <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    aria-current={isActive(l.href) ? "page" : undefined}
-                    className={`text-[14px] font-medium transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none ${
-                      isActive(l.href) ? "text-text-primary" : "text-text-nav"
-                    }`}
-                  >
+                  <NavLink href={l.href} active={isActive(l.href)}>
                     {l.label}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="flex shrink-0 items-center gap-3 md:gap-4">
+          <div className="flex shrink-0 items-center gap-2">
             {secondaryLink ? (
-              <Link
-                href={secondaryLink.href}
-                className={`hidden md:inline-block ${quietLink}`}
-              >
-                {secondaryLink.label}
-              </Link>
+              <span className="hidden md:contents">
+                <Button href={secondaryLink.href} variant="secondary" size="sm">
+                  {secondaryLink.label}
+                </Button>
+              </span>
             ) : null}
             {cta ? (
               <Button href={cta.href} size="sm">
@@ -194,7 +172,7 @@ export function NavigationSlideOut({
               aria-expanded={open}
               aria-controls={panelId}
               onClick={() => setOpen(true)}
-              className={iconButton}
+              className={`${navIconButtonClasses} ml-0.5`}
             >
               <DotGrid />
             </button>
@@ -234,13 +212,9 @@ export function NavigationSlideOut({
           </p>
           <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-2 md:gap-x-4">
             {secondaryLink ? (
-              <Link
-                href={secondaryLink.href}
-                onClick={close}
-                className={quietLink}
-              >
+              <Button href={secondaryLink.href} variant="secondary" size="sm" onClick={close}>
                 {secondaryLink.label}
-              </Link>
+              </Button>
             ) : null}
             {cta ? (
               <Button href={cta.href} size="sm" onClick={close}>
@@ -252,7 +226,7 @@ export function NavigationSlideOut({
               type="button"
               aria-label="Close menu"
               onClick={close}
-              className={iconButton}
+              className={`${navIconButtonClasses} ml-0.5`}
             >
               <DotGrid />
             </button>

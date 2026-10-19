@@ -23,11 +23,13 @@ export const meta: CatalogueItem = {
     { name: "<Segmented>", type: "component", default: 'size "md"', description: "Switch / tab pills: the white indicator slides to the active item, inactive items get a warm hover layer. Props: items [{ id, label }], value, onChange, size, ariaLabel. Arrow keys move the selection." },
     { name: "<PaginationDots>", type: "component", description: "Carousel pagination: 4px dots, the active one a 24px line that slides between positions. Props: count, index, onSelect, label." },
     { name: "<HeroCta>", type: "component", default: "Join waitlist / Book a demo · lg", description: "Primary + secondary pill pair, 8px apart. Props: primary, secondary, onDark, size." },
+    { name: "<NavLink>", type: "component", description: "Navigation bar link (ElevenLabs bar): 18px regular in a 36px pill that fills grey on hover; `active` keeps the fill and sets aria-current. Also exports navIconButtonClasses (round 36px bar control) and <BurgerIcon>." },
     { name: "<TwoTone>", type: "component", description: "Renders a headline as primary text + muted grey second half. Props: text, muted, stack, onDark." },
     { name: "<Placeholder>", type: "component", default: 'label "Visual"', description: "Hatched stand-in for an image or mockup. Props: label, ratio, tone." },
   ],
   changelog: [
     { version: "1.0", date: "2026-10-16", notes: "First release, distilled from the Startupmap build and the Firefly Web Guide Book." },
+    { version: "1.2", date: "2026-10-19", notes: "NavLink atom + surface-hover token: 18px pill links with a grey hover fill for the 64px navigation bar (ElevenLabs reference)." },
     { version: "1.1", date: "2026-10-19", notes: "Button set rebuilt 1:1 from the ElevenLabs reference: regular weight, 36 / 40 / 44px sizes, colour-shift hover, white secondary with a half-pixel ring + soft shadow. New IconButton, Segmented and PaginationDots atoms; new tokens for hover fills, pressed layer, pagination and --shadow-button." },
   ],
   files: [
@@ -42,6 +44,7 @@ export const meta: CatalogueItem = {
     { path: "registry/firefly/ui/segmented.tsx", target: "components/ui/segmented.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/pagination-dots.tsx", target: "components/ui/pagination-dots.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/hero-cta.tsx", target: "components/ui/hero-cta.tsx", type: "registry:ui" },
+    { path: "registry/firefly/ui/nav-link.tsx", target: "components/ui/nav-link.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/two-tone.tsx", target: "components/ui/two-tone.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/placeholder.tsx", target: "components/ui/placeholder.tsx", type: "registry:ui" },
   ],

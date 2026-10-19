@@ -27,7 +27,7 @@ export type HeroPortraitProps = {
  * Portrait-ratio visual on the left (full width on mobile, ~46% on tablet, 600px on desktop),
  * copy on the right: h1 revealing word by word (muted part continues inline), body and the CTA
  * pair. The visual follows the copy by 300ms and drifts down on scroll (exit parallax 60px).
- * Renders the page <h1>. Top padding assumes a fixed nav (72 / 76px).
+ * Renders the page <h1>. Top padding assumes a fixed nav (64px).
  */
 export function HeroPortrait({
   id = "hero",
@@ -50,7 +50,7 @@ export function HeroPortrait({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={`overflow-x-clip bg-surface-page pb-14 pt-[calc(72px+20px)] md:pb-[72px] md:pt-[calc(76px+24px)] xl:pb-24 xl:pt-[calc(76px+32px)] ${className}`}
+      className={`overflow-x-clip bg-surface-page pb-14 pt-[calc(64px+20px)] md:pb-[72px] md:pt-[calc(64px+24px)] xl:pb-24 xl:pt-[calc(64px+32px)] ${className}`}
     >
       <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 md:flex-row md:items-center md:pl-6 md:pr-10 xl:gap-20 xl:pl-8 xl:pr-[clamp(40px,calc(100vw-1320px),120px)]">
         {/* Visual: slightly delayed after the copy */}

@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/catalogue/page-header";
 import { Button } from "@/components/ui/button";
 import { HeroCta } from "@/components/ui/hero-cta";
 import { ChevronLeft, ChevronRight, IconButton, PauseIcon, PlayIcon } from "@/components/ui/icon-button";
+import { BurgerIcon, NavLink, navIconButtonClasses } from "@/components/ui/nav-link";
 
 export const metadata: Metadata = { title: "Buttons · Design system" };
 
@@ -73,6 +74,25 @@ export default function ButtonsPage() {
           </Item>
         </Specimen>
       </div>
+
+      <Specimen title="Navigation links" note="NavLink: 18px regular in a 36px pill, grey fill on hover; the current page keeps the fill. The round 36px control is the hamburger / menu button. Bar height 64px.">
+        <Item caption="links · active first · hamburger 36px">
+          <div className="flex items-center gap-6">
+            <ul className="flex items-center">
+              {["Product", "Customers", "Pricing", "About"].map((label, i) => (
+                <li key={label}>
+                  <NavLink href="#" active={i === 0}>
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+            <span className={navIconButtonClasses} aria-hidden>
+              <BurgerIcon open={false} />
+            </span>
+          </div>
+        </Item>
+      </Specimen>
 
       <Specimen title="Icon buttons" note="Round, icon only, same fills and shadow. 16px icons with a 2px stroke. Always pass aria-label.">
         <div className="flex flex-wrap gap-8">

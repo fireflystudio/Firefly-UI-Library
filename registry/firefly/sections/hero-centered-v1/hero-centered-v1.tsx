@@ -32,7 +32,7 @@ export type HeroCenteredProps = {
  * Centred copy block (eyebrow, stacked two-tone h1 at 34/48/64px, body, CTA pair) with a
  * large visual underneath in a clipped rounded frame. On load the copy reveals line by line
  * (100ms stagger), the visual follows 300ms later and drifts down up to 60px as it scrolls
- * out. Top padding leaves room for a fixed nav (72px / 76px). Renders the page's only h1.
+ * out. Top padding leaves room for a fixed nav (64px). Renders the page's only h1.
  */
 export function HeroCentered({
   id = "hero",
@@ -52,7 +52,7 @@ export function HeroCentered({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={`bg-surface-page px-5 pb-14 pt-[calc(72px+56px)] md:px-10 md:pb-20 md:pt-[calc(76px+80px)] xl:px-16 xl:pb-24 xl:pt-[calc(76px+120px)] ${className}`}
+      className={`bg-surface-page px-5 pb-14 pt-[calc(64px+56px)] md:px-10 md:pb-20 md:pt-[calc(64px+80px)] xl:px-16 xl:pb-24 xl:pt-[calc(64px+120px)] ${className}`}
     >
       {/* Copy */}
       <Reveal stagger={100} className="mx-auto flex w-full max-w-[1100px] flex-col items-center gap-6 text-center md:gap-8">

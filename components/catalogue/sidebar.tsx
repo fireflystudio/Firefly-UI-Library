@@ -5,7 +5,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { DESIGN_SYSTEM_HOME, DESIGN_SYSTEM_PAGES } from "@/lib/design-system/pages";
 import type { MenuProps } from "@/lib/menu";
 import type { CategoryId } from "@/lib/types";
-import { FireflySymbol } from "./firefly-symbol";
+import { FireflyLogo } from "./firefly-logo";
 import { useSelection } from "./selection";
 
 function useActiveCategory(itemCategories: Record<string, CategoryId>): CategoryId | "all" | null {
@@ -41,7 +41,7 @@ export function Sidebar({ categories, total, itemCategories }: MenuProps) {
   return (
     <div className="flex h-full flex-col gap-6">
       <Link href="/" className="flex items-center gap-2 rounded-chip px-3 pt-1">
-        <FireflySymbol className="h-[15px] text-text-primary" />
+        <FireflyLogo className="h-[17px] text-text-primary" />
         <span className="text-[16px] font-medium leading-none tracking-[-0.01em] text-text-primary">Firefly</span>
         <span className="text-[16px] font-normal leading-none text-text-muted">UI Library</span>
       </Link>

@@ -6,11 +6,11 @@ export const meta: CatalogueItem = {
   version: 1,
   category: "navigation",
   description:
-    "Fixed header with a brand, text links and a primary pill. Turns translucent and compacts after a few pixels of scroll; on mobile a hamburger opens a simple panel.",
+    "Fixed 64px header styled after the ElevenLabs bar: brand, 18px links in pills that fill grey on hover, an optional white Log in pill and the primary pill. Turns translucent with a hairline after a few pixels of scroll; on mobile a round hamburger opens a simple panel.",
   interactions: [
-    "Scroll inside the frame: the bar blurs, gains a hairline and compacts.",
+    "Hover a link: a soft grey pill fills behind it; the current page keeps the fill.",
+    "Scroll inside the frame: the bar blurs and gains a hairline.",
     "Switch to Mobile and tap the hamburger.",
-    "Hover a link: it fades to 60%.",
   ],
   props: [
     { name: "links", type: "{ label: string; href: string }[]", description: "Text links shown on tablet/desktop and in the mobile panel." },
@@ -22,7 +22,10 @@ export const meta: CatalogueItem = {
     { name: "activeHref", type: "string", default: "current pathname", description: "Marks the matching link with aria-current." },
     { name: "className", type: "string", description: "Extra classes on the <header>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: scroll compaction, active link, mobile panel." }],
+  changelog: [
+    { version: "1.0", date: "2026-10-16", notes: "First release: scroll compaction, active link, mobile panel." },
+    { version: "1.1", date: "2026-10-19", notes: "Restyled 1:1 after the ElevenLabs bar: 64px, 18px regular links in 36px pills with a grey hover fill (Base NavLink), secondary + primary 36px pills, round hamburger, no scroll compaction." },
+  ],
   files: [
     {
       path: "registry/firefly/sections/navigation-sticky-v1/navigation-sticky-v1.tsx",

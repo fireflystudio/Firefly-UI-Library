@@ -38,7 +38,7 @@ export type HeroSplitProps = {
  * on mobile with the copy first. Left-aligned two-tone h1 at 34/44/56px, body, CTA pair and an
  * optional mono note. The copy reveals on load (100ms stagger); the visual follows 300ms later
  * and drifts down up to 60px as it scrolls out. `reverse` swaps the columns on tablet and up.
- * Top padding leaves room for a fixed nav (72px / 76px). Renders the page's only h1.
+ * Top padding leaves room for a fixed nav (64px). Renders the page's only h1.
  */
 export function HeroSplit({
   id = "hero",
@@ -60,7 +60,7 @@ export function HeroSplit({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={`bg-surface-page px-5 pb-14 pt-[calc(72px+56px)] md:px-10 md:pb-20 md:pt-[calc(76px+80px)] xl:px-16 xl:pb-24 xl:pt-[calc(76px+120px)] ${className}`}
+      className={`bg-surface-page px-5 pb-14 pt-[calc(64px+56px)] md:px-10 md:pb-20 md:pt-[calc(64px+80px)] xl:px-16 xl:pb-24 xl:pt-[calc(64px+120px)] ${className}`}
     >
       <div className="mx-auto grid max-w-[1312px] grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-8 xl:gap-12">
         {/* Copy */}
