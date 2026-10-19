@@ -24,16 +24,16 @@ const itemOn = "bg-surface-primary text-text-primary shadow-[0_1px_2px_0_#000000
 const itemOff = "text-text-nav hover:bg-surface-primary/70 hover:text-text-primary";
 
 /**
- * Full-height product sidebar: brand, main sections, then either the component categories or,
- * inside /design-system, the design-system pages (Buttons, Typography …). "Design system" sits
- * at the bottom like a second workspace.
+ * Full-height product sidebar. The component categories are the main content, so they sit
+ * right under the brand. The other areas (Websites, Build site, Design system) live at the
+ * bottom under a hairline. Inside /design-system the categories give way to the design-system
+ * pages with a back link above them.
  */
 export function Sidebar({ categories, total, itemCategories }: MenuProps) {
   const pathname = usePathname();
   const active = useActiveCategory(itemCategories);
   const { selected, ready } = useSelection();
   const count = ready ? selected.length : 0;
-  const onLibrary = pathname === "/" || pathname.startsWith("/components");
   const onWebsites = pathname.startsWith("/websites");
   const onBuild = pathname.startsWith("/build");
   const onDesignSystem = pathname.startsWith("/design-system");
@@ -47,52 +47,15 @@ export function Sidebar({ categories, total, itemCategories }: MenuProps) {
       </Link>
 
       {onDesignSystem ? (
-        /* Inside the design system the main sections step aside: one back link above the pages */
-        <Link href="/" className={`${itemBase} ${itemOff} -mt-2`}>
-          <span className="flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-              <path d="M9.5 3.5 5 8l4.5 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            UI Components
-          </span>
-        </Link>
-      ) : (
-        <>
-        <nav aria-label="Sections" className="flex flex-col gap-0.5">
-          <Link href="/" aria-current={onLibrary ? "page" : undefined} className={`${itemBase} ${onLibrary ? itemOn : itemOff}`}>
-            <span className="flex items-center gap-2.5">
-              <Icon name="components" />
-              UI Components
-            </span>
-          </Link>
-          <Link href="/websites" aria-current={onWebsites ? "page" : undefined} className={`${itemBase} ${onWebsites ? itemOn : itemOff}`}>
-            <span className="flex items-center gap-2.5">
-              <Icon name="websites" />
-              Websites
-            </span>
-          </Link>
-          <Link href="/build" aria-current={onBuild ? "page" : undefined} className={`${itemBase} ${onBuild ? itemOn : itemOff}`}>
-            <span className="flex items-center gap-2.5">
-              <Icon name="build" />
-              Build site
-            </span>
-            <span
-              aria-label={`${count} selected`}
-              className={`inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-pill px-1 font-mono text-[11px] ${
-                count > 0 ? "bg-button-primary text-button-content-primary" : "text-text-quaternary"
-              }`}
-            >
-              {count}
-            </span>
-          </Link>
-        </nav>
-
-        <div aria-hidden className="h-px bg-border-10" />
-        </>
-      )}
-
-      {onDesignSystem ? (
         <nav aria-label="Design system pages" className="flex flex-col gap-0.5">
+          <Link href="/" className={`${itemBase} ${itemOff} mb-3`}>
+            <span className="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+                <path d="M9.5 3.5 5 8l4.5 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              All components
+            </span>
+          </Link>
           {DESIGN_SYSTEM_PAGES.map((page) => {
             const isActive = pathname === page.href;
             return (
@@ -115,29 +78,35 @@ export function Sidebar({ categories, total, itemCategories }: MenuProps) {
         </nav>
       )}
 
-      <div className="mt-auto flex flex-col gap-0.5 pt-6">
+      <nav aria-label="Other areas" className="mt-auto flex flex-col gap-0.5 pt-6">
         <div aria-hidden className="mb-3 h-px bg-border-10" />
+        <Link href="/websites" aria-current={onWebsites ? "page" : undefined} className={`${itemBase} ${onWebsites ? itemOn : itemOff}`}>
+          <span className="flex items-center gap-2.5">
+            <Icon name="websites" />
+            Websites
+          </span>
+        </Link>
+        <Link href="/build" aria-current={onBuild ? "page" : undefined} className={`${itemBase} ${onBuild ? itemOn : itemOff}`}>
+          <span className="flex items-center gap-2.5">
+            <Icon name="build" />
+            Build site
+          </span>
+          <span
+            aria-label={`${count} selected`}
+            className={`inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-pill px-1 font-mono text-[11px] ${
+              count > 0 ? "bg-button-primary text-button-content-primary" : "text-text-quaternary"
+            }`}
+          >
+            {count}
+          </span>
+        </Link>
         <Link href={DESIGN_SYSTEM_HOME} aria-current={onDesignSystem ? "page" : undefined} className={`${itemBase} ${onDesignSystem ? itemOn : itemOff}`}>
           <span className="flex items-center gap-2.5">
             <Icon name="design-system" />
             Design system
           </span>
         </Link>
-        <a
-          href="https://github.com/lukasznosekk/Firefly-UI-Library"
-          target="_blank"
-          rel="noreferrer"
-          className={`${itemBase} ${itemOff} text-[13px]`}
-        >
-          <span className="flex items-center gap-2.5">
-            <Icon name="github" />
-            GitHub
-          </span>
-          <span aria-hidden className="text-text-quaternary">
-            ↗
-          </span>
-        </a>
-      </div>
+      </nav>
     </div>
   );
 }
@@ -151,18 +120,9 @@ function CategoryLink({ href, active, count, children }: { href: string; active:
   );
 }
 
-function Icon({ name }: { name: "components" | "websites" | "build" | "design-system" | "github" }) {
+function Icon({ name }: { name: "websites" | "build" | "design-system" }) {
   const common = { width: 16, height: 16, viewBox: "0 0 16 16", fill: "none", "aria-hidden": true } as const;
   switch (name) {
-    case "components":
-      return (
-        <svg {...common}>
-          <rect x="2" y="2" width="5" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
-          <rect x="9" y="2" width="5" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
-          <rect x="2" y="9" width="5" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
-          <rect x="9" y="9" width="5" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
-        </svg>
-      );
     case "websites":
       return (
         <svg {...common}>
@@ -182,12 +142,6 @@ function Icon({ name }: { name: "components" | "websites" | "build" | "design-sy
           {/* Layers: one rhombus on top of a second layer, same 1.4px stroke as the icons above */}
           <path d="M8 2.5 13.5 5.75 8 9 2.5 5.75 8 2.5Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
           <path d="M2.5 9.25 8 12.5l5.5-3.25" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      );
-    case "github":
-      return (
-        <svg {...common} fill="currentColor">
-          <path d="M8 .2a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.23.48-2.7-.95-2.7-.95-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.23 1.88.87 2.33.67.07-.52.28-.87.5-1.07-1.77-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.94.29.25.54.74.54 1.49v2.21c0 .21.15.46.55.38A8 8 0 0 0 8 .2Z" />
         </svg>
       );
   }
