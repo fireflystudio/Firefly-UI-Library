@@ -79,6 +79,8 @@ export type CatalogueItem = {
   previewAlign?: "top" | "center" | "bottom";
   /** Cap the preview frame height so the user scrolls inside it (needed to show scroll behaviour, e.g. a sticky nav) */
   previewScroll?: boolean;
+  /** Websites (ids from lib/websites.ts) that use this component; shown as a small label on the card and page */
+  usedOn?: string[];
   /** Set by the catalogue: the folder has an example.tsx (final design example with real content) */
   hasExample?: boolean;
 };

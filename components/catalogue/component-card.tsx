@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import type { CatalogueItem } from "@/lib/types";
 import { CardPreview } from "./card-preview";
 import { useSelection } from "./selection";
+import { UsedOnBadge } from "./used-on";
 import { previewSrc, useViewMode } from "./view-mode";
 
 /** Dashboard card: live preview + name + version. The whole card opens the component; the checkbox adds it to the build. */
@@ -39,6 +40,7 @@ export function ComponentCard({ item }: { item: CatalogueItem }) {
           align={item.previewAlign}
           replayTick={replayTick}
         />
+        <UsedOnBadge ids={item.usedOn} />
         {wireframeOnly ? (
           <span className="absolute right-3 top-3 rounded-pill border border-border-10 bg-surface-primary/90 px-2 py-1 font-mono text-[11px] text-text-nav backdrop-blur-xl">
             wireframe only

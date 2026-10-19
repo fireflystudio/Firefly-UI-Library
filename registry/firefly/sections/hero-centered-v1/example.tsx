@@ -7,6 +7,7 @@ export default function Example() {
     <HeroCentered
       headline="Every deal, founder and fund."
       headlineMuted="On one map."
+      body="The whole early-stage market, read and mapped for you. Screen deals in minutes, raise with a plan and stay current every morning."
       primaryCta={{ label: "Join waitlist", href: "#cta" }}
       secondaryCta={{ label: "Book a demo", href: "#cta" }}
       visual={

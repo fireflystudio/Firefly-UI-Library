@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AddToBuild } from "@/components/catalogue/add-to-build";
 import { ComponentPreview } from "@/components/catalogue/component-preview";
+import { UsedOnRow } from "@/components/catalogue/used-on";
 import { ViewSwitch } from "@/components/catalogue/view-mode";
 import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
@@ -42,6 +43,11 @@ export default async function ComponentPage({ params }: { params: Params }) {
           </h1>
           <ViewSwitch />
         </div>
+        {item.usedOn?.length ? (
+          <div {...reveal}>
+            <UsedOnRow ids={item.usedOn} />
+          </div>
+        ) : null}
       </Reveal>
 
       <div className="mt-8 md:mt-10">
