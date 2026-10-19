@@ -396,6 +396,19 @@
           "target": "components/sections/footer-v1.tsx"
         }
       ]
+    },
+    {
+      "name": "footer-light-v1",
+      "type": "registry:block",
+      "title": "Footer Light v1",
+      "description": "The Footer on the page surface: ink text, light hairlines, the same brand + tagline, link columns, email sign-up and legal line. It is footer-v1 with tone=\"light\" (same file).",
+      "files": [
+        {
+          "path": "registry/firefly/sections/footer-v1/footer-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/footer-v1.tsx"
+        }
+      ]
     }
   ]
 }

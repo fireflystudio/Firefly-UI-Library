@@ -5,7 +5,7 @@ import { useId, useState, type FormEvent, type ReactNode } from "react";
 import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
 
-export type FooterLink = { label: string; href: string };
+export type FooterLink = { label: string; href: string; /** false for pages that do not exist yet (avoids 404 prefetches) */ prefetch?: boolean };
 export type FooterColumn = { title: string; links: FooterLink[] };
 export type FooterSignup = {
   /** Small label above the field, also the input's accessible name */
@@ -135,7 +135,7 @@ export function Footer({
               <ul className="flex flex-wrap gap-x-5 gap-y-2">
                 {legalLinks.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} className="transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none">
+                    <Link href={l.href} prefetch={l.prefetch} className="transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none">
                       {l.label}
                     </Link>
                   </li>
@@ -161,6 +161,7 @@ function FooterColumnList({ column, labelClass, linkClass }: { column: FooterCol
           <li key={link.label}>
             <Link
               href={link.href}
+              prefetch={link.prefetch}
               className={`inline-block text-[20px] leading-[1.3] tracking-[-0.02em] transition-opacity duration-200 ease-out hover:opacity-70 motion-reduce:transition-none ${linkClass}`}
             >
               {link.label}

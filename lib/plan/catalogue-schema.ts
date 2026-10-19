@@ -146,6 +146,11 @@ export const CONTRACTS: ComponentContract[] = [
     use: "Dark footer: tagline, 2–3 link columns, email sign-up, legal line (always last).",
     fields: "tagline, columns[{title, links[{label}]}] (2–3 columns of 2–4), signup{label, placeholder, confirmation} or null, legal",
   },
+  {
+    component: "footer-light-v1",
+    use: "Light version on the page surface (for light sites). Dark footer: tagline, 2–3 link columns, email sign-up, legal line (always last).",
+    fields: "tagline, columns[{title, links[{label}]}] (2–3 columns of 2–4), signup{label, placeholder, confirmation} or null, legal",
+  },
 ];
 
 export const contractFor = (component: string) => CONTRACTS.find((c) => c.component === component);

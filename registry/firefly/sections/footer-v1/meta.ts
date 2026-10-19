@@ -30,6 +30,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <footer>." },
   ],
   changelog: [
+    { version: "1.2", date: "2026-10-19", notes: "Links accept prefetch: false for pages that do not exist yet. Footer Light added as its own catalogue entry (same file)." },
     { version: "1.1", date: "2026-10-19", notes: "tone prop: light variant (page surface, ink text, light hairlines). Used in Solve." },
     { version: "1.0", date: "2026-10-16", notes: "First release: brand, columns, sign-up form with reserved status slot, legal line." },
   ],

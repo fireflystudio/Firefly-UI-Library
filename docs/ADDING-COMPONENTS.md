@@ -2,6 +2,7 @@
 
 Read this whole file before writing code. Then read the two reference implementations and copy their shape exactly:
 
+- `registry/firefly/sections/footer-light-v1/` (a catalogue entry that reuses another folder's component file: only meta + preview + example, `files` point at footer-v1)
 - `registry/firefly/sections/navigation-sticky-v1/` (client component with scroll behaviour, demo filler in the preview); `navigation-centered-v1/` shows the `overHero` pattern (bar over a photo, `tone="on-dark"` atoms)
 - `registry/firefly/sections/faq-split-v1/` (accordion, two-tone headline, motion)
 
