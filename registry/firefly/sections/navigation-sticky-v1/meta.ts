@@ -14,12 +14,13 @@ export const meta: CatalogueItem = {
   ],
   props: [
     { name: "links", type: "{ label: string; href: string }[]", description: "Text links shown on tablet/desktop and in the mobile panel." },
-    { name: "brand", type: "ReactNode", default: "neutral mark + “Brand”", description: "Logo or wordmark; pass your <Image> or inline SVG." },
+    { name: "brand", type: "ReactNode", default: "Firefly mark + “Brand”", description: "Logo or wordmark; pass your <Image> or inline SVG." },
     { name: "brandLabel", type: "string", default: '"Home"', description: "Accessible name of the brand link." },
     { name: "brandHref", type: "string", default: '"/"', description: "Where the brand links to." },
     { name: "cta", type: "{ label; href } | null", default: "Join waitlist → #cta", description: "Primary pill on the right. null hides it." },
     { name: "secondaryCta", type: "{ label; href } | null", default: "null", description: "White secondary pill before the primary one (e.g. Log in). Hidden on phones." },
     { name: "activeHref", type: "string", default: "current pathname", description: "Marks the matching link with aria-current." },
+    { name: "containerClassName", type: "string", default: '"max-w-[1328px] px-5 md:px-10 xl:px-16"', description: "Width + side padding of the bar's content, so it lines up with the site's sections." },
     { name: "className", type: "string", description: "Extra classes on the <header>." },
   ],
   changelog: [

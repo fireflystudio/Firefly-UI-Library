@@ -73,6 +73,11 @@
           "target": "components/ui/nav-link.tsx"
         },
         {
+          "path": "registry/firefly/ui/brand-mark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/brand-mark.tsx"
+        },
+        {
           "path": "registry/firefly/ui/two-tone.tsx",
           "type": "registry:ui",
           "target": "components/ui/two-tone.tsx"

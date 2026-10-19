@@ -10,6 +10,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
 } from "react";
+import { FireflyMark } from "@/components/ui/brand-mark";
 import { Button } from "@/components/ui/button";
 import { NavLink, navIconButtonClasses } from "@/components/ui/nav-link";
 
@@ -17,7 +18,7 @@ export type SlideOutLink = { label: string; href: string };
 export type SlideOutGroup = { title: string; links: SlideOutLink[] };
 
 export type NavigationSlideOutProps = {
-  /** Logo or wordmark. Defaults to a neutral mark + "Brand" text; pass your <Image> or SVG. */
+  /** Logo or wordmark. Defaults to the Firefly mark + "Brand" text; pass your <Image> or SVG. */
   brand?: ReactNode;
   /** Accessible name of the brand link */
   brandLabel?: string;
@@ -36,6 +37,8 @@ export type NavigationSlideOutProps = {
   exploreLabel?: string;
   /** Which link is current. Defaults to the pathname. */
   activeHref?: string;
+  /** Width + side padding of the bar's content, so it lines up with the site's sections. Default matches the library heroes. */
+  containerClassName?: string;
   className?: string;
 };
 
@@ -61,6 +64,7 @@ export function NavigationSlideOut({
   menuTitle = "Menu",
   exploreLabel = "Explore",
   activeHref,
+  containerClassName = "max-w-[1328px] px-5 md:px-10 xl:px-16",
   className = "",
 }: NavigationSlideOutProps) {
   const [scrolled, setScrolled] = useState(false);
@@ -136,7 +140,7 @@ export function NavigationSlideOut({
             scrolled ? "border-border-06 bg-surface-page/85 backdrop-blur-xl" : "border-transparent bg-surface-page"
           }`}
         />
-        <nav aria-label="Main" className="relative mx-auto flex h-16 max-w-[1328px] items-center justify-between gap-6 px-5 md:px-10 xl:px-16">
+        <nav aria-label="Main" className={`relative mx-auto flex h-16 items-center justify-between gap-6 ${containerClassName}`}>
           <div className="flex min-w-0 items-center gap-6 xl:gap-9">
             <Link href={brandHref} aria-label={brandLabel} className="flex min-w-0 items-center rounded-chip">
               {brand ?? <DefaultBrand />}
@@ -296,10 +300,8 @@ function DotGrid() {
 function DefaultBrand() {
   return (
     <span className="flex items-center gap-2">
-      <span aria-hidden className="block size-6 rounded-chip bg-text-primary" />
-      <span className="text-[16px] font-medium leading-none tracking-[-0.01em] text-text-primary">
-        Brand
-      </span>
+      <FireflyMark className="h-[17px]" />
+      <span className="text-[16px] font-medium leading-none tracking-[-0.01em]">Brand</span>
     </span>
   );
 }

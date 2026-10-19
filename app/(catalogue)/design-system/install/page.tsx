@@ -20,6 +20,8 @@ const FILE_NOTES: Record<string, string> = {
   "components/ui/segmented.tsx": "<Segmented> switch tabs with a sliding white indicator.",
   "components/ui/pagination-dots.tsx": "<PaginationDots> dots with a sliding active line.",
   "components/ui/hero-cta.tsx": "<HeroCta> primary + secondary pair for heroes and closing CTAs.",
+  "components/ui/nav-link.tsx": "<NavLink> 14px pill links with the grey hover fill, navIconButtonClassesFor, <BurgerIcon>.",
+  "components/ui/brand-mark.tsx": "<FireflyMark> default brand for the navigations (currentColor).",
   "components/ui/two-tone.tsx": "<TwoTone> headline helper: primary first half, grey second half.",
   "components/ui/placeholder.tsx": "<Placeholder> hatched stand-in for any image or mockup.",
 };
