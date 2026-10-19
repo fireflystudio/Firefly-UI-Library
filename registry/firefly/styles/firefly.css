@@ -49,18 +49,18 @@
   --color-border-on-dark: #2a2f3a;
   --color-border-interactive: #3f51f4;
 
-  /* Buttons (ElevenLabs-style pills: colour change on hover, no lift) */
+  /* Buttons (pills copied from the ElevenLabs reference, hover fills in the Firefly greys, no lift) */
   --color-button-primary: #0a0a0a;
-  --color-button-primary-hover: #44403b;
+  --color-button-primary-hover: #333333;
   --color-button-content-primary: #ffffff;
   --color-button-secondary: #ffffff;
-  --color-button-secondary-hover: #fdfcfc;
+  --color-button-secondary-hover: #f7f7f7;
   --color-button-content-secondary: #0a0a0a;
   /* Hover / pressed layer under inactive tabs and ghost controls */
-  --color-surface-pressed: #ebe8e4;
+  --color-surface-pressed: #ebebeb;
   /* Pagination dots */
-  --color-pagination-dot: #d7d2cc;
-  --color-pagination-active: #44403b;
+  --color-pagination-dot: #d4d4d4;
+  --color-pagination-active: #333333;
 
   /* Status (tags, dots) */
   --color-status-positive: #166534;

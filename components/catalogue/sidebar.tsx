@@ -163,10 +163,8 @@ function Icon({ name }: { name: "components" | "websites" | "build" | "design-sy
     case "design-system":
       return (
         <svg {...common}>
-          <circle cx="5" cy="5" r="2.6" stroke="currentColor" strokeWidth="1.4" />
-          <rect x="8.6" y="8.6" width="5" height="5" rx="1.2" stroke="currentColor" strokeWidth="1.4" />
-          <path d="M11 2.4 13.6 7h-5.2L11 2.4Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-          <path d="M2.6 13.6 7.2 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+          {/* One rounded diamond: a token / atom, same 1.4px stroke as the icons above */}
+          <rect x="3.5" y="3.5" width="9" height="9" rx="1.6" transform="rotate(45 8 8)" stroke="currentColor" strokeWidth="1.4" />
         </svg>
       );
     case "github":

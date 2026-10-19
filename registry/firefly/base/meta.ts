@@ -9,7 +9,7 @@ export const meta: CatalogueItem = {
     "Install this first in every site. Design tokens for Tailwind v4, the scroll-reveal system, parallax, art-scale, the button set (pill buttons, round icon buttons, switch tabs, pagination dots), the hero CTA pair, a two-tone headline helper and a content-free visual placeholder.",
   interactions: [
     "Scroll: every block fades and rises once, staggered 90ms apart.",
-    "Hover the buttons: the fill shifts (black → warm charcoal, white → off-white); no lift. The switch indicator and pagination line slide between positions.",
+    "Hover the buttons: the fill shifts (black → dark grey, white → light grey); no lift. The switch indicator and pagination line slide between positions.",
   ],
   props: [
     { name: "app/firefly.css", type: "stylesheet", description: "Tokens (@theme), base layer, reveal rules and marquee keyframes. Import it after Tailwind in globals.css. Change the values to a client's palette; keep the names." },

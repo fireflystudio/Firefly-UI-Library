@@ -17,7 +17,8 @@ export function Specimen({ title, note, children, className = "", bodyClassName 
 export function Item({ caption, children, className = "" }: { caption: string; children: ReactNode; className?: string }) {
   return (
     <div className={`flex flex-col items-start gap-2.5 ${className}`}>
-      <div className="flex min-h-11 max-w-full items-center overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{children}</div>
+      {/* Negative margin + padding: the row may scroll sideways on phones without clipping the button shadows */}
+      <div className="-m-2 flex min-h-11 max-w-[calc(100%+16px)] items-center overflow-x-auto p-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{children}</div>
       <p className="text-[12px] leading-[normal] text-text-quaternary">{caption}</p>
     </div>
   );

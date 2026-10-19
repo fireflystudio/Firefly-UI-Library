@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useId } from "react";
 
 /**
- * Carousel pagination (ElevenLabs testimonials): 4px warm-grey dots, the active one stretched
+ * Carousel pagination (ElevenLabs testimonials): 4px grey dots, the active one stretched
  * into a 24×4 dark line that slides between positions (transform only). Each dot is a button
  * with a 20px-tall hit area.
  */

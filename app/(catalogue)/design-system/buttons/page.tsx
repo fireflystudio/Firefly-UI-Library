@@ -19,7 +19,7 @@ export default function ButtonsPage() {
     <div className="flex flex-col gap-6 pb-24">
       <PageHeader title="Buttons" />
       <Intro>
-        One pill shape, regular weight, three sizes. Hover changes the fill (black to warm charcoal, white to off-white), nothing moves. The secondary
+        One pill shape, regular weight, three sizes. Hover changes the fill (black to dark grey, white to light grey), nothing moves. The secondary
         button has no border: a half-pixel ring plus two soft shadows. Every section imports these from the Base, so a change here reaches all of them.
       </Intro>
 
@@ -119,7 +119,7 @@ export default function ButtonsPage() {
         </div>
       </Specimen>
 
-      <Specimen title="Switch tabs" note="Segmented: the white indicator slides to the chosen item; inactive items get a warm hover layer. Arrow keys move the selection.">
+      <Specimen title="Switch tabs" note="Segmented: the white indicator slides to the chosen item; inactive items get a light grey hover layer. Arrow keys move the selection.">
         <div className="flex flex-col gap-6">
           <Item caption="md · 40px">
             <SegmentedDemo />

@@ -6,7 +6,7 @@ import { useId } from "react";
 /**
  * Switch / tab pills (ElevenLabs "AI Voice Generator · Text to Speech · …"): 40px pills, regular
  * weight, the active one white with the button shadow. The white indicator slides between
- * items (transform only, 300ms); inactive items get a warm pressed layer on hover.
+ * items (transform only, 300ms); inactive items get a light grey layer on hover.
  * Keyboard: arrow keys move the selection, Home/End jump.
  */
 export type SegmentedItem = { id: string; label: string };
