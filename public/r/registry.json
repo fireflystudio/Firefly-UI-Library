@@ -388,7 +388,7 @@
       "name": "footer-v1",
       "type": "registry:block",
       "title": "Footer v1",
-      "description": "Dark footer with a top hairline: brand and tagline, link columns and an email sign-up form with an inline confirmation. Stacked on mobile, brand and columns side by side on tablet, three columns on desktop. Optional legal line.",
+      "description": "Footer with a top hairline, dark by default or light (tone=\"light\"): brand and tagline, link columns and an email sign-up form with an inline confirmation. Stacked on mobile, brand and columns side by side on tablet, three columns on desktop. Optional legal line.",
       "files": [
         {
           "path": "registry/firefly/sections/footer-v1/footer-v1.tsx",

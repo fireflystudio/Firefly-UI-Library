@@ -6,7 +6,7 @@ export const meta: CatalogueItem = {
   version: 1,
   category: "footer",
   description:
-    "Dark footer with a top hairline: brand and tagline, link columns and an email sign-up form with an inline confirmation. Stacked on mobile, brand and columns side by side on tablet, three columns on desktop. Optional legal line.",
+    "Footer with a top hairline, dark by default or light (tone=\"light\"): brand and tagline, link columns and an email sign-up form with an inline confirmation. Stacked on mobile, brand and columns side by side on tablet, three columns on desktop. Optional legal line.",
   interactions: [
     "Type an email and press Enter: the confirmation appears without moving anything.",
     "Hover a link: it fades to 70%.",
@@ -26,9 +26,13 @@ export const meta: CatalogueItem = {
     },
     { name: "legal", type: "string", description: "Bottom line, e.g. “© 2026 Brand. All rights reserved.” (12px, 60%)." },
     { name: "legalLinks", type: "{ label; href }[]", description: "Small links on the bottom line." },
+    { name: "tone", type: '"dark" | "light"', default: '"dark"', description: "Dark surface with light text (default) or the page surface with ink text and light hairlines." },
     { name: "className", type: "string", description: "Extra classes on the <footer>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: brand, columns, sign-up form with reserved status slot, legal line." }],
+  changelog: [
+    { version: "1.1", date: "2026-10-19", notes: "tone prop: light variant (page surface, ink text, light hairlines). Used in Solve." },
+    { version: "1.0", date: "2026-10-16", notes: "First release: brand, columns, sign-up form with reserved status slot, legal line." },
+  ],
   files: [
     {
       path: "registry/firefly/sections/footer-v1/footer-v1.tsx",
