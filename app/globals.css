@@ -4,7 +4,7 @@
 
 /* Catalogue-only tokens (not shipped to sites) */
 @theme {
-  --color-catalogue-shell: #ebebee; /* outer shell behind the sidebar; the content card sits on it */
+  --color-catalogue-shell: #f5f5f7; /* outer shell behind the sidebar: same grey as the card, which the hairline + radius set apart */
   --color-catalogue-bg: #f5f5f7; /* content card: slightly grey so white cards and panels stand out */
   --color-catalogue-code: #f4f4f6; /* install command box, inline code */
 }
