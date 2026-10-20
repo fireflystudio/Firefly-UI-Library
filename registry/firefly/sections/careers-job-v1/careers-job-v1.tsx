@@ -33,7 +33,7 @@ function slugify(s: string) {
 
 /**
  * Careers Job v1
- * A role page: back link, title (the page's h1, 32/40/48px), fact chips, an "Apply" pill that scrolls
+ * A role page: back link, title (the page's h1, 28/32/40px), fact chips, an "Apply" pill that scrolls
  * to the form, shared intro paragraphs, then the role's sections (sub-headline h2 + paragraphs and/or
  * bullet list). Narrow 760px column. Each section reveals on its own as it scrolls in.
  */
@@ -65,7 +65,7 @@ export function CareersJob({
             </Link>
           ) : null}
 
-          <h1 id={headingId} {...reveal} className="mt-6 max-w-[1000px] text-balance text-[30px] leading-[1.1] tracking-[-0.025em] text-text-primary md:mt-8 md:text-[40px] xl:text-[48px]">
+          <h1 id={headingId} {...reveal} className="mt-6 max-w-[1000px] text-balance text-[28px] leading-[1.15] tracking-[-0.02em] text-text-primary md:mt-8 md:text-[32px] xl:text-[40px]">
             {title}
           </h1>
 

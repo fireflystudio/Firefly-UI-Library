@@ -27,10 +27,10 @@ export function CareersValues({ id = "how-we-work", headline, headlineMuted, ite
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page py-8 md:py-12 xl:py-[60px] ${className}`}>
       <div className={`mx-auto ${containerClassName}`}>
         <Reveal stagger={70}>
-          <h2 id={headingId} {...reveal} className="max-w-[1000px] text-balance text-[28px] leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]">
+          <h2 id={headingId} {...reveal} className="max-w-[1000px] text-balance text-[24px] leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[28px] xl:text-[32px]">
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
-          <ul className="mt-10 grid gap-8 md:mt-14 md:grid-cols-2 md:gap-x-10 md:gap-y-10 xl:mt-16 xl:gap-x-16 xl:gap-y-12">
+          <ul className="mt-6 grid gap-8 md:mt-8 md:grid-cols-2 md:gap-x-10 md:gap-y-10 xl:gap-x-16 xl:gap-y-12">
             {items.map((item) => (
               <li key={item.title} {...reveal} className="flex flex-col gap-2.5">
                 <h3 className="text-[18px] font-medium leading-[1.3] tracking-[-0.01em] text-text-primary md:text-[19px] xl:text-[20px]">{item.title}</h3>

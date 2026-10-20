@@ -32,7 +32,6 @@ export default function Preview() {
       tagline="The quiet layer under your product."
       columns={COLUMNS}
       signup={{ label: "Sign up for updates" }}
-      legal="© 2026 Brand. All rights reserved."
     />
   );
 }

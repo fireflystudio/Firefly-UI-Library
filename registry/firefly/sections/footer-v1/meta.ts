@@ -6,7 +6,7 @@ export const meta: CatalogueItem = {
   version: 1,
   category: "footer",
   description:
-    "Footer with a top hairline, dark by default or light (tone=\"light\"): brand and tagline, link columns and an email sign-up form with an inline confirmation. Stacked on mobile, brand and columns side by side on tablet, three columns on desktop. Optional legal line.",
+    "Footer with a top hairline, dark by default or light (tone=\"light\"): brand and tagline, link columns and an email sign-up form with an inline confirmation. Stacked on mobile, brand and columns side by side on tablet, three columns on desktop.",
   interactions: [
     "Type an email and press Enter: the confirmation appears without moving anything.",
     "Hover a link: it fades to 70%.",
@@ -24,12 +24,11 @@ export const meta: CatalogueItem = {
       default: '{ label: "Sign up for updates" }',
       description: "Email form with a labelled input and an arrow button. onSubmit receives the email; nothing is sent until a site wires it. null hides the form.",
     },
-    { name: "legal", type: "string", description: "Bottom line, e.g. “© 2026 Brand. All rights reserved.” (12px, 60%)." },
-    { name: "legalLinks", type: "{ label; href }[]", description: "Small links on the bottom line." },
     { name: "tone", type: '"dark" | "light"', default: '"dark"', description: "Dark surface with light text (default) or the page surface with ink text and light hairlines." },
     { name: "className", type: "string", description: "Extra classes on the <footer>." },
   ],
   changelog: [
+    { version: "1.6", date: "2026-10-20", notes: "Bottom hairline and legal line removed (house decision); bottom padding 80/96/112px instead of 64 so the footer does not end right under the form. legal / legalLinks props removed." },
     { version: "1.5", date: "2026-10-20", notes: "Smaller, unified text: column links 16/17px (was 20), Policies sub-links 15/16px, e-mail field 16/17px (was 20/24); label 12px unchanged." },
     { version: "1.4", date: "2026-10-20", notes: "Column links accept nested `links`: the item becomes a “Policies ▾” disclosure (mouse hover opens while the pointer stays; click, tap, Enter pin it open; Escape closes). Sign-up column narrowed to 360px so two link columns fit beside it." },
     { version: "1.3", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Top hairline, then 64px above and below the content on every breakpoint (was 64/48/40), tagline 20/18/17 (was 24/20/18)." },

@@ -186,11 +186,11 @@ export function renderPlanSection(section: PlanSection): ReactNode | null {
       );
     case "footer-v1":
       return (
-        <Footer tagline={p.tagline} columns={(p.columns ?? []).map((c) => ({ title: c.title, links: links(c.links) }))} signup={p.signup === null ? null : p.signup ? { label: p.signup.label, placeholder: p.signup.placeholder, confirmation: p.signup.confirmation } : undefined} legal={p.legal} />
+        <Footer tagline={p.tagline} columns={(p.columns ?? []).map((c) => ({ title: c.title, links: links(c.links) }))} signup={p.signup === null ? null : p.signup ? { label: p.signup.label, placeholder: p.signup.placeholder, confirmation: p.signup.confirmation } : undefined} />
       );
     case "footer-light-v1":
       return (
-        <Footer tone="light" tagline={p.tagline} columns={(p.columns ?? []).map((c) => ({ title: c.title, links: links(c.links) }))} signup={p.signup === null ? null : p.signup ? { label: p.signup.label, placeholder: p.signup.placeholder, confirmation: p.signup.confirmation } : undefined} legal={p.legal} />
+        <Footer tone="light" tagline={p.tagline} columns={(p.columns ?? []).map((c) => ({ title: c.title, links: links(c.links) }))} signup={p.signup === null ? null : p.signup ? { label: p.signup.label, placeholder: p.signup.placeholder, confirmation: p.signup.confirmation } : undefined} />
       );
     default:
       return null;

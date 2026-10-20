@@ -45,11 +45,11 @@ export function CareersRoles({
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page py-8 md:py-12 xl:py-[60px] ${className}`}>
       <div className={`mx-auto ${containerClassName}`}>
         <Reveal stagger={60}>
-          <h2 id={headingId} {...reveal} className="max-w-[1000px] text-balance text-[28px] leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]">
+          <h2 id={headingId} {...reveal} className="max-w-[1000px] text-balance text-[24px] leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[28px] xl:text-[32px]">
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
           {roles.length ? (
-            <ul className="mt-10 border-t border-border-10 md:mt-14 xl:mt-16">
+            <ul className="mt-6 border-t border-border-10 md:mt-8">
               {roles.map((role) => (
                 <li key={role.href} {...reveal} className="border-b border-border-10">
                   <Link href={role.href} prefetch={role.prefetch} className="group flex items-center justify-between gap-6 py-5 md:py-6">
@@ -88,7 +88,7 @@ export function CareersRoles({
               ))}
             </ul>
           ) : (
-            <p {...reveal} className="mt-10 text-[17px] leading-[1.4] tracking-[-0.01em] text-text-secondary md:mt-14 md:text-[18px] xl:mt-16 xl:text-[20px]">
+            <p {...reveal} className="mt-5 text-[17px] leading-[1.4] tracking-[-0.01em] text-text-secondary md:mt-6 md:text-[18px] xl:text-[20px]">
               {emptyText}
             </p>
           )}

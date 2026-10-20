@@ -24,7 +24,7 @@ export type CareersHeroProps = {
 
 /**
  * Careers Hero v1
- * Centred stacked two-tone h1 (34/48/64px) and a wide clipped frame for a team photo underneath.
+ * Centred stacked two-tone h1 (30/40/48px: a subpage, smaller than the site hero) and a wide clipped frame for a team photo underneath.
  * The headline reveals first, the visual follows 300ms later. Top padding leaves room for a fixed
  * 64px nav; bottom padding 64/80/96px. Renders the page's only h1.
  */
@@ -50,7 +50,7 @@ export function CareersHero({
           <h1
             id={headingId}
             {...reveal}
-            className="max-w-[1000px] text-balance text-center text-[34px] leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[48px] xl:text-[64px]"
+            className="max-w-[1000px] text-balance text-center text-[30px] leading-[1.1] tracking-[-0.025em] text-text-primary md:text-[40px] xl:text-[48px]"
           >
             <TwoTone text={headline} muted={headlineMuted} stack />
           </h1>
@@ -59,7 +59,7 @@ export function CareersHero({
           <div
             {...reveal}
             style={{ "--ratio-m": visualRatioMobile, "--ratio": visualRatio } as CSSProperties}
-            className="relative mt-10 aspect-[var(--ratio-m)] w-full overflow-clip rounded-card md:mt-14 md:aspect-[var(--ratio)] xl:mt-16"
+            className="relative mt-8 aspect-[var(--ratio-m)] w-full overflow-clip rounded-card md:mt-10 md:aspect-[var(--ratio)] xl:mt-12"
           >
             {visual ?? <Placeholder label="Team photo" />}
           </div>

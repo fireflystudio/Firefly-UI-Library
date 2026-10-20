@@ -27,5 +27,5 @@ const COLUMNS = [
 ];
 
 export default function Preview() {
-  return <Footer tone="light" tagline="The quiet layer under your product." columns={COLUMNS} signup={{ label: "Sign up for updates" }} legal="© 2026 Brand. All rights reserved." />;
+  return <Footer tone="light" tagline="The quiet layer under your product." columns={COLUMNS} signup={{ label: "Sign up for updates" }} />;
 }

@@ -21,10 +21,8 @@ export const meta: CatalogueItem = {
     { name: "tagline", type: "string", description: "One short sentence under the brand (18 / 20 / 24px)." },
     { name: "brand", type: "ReactNode", default: "light tile + “Brand”", description: "Logo or wordmark; pass your <Image> or inline SVG." },
     { name: "signup", type: "{ label; placeholder?; confirmation?; buttonLabel?; onSubmit? } | null", default: '{ label: "Sign up for updates" }', description: "Email form. null hides it." },
-    { name: "legal", type: "string", description: "Bottom line, e.g. “© 2026 Brand”." },
-    { name: "legalLinks", type: "{ label; href }[]", description: "Small links on the bottom line." },
   ],
-  changelog: [{ version: "1.3", date: "2026-10-20", notes: "Smaller, unified text: column links 16/17px (was 20), Policies sub-links 15/16px, e-mail field 16/17px (was 20/24); label 12px unchanged." }, { version: "1.2", date: "2026-10-20", notes: "Same file as Footer v1.4: nested Policies disclosure, 360px sign-up column." }, { version: "1.0", date: "2026-10-19", notes: "Catalogue entry for the light tone of Footer v1 (same source file)." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Same file as Footer v1.3: hairline, then 64px above and below the content on every breakpoint, tagline 20/18/17." }],
+  changelog: [{ version: "1.4", date: "2026-10-20", notes: "Bottom hairline and legal line removed (house decision); bottom padding 80/96/112px instead of 64 so the footer does not end right under the form. legal / legalLinks props removed." }, { version: "1.3", date: "2026-10-20", notes: "Smaller, unified text: column links 16/17px (was 20), Policies sub-links 15/16px, e-mail field 16/17px (was 20/24); label 12px unchanged." }, { version: "1.2", date: "2026-10-20", notes: "Same file as Footer v1.4: nested Policies disclosure, 360px sign-up column." }, { version: "1.0", date: "2026-10-19", notes: "Catalogue entry for the light tone of Footer v1 (same source file)." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Same file as Footer v1.3: hairline, then 64px above and below the content on every breakpoint, tagline 20/18/17." }],
   files: [
     {
       path: "registry/firefly/sections/footer-v1/footer-v1.tsx",

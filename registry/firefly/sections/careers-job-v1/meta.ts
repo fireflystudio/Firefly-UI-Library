@@ -16,7 +16,7 @@ export const meta: CatalogueItem = {
     { name: "sections", type: "{ title; lead?; paragraphs?; bullets? }[]", description: "About the role, What you'll do, Who you are, Requirements, Nice to have, What we offer…" },
     { name: "id", type: "string", default: '"job"', description: "Article id; section ids derive from it." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-20", notes: "First release (distilled from the Verb careers page)." }],
+  changelog: [{ version: "1.1", date: "2026-10-20", notes: "Role title 28/32/40 (was 30/40/48): subpage size." }, { version: "1.0", date: "2026-10-20", notes: "First release (distilled from the Verb careers page)." }],
   files: [{ path: "registry/firefly/sections/careers-job-v1/careers-job-v1.tsx", target: "components/sections/careers-job-v1.tsx", type: "registry:component" }],
   registryDependencies: ["firefly-base"],
   order: 50,

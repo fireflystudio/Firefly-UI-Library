@@ -39,10 +39,6 @@ export type FooterProps = {
   columns: FooterColumn[];
   /** Email sign-up form. null hides it. */
   signup?: FooterSignup | null;
-  /** Bottom line, e.g. "© 2026 Brand. All rights reserved." */
-  legal?: string;
-  /** Small links on the bottom line */
-  legalLinks?: FooterLink[];
   /** "dark" (default): dark surface, light text. "light": page surface, ink text, light hairlines. */
   tone?: FooterTone;
   className?: string;
@@ -53,7 +49,7 @@ export type FooterTone = "dark" | "light";
 /* Everything that changes between the two tones lives here; layout stays identical. */
 const TONES: Record<
   FooterTone,
-  { footer: string; hairline: string; label: string; link: string; input: string; arrow: string; status: string; legal: string; brandText: string }
+  { footer: string; hairline: string; label: string; link: string; input: string; arrow: string; status: string; brandText: string }
 > = {
   dark: {
     footer: "bg-surface-dark text-text-on-dark",
@@ -63,7 +59,6 @@ const TONES: Record<
     input: "border-text-on-dark/50 text-text-on-dark placeholder:text-text-on-dark/50",
     arrow: "text-text-on-dark",
     status: "text-text-on-dark/60",
-    legal: "border-border-on-dark text-text-on-dark/60",
     brandText: "text-text-on-dark",
   },
   light: {
@@ -74,7 +69,6 @@ const TONES: Record<
     input: "border-text-primary/40 text-text-primary placeholder:text-text-placeholder",
     arrow: "text-text-primary",
     status: "text-text-tertiary",
-    legal: "border-border-light text-text-tertiary",
     brandText: "text-text-primary",
   },
 };
@@ -85,7 +79,7 @@ const TONES: Record<
  * (`tone="light"`). Brand + tagline, link columns and an email sign-up form. A column link with
  * `links` renders as a disclosure (label + chevron) whose sub-links open on hover, click or keyboard.
  * Stacked on mobile; brand and columns side by side on tablet with the form below; on
- * desktop a three-column grid (brand | columns | form). Optional legal line with small links.
+ * desktop a three-column grid (brand | columns | form). No legal line (house decision 2026-10-20).
  * The form is a real <form> with a labelled email input: it prevents default, confirms inline
  * in a reserved role="status" slot (no layout shift) and calls `signup.onSubmit` if given.
  */
@@ -96,25 +90,22 @@ export function Footer({
   tagline,
   columns,
   signup = { label: "Sign up for updates" },
-  legal,
-  legalLinks,
   tone = "dark",
   className = "",
 }: FooterProps) {
-  const hasLegal = Boolean(legal || legalLinks?.length);
   const t = TONES[tone];
 
   return (
     <footer className={`${t.footer} ${className}`}>
       <style href="firefly-footer-disclosure" precedence="default">{DISCLOSURE_CSS}</style>
-      {/* Top hairline, then 64px above and below the content on every breakpoint */}
+      {/* Top hairline, 64px above the content, 80/96/112px below it (no bottom hairline or legal line) */}
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         <div aria-hidden className={`h-px w-full ${t.hairline}`} />
       </div>
       <Reveal
         {...reveal}
         amount={0.1}
-        className="mx-auto flex max-w-[1440px] flex-col gap-10 px-5 py-16 md:gap-12 md:px-10 xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,360px)] xl:gap-x-10 xl:gap-y-16"
+        className="mx-auto flex max-w-[1440px] flex-col gap-10 px-5 pb-20 pt-16 md:gap-12 md:px-10 md:pb-24 xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,360px)] xl:gap-x-10 xl:gap-y-16 xl:pb-28"
       >
 
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-8 xl:contents">
@@ -137,26 +128,6 @@ export function Footer({
         </div>
 
         {signup ? <SignupForm {...signup} tone={t} className="xl:col-start-3" /> : null}
-
-        {hasLegal ? (
-          <div
-            {...reveal}
-            className={`flex flex-col gap-3 border-t pt-6 text-[12px] leading-[1.3] md:flex-row md:items-center md:justify-between xl:col-span-3 ${t.legal}`}
-          >
-            {legal ? <p>{legal}</p> : null}
-            {legalLinks?.length ? (
-              <ul className="flex flex-wrap gap-x-5 gap-y-2">
-                {legalLinks.map((l) => (
-                  <li key={l.label}>
-                    <Link href={l.href ?? "#"} prefetch={l.prefetch} className="transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
-        ) : null}
       </Reveal>
     </footer>
   );

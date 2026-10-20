@@ -137,11 +137,11 @@ export function CareersApply({
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page py-8 md:py-12 xl:py-[60px] ${className}`}>
       <div className="mx-auto max-w-[760px] px-5 md:px-10">
         <Reveal amount={0.1}>
-          <h2 id={headingId} {...reveal} className="max-w-[1000px] text-balance text-[28px] leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]">
+          <h2 id={headingId} {...reveal} className="max-w-[1000px] text-balance text-[24px] leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[28px] xl:text-[32px]">
             <TwoTone text={headline} muted={headlineMuted ?? `for ${roleTitle}`} />
           </h2>
 
-          <form {...reveal} onSubmit={handleSubmit} aria-describedby={statusId} className="mt-10 flex flex-col gap-5 rounded-card bg-surface-muted p-5 md:mt-14 md:p-8 xl:mt-16">
+          <form {...reveal} onSubmit={handleSubmit} aria-describedby={statusId} className="mt-6 flex flex-col gap-5 rounded-card bg-surface-muted p-5 md:mt-8 md:p-8">
             <fieldset disabled={done} className="contents">
               <div className="grid gap-5 md:grid-cols-2">
                 <Field id={`${uid}-first`} label={l.firstName} required>
