@@ -8,6 +8,8 @@ import { TwoTone } from "@/components/ui/two-tone";
 export type FeatureCheck = {
   title: string;
   body?: string;
+  /** A figure ("1h 20m", "4 min") shown instead of the ✓: the item becomes a stat row (figure + one line, hairline above). `body` is ignored. */
+  value?: string;
 };
 
 export type FeatureRowChecksProps = {
@@ -59,8 +61,17 @@ export function FeatureRowChecks({
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
 
-          <ul className="flex flex-col gap-12 md:gap-8 xl:gap-12">
-            {items.map((item) => (
+          <ul className={`flex flex-col ${items.some((i) => i.value) ? "" : "gap-12 md:gap-8 xl:gap-12"}`}>
+            {items.map((item) =>
+              item.value ? (
+                <li key={item.title} {...reveal} className="group flex items-baseline gap-4 border-t border-border-10 py-4 xl:gap-5 xl:py-5">
+                  {/* Hover: the figure nudges 5px right (translate only) */}
+                  <span className="w-[88px] shrink-0 whitespace-nowrap text-[22px] font-normal leading-none tracking-[-0.02em] tabular-nums text-text-primary transition-[translate] duration-200 ease-out group-hover:translate-x-[5px] motion-reduce:transition-none md:w-[78px] md:text-[22px] xl:w-[104px] xl:text-[28px]">
+                    {item.value}
+                  </span>
+                  <p className="min-w-0 max-w-[240px] text-pretty text-[14px] leading-[1.5] text-text-nav md:text-[15px]">{item.title}</p>
+                </li>
+              ) : (
               <li key={item.title} {...reveal} className="flex items-start gap-3">
                 <CheckIcon className="mt-[3px] shrink-0 text-icon-primary" />
                 <div className="flex min-w-0 flex-col gap-1">
@@ -68,7 +79,8 @@ export function FeatureRowChecks({
                   {item.body ? <p className="max-w-[340px] text-pretty text-[15px] font-normal leading-[1.55] text-text-nav md:text-[16px]">{item.body}</p> : null}
                 </div>
               </li>
-            ))}
+              ),
+            )}
           </ul>
         </div>
 
