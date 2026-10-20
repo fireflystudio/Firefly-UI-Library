@@ -11,7 +11,7 @@ export type CareersValuesProps = {
   headlineMuted?: string;
   /** 4–8 short principles */
   items: CareersValue[];
-  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = the library column (1072px at 1440). */
+  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = a 1200px content column at 1440 (max-w 1328 includes the 64px side padding), like every other library section. */
   containerClassName?: string;
   className?: string;
 };
@@ -21,7 +21,7 @@ export type CareersValuesProps = {
  * "How we work": a section headline and a two-column grid of principles (card-title h3 + one or two
  * sentences). Items stagger in. Single column below 768px.
  */
-export function CareersValues({ id = "how-we-work", headline, headlineMuted, items, containerClassName = "max-w-[1200px] px-5 md:px-10 xl:px-16", className = "" }: CareersValuesProps) {
+export function CareersValues({ id = "how-we-work", headline, headlineMuted, items, containerClassName = "max-w-[1328px] px-5 md:px-10 xl:px-16", className = "" }: CareersValuesProps) {
   const headingId = `${id}-heading`;
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page py-8 md:py-12 xl:py-[60px] ${className}`}>

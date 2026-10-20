@@ -10,7 +10,7 @@ export type CareersAboutProps = {
   headlineMuted?: string;
   /** Short paragraphs, one per entry */
   paragraphs: string[];
-  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = the library column (1072px at 1440). */
+  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = a 1200px content column at 1440 (max-w 1328 includes the 64px side padding), like every other library section. */
   containerClassName?: string;
   className?: string;
 };
@@ -20,7 +20,7 @@ export type CareersAboutProps = {
  * "Who we are": a section headline (24/28/32px) and a column of lead-size paragraphs (17/18/20px)
  * capped at 920px. Headline first, paragraphs stagger in after it.
  */
-export function CareersAbout({ id = "about", headline, headlineMuted, paragraphs, containerClassName = "max-w-[1200px] px-5 md:px-10 xl:px-16", className = "" }: CareersAboutProps) {
+export function CareersAbout({ id = "about", headline, headlineMuted, paragraphs, containerClassName = "max-w-[1328px] px-5 md:px-10 xl:px-16", className = "" }: CareersAboutProps) {
   const headingId = `${id}-heading`;
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page py-8 md:py-12 xl:py-[60px] ${className}`}>

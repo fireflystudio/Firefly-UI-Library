@@ -20,7 +20,7 @@ export type CareersRolesProps = {
   roles: CareersRole[];
   /** Shown instead of the list when `roles` is empty */
   emptyText?: string;
-  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = the library column (1072px at 1440). */
+  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = a 1200px content column at 1440 (max-w 1328 includes the 64px side padding), like every other library section. */
   containerClassName?: string;
   className?: string;
 };
@@ -37,7 +37,7 @@ export function CareersRoles({
   headlineMuted,
   roles,
   emptyText = "No open roles right now. Check back soon.",
-  containerClassName = "max-w-[1200px] px-5 md:px-10 xl:px-16",
+  containerClassName = "max-w-[1328px] px-5 md:px-10 xl:px-16",
   className = "",
 }: CareersRolesProps) {
   const headingId = `${id}-heading`;
