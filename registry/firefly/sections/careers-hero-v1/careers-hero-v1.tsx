@@ -40,7 +40,7 @@ export function CareersHero({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={`bg-surface-page pb-16 pt-[calc(64px+56px)] md:pb-20 md:pt-[calc(64px+80px)] xl:pb-24 xl:pt-[calc(64px+120px)] ${className}`}
+      className={`bg-surface-page pb-8 pt-[calc(64px+56px)] md:pb-12 md:pt-[calc(64px+80px)] xl:pb-[60px] xl:pt-[calc(64px+120px)] ${className}`}
     >
       <div className="mx-auto max-w-[1200px] px-5 md:px-10 xl:px-16">
         <Reveal stagger={100} className="flex flex-col items-center">

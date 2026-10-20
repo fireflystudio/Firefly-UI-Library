@@ -16,7 +16,7 @@ export const meta: CatalogueItem = {
     { name: "visualRatioMobile", type: "string", default: '"4 / 3"', description: "Aspect ratio below 768px." },
     { name: "id", type: "string", default: '"careers-hero"', description: "Section id; the heading id is `${id}-heading`." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-20", notes: "First release (distilled from the Verb careers page)." }],
+  changelog: [{ version: "1.1", date: "2026-10-20", notes: "Bottom padding 32/48/60px to match the half rhythm of the other careers sections." }, { version: "1.0", date: "2026-10-20", notes: "First release (distilled from the Verb careers page)." }],
   files: [{ path: "registry/firefly/sections/careers-hero-v1/careers-hero-v1.tsx", target: "components/sections/careers-hero-v1.tsx", type: "registry:component" }],
   registryDependencies: ["firefly-base"],
   order: 10,

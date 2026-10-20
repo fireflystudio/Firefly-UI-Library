@@ -22,7 +22,7 @@ export const meta: CatalogueItem = {
     { name: "onSubmit", type: "(data: FormData) => void", description: "Receives the form data on a valid submit. Nothing is sent until a site wires this." },
     { name: "id", type: "string", default: '"apply"', description: "Section id (the Careers Job Apply pill links to #apply)." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-20", notes: "First release (distilled from the Verb careers page). The anchor offset under a fixed nav comes from the site's global scroll-padding-top (Web Guide Book §4), not from the component." }],
+  changelog: [{ version: "1.1", date: "2026-10-20", notes: "Half section padding (32/48/60px); headline→form 40/48/56." }, { version: "1.0", date: "2026-10-20", notes: "First release (distilled from the Verb careers page). The anchor offset under a fixed nav comes from the site's global scroll-padding-top (Web Guide Book §4), not from the component." }],
   files: [{ path: "registry/firefly/sections/careers-apply-v1/careers-apply-v1.tsx", target: "components/sections/careers-apply-v1.tsx", type: "registry:component" }],
   registryDependencies: ["firefly-base"],
   order: 60,
