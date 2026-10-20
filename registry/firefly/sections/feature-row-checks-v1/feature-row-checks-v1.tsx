@@ -28,7 +28,7 @@ export type FeatureRowChecksProps = {
 
 /**
  * Feature Row Checks v1
- * The static sibling of Feature Row Interactive: a two-tone sub-headline h2 (22/24/28px) at the top of the copy
+ * The static sibling of Feature Row Interactive: a two-tone section h2 (28/32/40px) at the top of the copy
  * column, a list of ✓ + title + body items at the bottom (every item open, no dividers,
  * 48px apart; 32px on tablet), and one shared 720×560 visual with a 30px parallax.
  * Copy column 400px on desktop, 300px on tablet.
@@ -47,16 +47,16 @@ export function FeatureRowChecks({
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
       <Reveal
-        className={`mx-auto flex w-full max-w-[1200px] flex-col gap-10 md:items-center md:gap-[22px] xl:items-stretch xl:gap-20 ${
+        className={`mx-auto flex w-full max-w-[1200px] flex-col gap-10 md:items-center md:gap-[22px] xl:items-stretch xl:gap-10 ${
           reverse ? "md:flex-row-reverse" : "md:flex-row"
         }`}
       >
         {/* Copy */}
-        <div className="flex w-full flex-col justify-between gap-10 pt-2 md:w-[300px] md:shrink-0 md:gap-8 xl:w-[400px]">
+        <div className="flex w-full flex-col justify-between gap-10 pt-2 md:w-[300px] md:shrink-0 md:gap-8 xl:w-[440px] xl:gap-14">
           <h2
             {...reveal}
             id={headingId}
-            className="text-pretty text-[22px] font-normal leading-[1.3] tracking-[-0.02em] text-text-primary md:pr-6 md:text-[24px] xl:pr-8 xl:text-[28px]"
+            className="text-pretty text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]"
           >
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
@@ -64,12 +64,12 @@ export function FeatureRowChecks({
           <ul className={`flex flex-col ${items.some((i) => i.value) ? "" : "gap-12 md:gap-8 xl:gap-12"}`}>
             {items.map((item) =>
               item.value ? (
-                <li key={item.title} {...reveal} className="group flex items-baseline gap-4 border-t border-border-10 py-4 xl:gap-5 xl:py-5">
+                <li key={item.title} {...reveal} className="group flex items-baseline gap-6 border-t border-border-10 py-5">
                   {/* Hover: the figure nudges 5px right (translate only) */}
-                  <span className="w-[88px] shrink-0 whitespace-nowrap text-[22px] font-normal leading-none tracking-[-0.02em] tabular-nums text-text-primary transition-[translate] duration-200 ease-out group-hover:translate-x-[5px] motion-reduce:transition-none md:w-[78px] md:text-[22px] xl:w-[104px] xl:text-[28px]">
+                  <span className="w-[120px] shrink-0 whitespace-nowrap text-[32px] font-normal leading-none tracking-[-0.03em] tabular-nums text-text-primary transition-[translate] duration-200 ease-out group-hover:translate-x-[5px] motion-reduce:transition-none md:w-[112px] xl:w-[150px] xl:text-[44px]">
                     {item.value}
                   </span>
-                  <p className="min-w-0 max-w-[240px] text-pretty text-[14px] leading-[1.5] text-text-nav md:text-[15px]">{item.title}</p>
+                  <p className="min-w-0 max-w-[260px] text-pretty text-[16px] leading-[1.5] text-text-nav md:text-[17px]">{item.title}</p>
                 </li>
               ) : (
               <li key={item.title} {...reveal} className="flex items-start gap-3">
