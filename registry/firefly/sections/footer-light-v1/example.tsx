@@ -13,10 +13,18 @@ const COLUMNS = [
     ],
   },
   {
-    title: "Explore",
+    title: "Company",
     links: [
-      { label: "About Solve", href: "#about" },
-      { label: "Encyclopedia", href: "#encyclopedia" },
+      { label: "About", href: "#about" },
+      { label: "Careers", href: "#careers" },
+      {
+        label: "Policies",
+        links: [
+          { label: "Terms", href: "#terms" },
+          { label: "Privacy", href: "#privacy" },
+          { label: "Cookie policy", href: "#cookies" },
+        ],
+      },
     ],
   },
 ];

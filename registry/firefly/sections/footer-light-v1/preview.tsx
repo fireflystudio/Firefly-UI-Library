@@ -2,7 +2,7 @@ import { Footer } from "../footer-v1/footer-v1";
 
 const COLUMNS = [
   {
-    title: "Product",
+    title: "Discover",
     links: [
       { label: "Features", href: "#features" },
       { label: "Pricing", href: "#pricing" },
@@ -10,10 +10,18 @@ const COLUMNS = [
     ],
   },
   {
-    title: "Legal",
+    title: "Company",
     links: [
-      { label: "Privacy policy", href: "#privacy" },
-      { label: "Cookie policy", href: "#cookies" },
+      { label: "About", href: "#about" },
+      { label: "Careers", href: "#careers" },
+      {
+        label: "Policies",
+        links: [
+          { label: "Terms", href: "#terms" },
+          { label: "Privacy", href: "#privacy" },
+          { label: "Cookie policy", href: "#cookies" },
+        ],
+      },
     ],
   },
 ];

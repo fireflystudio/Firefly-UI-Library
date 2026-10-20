@@ -11,6 +11,7 @@ export type CategoryId =
   | "faq"
   | "cta"
   | "popups"
+  | "careers"
   | "footer";
 
 export type Category = {

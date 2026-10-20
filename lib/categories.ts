@@ -18,6 +18,7 @@ export const CATEGORIES: Category[] = [
   { id: "faq", name: "FAQ", description: "Accordions with one question open at a time, split or centered." },
   { id: "cta", name: "CTA", description: "Closing calls to action: demo pills and newsletter sign-up." },
   { id: "popups", name: "Pop-ups", description: "Modal sign-up popup, a thank-you popup (V1) and a thank-you bar that slides from the top (V2)." },
+  { id: "careers", name: "Careers", description: "Careers page kit: intro, culture values, open-roles list, job detail and an application form." },
   { id: "footer", name: "Footer", description: "Dark footers with link columns and an email sign-up." },
 ];
 

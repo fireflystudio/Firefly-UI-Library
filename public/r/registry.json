@@ -438,6 +438,84 @@
       ]
     },
     {
+      "name": "careers-hero-v1",
+      "type": "registry:block",
+      "title": "Careers Hero v1",
+      "description": "Opener of a careers page: centred stacked two-tone h1 and a wide clipped frame for a team photo. The headline reveals first, the visual 300ms later.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/careers-hero-v1/careers-hero-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/careers-hero-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "careers-about-v1",
+      "type": "registry:block",
+      "title": "Careers About v1",
+      "description": "“Who we are”: a section headline and a column of short lead-size paragraphs capped at 760px. Paragraphs stagger in after the headline.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/careers-about-v1/careers-about-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/careers-about-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "careers-values-v1",
+      "type": "registry:block",
+      "title": "Careers Values v1",
+      "description": "“How we work”: a section headline and a two-column grid of short principles (title + one or two sentences). Single column on phones.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/careers-values-v1/careers-values-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/careers-values-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "careers-roles-v1",
+      "type": "registry:block",
+      "title": "Careers Roles v1",
+      "description": "“Open roles”: a section headline and a hairline list of roles; each row links to the role page, with its facts (type, location) and an arrow on the right. Empty state text when there are no roles.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/careers-roles-v1/careers-roles-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/careers-roles-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "careers-job-v1",
+      "type": "registry:block",
+      "title": "Careers Job v1",
+      "description": "A role page: back link, title, fact chips, an Apply pill that scrolls to the form, shared intro paragraphs and the role's sections (paragraphs and bullet lists) in a 760px column. Pair it with Careers Apply.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/careers-job-v1/careers-job-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/careers-job-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "careers-apply-v1",
+      "type": "registry:block",
+      "title": "Careers Apply v1",
+      "description": "Application form in a muted card: name, e-mail, phone, read-only role, resume drop zone (click or drag, size limit), cover letter, URL, location, notes and a full-width primary pill. Locks after a valid submit and confirms in a reserved status slot.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/careers-apply-v1/careers-apply-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/careers-apply-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "footer-v1",
       "type": "registry:block",
       "title": "Footer v1",

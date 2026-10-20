@@ -5,7 +5,15 @@ import { useId, useState, type FormEvent, type ReactNode } from "react";
 import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
 
-export type FooterLink = { label: string; href: string; /** false for pages that do not exist yet (avoids 404 prefetches) */ prefetch?: boolean };
+export type FooterLink = {
+  label: string;
+  /** Destination. Leave out when `links` is set: the item then renders as a disclosure. */
+  href?: string;
+  /** false for pages that do not exist yet (avoids 404 prefetches) */
+  prefetch?: boolean;
+  /** Sub-links: the item becomes a "Policies ▾" disclosure that opens on hover, click or keyboard (ElevenLabs pattern) */
+  links?: FooterLink[];
+};
 export type FooterColumn = { title: string; links: FooterLink[] };
 export type FooterSignup = {
   /** Small label above the field, also the input's accessible name */
@@ -74,7 +82,8 @@ const TONES: Record<
 /**
  * Footer v1
  * Footer with a top hairline and 64px above and below the content, dark by default or light
- * (`tone="light"`). Brand + tagline, link columns and an email sign-up form.
+ * (`tone="light"`). Brand + tagline, link columns and an email sign-up form. A column link with
+ * `links` renders as a disclosure (label + chevron) whose sub-links open on hover, click or keyboard.
  * Stacked on mobile; brand and columns side by side on tablet with the form below; on
  * desktop a three-column grid (brand | columns | form). Optional legal line with small links.
  * The form is a real <form> with a labelled email input: it prevents default, confirms inline
@@ -97,6 +106,7 @@ export function Footer({
 
   return (
     <footer className={`${t.footer} ${className}`}>
+      <style href="firefly-footer-disclosure" precedence="default">{DISCLOSURE_CSS}</style>
       {/* Top hairline, then 64px above and below the content on every breakpoint */}
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         <div aria-hidden className={`h-px w-full ${t.hairline}`} />
@@ -104,7 +114,7 @@ export function Footer({
       <Reveal
         {...reveal}
         amount={0.1}
-        className="mx-auto flex max-w-[1440px] flex-col gap-10 px-5 py-16 md:gap-12 md:px-10 xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,440px)] xl:gap-x-10 xl:gap-y-16"
+        className="mx-auto flex max-w-[1440px] flex-col gap-10 px-5 py-16 md:gap-12 md:px-10 xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,360px)] xl:gap-x-10 xl:gap-y-16"
       >
 
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-8 xl:contents">
@@ -138,7 +148,7 @@ export function Footer({
               <ul className="flex flex-wrap gap-x-5 gap-y-2">
                 {legalLinks.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} prefetch={l.prefetch} className="transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none">
+                    <Link href={l.href ?? "#"} prefetch={l.prefetch} className="transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none">
                       {l.label}
                     </Link>
                   </li>
@@ -160,19 +170,83 @@ function FooterColumnList({ column, labelClass, linkClass }: { column: FooterCol
         {column.title}
       </p>
       <ul aria-labelledby={id} className="flex flex-col gap-1">
-        {column.links.map((link) => (
-          <li key={link.label}>
+        {column.links.map((link) =>
+          link.links?.length ? (
+            <FooterDisclosure key={link.label} link={link} linkClass={linkClass} />
+          ) : (
+            <li key={link.label}>
+              <Link
+                href={link.href ?? "#"}
+                prefetch={link.prefetch}
+                className={`inline-block text-[20px] leading-[1.3] tracking-[-0.02em] transition-opacity duration-200 ease-out hover:opacity-70 motion-reduce:transition-none ${linkClass}`}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ),
+        )}
+      </ul>
+    </div>
+  );
+}
+
+/* Sub-links fade and rise in (transform/opacity only); nothing under reduced motion. */
+const DISCLOSURE_CSS = `@keyframes firefly-footer-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.firefly-footer-in{animation:firefly-footer-in .3s var(--ease-out-soft) both}
+@media (prefers-reduced-motion:reduce){.firefly-footer-in{animation:none}}`;
+
+/**
+ * "Policies ▾": a real <button aria-expanded aria-controls>; the sub-links open on hover (pointer),
+ * on click / Enter / Space, close on Escape and when the pointer leaves. They stay in the DOM.
+ */
+function FooterDisclosure({ link, linkClass }: { link: FooterLink; linkClass: string }) {
+  const id = useId();
+  const [open, setOpen] = useState(false);
+  return (
+    <li
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") setOpen(false);
+      }}
+    >
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={() => setOpen((o) => !o)}
+        className={`inline-flex cursor-pointer items-center gap-1 text-[20px] leading-[1.3] tracking-[-0.02em] transition-opacity duration-200 ease-out hover:opacity-70 motion-reduce:transition-none ${linkClass}`}
+      >
+        {link.label}
+        <svg
+          aria-hidden
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`shrink-0 opacity-60 transition-transform duration-200 ease-out motion-reduce:transition-none ${open ? "rotate-180" : ""}`}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+      <ul id={id} hidden={!open} className="firefly-footer-in mt-1.5 pl-4">
+        {link.links!.map((sub) => (
+          <li key={sub.label} className="py-0.5">
             <Link
-              href={link.href}
-              prefetch={link.prefetch}
-              className={`inline-block text-[20px] leading-[1.3] tracking-[-0.02em] transition-opacity duration-200 ease-out hover:opacity-70 motion-reduce:transition-none ${linkClass}`}
+              href={sub.href ?? "#"}
+              prefetch={sub.prefetch}
+              className={`inline-block text-[17px] leading-[1.4] tracking-[-0.01em] opacity-80 transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none ${linkClass}`}
             >
-              {link.label}
+              {sub.label}
             </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </li>
   );
 }
 
@@ -197,7 +271,7 @@ function SignupForm({
   };
 
   return (
-    <form {...reveal} onSubmit={handleSubmit} className={`flex w-full max-w-[440px] flex-col items-start gap-5 ${className}`}>
+    <form {...reveal} onSubmit={handleSubmit} className={`flex w-full max-w-[360px] flex-col items-start gap-5 ${className}`}>
       <label htmlFor={`${id}-email`} className={`text-[12px] leading-[1.3] ${tone.label}`}>
         {label}
       </label>

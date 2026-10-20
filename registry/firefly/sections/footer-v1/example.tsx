@@ -13,11 +13,18 @@ const COLUMNS = [
     ],
   },
   {
-    // Exact site copy ("Lega").
-    title: "Lega",
+    title: "Company",
     links: [
-      { label: "Privacy policy", href: "#privacy-policy" },
-      { label: "Cookie policy", href: "#cookie-policy" },
+      { label: "About", href: "#about" },
+      { label: "Careers", href: "#careers" },
+      {
+        label: "Policies",
+        links: [
+          { label: "Terms", href: "#terms" },
+          { label: "Privacy", href: "#privacy" },
+          { label: "Cookie policy", href: "#cookies" },
+        ],
+      },
     ],
   },
 ];
