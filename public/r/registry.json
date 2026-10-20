@@ -147,6 +147,19 @@
       ]
     },
     {
+      "name": "hero-left-v1",
+      "type": "registry:block",
+      "title": "Hero Left v1",
+      "description": "Hero Centered with the copy aligned left (the ElevenLabs layout): stacked two-tone h1 and the CTA pair in the left column, the lead paragraph in the right column centred on the headline, and the same large visual underneath. Same sizes, reveal and parallax as Hero Centered.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/hero-left-v1/hero-left-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/hero-left-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "hero-split-v1",
       "type": "registry:block",
       "title": "Hero Split v1",

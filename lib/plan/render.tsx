@@ -13,6 +13,7 @@ import { FeatureRowChecks } from "@/registry/firefly/sections/feature-row-checks
 import { FeatureRowInteractive } from "@/registry/firefly/sections/feature-row-interactive-v1/feature-row-interactive-v1";
 import { Footer } from "@/registry/firefly/sections/footer-v1/footer-v1";
 import { HeroCentered } from "@/registry/firefly/sections/hero-centered-v1/hero-centered-v1";
+import { HeroLeft } from "@/registry/firefly/sections/hero-left-v1/hero-left-v1";
 import { HeroNewsBento } from "@/registry/firefly/sections/hero-news-bento-v1/hero-news-bento-v1";
 import { HeroPortrait } from "@/registry/firefly/sections/hero-portrait-v1/hero-portrait-v1";
 import { HeroSplit } from "@/registry/firefly/sections/hero-split-v1/hero-split-v1";
@@ -96,6 +97,10 @@ export function renderPlanSection(section: PlanSection): ReactNode | null {
     case "hero-centered-v1":
       return (
         <HeroCentered headline={headline} headlineMuted={p.headlineMuted ?? ""} body={p.body} primaryCta={p.primaryCta ? link(p.primaryCta) : undefined} secondaryCta={ctaOrNull(p.secondaryCta)} visual={img(section, "visual")} />
+      );
+    case "hero-left-v1":
+      return (
+        <HeroLeft headline={headline} headlineMuted={p.headlineMuted ?? ""} body={p.body} primaryCta={p.primaryCta ? link(p.primaryCta) : undefined} secondaryCta={ctaOrNull(p.secondaryCta)} visual={img(section, "visual")} />
       );
     case "hero-split-v1":
       return (

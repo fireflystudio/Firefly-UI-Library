@@ -35,6 +35,12 @@ export const CONTRACTS: ComponentContract[] = [
     images: [{ slot: "visual", orientation: "landscape", hint: "large hero visual, 2:1" }],
   },
   {
+    component: "hero-left-v1",
+    use: "Same as Hero Centered but left-aligned (ElevenLabs layout): headline + buttons left, lead on the right, large visual below. Pick for editorial or developer-facing products.",
+    fields: "headline, headlineMuted, body (2–3 sentences, max 180 characters), primaryCta{label}, secondaryCta{label}",
+    images: [{ slot: "visual", orientation: "landscape", hint: "large hero visual, 2:1" }],
+  },
+  {
     component: "hero-split-v1",
     use: "Opening hero, copy left and visual right.",
     fields: "headline, headlineMuted, body, primaryCta{label}, secondaryCta{label}, note (short mono line, optional)",
