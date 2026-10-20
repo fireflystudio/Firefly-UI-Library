@@ -24,7 +24,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"newsletter"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: accessible pill form, shift-free confirmation, benefits, visual slot, dark/light tone." }],
+  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: accessible pill form, shift-free confirmation, benefits, visual slot, dark/light tone." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Statement h2 48/40/30 (was 48/36/28, max width 1000px), lead 20/18/17, visual 64/56/40 below the form." }],
   files: [
     {
       path: "registry/firefly/sections/cta-newsletter-v1/cta-newsletter-v1.tsx",

@@ -27,17 +27,35 @@ export default function SpacingPage() {
         />
       </Specimen>
 
-      <Specimen title="Section rhythm">
+      <Specimen
+        title="Section rhythm"
+        note="Accepted 2026-10-20 for every site and every library section. Sections have padding, never margins, so the distance between the content of two sections is always twice the padding. Dark, coloured and photo sections keep the same padding inside; their background edge is the boundary."
+      >
         <SpecTable
           head={["Element", "Mobile", "Tablet", "Desktop"]}
           rows={[
-            ["Section padding (top and bottom)", "64px", "96px", "120px"],
-            ["Page gutter", "20px", "32px (nav) / 40px", "64px"],
-            ["Content container", "100%", "100%", "1200px (copy), 1312 to 1392px (wide grids), 1440px (nav)"],
-            ["Headline to copy", "16 to 20px", "20px", "20px"],
-            ["Copy to buttons", "32px", "40px", "40px"],
-            ["Card grid gap", "20px", "24px", "24px"],
-            ["Fixed nav height", "72px", "76px", "76px (hero top padding = nav + spacing; scroll-padding-top 80px)"],
+            ["Section padding (top and bottom)", "64px", "96px", "120px (py-16 md:py-24 xl:py-[120px])"],
+            ["Content to content across two sections", "128px", "192px", "240px (no margins between sections)"],
+            ["Hero top (fixed nav 64px + spacing)", "64 + 56px", "64 + 80px", "64 + 120px"],
+            ["Hero bottom", "64px", "80px", "96px (a full-screen photo hero keeps its height; copy ≥ 120px from the bottom edge)"],
+            ["Logo strip (Logo Marquee only)", "48px", "64px", "64px"],
+            ["Footer", "hairline, then 64px above and below the content", "same", "same (legal line 24px above)"],
+            ["Page gutter", "20px", "40px", "64px (navigation bars 40px)"],
+            ["Content container", "100%", "100%", "1200px (copy), 1312 to 1392px (wide grids), 1440px (nav, footer). A site may keep its own container; it does not change the rhythm."],
+            ["Fixed nav height", "64px", "64px", "64px (scroll-padding-top 80px)"],
+          ]}
+        />
+      </Specimen>
+
+      <Specimen title="Inside a section" note="Nothing larger than these inside a section. Figma spacing that differs is a deviation to list in the report, not a reason to break the rhythm.">
+        <SpecTable
+          head={["Gap", "Mobile", "Tablet", "Desktop"]}
+          rows={[
+            ["Headline block → content (cards, rows, visual, form)", "40px", "56px", "64px (mt-10 md:mt-14 xl:mt-16)"],
+            ["Headline → lead", "16px", "20px", "20px (gap-4 md:gap-5)"],
+            ["Lead → buttons", "32px", "40px", "40px (mt-8 md:mt-10)"],
+            ["Repeated rows (feature rows, steps)", "64px", "96px", "120px"],
+            ["Card grid gap", "20px", "24px", "24px (gap-5 md:gap-6)"],
           ]}
         />
       </Specimen>

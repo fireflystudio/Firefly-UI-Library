@@ -5,7 +5,7 @@ import { reveal } from "@/components/ui/reveal-attr";
 import { TwoTone } from "@/components/ui/two-tone";
 
 export type ComparePanel = {
-  /** Short lead line above the list (18px medium) */
+  /** Short lead line above the list (card title: 18 / 19 / 20px medium) */
   title?: string;
   /** 3–5 short points */
   points: string[];
@@ -55,22 +55,22 @@ export function BeforeAfterCompare({
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
       <Reveal className="mx-auto flex max-w-[1200px] flex-col gap-10 md:gap-14 xl:gap-16">
-        <div className="flex max-w-[720px] flex-col items-start gap-5">
+        <div className="flex max-w-[720px] flex-col items-start gap-4 md:gap-5">
           <h2
             {...reveal}
             id={headingId}
-            className="text-balance text-[28px] font-normal leading-[1.1] tracking-[-0.03em] text-text-primary md:text-[36px] xl:text-[48px]"
+            className="text-balance text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]"
           >
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
           {intro ? (
-            <p {...reveal} className="max-w-[560px] text-pretty text-[16px] leading-[1.55] text-text-nav">
+            <p {...reveal} className="max-w-[600px] text-pretty text-[17px] leading-[1.4] tracking-[-0.01em] text-text-nav md:text-[18px] xl:text-[20px]">
               {intro}
             </p>
           ) : null}
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:gap-6">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
           <Panel id={`${id}-before`} label={beforeLabel} panel={before} dark={false} />
           <Panel id={`${id}-after`} label={afterLabel} panel={after} dark />
         </div>
@@ -98,12 +98,12 @@ function Panel({ id, label, panel, dark }: { id: string; label: string; panel: C
         {visual ? <div className={`overflow-clip rounded-tile border ${dark ? "border-border-dark" : "border-border-light"}`}>{visual}</div> : null}
 
         <div className="flex flex-col gap-4">
-          {panel.title ? <p className="text-pretty text-[18px] font-medium leading-[1.3] tracking-[-0.01em]">{panel.title}</p> : null}
+          {panel.title ? <p className="text-pretty text-[18px] font-medium leading-[1.3] tracking-[-0.01em] md:text-[19px] xl:text-[20px]">{panel.title}</p> : null}
           <ul className="flex flex-col">
             {panel.points.map((point) => (
               <li
                 key={point}
-                className={`flex items-start gap-3 border-t py-3 text-pretty text-[15px] leading-[1.5] first:border-t-0 first:pt-0 last:pb-0 ${
+                className={`flex items-start gap-3 border-t py-3 text-pretty text-[15px] leading-[1.55] first:border-t-0 md:text-[16px] first:pt-0 last:pb-0 ${
                   dark ? "border-border-dark text-text-on-dark" : "border-border-light text-text-nav"
                 }`}
               >

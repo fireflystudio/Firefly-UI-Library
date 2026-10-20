@@ -21,14 +21,16 @@ export default function BasePreview() {
   return (
     <div className="bg-surface-page px-5 py-12 md:px-10 md:py-16 xl:px-16 xl:py-20">
       <Reveal className="mx-auto flex max-w-[1200px] flex-col gap-12 md:gap-16">
-        <div className="flex flex-col gap-5">
-          <h1 {...reveal} className="max-w-[900px] text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[48px] xl:text-[64px]">
-            <TwoTone text="Two-tone headlines on every page." muted="The second half always grey." />
-          </h1>
-          <p {...reveal} className="max-w-[560px] text-[16px] leading-[1.55] text-text-nav md:text-[18px]">
-            Body copy sits in Inter at 16–18px with a 1.55 line height. Small labels use IBM Plex Mono, uppercase, with a
-            little tracking.
-          </p>
+        <div className="flex flex-col gap-8 md:gap-10">
+          <div className="flex flex-col gap-4 md:gap-5">
+            <h1 {...reveal} className="max-w-[900px] text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[48px] xl:text-[64px]">
+              <TwoTone text="Two-tone headlines on every page." muted="The second half always grey." />
+            </h1>
+            <p {...reveal} className="max-w-[600px] text-[17px] leading-[1.4] tracking-[-0.01em] text-text-nav md:text-[18px] xl:text-[20px]">
+              The lead sits in Inter at 20px (18 on tablet, 17 on phones), body copy at 16px with a 1.55 line height. Small
+              labels use IBM Plex Mono, uppercase, with a little tracking.
+            </p>
+          </div>
           <div {...reveal}>
             <HeroCta primary={{ label: "Primary action", href: "#" }} secondary={{ label: "Secondary action", href: "#" }} />
           </div>

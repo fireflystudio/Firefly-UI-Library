@@ -75,14 +75,26 @@ No mono uppercase labels above headlines (section eyebrows, "tags" above a CTA h
 - Two-tone h1/h2 everywhere via `TwoTone` (or the same pattern). Section headings are `h2`, card titles `h3`. A component never renders an `h1` unless it is a hero (then exactly one).
 - `leading-[normal]`, `leading-[1.1]`, `leading-[1.55]` … **never** `leading-normal`. Tracking in `em` (`tracking-[-0.03em]`).
 - No forced `<br>` in long text; use `text-balance` / `text-pretty` + `max-w`.
-- Minimum text size 12px; body 14–16px; card titles 18px; nav links 14px regular in 36px pills (`NavLink` from the Base).
+- **The type scale (2026-10-20, desktop / tablet / mobile; Inter 400 unless noted). No other headline sizes on desktop.**
+  - Display h1 `text-[34px] md:text-[48px] xl:text-[64px] leading-[1.04] tracking-[-0.03em]` — heroes only.
+  - Statement h2 `text-[30px] md:text-[40px] xl:text-[48px] leading-[1.1] tracking-[-0.025em]`, `max-w-[1000px]` — headline sections where the headline *is* the content (no body, or ≤ ~25 words / one line / one CTA) and the closing CTA.
+  - Section h2 `text-[28px] md:text-[32px] xl:text-[40px] leading-[1.2] tracking-[-0.02em]` — a headline followed by copy, cards, a list, steps or a visual. Count the words under the headline: under ~25 → Statement, anything with real copy / cards / a visual → Section.
+  - Sub-headline h3 `text-[22px] md:text-[24px] xl:text-[28px] leading-[1.3] tracking-[-0.02em]` — feature-row headlines, lens names, quotes.
+  - Card title h3 `text-[18px] md:text-[19px] xl:text-[20px] font-medium leading-[1.3] tracking-[-0.01em]`.
+  - Row / list title `text-[16px] md:text-[17px] xl:text-[18px] font-medium leading-[normal]` — steps, accordion questions.
+  - Lead `text-[17px] md:text-[18px] xl:text-[20px] leading-[1.4] tracking-[-0.01em] text-text-nav` — the intro paragraph under a headline, `max-w-[600px]`.
+  - Body `text-[15px] md:text-[16px] leading-[1.55]` — paragraphs, card copy, answers. Small `text-[13px] md:text-[14px] leading-[1.5]` — captions, notes, legal. Mono label 12px uppercase `tracking-[0.08em]` — counters and tags only.
+  - Stat number `text-[32px] md:text-[40px] xl:text-[48px] leading-[1] tracking-[-0.03em] tabular-nums`.
+  - Nav links 14px regular in 36px pills (`NavLink` from the Base); buttons come from the button set. Nothing under 12px.
 
 **Layout**
-- Mobile-first. Breakpoints: base < 768, `md:` 768–1279, `xl:` ≥ 1280. Section padding like the references: `px-5 md:px-10 xl:px-16` (or `xl:px-[120px]` for narrow content), vertical `py-16 md:py-24 xl:py-[120px]`.
+- Mobile-first. Breakpoints: base < 768, `md:` 768–1279, `xl:` ≥ 1280. Side padding `px-5 md:px-10 xl:px-16` (or `xl:px-[120px]` for narrow content).
+- **Vertical rhythm (2026-10-20, mobile / tablet / desktop).** Every section `py-16 md:py-24 xl:py-[120px]` (64 / 96 / 120), no margins between sections; dark and photo sections keep the same padding inside. Only the Logo Marquee is a strip at 48 / 64 / 64 (`py-12 md:py-16`). Footer: top hairline, then 64 above and below the content (`py-16`), legal line 24 above.
+- Inside a section: headline block → content (cards, rows, visual, form) **40 / 56 / 64** (`mt-10 md:mt-14 xl:mt-16` or `gap-10 md:gap-14 xl:gap-16`); headline → lead **16 / 20 / 20** (`gap-4 md:gap-5`); lead → buttons **32 / 40 / 40** (`mt-8 md:mt-10`); repeated rows (feature rows, steps) **64 / 96 / 120** apart; card grids **20 / 24 / 24** (`gap-5 md:gap-6`). Nothing larger inside a section.
 - Content centred with `mx-auto` + `max-w-[1200px]` (or 1312 / 1392 for wide grids).
 - **No horizontal overflow from 375 to 2400px.** Fluid widths (`min-w-0`, `flex-1`, `%`), never a fixed width wider than the viewport.
 - **No viewport-height units** (`h-screen`, `min-h-[100vh]`, `svh`…): previews run in iframes sized to content. Use fixed heights / aspect ratios.
-- Heroes assume a fixed 64px nav: top padding `pt-[calc(64px+56px)] md:pt-[calc(64px+80px)] xl:pt-[calc(64px+120px)]`.
+- Heroes assume a fixed 64px nav: top padding `pt-[calc(64px+56px)] md:pt-[calc(64px+80px)] xl:pt-[calc(64px+120px)]`, bottom `pb-16 md:pb-20 xl:pb-24` (64 / 80 / 96). A full-screen photo hero keeps its height; its copy stays ≥ 120px from the bottom edge.
 
 **Motion**
 - Animate only `transform`/`translate`/`scale`/`rotate` and `opacity`. No width/height/margin animations.

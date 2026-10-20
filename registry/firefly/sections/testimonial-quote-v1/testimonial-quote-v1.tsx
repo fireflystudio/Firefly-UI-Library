@@ -42,7 +42,7 @@ const TONES = {
 
 /**
  * Testimonial Quote v1
- * One large centred quote (24/28/36px, line-height 1.2, max 900px) with an attribution row:
+ * One centred quote at the sub-headline size (22/24/28px, line-height 1.3, max 900px) with an attribution row:
  * 48px avatar, name (15px medium) and role (14px muted), plus an optional company mark.
  * `tone` switches between the dark section and the light page background. Eyebrow, quote and
  * attribution reveal one after another (90ms stagger). Section padding 64/96/120px.
@@ -83,7 +83,7 @@ export function TestimonialQuote({
         <figure className="flex w-full flex-col items-center gap-8 md:gap-10">
           <blockquote
             {...reveal}
-            className="max-w-[900px] text-balance text-[24px] font-normal leading-[1.2] tracking-[-0.02em] md:text-[28px] xl:text-[36px]"
+            className="max-w-[900px] text-balance text-[22px] font-normal leading-[1.3] tracking-[-0.02em] md:text-[24px] xl:text-[28px]"
           >
             <p>{quoteMarks ? `“${quote}”` : quote}</p>
           </blockquote>

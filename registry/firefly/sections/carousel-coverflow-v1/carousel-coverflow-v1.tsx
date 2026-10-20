@@ -195,17 +195,17 @@ export function CarouselCoverflow({
 
   return (
     <section id={id} aria-labelledby={headingId} className={`overflow-x-clip bg-surface-page py-16 md:py-24 xl:py-[120px] ${className}`}>
-      <Reveal className="mx-auto flex w-full max-w-[1440px] flex-col items-center gap-8 md:gap-10 xl:gap-14">
-        <div className="flex w-full max-w-[800px] flex-col items-center gap-4 px-5 text-center md:px-10">
+      <Reveal className="mx-auto flex w-full max-w-[1440px] flex-col items-center gap-10 md:gap-14 xl:gap-16">
+        <div className="flex w-full max-w-[800px] flex-col items-center gap-4 px-5 text-center md:gap-5 md:px-10">
           <h2
             {...reveal}
             id={headingId}
-            className="text-balance text-[28px] font-normal leading-[1.06] tracking-[-0.04em] text-text-primary md:text-[36px] xl:text-[48px]"
+            className="text-balance text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]"
           >
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
           {intro ? (
-            <p {...reveal} className="max-w-[560px] text-pretty text-[16px] leading-[1.55] text-text-nav">
+            <p {...reveal} className="max-w-[600px] text-pretty text-[17px] leading-[1.4] tracking-[-0.01em] text-text-nav md:text-[18px] xl:text-[20px]">
               {intro}
             </p>
           ) : null}
@@ -269,8 +269,8 @@ export function CarouselCoverflow({
                     {item.kicker ? (
                       <p className="font-mono text-[12px] uppercase leading-[normal] tracking-[0.08em] text-text-tertiary">{item.kicker}</p>
                     ) : null}
-                    <h3 className="text-pretty text-[19px] font-medium leading-[1.3] tracking-[-0.02em] text-text-primary">{item.title}</h3>
-                    {item.body ? <p className="text-pretty text-[14px] leading-[1.5] text-text-nav">{item.body}</p> : null}
+                    <h3 className="text-pretty text-[18px] font-medium leading-[1.3] tracking-[-0.01em] text-text-primary md:text-[19px] xl:text-[20px]">{item.title}</h3>
+                    {item.body ? <p className="text-pretty text-[15px] leading-[1.55] text-text-nav md:text-[16px]">{item.body}</p> : null}
                   </div>
                   {slot !== 0 && !hidden ? (
                     <button

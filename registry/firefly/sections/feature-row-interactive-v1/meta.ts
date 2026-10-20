@@ -26,7 +26,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"feature-row"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: step accordion, swapping visual, parallax frame." }],
+  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: step accordion, swapping visual, parallax frame." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Sub-headline h2 28/24/22 (was 37/28/26), step titles 18/17/16, step copy 16/15, headline → content 40 on mobile." }],
   files: [
     {
       path: "registry/firefly/sections/feature-row-interactive-v1/feature-row-interactive-v1.tsx",

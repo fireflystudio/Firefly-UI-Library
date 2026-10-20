@@ -25,7 +25,7 @@ export type FooterProps = {
   /** Accessible name of the brand link */
   brandLabel?: string;
   brandHref?: string;
-  /** One short sentence under the brand (18 / 20 / 24px) */
+  /** One short sentence under the brand (17 / 18 / 20px) */
   tagline?: string;
   /** Link columns: 12px label + 20px links */
   columns: FooterColumn[];
@@ -73,8 +73,8 @@ const TONES: Record<
 
 /**
  * Footer v1
- * Footer with a top hairline, dark by default or light (`tone="light"`). Brand + tagline, link
- * columns and an email sign-up form.
+ * Footer with a top hairline and 64px above and below the content, dark by default or light
+ * (`tone="light"`). Brand + tagline, link columns and an email sign-up form.
  * Stacked on mobile; brand and columns side by side on tablet with the form below; on
  * desktop a three-column grid (brand | columns | form). Optional legal line with small links.
  * The form is a real <form> with a labelled email input: it prevents default, confirms inline
@@ -97,12 +97,15 @@ export function Footer({
 
   return (
     <footer className={`${t.footer} ${className}`}>
+      {/* Top hairline, then 64px above and below the content on every breakpoint */}
+      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+        <div aria-hidden className={`h-px w-full ${t.hairline}`} />
+      </div>
       <Reveal
         {...reveal}
         amount={0.1}
-        className="mx-auto flex max-w-[1440px] flex-col gap-10 px-5 pb-10 md:gap-12 md:px-10 md:pb-12 xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,440px)] xl:gap-x-10 xl:gap-y-16 xl:pb-16"
+        className="mx-auto flex max-w-[1440px] flex-col gap-10 px-5 py-16 md:gap-12 md:px-10 xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,440px)] xl:gap-x-10 xl:gap-y-16"
       >
-        <div aria-hidden className={`h-px w-full xl:col-span-3 ${t.hairline}`} />
 
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-8 xl:contents">
           <div {...reveal} className="flex flex-col items-start gap-6 md:max-w-[300px] xl:max-w-[400px]">
@@ -110,7 +113,7 @@ export function Footer({
               {brand ?? <DefaultBrand textClass={t.brandText} />}
             </Link>
             {tagline ? (
-              <p className="text-pretty text-[18px] font-normal leading-[1.3] tracking-[-0.02em] md:text-[20px] xl:text-[24px]">{tagline}</p>
+              <p className="text-pretty text-[17px] font-normal leading-[1.3] tracking-[-0.01em] md:text-[18px] xl:text-[20px]">{tagline}</p>
             ) : null}
           </div>
 

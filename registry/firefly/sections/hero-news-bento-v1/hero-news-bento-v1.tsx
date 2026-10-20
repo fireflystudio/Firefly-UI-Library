@@ -56,7 +56,7 @@ const CARD_STAGGER = 90;
 
 /**
  * Hero News Bento v1
- * Editorial front page: masthead (eyebrow, stacked two-tone h1, intro) above a story grid.
+ * Editorial front page: masthead (eyebrow, stacked two-tone h1 at 34/48/64px, lead intro) above a story grid.
  * The lead story is a large dark card with the image behind a bottom gradient; 3–5 smaller
  * light cards show a kicker and title with an optional 2:1 image slot. One column on mobile
  * (lead as a 4:5 poster), two on tablet (lead full width at 16:9), on desktop the lead takes
@@ -83,9 +83,9 @@ export function HeroNewsBento({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={`bg-surface-page px-5 pb-14 pt-[calc(64px+56px)] md:px-10 md:pb-20 md:pt-[calc(64px+80px)] xl:px-16 xl:pb-[120px] xl:pt-[calc(64px+120px)] ${className}`}
+      className={`bg-surface-page px-5 pb-16 pt-[calc(64px+56px)] md:px-10 md:pb-20 md:pt-[calc(64px+80px)] xl:px-16 xl:pb-24 xl:pt-[calc(64px+120px)] ${className}`}
     >
-      <div className="mx-auto flex max-w-[1312px] flex-col gap-10 md:gap-12 xl:gap-16">
+      <div className="mx-auto flex max-w-[1312px] flex-col gap-10 md:gap-14 xl:gap-16">
         {/* Masthead */}
         <Reveal stagger={100} className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between xl:gap-16">
           <div className="flex min-w-0 flex-col items-start gap-4 md:gap-5">
@@ -96,7 +96,7 @@ export function HeroNewsBento({
             ) : null}
             <h1
               id={headingId}
-              className="max-w-[760px] text-balance text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[44px] xl:text-[56px]"
+              className="max-w-[760px] text-balance text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[48px] xl:text-[64px]"
             >
               <span {...reveal} className="block">
                 {headline}
@@ -107,14 +107,14 @@ export function HeroNewsBento({
             </h1>
           </div>
           {intro ? (
-            <p {...reveal} className="max-w-[480px] text-pretty text-[16px] leading-[1.55] text-text-nav md:text-[17px] xl:max-w-[400px] xl:pb-2">
+            <p {...reveal} className="max-w-[520px] text-pretty text-[17px] leading-[1.4] tracking-[-0.01em] text-text-nav md:text-[18px] xl:text-[20px] xl:max-w-[440px] xl:pb-2">
               {intro}
             </p>
           ) : null}
         </Reveal>
 
         {/* Front page */}
-        <div className="grid grid-cols-1 gap-3 md:gap-4 xl:grid-cols-[minmax(0,592fr)_minmax(0,704fr)]">
+        <div className="grid grid-cols-1 gap-5 md:gap-6 xl:grid-cols-[minmax(0,592fr)_minmax(0,704fr)]">
           {/* Lead story: its own reveal, parallax "through" on this card only */}
           <Reveal {...reveal} delay={GRID_DELAY} className="min-w-0">
             <Parallax distance={30} className="h-full">
@@ -123,7 +123,7 @@ export function HeroNewsBento({
           </Reveal>
 
           {/* Smaller stories */}
-          <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 xl:auto-rows-fr">
+          <div className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 xl:auto-rows-fr">
             {items.map((item, i) => (
               <Reveal
                 key={item.href + i}
@@ -154,12 +154,12 @@ function LeadCard({ kicker, title, dek, href, image }: NewsLead) {
       </div>
       <div aria-hidden className="absolute inset-0 -z-10 bg-linear-to-b from-transparent from-30% to-surface-inverse/80" />
       {kicker ? <p className={`${kickerClass} text-text-on-dark/70`}>{kicker}</p> : null}
-      <h3 className="max-w-[18em] text-balance text-[24px] font-normal leading-[1.15] tracking-[-0.015em] md:text-[28px] xl:text-[32px]">
+      <h3 className="max-w-[18em] text-balance text-[22px] font-normal leading-[1.3] tracking-[-0.02em] md:text-[24px] xl:text-[28px]">
         <Link href={href} className={stretchedLink}>
           {title}
         </Link>
       </h3>
-      {dek ? <p className="max-w-[480px] text-pretty text-[14px] leading-[1.5] text-text-on-dark/70">{dek}</p> : null}
+      {dek ? <p className="max-w-[480px] text-pretty text-[15px] leading-[1.55] text-text-on-dark/70 md:text-[16px]">{dek}</p> : null}
     </article>
   );
 }
@@ -177,7 +177,7 @@ function StoryCard({ kicker, title, href, image }: NewsItem) {
       ) : null}
       <div className={`flex flex-1 flex-col p-5 ${hasImage ? "gap-3" : "justify-between gap-8"}`}>
         {kicker ? <p className={`${kickerClass} text-text-quaternary`}>{kicker}</p> : null}
-        <h3 className="text-pretty text-[18px] font-medium leading-[1.3] tracking-[-0.01em] text-text-primary">
+        <h3 className="text-pretty text-[18px] font-medium leading-[1.3] tracking-[-0.01em] text-text-primary md:text-[19px] xl:text-[20px]">
           <Link href={href} className={stretchedLink}>
             {title}
           </Link>

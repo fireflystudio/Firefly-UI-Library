@@ -29,6 +29,7 @@ export const meta: CatalogueItem = {
   changelog: [
     { version: "1.0", date: "2026-10-16", notes: "First release: cover-flow geometry, buttons, keys, drag/flick, autoplay with pause toggle, counter." },
     { version: "1.1", date: "2026-10-19", notes: "Controls use the Base IconButton and PaginationDots (dots + sliding line) instead of bordered round buttons and the mono counter." },
+    { version: "1.2", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 48/36/28), lead intro 20/18/17, headline → carousel 64/56/40, card titles 20/19/18, card copy 16/15." },
   ],
   files: [
     {

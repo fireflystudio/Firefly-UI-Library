@@ -20,7 +20,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"testimonial"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: dark/light tone, avatar and logo slots, staggered reveal." }],
+  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: dark/light tone, avatar and logo slots, staggered reveal." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Quote at the sub-headline size 28/24/22, line height 1.3 (was 36/28/24)." }],
   files: [
     {
       path: "registry/firefly/sections/testimonial-quote-v1/testimonial-quote-v1.tsx",

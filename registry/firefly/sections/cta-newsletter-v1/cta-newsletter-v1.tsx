@@ -58,7 +58,7 @@ const TONES = {
 
 /**
  * CTA Newsletter v1
- * Centred sign-up section: mono eyebrow, two-tone heading (28/36/48px), one line of body and a
+ * Centred sign-up section: mono eyebrow, two-tone statement heading (30/40/48px), one lead line and a
  * real <form>: a pill with a labelled type="email" input and a dark submit pill. Submitting calls
  * preventDefault and shows the confirmation in a reserved role="status" slot (fixed height, no
  * layout shift); typing again clears it. Optional ticked benefits and a visual slot below.
@@ -106,13 +106,13 @@ export function CtaNewsletter({
         <h2
           {...reveal}
           id={headingId}
-          className="max-w-[760px] text-balance text-[28px] font-normal leading-[1.1] tracking-[-0.025em] md:text-[36px] xl:text-[48px]"
+          className="max-w-[1000px] text-balance text-[30px] font-normal leading-[1.1] tracking-[-0.025em] md:text-[40px] xl:text-[48px]"
         >
           <TwoTone text={headline} muted={headlineMuted} onDark={tone === "dark"} />
         </h2>
 
         {body ? (
-          <p {...reveal} className={`mt-4 max-w-[520px] text-pretty text-[16px] font-normal leading-[1.55] md:mt-5 ${t.body}`}>
+          <p {...reveal} className={`mt-4 max-w-[600px] text-pretty text-[17px] font-normal leading-[1.4] tracking-[-0.01em] md:mt-5 md:text-[18px] xl:text-[20px] ${t.body}`}>
             {body}
           </p>
         ) : null}
@@ -141,7 +141,7 @@ export function CtaNewsletter({
           </div>
 
           {/* Reserved slot: the privacy note and the confirmation share it, so nothing shifts. */}
-          <div {...reveal} className="relative mt-3 h-5 w-full text-[13px] font-normal leading-5">
+          <div {...reveal} className="relative mt-3 h-5 w-full text-[13px] font-normal leading-5 md:text-[14px]">
             {privacyNote ? (
               <p
                 aria-hidden={done}
@@ -171,7 +171,7 @@ export function CtaNewsletter({
         ) : null}
 
         {visual ? (
-          <div {...reveal} className="mt-12 w-full max-w-[760px] md:mt-14">
+          <div {...reveal} className="mt-10 w-full max-w-[760px] md:mt-14 xl:mt-16">
             {visual}
           </div>
         ) : null}

@@ -30,8 +30,8 @@ export type LensesListProps = {
 
 /**
  * Lenses List v1
- * A two-tone h2 with a portrait (4:5) visual under it, next to a vertical list of large
- * clickable names. The active name is black and shows a short description; the others are
+ * A two-tone h2 (28/32/40px) with a portrait (4:5) visual under it, next to a vertical list of
+ * clickable sub-headline names (22/24/28px). The active name is black and shows a short description; the others are
  * grey. Choosing an item crossfades the visual (opacity + slight rise/scale, 500ms; hidden
  * layers are inert). Real buttons: Enter/Space select, ArrowUp/ArrowDown move, Home/End jump.
  * Mobile stacks headline, list, then the visual.
@@ -69,14 +69,14 @@ export function LensesList({
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-[120px] xl:py-[120px] ${className}`}>
       <Reveal
-        className={`mx-auto flex w-full max-w-[1200px] flex-col gap-8 md:grid md:gap-x-10 md:gap-y-0 md:grid-rows-[auto_1fr] xl:gap-x-16 ${
+        className={`mx-auto flex w-full max-w-[1200px] flex-col gap-10 md:grid md:gap-x-10 md:gap-y-0 md:grid-rows-[auto_1fr] xl:gap-x-16 ${
           reverse ? "md:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[560px_minmax(0,1fr)]" : "md:grid-cols-[300px_minmax(0,1fr)] xl:grid-cols-[minmax(0,1fr)_560px]"
         }`}
       >
         <h2
           {...reveal}
           id={headingId}
-          className={`${side} text-balance text-[26px] font-normal leading-[1.1] tracking-[-0.025em] text-text-primary md:row-start-1 md:self-start md:text-[30px] xl:max-w-[520px] xl:text-[42px]`}
+          className={`${side} text-balance text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-text-primary md:row-start-1 md:self-start md:text-[32px] xl:max-w-[520px] xl:text-[40px]`}
         >
           <TwoTone text={headline} muted={headlineMuted} />
         </h2>
@@ -89,7 +89,7 @@ export function LensesList({
             const panelId = `${uid}-panel-${i}`;
             return (
               <li key={item.name} {...reveal} className="flex flex-col border-b border-border-light">
-                <h3 className="text-[32px] font-normal leading-[normal] tracking-[-0.02em] md:text-[36px] xl:text-[44px]">
+                <h3 className="text-[22px] font-normal leading-[1.3] tracking-[-0.02em] md:text-[24px] xl:text-[28px]">
                   <button
                     ref={(el) => {
                       buttons.current[i] = el;
@@ -110,7 +110,7 @@ export function LensesList({
                 <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!open}>
                   <p
                     key={open ? "open" : "closed"}
-                    className="max-w-[520px] text-pretty pb-[18px] text-[16px] font-normal leading-[1.6] text-text-nav motion-safe:animate-[feature-in_0.45s_var(--ease-out-soft)_both] xl:text-[18px]"
+                    className="max-w-[520px] text-pretty pb-[18px] text-[15px] font-normal leading-[1.55] text-text-nav motion-safe:animate-[feature-in_0.45s_var(--ease-out-soft)_both] md:text-[16px]"
                   >
                     {item.description}
                   </p>
@@ -121,7 +121,7 @@ export function LensesList({
         </ul>
 
         {/* Visual */}
-        <div {...reveal} className={`${side} w-full max-w-[280px] md:row-start-2 md:mt-10 md:max-w-[240px] md:self-start xl:mt-16 xl:max-w-[300px]`}>
+        <div {...reveal} className={`${side} w-full max-w-[280px] md:row-start-2 md:mt-14 md:max-w-[240px] md:self-start xl:mt-16 xl:max-w-[300px]`}>
           <div className="relative aspect-[4/5] w-full overflow-clip rounded-frame bg-surface-muted">
             {items.map((item, i) => {
               const current = i === active;

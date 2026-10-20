@@ -25,7 +25,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"lenses"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: large-name list, arrow-key navigation, swapping portrait visual." }],
+  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: large-name list, arrow-key navigation, swapping portrait visual." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 42/30/26), lens names at the sub-headline size 28/24/22 (was 44/36/32), descriptions 16/15, headline → visual 64/56/40." }],
   files: [
     {
       path: "registry/firefly/sections/lenses-list-v1/lenses-list-v1.tsx",

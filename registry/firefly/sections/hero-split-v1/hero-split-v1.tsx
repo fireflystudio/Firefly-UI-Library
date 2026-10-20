@@ -35,10 +35,10 @@ export type HeroSplitProps = {
 /**
  * Hero Split v1
  * Two columns from tablet up (copy 6/12, then 5/12 on desktop; visual takes the rest), stacked
- * on mobile with the copy first. Left-aligned two-tone h1 at 34/44/56px, body, CTA pair and an
+ * on mobile with the copy first. Left-aligned two-tone h1 at 34/48/64px, lead (17/18/20px), CTA pair and an
  * optional mono note. The copy reveals on load (100ms stagger); the visual follows 300ms later
  * and drifts down up to 60px as it scrolls out. `reverse` swaps the columns on tablet and up.
- * Top padding leaves room for a fixed nav (64px). Renders the page's only h1.
+ * Top padding leaves room for a fixed nav (64px); bottom padding 64/80/96px. Renders the page's only h1.
  */
 export function HeroSplit({
   id = "hero",
@@ -60,11 +60,11 @@ export function HeroSplit({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={`bg-surface-page px-5 pb-14 pt-[calc(64px+56px)] md:px-10 md:pb-20 md:pt-[calc(64px+80px)] xl:px-16 xl:pb-24 xl:pt-[calc(64px+120px)] ${className}`}
+      className={`bg-surface-page px-5 pb-16 pt-[calc(64px+56px)] md:px-10 md:pb-20 md:pt-[calc(64px+80px)] xl:px-16 xl:pb-24 xl:pt-[calc(64px+120px)] ${className}`}
     >
       <div className="mx-auto grid max-w-[1312px] grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-8 xl:gap-12">
         {/* Copy */}
-        <Reveal stagger={100} className="flex min-w-0 flex-col items-start gap-6 md:col-span-6 md:gap-7 xl:col-span-5">
+        <Reveal stagger={100} className="flex min-w-0 flex-col items-start gap-8 md:col-span-6 md:gap-10 xl:col-span-5">
           <div className="flex flex-col items-start gap-4 md:gap-5">
             {eyebrow ? (
               <p {...reveal} className="font-mono text-[12px] uppercase leading-[normal] tracking-[0.08em] text-text-quaternary">
@@ -74,16 +74,16 @@ export function HeroSplit({
             <h1
               {...reveal}
               id={headingId}
-              className="text-balance text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[44px] xl:text-[56px]"
+              className="text-balance text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[48px] xl:text-[64px]"
             >
               <TwoTone text={headline} muted={headlineMuted} />
             </h1>
+            {body ? (
+              <p {...reveal} className="max-w-[520px] text-pretty text-[17px] leading-[1.4] tracking-[-0.01em] text-text-nav md:text-[18px] xl:text-[20px]">
+                {body}
+              </p>
+            ) : null}
           </div>
-          {body ? (
-            <p {...reveal} className="max-w-[480px] text-pretty text-[16px] leading-[1.55] text-text-nav md:text-[17px] xl:text-[18px]">
-              {body}
-            </p>
-          ) : null}
           <div className="flex flex-col items-start gap-4">
             <div {...reveal}>
               <HeroCta primary={primaryCta} secondary={secondaryCta} />

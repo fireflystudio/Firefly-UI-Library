@@ -30,7 +30,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"hero"', description: "Section id for anchor links; the heading id is <id>-heading." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: masthead, lead card with gradient, fluid 1/2/2+lead grid, hover lift + image scale, parallax on the lead." }],
+  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: masthead, lead card with gradient, fluid 1/2/2+lead grid, hover lift + image scale, parallax on the lead." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Display h1 64/48/34 (was 56/44/34), lead intro 20/18/17, masthead → grid 64/56/40, grid gap 24/20 (was 16/12), lead story title 28/24/22, story titles 20/19/18, bottom padding 96/80/64 (was 120/80/56)." }],
   files: [
     {
       path: "registry/firefly/sections/hero-news-bento-v1/hero-news-bento-v1.tsx",

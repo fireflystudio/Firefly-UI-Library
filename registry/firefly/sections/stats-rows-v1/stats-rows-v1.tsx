@@ -47,8 +47,8 @@ export function StatsRows({
 
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
-      <Reveal className="mx-auto flex max-w-[1200px] flex-col gap-10 md:gap-14 xl:gap-20">
-        <div className="flex max-w-[720px] flex-col items-start gap-5 md:gap-6">
+      <Reveal className="mx-auto flex max-w-[1200px] flex-col gap-10 md:gap-14 xl:gap-16">
+        <div className="flex max-w-[720px] flex-col items-start gap-4 md:gap-5">
           {eyebrow ? (
             <p {...reveal} className="font-mono text-[12px] font-medium uppercase leading-[normal] tracking-[0.08em] text-text-nav">
               {eyebrow}
@@ -57,17 +57,17 @@ export function StatsRows({
           <h2
             {...reveal}
             id={headingId}
-            className="text-balance text-[28px] font-normal leading-[1.1] tracking-[-0.03em] text-text-primary md:text-[36px] xl:text-[48px]"
+            className="text-balance text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]"
           >
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
           {intro ? (
-            <p {...reveal} className="max-w-[560px] text-pretty text-[16px] leading-[1.55] text-text-nav">
+            <p {...reveal} className="max-w-[600px] text-pretty text-[17px] leading-[1.4] tracking-[-0.01em] text-text-nav md:text-[18px] xl:text-[20px]">
               {intro}
             </p>
           ) : null}
           {cta ? (
-            <div {...reveal} className="pt-1">
+            <div {...reveal} className="pt-4 md:pt-5">
               <Button href={cta.href} variant="secondary">
                 {cta.label}
               </Button>
@@ -80,15 +80,15 @@ export function StatsRows({
             <li
               key={`${item.value}-${item.title}`}
               {...reveal}
-              className="group flex flex-col gap-3 border-t border-border-light py-6 md:grid md:grid-cols-[112px_minmax(0,1fr)_minmax(0,1.4fr)] md:items-baseline md:gap-x-8 md:gap-y-0 md:py-8 xl:grid-cols-[200px_minmax(0,1fr)_minmax(0,1.4fr)] xl:gap-x-12 xl:py-10"
+              className="group flex flex-col gap-3 border-t border-border-light py-6 md:grid md:grid-cols-[136px_minmax(0,1fr)_minmax(0,1.4fr)] md:items-baseline md:gap-x-8 md:gap-y-0 md:py-8 xl:grid-cols-[200px_minmax(0,1fr)_minmax(0,1.4fr)] xl:gap-x-12 xl:py-10"
             >
               {/* Hover: the value nudges 5px right (translate only); the reveal sits on the <li> */}
-              <p className="text-[32px] font-normal leading-[1] tracking-[-0.03em] text-text-primary tabular-nums transition-[translate] duration-200 ease-out group-hover:translate-x-[5px] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 xl:text-[40px]">
+              <p className="text-[32px] font-normal leading-[1] tracking-[-0.03em] text-text-primary tabular-nums transition-[translate] duration-200 ease-out group-hover:translate-x-[5px] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 md:text-[40px] xl:text-[48px]">
                 {item.value}
               </p>
-              <h3 className="text-pretty text-[18px] font-medium leading-[1.3] tracking-[-0.01em] text-text-primary">{item.title}</h3>
+              <h3 className="text-pretty text-[16px] font-medium leading-[normal] text-text-primary md:text-[17px] xl:text-[18px]">{item.title}</h3>
               {item.description ? (
-                <p className="max-w-[480px] text-pretty text-[15px] leading-[1.55] text-text-nav">{item.description}</p>
+                <p className="max-w-[480px] text-pretty text-[15px] leading-[1.55] text-text-nav md:text-[16px]">{item.description}</p>
               ) : null}
             </li>
           ))}

@@ -28,7 +28,7 @@ export type FaqSplitProps = {
  * Two-tone headline + ghost CTA on the left (400px on desktop), accordion on the right.
  * One question open at a time: opening one closes the previous, clicking the open one closes
  * it. The first is open by default. +/– glyph rotates; the answer fades and rises in after
- * the first interaction. Section padding 64/96/160px, max width 1200px.
+ * the first interaction. Section padding 64/96/120px, max width 1200px.
  */
 export function FaqSplit({
   id = "faq",
@@ -48,13 +48,13 @@ export function FaqSplit({
   };
 
   return (
-    <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-[120px] xl:py-[160px] ${className}`}>
-      <Reveal className="mx-auto flex max-w-[1200px] flex-col items-start gap-8 md:flex-row xl:gap-[120px]">
-        <div className="flex w-full flex-col items-start gap-5 pt-6 md:w-[260px] md:shrink-0 xl:w-[400px]">
+    <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-[120px] xl:py-[120px] ${className}`}>
+      <Reveal className="mx-auto flex max-w-[1200px] flex-col items-start gap-10 md:flex-row xl:gap-[120px]">
+        <div className="flex w-full flex-col items-start gap-8 pt-6 md:w-[260px] md:shrink-0 md:gap-10 xl:w-[400px]">
           <h2
             {...reveal}
             id={headingId}
-            className="text-balance text-[26px] font-normal leading-[1.1] tracking-[-0.035em] text-text-primary md:text-[30px] xl:text-[44px]"
+            className="text-balance text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]"
           >
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
@@ -94,7 +94,7 @@ function AccordionItem({ item, open, animate, onToggle }: { item: FaqItem; open:
           onClick={onToggle}
           className="group flex w-full cursor-pointer items-center justify-between gap-4 py-[26px] text-left"
         >
-          <span className="text-[17px] font-medium leading-[normal] tracking-[-0.02em] text-text-primary transition-opacity duration-200 ease-out group-hover:opacity-70 motion-reduce:transition-none md:text-[19px]">
+          <span className="text-[16px] font-medium leading-[normal] text-text-primary transition-opacity duration-200 ease-out group-hover:opacity-70 motion-reduce:transition-none md:text-[17px] xl:text-[18px]">
             {item.question}
           </span>
           <ToggleIcon open={open} />
@@ -106,7 +106,7 @@ function AccordionItem({ item, open, animate, onToggle }: { item: FaqItem; open:
             initial={animate && !reduce ? { opacity: 0, y: -8 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-[280px] text-pretty text-[16px] font-normal leading-[1.55] text-text-nav md:max-w-[400px] xl:max-w-[600px]"
+            className="max-w-[280px] text-pretty text-[15px] font-normal leading-[1.55] text-text-nav md:max-w-[400px] md:text-[16px] xl:max-w-[600px]"
           >
             {item.answer}
           </motion.p>

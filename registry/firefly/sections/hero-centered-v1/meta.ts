@@ -29,6 +29,7 @@ export const meta: CatalogueItem = {
     { version: "1.0", date: "2026-10-16", notes: "First release: stacked two-tone h1, staggered load reveal, exit parallax on the visual." },
     { version: "1.1", date: "2026-10-19", notes: "Optional visualRatioMobile for a taller phone crop (default look unchanged)." },
     { version: "1.2", date: "2026-10-19", notes: "Body limited to 120 characters (2 lines on tablet/desktop); dev warning when longer." },
+    { version: "1.3", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Lead 20/18/17 (was 18/18/16), headline → lead 20/20/16, lead → buttons 40/40/32, copy → visual 64/56/40, bottom padding 96/80/64." },
   ],
   files: [
     {

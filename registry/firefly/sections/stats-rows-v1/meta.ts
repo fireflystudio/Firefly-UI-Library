@@ -22,7 +22,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"stats"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: hairline rows, value nudge on hover, two-tone headline." }],
+  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: hairline rows, value nudge on hover, two-tone headline." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 48/36/28), values 48/40/32 (was 40/32/32), lead intro 20/18/17, lead → button 40/40/32, row titles 18/17/16, descriptions 16/15, header → rows 64/56/40." }],
   files: [
     {
       path: "registry/firefly/sections/stats-rows-v1/stats-rows-v1.tsx",

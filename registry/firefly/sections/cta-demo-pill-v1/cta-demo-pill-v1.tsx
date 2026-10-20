@@ -47,10 +47,10 @@ const TONES = {
 
 /**
  * CTA Demo Pill v1
- * Centred closing call to action: a small mono pill tag, a big two-tone heading (32/40/56px),
+ * Centred closing call to action: a small mono pill tag, a two-tone statement heading (30/40/48px),
  * a short body, the house CTA pair (primary + ghost) and a small note. An optional visual sits
  * below in a rounded, clipped frame with a 30px parallax. `tone` switches between the dark
- * section and the light page background. Generous padding: 96/128/160px.
+ * section and the light page background. Section padding 64/96/120px.
  */
 export function CtaDemoPill({
   id = "cta",
@@ -70,7 +70,7 @@ export function CtaDemoPill({
   const onDark = tone === "dark";
 
   return (
-    <section id={id} aria-labelledby={headingId} className={`${t.section} overflow-clip px-5 py-24 md:px-10 md:py-32 xl:px-16 xl:py-[160px] ${className}`}>
+    <section id={id} aria-labelledby={headingId} className={`${t.section} overflow-clip px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
       <Reveal className="mx-auto flex w-full max-w-[1200px] flex-col items-center text-center">
         {tag ? (
           <p
@@ -84,13 +84,13 @@ export function CtaDemoPill({
         <h2
           {...reveal}
           id={headingId}
-          className="max-w-[900px] text-balance text-[32px] font-normal leading-[1.06] tracking-[-0.03em] md:text-[40px] xl:text-[56px]"
+          className="max-w-[1000px] text-balance text-[30px] font-normal leading-[1.1] tracking-[-0.025em] md:text-[40px] xl:text-[48px]"
         >
           <TwoTone text={headline} muted={headlineMuted} onDark={onDark} />
         </h2>
 
         {body ? (
-          <p {...reveal} className={`mt-5 max-w-[560px] text-pretty text-[16px] font-normal leading-[1.55] md:mt-6 md:text-[18px] ${t.body}`}>
+          <p {...reveal} className={`mt-4 max-w-[600px] text-pretty text-[17px] font-normal leading-[1.4] tracking-[-0.01em] md:mt-5 md:text-[18px] xl:text-[20px] ${t.body}`}>
             {body}
           </p>
         ) : null}
@@ -100,13 +100,13 @@ export function CtaDemoPill({
         </div>
 
         {note ? (
-          <p {...reveal} className={`mt-4 text-balance text-[13px] font-normal leading-[normal] ${t.note}`}>
+          <p {...reveal} className={`mt-4 text-balance text-[13px] font-normal leading-[normal] md:text-[14px] ${t.note}`}>
             {note}
           </p>
         ) : null}
 
         {visual ? (
-          <div {...reveal} className="mt-14 w-full max-w-[960px] md:mt-16 xl:mt-20">
+          <div {...reveal} className="mt-10 w-full max-w-[960px] md:mt-14 xl:mt-16">
             <Parallax distance={30}>
               <div className={`overflow-clip rounded-frame border ${t.frame}`}>{visual}</div>
             </Parallax>

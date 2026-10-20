@@ -48,16 +48,16 @@ export function BentoCards({ id = "bento", headline, headlineMuted, items, class
 
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
-      <Reveal className="mx-auto flex w-full max-w-[1312px] flex-col gap-8 md:gap-10 xl:gap-12">
+      <Reveal className="mx-auto flex w-full max-w-[1312px] flex-col gap-10 md:gap-14 xl:gap-16">
         <h2
           {...reveal}
           id={headingId}
-          className="max-w-[760px] text-balance text-[28px] font-normal leading-[1.06] tracking-[-0.04em] text-text-primary md:text-[36px] xl:text-[48px]"
+          className="max-w-[760px] text-balance text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]"
         >
           <TwoTone text={headline} muted={headlineMuted} />
         </h2>
 
-        <ul className={`grid w-full auto-rows-[400px] grid-cols-1 gap-3 md:auto-rows-[423px] md:grid-cols-2 xl:auto-rows-[364px] ${cols}`}>
+        <ul className={`grid w-full auto-rows-[400px] grid-cols-1 gap-5 md:auto-rows-[423px] md:grid-cols-2 md:gap-6 xl:auto-rows-[364px] ${cols}`}>
           {items.map((item, i) => (
             <li key={i} {...reveal} className={`min-w-0 ${wideFirst && i === 0 ? "md:col-span-2" : ""}`}>
               <BentoCard item={item} />
@@ -102,7 +102,7 @@ function BentoCard({ item }: { item: BentoItem }) {
       ) : null}
 
       <div className="mt-auto flex flex-col gap-2">
-        <h3 className="line-clamp-3 text-pretty text-[20px] font-medium leading-[1.3] tracking-[-0.02em]">
+        <h3 className="line-clamp-3 text-pretty text-[18px] font-medium leading-[1.3] tracking-[-0.01em] md:text-[19px] xl:text-[20px]">
           {item.href ? (
             // Stretched link: the whole card is clickable, the accessible name stays the title
             <Link href={item.href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
@@ -112,7 +112,7 @@ function BentoCard({ item }: { item: BentoItem }) {
             item.title
           )}
         </h3>
-        {item.body ? <p className={`line-clamp-2 text-pretty text-[14px] leading-[1.5] ${onDark ? "text-text-on-dark/70" : "text-text-nav"}`}>{item.body}</p> : null}
+        {item.body ? <p className={`line-clamp-2 text-pretty text-[15px] leading-[1.55] md:text-[16px] ${onDark ? "text-text-on-dark/70" : "text-text-nav"}`}>{item.body}</p> : null}
       </div>
     </article>
   );

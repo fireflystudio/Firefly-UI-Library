@@ -26,7 +26,7 @@ export type FeatureRowChecksProps = {
 
 /**
  * Feature Row Checks v1
- * The static sibling of Feature Row Interactive: a compact two-tone h2 at the top of the copy
+ * The static sibling of Feature Row Interactive: a two-tone sub-headline h2 (22/24/28px) at the top of the copy
  * column, a list of ✓ + title + body items at the bottom (every item open, no dividers,
  * 48px apart; 32px on tablet), and one shared 720×560 visual with a 30px parallax.
  * Copy column 400px on desktop, 300px on tablet.
@@ -45,16 +45,16 @@ export function FeatureRowChecks({
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
       <Reveal
-        className={`mx-auto flex w-full max-w-[1200px] flex-col gap-7 md:items-center md:gap-[22px] xl:items-stretch xl:gap-20 ${
+        className={`mx-auto flex w-full max-w-[1200px] flex-col gap-10 md:items-center md:gap-[22px] xl:items-stretch xl:gap-20 ${
           reverse ? "md:flex-row-reverse" : "md:flex-row"
         }`}
       >
         {/* Copy */}
-        <div className="flex w-full flex-col justify-between gap-12 pt-2 md:w-[300px] md:shrink-0 md:gap-8 xl:w-[400px]">
+        <div className="flex w-full flex-col justify-between gap-10 pt-2 md:w-[300px] md:shrink-0 md:gap-8 xl:w-[400px]">
           <h2
             {...reveal}
             id={headingId}
-            className="text-pretty text-[26px] font-normal leading-[1.1] tracking-[-0.025em] text-text-primary md:pr-6 md:text-[24px] xl:pr-8 xl:text-[32px]"
+            className="text-pretty text-[22px] font-normal leading-[1.3] tracking-[-0.02em] text-text-primary md:pr-6 md:text-[24px] xl:pr-8 xl:text-[28px]"
           >
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
@@ -64,8 +64,8 @@ export function FeatureRowChecks({
               <li key={item.title} {...reveal} className="flex items-start gap-3">
                 <CheckIcon className="mt-[3px] shrink-0 text-icon-primary" />
                 <div className="flex min-w-0 flex-col gap-1">
-                  <h3 className="text-[16px] font-medium leading-[normal] text-text-primary">{item.title}</h3>
-                  {item.body ? <p className="max-w-[340px] text-pretty text-[14px] font-normal leading-[1.55] text-text-nav">{item.body}</p> : null}
+                  <h3 className="text-[16px] font-medium leading-[normal] text-text-primary md:text-[17px] xl:text-[18px]">{item.title}</h3>
+                  {item.body ? <p className="max-w-[340px] text-pretty text-[15px] font-normal leading-[1.55] text-text-nav md:text-[16px]">{item.body}</p> : null}
                 </div>
               </li>
             ))}

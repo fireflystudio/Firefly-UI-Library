@@ -17,7 +17,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"feature-checks"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: static check list, shared parallax visual." }],
+  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: static check list, shared parallax visual." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Sub-headline h2 28/24/22 (was 32/24/26), item titles 18/17/16, item copy 16/15, headline → content 40 on mobile." }],
   files: [
     {
       path: "registry/firefly/sections/feature-row-checks-v1/feature-row-checks-v1.tsx",
