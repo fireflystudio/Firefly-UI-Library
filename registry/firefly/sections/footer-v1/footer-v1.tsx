@@ -196,25 +196,35 @@ const DISCLOSURE_CSS = `@keyframes firefly-footer-in{from{opacity:0;transform:tr
 @media (prefers-reduced-motion:reduce){.firefly-footer-in{animation:none}}`;
 
 /**
- * "Policies ▾": a real <button aria-expanded aria-controls>; the sub-links open on hover (pointer),
- * on click / Enter / Space, close on Escape and when the pointer leaves. They stay in the DOM.
+ * "Policies ▾": a real <button aria-expanded aria-controls>. A mouse hover opens the sub-links
+ * while the pointer stays; a click / Enter / Space (and a tap on touch screens, which has no hover)
+ * pins them open until the next activation; Escape closes everything. They stay in the DOM.
  */
 function FooterDisclosure({ link, linkClass }: { link: FooterLink; linkClass: string }) {
   const id = useId();
-  const [open, setOpen] = useState(false);
+  const [hover, setHover] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const open = hover || pinned;
   return (
     <li
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onPointerEnter={(e) => {
+        if (e.pointerType === "mouse") setHover(true);
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "mouse") setHover(false);
+      }}
       onKeyDown={(e) => {
-        if (e.key === "Escape") setOpen(false);
+        if (e.key === "Escape") {
+          setHover(false);
+          setPinned(false);
+        }
       }}
     >
       <button
         type="button"
         aria-expanded={open}
         aria-controls={id}
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => setPinned((p) => !p)}
         className={`inline-flex cursor-pointer items-center gap-1 text-[20px] leading-[1.3] tracking-[-0.02em] transition-opacity duration-200 ease-out hover:opacity-70 motion-reduce:transition-none ${linkClass}`}
       >
         {link.label}
