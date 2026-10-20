@@ -134,7 +134,7 @@ export function CareersApply({
   const statusId = `${uid}-status`;
 
   return (
-    <section id={id} aria-labelledby={headingId} className={`bg-surface-page py-8 md:py-12 xl:py-[60px] ${className}`}>
+    <section id={id} aria-labelledby={headingId} className={`bg-surface-page pb-16 pt-8 md:pb-24 md:pt-12 xl:pb-[120px] xl:pt-[60px] ${className}`}>
       <div className="mx-auto max-w-[760px] px-5 md:px-10">
         <Reveal amount={0.1}>
           <h2 id={headingId} {...reveal} className="max-w-[1000px] text-balance text-[24px] leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[28px] xl:text-[32px]">
