@@ -10,6 +10,7 @@ export type CategoryId =
   | "testimonials"
   | "faq"
   | "cta"
+  | "popups"
   | "footer";
 
 export type Category = {

@@ -27,8 +27,10 @@ export const meta: CatalogueItem = {
     { name: "<NavLink>", type: "component", description: "Navigation bar link (ElevenLabs bar): 14px regular in a 36px pill that fills grey on hover; `active` sets aria-current; tone on-dark for bars over a hero photo. Also exports navIconButtonClassesFor(tone) (round 36px bar control) and <BurgerIcon>." },
     { name: "<TwoTone>", type: "component", description: "Renders a headline as primary text + muted grey second half. Props: text, muted, stack, onDark." },
     { name: "<Placeholder>", type: "component", default: 'label "Visual"', description: "Hatched stand-in for an image or mockup. Props: label, ratio, tone." },
+    { name: "<Popup>", type: "component", default: 'width "max-w-[440px]"', description: "Modal popup shell on a native <dialog>: focus trap, inert page, Escape, focus restore; overlay fade + panel rise-in from motion (instant under reduced motion); × button built in. Props: open, onClose, labelledBy, closeLabel, width, className. Mark the control to focus with data-autofocus. Also exports CloseIcon and CheckIcon." },
   ],
   changelog: [
+    { version: "1.3", date: "2026-10-20", notes: "Popup atom: modal shell on a native <dialog> (focus trap, Escape, focus restore) with the overlay fade and panel rise-in; the Pop-ups category builds on it." },
     { version: "1.0", date: "2026-10-16", notes: "First release, distilled from the Startupmap build and the Firefly Web Guide Book." },
     { version: "1.2", date: "2026-10-19", notes: "NavLink atom + surface-hover token: 14px pill links with a grey hover fill for the 64px navigation bar (ElevenLabs reference)." },
     { version: "1.1", date: "2026-10-19", notes: "Button set rebuilt 1:1 from the ElevenLabs reference: regular weight, 36 / 40 / 44px sizes, colour-shift hover, white secondary with a half-pixel ring + soft shadow. New IconButton, Segmented and PaginationDots atoms; new tokens for hover fills, pressed layer, pagination and --shadow-button." },
@@ -49,6 +51,7 @@ export const meta: CatalogueItem = {
     { path: "registry/firefly/ui/brand-mark.tsx", target: "components/ui/brand-mark.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/two-tone.tsx", target: "components/ui/two-tone.tsx", type: "registry:ui" },
     { path: "registry/firefly/ui/placeholder.tsx", target: "components/ui/placeholder.tsx", type: "registry:ui" },
+    { path: "registry/firefly/ui/popup.tsx", target: "components/ui/popup.tsx", type: "registry:ui" },
   ],
   dependencies: ["motion"],
 };

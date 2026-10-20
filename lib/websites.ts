@@ -20,4 +20,12 @@ export const WEBSITES: Website[] = [
     thumbnail: "/images/websites/startupmap.jpg",
     year: "2026",
   },
+  {
+    id: "solve",
+    name: "Solve",
+    description: "Five-page site for a health company (Platform, Health, Labs, Spinealign): photo heroes, scroll-driven steps, a product carousel, a navigation dropdown and the sign-up popup flow.",
+    url: "https://solve-inky.vercel.app",
+    github: "https://github.com/lukasznosekk/Solve",
+    year: "2026",
+  },
 ];

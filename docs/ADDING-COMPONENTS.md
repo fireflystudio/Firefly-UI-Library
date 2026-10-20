@@ -22,7 +22,7 @@ registry/firefly/sections/<id>/
 - The folder is auto-discovered. Do **not** edit `lib/`, `app/`, `components/catalogue/` or any other folder.
 - The component file is copied verbatim into a site as `components/sections/<id>.tsx`, so it may only import:
   - React, `next/link`, `next/image`, `motion` / `motion/react`
-  - the Base: `@/components/ui/reveal`, `@/components/ui/reveal-attr`, `@/components/ui/parallax`, `@/components/ui/art-scale`, `@/components/ui/button`, `@/components/ui/icon-button`, `@/components/ui/segmented`, `@/components/ui/pagination-dots`, `@/components/ui/hero-cta`, `@/components/ui/nav-link`, `@/components/ui/two-tone`, `@/components/ui/placeholder`
+  - the Base: `@/components/ui/reveal`, `@/components/ui/reveal-attr`, `@/components/ui/parallax`, `@/components/ui/art-scale`, `@/components/ui/button`, `@/components/ui/icon-button`, `@/components/ui/segmented`, `@/components/ui/pagination-dots`, `@/components/ui/hero-cta`, `@/components/ui/nav-link`, `@/components/ui/two-tone`, `@/components/ui/placeholder`, `@/components/ui/popup`
   - **never** `@/registry/...`, never another section, never `@/lib/...`.
 - `preview.tsx` and `meta.ts` are not shipped: they may import `@/lib/types` and the Base.
 
@@ -41,6 +41,7 @@ registry/firefly/sections/<id>/
 | `NavLink`, `navIconButtonClasses`, `BurgerIcon` from `@/components/ui/nav-link` | Navigation bar atoms: 14px links in 36px pills with the grey hover fill (`active` = aria-current only; `tone="on-dark"` over photos), the round 36px bar control, the two-line hamburger. |
 | `TwoTone` | `<h2><TwoTone text={headline} muted={headlineMuted} /></h2>`. Every h1/h2 is two-tone. `stack` puts the grey part on its own line, `onDark` for dark sections. |
 | `Placeholder` | `<Placeholder label="Image" ratio="4 / 3" tone="light" \| "dark" />`. The default for every image/mockup slot. |
+| `Popup` + `CloseIcon` / `CheckIcon` | Modal shell on a native `<dialog>` (focus trap, Escape, overlay click, focus restore, scroll lock) with the overlay fade and panel rise-in. `open`, `onClose`, `labelledBy` (heading id), `width`. Mark the control to focus with `data-autofocus`. Pop-ups build on it. |
 
 ## 3. Tokens — the only colours, radii, shadows you may use
 
@@ -122,7 +123,7 @@ export const meta: CatalogueItem = {
   id: "hero-split-v1",            // = folder name
   name: "Hero Split",             // no version
   version: 1,
-  category: "hero",               // base | navigation | hero | features | stats | carousels | logos | bento | testimonials | faq | cta | footer
+  category: "hero",               // base | navigation | hero | features | stats | carousels | logos | bento | testimonials | faq | cta | popups | footer
   description: "One or two sentences: what it is, what it does on interaction.",
   interactions: ["Hover the cards: they lift 4px.", "Scroll: the visual drifts 30px."],
   props: [

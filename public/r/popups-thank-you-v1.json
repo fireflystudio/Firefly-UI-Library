@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popups-thank-you-v1",
+  "type": "registry:block",
+  "title": "Thank-you Popup v1",
+  "description": "Thank-you V1: the confirmation as a modal popup — a check mark in a soft circle, a short title, one line of body and a full-width Close button. Exports the panel on its own too, so the Sign-up Popup can crossfade to it in place. Focus lands on the title, so screen readers hear the confirmation.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/firefly/sections/popups-thank-you-v1/popups-thank-you-v1.tsx",
+      "type": "registry:component",
+      "target": "components/sections/popups-thank-you-v1.tsx",
+      "content": "\"use client\";\n\nimport { useId, type ReactNode } from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport { CheckIcon, Popup } from \"@/components/ui/popup\";\n\nexport type ThankYouPanelProps = {\n  title: string;\n  body?: string;\n  closeLabel?: string;\n  onClose: () => void;\n  /** Icon in the circle; the Base check mark by default */\n  icon?: ReactNode;\n  /** id for the heading (Popup's labelledBy); generated when omitted */\n  id?: string;\n};\n\nconst focusOnMount = (el: HTMLElement | null) => el?.focus();\n\n/**\n * The confirmation itself: an icon in a soft circle, a short title, one line of body and a full-width\n * Close button. Use it standalone inside <ThankYouPopup> or pass it as the `success` view of the\n * Sign-up Popup (V1 flow, where it crossfades in over the form). Focus lands on the title when it\n * mounts, so screen readers hear the confirmation.\n */\nexport function ThankYouPanel({ title, body, closeLabel = \"Close\", onClose, icon, id }: ThankYouPanelProps) {\n  const generated = useId();\n  const headingId = id ?? `${generated}-title`;\n  return (\n    <div className=\"flex flex-col items-start\">\n      <span aria-hidden className=\"flex size-12 items-center justify-center rounded-pill bg-surface-muted text-text-primary\">\n        {icon ?? <CheckIcon />}\n      </span>\n      <h2 id={headingId} ref={focusOnMount} tabIndex={-1} className=\"mt-5 text-[22px] leading-[1.3] tracking-[-0.02em] outline-none md:text-[24px]\">\n        {title}\n      </h2>\n      {body ? <p className=\"mt-2 text-[15px] leading-[1.55] text-text-tertiary md:text-[16px]\">{body}</p> : null}\n      <Button type=\"button\" variant=\"primary\" size=\"lg\" className=\"mt-6 w-full\" onClick={onClose}>\n        {closeLabel}\n      </Button>\n    </div>\n  );\n}\n\nexport type ThankYouPopupProps = Omit<ThankYouPanelProps, \"id\"> & { open: boolean };\n\n/** Thank-you Popup v1: the confirmation panel in its own modal popup (Base <Popup>). */\nexport function ThankYouPopup({ open, onClose, ...panel }: ThankYouPopupProps) {\n  const id = useId();\n  return (\n    <Popup open={open} onClose={onClose} labelledBy={`${id}-title`} closeLabel={panel.closeLabel}>\n      <ThankYouPanel {...panel} id={`${id}-title`} onClose={onClose} />\n    </Popup>\n  );\n}\n"
+    }
+  ]
+}

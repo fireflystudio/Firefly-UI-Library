@@ -86,6 +86,11 @@
           "path": "registry/firefly/ui/placeholder.tsx",
           "type": "registry:ui",
           "target": "components/ui/placeholder.tsx"
+        },
+        {
+          "path": "registry/firefly/ui/popup.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/popup.tsx"
         }
       ]
     },
@@ -381,6 +386,54 @@
           "path": "registry/firefly/sections/cta-newsletter-v1/cta-newsletter-v1.tsx",
           "type": "registry:component",
           "target": "components/sections/cta-newsletter-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popups-signup-v1",
+      "type": "registry:block",
+      "title": "Sign-up Popup v1",
+      "description": "Modal popup with one labelled email field and a primary button, for waitlists and demo requests. Validates inline in a reserved slot, then either crossfades to a thank-you view inside the popup (V1) or closes and hands over to the site (V2, e.g. the Thank-you Bar). Built on the Base Popup: native dialog, focus trap, Escape, overlay click, focus restore, rise-in animation.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/firefly/sections/popups-signup-v1/popups-signup-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/popups-signup-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popups-thank-you-v1",
+      "type": "registry:block",
+      "title": "Thank-you Popup v1",
+      "description": "Thank-you V1: the confirmation as a modal popup — a check mark in a soft circle, a short title, one line of body and a full-width Close button. Exports the panel on its own too, so the Sign-up Popup can crossfade to it in place. Focus lands on the title, so screen readers hear the confirmation.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/firefly/sections/popups-thank-you-v1/popups-thank-you-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/popups-thank-you-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popups-thank-you-bar-v1",
+      "type": "registry:block",
+      "title": "Thank-you Bar v1",
+      "description": "Thank-you V2: a white pill that slides down from the top edge of the page, over the navigation — check mark, bold title, grey body and a × button. Hides itself after 6 s (pauses while hovered or focused), announces itself as a status message, instant under reduced motion. Pair it with the Sign-up Popup: close the popup on Join and show the bar.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/firefly/sections/popups-thank-you-bar-v1/popups-thank-you-bar-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/popups-thank-you-bar-v1.tsx"
         }
       ]
     },
