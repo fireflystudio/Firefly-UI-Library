@@ -31,7 +31,7 @@ export type HeroCenteredProps = {
 
 /**
  * Hero Centered v1
- * Centred copy block (eyebrow, stacked two-tone h1 at 34/48/64px, lead at 17/18/20px, CTA pair) with a
+ * Centred copy block (eyebrow, stacked two-tone h1 at 32/42/52px, lead at 17/18/20px, CTA pair) with a
  * large visual underneath in a clipped rounded frame. On load the copy reveals line by line
  * (100ms stagger), the visual follows 300ms later and drifts down up to 60px as it scrolls
  * out. Top padding leaves room for a fixed nav (64px); bottom padding 64/80/96px. Renders the page's only h1.
@@ -73,7 +73,7 @@ export function HeroCentered({
           ) : null}
           <h1
             id={headingId}
-            className="text-balance text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[48px] xl:text-[64px]"
+            className="text-balance text-[32px] font-normal leading-[1.06] tracking-[-0.03em] text-text-primary md:text-[42px] xl:text-[52px]"
           >
             <span {...reveal} className="block">
               {headline}
