@@ -2,7 +2,21 @@ import type { PreviewProps } from "@/lib/types";
 import { NavigationSticky } from "./navigation-sticky-v1";
 
 const LINKS = [
-  { label: "Product", href: "#product" },
+  {
+    label: "Product",
+    href: "#product",
+    menu: {
+      columns: [
+        { label: "For teams", links: [{ label: "Documents", href: "#documents" }, { label: "Records", href: "#records" }, { label: "Integrations", href: "#integrations" }] },
+        { label: "For individuals", links: [{ label: "Profile", href: "#profile" }, { label: "Consultation", href: "#consultation" }] },
+      ],
+      features: [
+        { label: "Documents", href: "#feature-1" },
+        { label: "Records", href: "#feature-2" },
+        { label: "Access", href: "#feature-3" },
+      ],
+    },
+  },
   { label: "Customers", href: "#customers" },
   { label: "Pricing", href: "#pricing" },
   { label: "About", href: "#about" },
