@@ -454,7 +454,7 @@
       "name": "careers-about-v1",
       "type": "registry:block",
       "title": "Careers About v1",
-      "description": "“Who we are”: a section headline and short lead-size paragraphs across the full column. Paragraphs stagger in after the headline.",
+      "description": "“Who we are”: a section headline and a column of short lead-size paragraphs capped at 760px. Paragraphs stagger in after the headline.",
       "files": [
         {
           "path": "registry/firefly/sections/careers-about-v1/careers-about-v1.tsx",

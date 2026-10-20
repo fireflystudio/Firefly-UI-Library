@@ -10,17 +10,17 @@ export type CareersAboutProps = {
   headlineMuted?: string;
   /** Short paragraphs, one per entry */
   paragraphs: string[];
-  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = the library footer (1360px at 1440). */
+  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = the library column (1072px at 1440). */
   containerClassName?: string;
   className?: string;
 };
 
 /**
  * Careers About v1
- * "Who we are": a section headline (28/32/40px) and lead-size paragraphs (17/18/20px) across the
- * full content column. Headline first, paragraphs stagger in after it.
+ * "Who we are": a section headline (28/32/40px) and a column of lead-size paragraphs (17/18/20px)
+ * capped at 760px. Headline first, paragraphs stagger in after it.
  */
-export function CareersAbout({ id = "about", headline, headlineMuted, paragraphs, containerClassName = "max-w-[1440px] px-5 md:px-10", className = "" }: CareersAboutProps) {
+export function CareersAbout({ id = "about", headline, headlineMuted, paragraphs, containerClassName = "max-w-[1200px] px-5 md:px-10 xl:px-16", className = "" }: CareersAboutProps) {
   const headingId = `${id}-heading`;
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page py-8 md:py-12 xl:py-[60px] ${className}`}>
@@ -29,7 +29,7 @@ export function CareersAbout({ id = "about", headline, headlineMuted, paragraphs
           <h2 id={headingId} {...reveal} className="max-w-[1000px] text-balance text-[28px] leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]">
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
-          <div className="mt-10 flex flex-col gap-4 md:mt-12 md:gap-5 xl:mt-14">
+          <div className="mt-10 flex max-w-[760px] flex-col gap-4 md:mt-12 md:gap-5 xl:mt-14">
             {paragraphs.map((p) => (
               <p key={p.slice(0, 32)} {...reveal} className="text-pretty text-[17px] leading-[1.4] tracking-[-0.01em] text-text-secondary md:text-[18px] xl:text-[20px]">
                 {p}
