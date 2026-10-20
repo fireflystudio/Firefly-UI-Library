@@ -20,6 +20,8 @@ export type CareersRolesProps = {
   roles: CareersRole[];
   /** Shown instead of the list when `roles` is empty */
   emptyText?: string;
+  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = the library footer (1360px at 1440). */
+  containerClassName?: string;
   className?: string;
 };
 
@@ -35,12 +37,13 @@ export function CareersRoles({
   headlineMuted,
   roles,
   emptyText = "No open roles right now. Check back soon.",
+  containerClassName = "max-w-[1440px] px-5 md:px-10",
   className = "",
 }: CareersRolesProps) {
   const headingId = `${id}-heading`;
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page py-8 md:py-12 xl:py-[60px] ${className}`}>
-      <div className="mx-auto max-w-[1200px] px-5 md:px-10 xl:px-16">
+      <div className={`mx-auto ${containerClassName}`}>
         <Reveal stagger={60}>
           <h2 id={headingId} {...reveal} className="max-w-[1000px] text-balance text-[28px] leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]">
             <TwoTone text={headline} muted={headlineMuted} />

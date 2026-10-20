@@ -17,6 +17,8 @@ export type CareersHeroProps = {
   visualRatio?: string;
   /** Aspect ratio below 768px */
   visualRatioMobile?: string;
+  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = the library footer (1360px at 1440). */
+  containerClassName?: string;
   className?: string;
 };
 
@@ -33,6 +35,7 @@ export function CareersHero({
   visual,
   visualRatio = "1200 / 520",
   visualRatioMobile = "4 / 3",
+  containerClassName = "max-w-[1440px] px-5 md:px-10",
   className = "",
 }: CareersHeroProps) {
   const headingId = `${id}-heading`;
@@ -42,7 +45,7 @@ export function CareersHero({
       aria-labelledby={headingId}
       className={`bg-surface-page pb-8 pt-[calc(64px+56px)] md:pb-12 md:pt-[calc(64px+80px)] xl:pb-[60px] xl:pt-[calc(64px+120px)] ${className}`}
     >
-      <div className="mx-auto max-w-[1200px] px-5 md:px-10 xl:px-16">
+      <div className={`mx-auto ${containerClassName}`}>
         <Reveal stagger={100} className="flex flex-col items-center">
           <h1
             id={headingId}

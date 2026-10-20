@@ -11,6 +11,8 @@ export type CareersValuesProps = {
   headlineMuted?: string;
   /** 4–8 short principles */
   items: CareersValue[];
+  /** Width + side padding of the content column, so it lines up with the site's nav and footer. Default = the library footer (1360px at 1440). */
+  containerClassName?: string;
   className?: string;
 };
 
@@ -19,11 +21,11 @@ export type CareersValuesProps = {
  * "How we work": a section headline and a two-column grid of principles (card-title h3 + one or two
  * sentences). Items stagger in. Single column below 768px.
  */
-export function CareersValues({ id = "how-we-work", headline, headlineMuted, items, className = "" }: CareersValuesProps) {
+export function CareersValues({ id = "how-we-work", headline, headlineMuted, items, containerClassName = "max-w-[1440px] px-5 md:px-10", className = "" }: CareersValuesProps) {
   const headingId = `${id}-heading`;
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page py-8 md:py-12 xl:py-[60px] ${className}`}>
-      <div className="mx-auto max-w-[1200px] px-5 md:px-10 xl:px-16">
+      <div className={`mx-auto ${containerClassName}`}>
         <Reveal stagger={70}>
           <h2 id={headingId} {...reveal} className="max-w-[1000px] text-balance text-[28px] leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]">
             <TwoTone text={headline} muted={headlineMuted} />
