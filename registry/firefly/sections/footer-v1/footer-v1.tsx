@@ -35,7 +35,7 @@ export type FooterProps = {
   brandHref?: string;
   /** One short sentence under the brand (17 / 18 / 20px) */
   tagline?: string;
-  /** Link columns: 12px label + 20px links */
+  /** Link columns: 12px label + 16/17px links */
   columns: FooterColumn[];
   /** Email sign-up form. null hides it. */
   signup?: FooterSignup | null;
@@ -178,7 +178,7 @@ function FooterColumnList({ column, labelClass, linkClass }: { column: FooterCol
               <Link
                 href={link.href ?? "#"}
                 prefetch={link.prefetch}
-                className={`inline-block text-[20px] leading-[1.3] tracking-[-0.02em] transition-opacity duration-200 ease-out hover:opacity-70 motion-reduce:transition-none ${linkClass}`}
+                className={`inline-block text-[16px] leading-[1.4] tracking-[-0.01em] transition-opacity duration-200 ease-out hover:opacity-70 motion-reduce:transition-none md:text-[17px] ${linkClass}`}
               >
                 {link.label}
               </Link>
@@ -225,14 +225,14 @@ function FooterDisclosure({ link, linkClass }: { link: FooterLink; linkClass: st
         aria-expanded={open}
         aria-controls={id}
         onClick={() => setPinned((p) => !p)}
-        className={`inline-flex cursor-pointer items-center gap-1 text-[20px] leading-[1.3] tracking-[-0.02em] transition-opacity duration-200 ease-out hover:opacity-70 motion-reduce:transition-none ${linkClass}`}
+        className={`inline-flex cursor-pointer items-center gap-1 text-[16px] leading-[1.4] tracking-[-0.01em] transition-opacity duration-200 ease-out hover:opacity-70 motion-reduce:transition-none md:text-[17px] ${linkClass}`}
       >
         {link.label}
         <svg
           aria-hidden
           viewBox="0 0 24 24"
-          width="18"
-          height="18"
+          width="16"
+          height="16"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.6"
@@ -249,7 +249,7 @@ function FooterDisclosure({ link, linkClass }: { link: FooterLink; linkClass: st
             <Link
               href={sub.href ?? "#"}
               prefetch={sub.prefetch}
-              className={`inline-block text-[17px] leading-[1.4] tracking-[-0.01em] opacity-80 transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none ${linkClass}`}
+              className={`inline-block text-[15px] leading-[1.5] opacity-80 transition-opacity duration-200 ease-out hover:opacity-60 motion-reduce:transition-none md:text-[16px] ${linkClass}`}
             >
               {sub.label}
             </Link>
@@ -285,7 +285,7 @@ function SignupForm({
       <label htmlFor={`${id}-email`} className={`text-[12px] leading-[1.3] ${tone.label}`}>
         {label}
       </label>
-      <div className={`flex w-full items-center gap-3 border-b pb-2 ${tone.input}`}>
+      <div className={`flex w-full items-center gap-3 border-b pb-1.5 ${tone.input}`}>
         <input
           id={`${id}-email`}
           name="email"
@@ -294,14 +294,14 @@ function SignupForm({
           autoComplete="email"
           placeholder={placeholder}
           onChange={() => done && setDone(false)}
-          className="min-w-0 flex-1 bg-transparent p-0 text-[20px] leading-[1.3] tracking-[-0.02em] text-inherit md:text-[24px]"
+          className="min-w-0 flex-1 bg-transparent p-0 text-[16px] leading-[1.4] tracking-[-0.01em] text-inherit md:text-[17px]"
         />
         <button
           type="submit"
           aria-label={buttonLabel}
           className={`flex size-8 shrink-0 cursor-pointer items-center justify-center transition-[translate,opacity] duration-200 ease-out hover:translate-x-0.5 hover:opacity-60 motion-reduce:transition-none motion-reduce:hover:translate-x-0 ${tone.arrow}`}
         >
-          <svg aria-hidden viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <svg aria-hidden viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
         </button>
