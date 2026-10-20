@@ -77,7 +77,7 @@ No mono uppercase labels above headlines (section eyebrows, "tags" above a CTA h
 - `leading-[normal]`, `leading-[1.1]`, `leading-[1.55]` … **never** `leading-normal`. Tracking in `em` (`tracking-[-0.03em]`).
 - No forced `<br>` in long text; use `text-balance` / `text-pretty` + `max-w`.
 - **The type scale (2026-10-20, desktop / tablet / mobile; Inter 400 unless noted). No other headline sizes on desktop.**
-  - Display h1 `text-[34px] md:text-[48px] xl:text-[64px] leading-[1.04] tracking-[-0.03em]` — heroes only. Hero Centered uses the smaller `text-[32px] md:text-[42px] xl:text-[52px] leading-[1.06]` since 2026-10-20 (client review: 64 read too big on centred heroes).
+  - Display h1 `text-[34px] md:text-[48px] xl:text-[64px] leading-[1.04] tracking-[-0.03em]` — heroes only. Hero Centered uses the smaller `text-[34px] md:text-[44px] xl:text-[56px] leading-[1.06]` since 2026-10-20 (client review: 64 read too big on centred heroes).
   - Statement h2 `text-[30px] md:text-[40px] xl:text-[48px] leading-[1.1] tracking-[-0.025em]`, `max-w-[1000px]` — headline sections where the headline *is* the content (no body, or ≤ ~25 words / one line / one CTA) and the closing CTA.
   - Section h2 `text-[28px] md:text-[32px] xl:text-[40px] leading-[1.2] tracking-[-0.02em]` — a headline followed by copy, cards, a list, steps or a visual. Count the words under the headline: under ~25 → Statement, anything with real copy / cards / a visual → Section.
   - Sub-headline h3 `text-[22px] md:text-[24px] xl:text-[28px] leading-[1.3] tracking-[-0.02em]` — feature-row headlines, lens names, quotes.
