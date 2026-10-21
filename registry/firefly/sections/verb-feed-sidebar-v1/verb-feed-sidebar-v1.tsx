@@ -21,9 +21,9 @@ export type FeedEntry = { id: number; label: string; /** Two or three letters sh
 type Entry = FeedEntry;
 
 const SAMPLE_INTERESTS: Entry[] = [
-  "gaming",
-  "software team management",
-  "learn to meditate",
+  "Gaming",
+  "Software team management",
+  "Learn to meditate",
   "Dune 3 movie",
   "Paris things to do",
 ].map((label, id) => ({ id, label }));

@@ -17,6 +17,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the root." },
   ],
   changelog: [
+    { version: "1.2", date: "2026-10-21", notes: "Sample interests start with a capital, like the other Verb mockups." },
     { version: "1.1", date: "2026-10-21", notes: "Tighter paddings (panel 6, rows 10) so it looks like the sidebar of the Verb app." },
     { version: "1.0", date: "2026-10-21", notes: "First release, moved from the Verb site where it was built and approved." },
   ],
