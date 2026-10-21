@@ -395,7 +395,7 @@ function Mark({ source, size = 16 }: { source: keyof typeof SOURCES; size?: numb
   }
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={SOURCES[source].src} alt="" width={size} height={size} className="shrink-0 object-cover" style={{ width: size, height: size, borderRadius: Math.max(3, size * 0.22) }} />
+    <img src={SOURCES[source].src} alt="" width={size} height={size} className="shrink-0 object-cover" style={{ width: size, height: size, borderRadius: Math.max(3, size * 0.22), background: s.bg }} />
   );
 }
 
