@@ -1392,7 +1392,7 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
     <div className={`relative flex overflow-hidden bg-surface-primary font-sans text-text-primary ${className}`} style={{ ...VERB_VARS, width, height }}>
       {sidebar}
       {articleFull ? null : (
-        <div className={`flex min-w-0 flex-col ${art ? "w-[530px] shrink-0" : "flex-1"}`}>
+        <div className="flex min-w-0 flex-1 flex-col">
           {topBar}
           <div ref={feedRef} className="min-h-0 flex-1 overflow-y-auto pb-32 [scrollbar-width:thin]">
             <div className={art ? "px-5" : compact ? "px-5" : "mx-auto w-[800px]"}>
