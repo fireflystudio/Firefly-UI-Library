@@ -358,15 +358,15 @@
       ]
     },
     {
-      "name": "faq-accordion-v2",
+      "name": "faq-centered-v2",
       "type": "registry:block",
-      "title": "FAQ Accordion Boxed v2",
+      "title": "FAQ Centered v2",
       "description": "Centred two-tone headline over a 900px list where every question sits in its own rounded stroked box; opening one grows the box and shows the answer inside. One answer open at a time.",
       "files": [
         {
-          "path": "registry/firefly/sections/faq-accordion-v2/faq-accordion-v2.tsx",
+          "path": "registry/firefly/sections/faq-centered-v2/faq-centered-v2.tsx",
           "type": "registry:component",
-          "target": "components/sections/faq-accordion-v2.tsx"
+          "target": "components/sections/faq-centered-v2.tsx"
         }
       ]
     },
@@ -383,6 +383,22 @@
           "path": "registry/firefly/sections/faq-split-v1/faq-split-v1.tsx",
           "type": "registry:component",
           "target": "components/sections/faq-split-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "faq-split-v2",
+      "type": "registry:block",
+      "title": "FAQ Split v2",
+      "description": "Two-tone headline and a ghost button on the left, accordion on the right. One question open at a time, the first open by default, with a rotating +/– glyph.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/firefly/sections/faq-split-v2/faq-split-v2.tsx",
+          "type": "registry:component",
+          "target": "components/sections/faq-split-v2.tsx"
         }
       ]
     },

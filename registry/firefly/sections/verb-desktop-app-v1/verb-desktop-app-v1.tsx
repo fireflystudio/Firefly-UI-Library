@@ -12,7 +12,10 @@ import type { CSSProperties, ReactNode } from "react";
  * - Feed: Excerpt and Compact layouts (toggle top right), hover rows with ▶ and ⋮ (Save / Add to queue /
  *   Copy; "Playing now" on the playing row), See more, Trending chips (scroll, open a topic feed), interest
  *   feeds (Remove from Interests), Add interest with suggestions, loading skeleton, error with Retry
- *   (Politics, first time), the empty state with suggestions (Explore).
+ *   (Politics, first time), the empty state with suggestions (empty For you).
+ * - Explore (Figma "Explore grid – Desktop"): "Pick your sources" / "Pick your people" (Sources | Authors), category
+ *   chips, a masonry grid that follows the screen width; click a tile (or its Follow pill) to follow / unfollow, the
+ *   source appears at the top of the sidebar's Following list; "Following · N" lists them with Unfollow (Undo).
  * - Article side panel: click a row; previous / next, full width, menu, close, ▶ plays the summary.
  * - Audio: "New · 12m" starts a session of the feed (Playing · Xm left → Resume → Continue → All caught
  *   up), floating player with speed list, menu, seek, next, queue panel (play a row, row menu, Clear),
@@ -40,7 +43,7 @@ const IMG = "/images/verb-player";
 /* Content                                                                                          */
 /* ------------------------------------------------------------------------------------------------ */
 
-type Source = { id: string; name: string; src: string };
+type Source = { id: string; name: string; src: string; /** Letter avatar when there is no image. */ letter?: string; bg?: string; fg?: string };
 
 const SOURCES: Record<string, Source> = {
   guardian: { id: "guardian", name: "The Guardian", src: `${IMG}/source-guardian.png` },
@@ -50,6 +53,40 @@ const SOURCES: Record<string, Source> = {
   hn: { id: "hn", name: "Hacker News", src: `${IMG}/source-hacker-news.png` },
   atc: { id: "atc", name: "Above The Crowd", src: `${IMG}/source-above-the-crowd.png` },
 };
+
+/* Explore (Figma "Explore grid – Desktop", Sources and Authors tabs). `ratio` = tile visual height / width (masonry). */
+type Tile = { id: string; name: string; kind: "source" | "author" | "both"; cats: string[]; img?: string; ratio: number; bg?: string; fit?: "cover" | "contain"; letter?: string; fg?: string };
+
+const EX = `${IMG}/explore`;
+const TILES: Tile[] = [
+  { id: "bbc", name: "BBC News", kind: "source", cats: ["News & Politics"], img: `${EX}/bbc.png`, ratio: 1, bg: "#1c1c1e" },
+  { id: "emma", name: "Emma Chamberlain", kind: "both", cats: ["People & Blogs", "Podcasts"], img: `${EX}/emma.jpg`, ratio: 1.78 },
+  { id: "huberman", name: "Huberman Lab", kind: "both", cats: ["Podcasts", "Science & Technology", "Education"], img: `${EX}/huberman.jpg`, ratio: 1 },
+  { id: "economist", name: "The Economist", kind: "source", cats: ["News & Politics", "Business"], img: `${EX}/economist.png`, ratio: 1, bg: "#fce9e8" },
+  { id: "michael", name: "Michael Stevens", kind: "both", cats: ["Education", "Science & Technology"], img: `${EX}/michael.jpg`, ratio: 1 },
+  { id: "ted", name: "TED", kind: "source", cats: ["Education"], img: `${EX}/ted.png`, ratio: 1, bg: "#ff002a" },
+  { id: "hank", name: "Hank Green", kind: "both", cats: ["Education", "Science & Technology"], img: `${EX}/hank.jpg`, ratio: 1 },
+  { id: "cleo", name: "Cleo Abram", kind: "both", cats: ["Science & Technology", "Documentary"], img: `${EX}/cleo.jpg`, ratio: 1.33 },
+  { id: "3b1b", name: "3Blue1Brown", kind: "source", cats: ["Education", "Science & Technology"], img: `${EX}/3blue1brown.png`, ratio: 1, bg: "#0b1b2b", fit: "contain" },
+  { id: "tom", name: "Tom Scott", kind: "both", cats: ["Education", "Documentary"], img: `${EX}/tom.jpg`, ratio: 1.5 },
+  { id: "lex", name: "Lex Fridman", kind: "both", cats: ["Podcasts", "Science & Technology"], img: `${EX}/lex.jpg`, ratio: 1.6 },
+  { id: "radiolab", name: "Radiolab", kind: "source", cats: ["Podcasts", "Science & Technology"], img: `${EX}/radiolab.jpg`, ratio: 1 },
+  { id: "onet", name: "Onet", kind: "source", cats: ["News & Politics"], img: `${EX}/onet.png`, ratio: 1, bg: "#ffd900" },
+  { id: "natgeo", name: "National Geographic", kind: "source", cats: ["Documentary", "Science & Technology"], img: `${EX}/natgeo.png`, ratio: 1, bg: "#ffcc00", fit: "contain" },
+  { id: "ft", name: "Financial Times", kind: "source", cats: ["Business", "News & Politics"], img: `${EX}/ft.png`, ratio: 1, bg: "#f9f1eb" },
+  { id: "atlantic", name: "The Atlantic", kind: "source", cats: ["News & Politics"], img: `${EX}/atlantic.png`, ratio: 1, bg: "#e8171e" },
+  { id: "lenny", name: "Lenny’s Podcast", kind: "source", cats: ["Podcasts", "Business", "Design"], img: `${EX}/lenny.jpg`, ratio: 1 },
+  { id: "wsj", name: "The Wall Street Journal", kind: "source", cats: ["Business", "News & Politics"], img: `${EX}/wsj.png`, ratio: 1, bg: "#1c1c1e" },
+  { id: "substack", name: "Substack", kind: "source", cats: ["People & Blogs"], img: `${EX}/substack.png`, ratio: 1, bg: "#ffede5" },
+  { id: "casey", name: "Casey Neistat", kind: "both", cats: ["People & Blogs", "Film & Animation"], img: `${EX}/casey.jpg`, ratio: 1 },
+  { id: "mina", name: "Mina Park", kind: "author", cats: ["Design"], letter: "M", bg: "#fbe6ef", fg: "#b0124f", ratio: 0.97 },
+  { id: "nadia", name: "Nadia Okafor", kind: "author", cats: ["Business"], letter: "N", bg: "#e6f2ef", fg: "#0b6b57", ratio: 0.97 },
+  { id: "ali", name: "Ali Abdaal", kind: "author", cats: ["Education", "People & Blogs"], letter: "A", bg: "#f9f1eb", fg: "#d46a1f", ratio: 1 },
+  { id: "marques", name: "Marques Brownlee", kind: "author", cats: ["Science & Technology"], letter: "M", bg: "#ece9fb", fg: "#5b3fd1", ratio: 0.97 },
+];
+const EXPLORE_CATEGORIES = ["All", "News & Politics", "Science & Technology", "Education", "Business", "Design", "Podcasts", "Documentary", "People & Blogs", "Gaming", "Film & Animation", "Howto & Style"];
+/* A followed tile becomes a sidebar source (an existing source keeps its own name and mark). */
+for (const t of TILES) if (!SOURCES[t.id]) SOURCES[t.id] = { id: t.id, name: t.name, src: t.img ?? "", letter: t.letter, bg: t.bg, fg: t.fg };
 
 export type DesktopItem = {
   id: string;
@@ -247,7 +284,7 @@ function feedFor(v: View, saved: Set<string>): DesktopItem[] {
 type IconName =
   | "play" | "pause" | "next" | "more" | "home" | "explore" | "bookmark" | "sparkle" | "sidebar" | "list" | "bell"
   | "plus" | "close" | "queue-add" | "copy" | "external" | "unfollow" | "flag" | "trash" | "chevron-up" | "chevron-down"
-  | "chevron-right" | "expand" | "bars" | "error" | "mic" | "filter";
+  | "chevron-right" | "check" | "expand" | "bars" | "error" | "mic" | "filter";
 
 function Icon({ name, size = 16, className = "" }: { name: IconName; size?: number; className?: string }) {
   const st = { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round", strokeLinejoin: "round" } as const;
@@ -310,6 +347,7 @@ function Icon({ name, size = 16, className = "" }: { name: IconName; size?: numb
     "chevron-up": <path d="m6 15 6-6 6 6" {...st} />,
     "chevron-down": <path d="m6 9 6 6 6-6" {...st} />,
     "chevron-right": <path d="m9 6 6 6-6 6" {...st} />,
+    check: <path d="m5 12.5 4.5 4.5L19 7.5" {...st} />,
     expand: <path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" {...st} />,
     bars: (
       <g fill="currentColor">
@@ -347,6 +385,14 @@ const LOGO_PATH =
 /* ------------------------------------------------------------------------------------------------ */
 
 function Mark({ source, size = 16 }: { source: keyof typeof SOURCES; size?: number }) {
+  const s = SOURCES[source];
+  if (!s.src) {
+    return (
+      <span aria-hidden className="flex shrink-0 items-center justify-center font-medium leading-none" style={{ width: size, height: size, borderRadius: Math.max(3, size * 0.22), background: s.bg, color: s.fg, fontSize: size * 0.5 }}>
+        {s.letter}
+      </span>
+    );
+  }
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img src={SOURCES[source].src} alt="" width={size} height={size} className="shrink-0 object-cover" style={{ width: size, height: size, borderRadius: Math.max(3, size * 0.22) }} />
@@ -420,6 +466,7 @@ type Menu =
   | { kind: "queueRow"; id: string }
   | { kind: "article" }
   | { kind: "bell" }
+  | { kind: "following" }
   | null;
 
 export type DesktopAppProps = {
@@ -449,6 +496,10 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
   const [draft, setDraft] = useState("");
   const [added, setAdded] = useState<Set<string>>(() => new Set());
   const [search, setSearch] = useState("");
+  const [exploreTab, setExploreTab] = useState<"sources" | "authors">("sources");
+  const [exploreCat, setExploreCat] = useState("All");
+  const [gridWidth, setGridWidth] = useState(0);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   /* Audio */
   const [current, setCurrent] = useState<string | null>("true-happiness");
@@ -670,6 +721,156 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
   const art = article ? BY_ID.get(article) ?? null : null;
   const compact = layout === "compact" || !!art;
   const showSidebarList = (list: string[], more: boolean) => (more ? list : list.slice(0, 5));
+
+  /* ---- Explore ------------------------------------------------------------------------------------ */
+  const exploreOn = view.kind === "explore";
+
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+    const measure = () => setGridWidth(el.clientWidth);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [exploreOn, status, collapsed, articleFull]);
+
+  const toggleFollow = (t: Tile) => {
+    const on = following.includes(t.id);
+    const before = following;
+    setFollowing(on ? following.filter((x) => x !== t.id) : [t.id, ...following]);
+    showSnack(on ? `Unfollowed ${t.name}` : `Following ${t.name}`, { label: "Undo", run: () => setFollowing(before) });
+  };
+
+  const tiles = useMemo(
+    () =>
+      TILES.filter((t) => (exploreTab === "sources" ? t.kind !== "author" : t.kind !== "source")).filter((t) => exploreCat === "All" || t.cats.includes(exploreCat)),
+    [exploreTab, exploreCat],
+  );
+  /* Masonry: each tile goes into the shortest column. */
+  const columns = useMemo(() => {
+    const n = Math.max(2, Math.floor(((gridWidth || 920) + 16) / 216));
+    const cols: Tile[][] = Array.from({ length: n }, () => []);
+    const heights = Array(n).fill(0);
+    for (const t of tiles) {
+      const i = heights.indexOf(Math.min(...heights));
+      cols[i].push(t);
+      heights[i] += t.ratio + 0.15;
+    }
+    return cols;
+  }, [tiles, gridWidth]);
+
+  const exploreView = (
+    <div className="flex flex-col pt-4">
+      <div className="flex items-end justify-between gap-6 py-5">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-[32px] font-medium leading-[42px] tracking-[-0.32px] text-text-primary">{exploreTab === "sources" ? "Pick your sources" : "Pick your people"}</h2>
+          <p className="text-[16px] leading-[20px] tracking-[-0.5px] text-text-secondary">Follow what you like. Your feed is built from it.</p>
+        </div>
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setMenu(menu?.kind === "following" ? null : { kind: "following" })}
+            aria-expanded={menu?.kind === "following"}
+            className={`flex h-8 cursor-pointer items-center gap-1 rounded-[8px] px-2 text-[14px] leading-[18px] tracking-[-0.4px] text-text-tertiary outline-none transition-colors hover:bg-[var(--v-btn)] hover:text-text-primary focus-visible:ring-2 focus-visible:ring-[var(--v-accent)] ${menu?.kind === "following" ? "bg-[var(--v-btn)]" : ""}`}
+          >
+            Following · {following.length}
+            <Icon name="chevron-right" size={14} />
+          </button>
+          {menu?.kind === "following" ? (
+            following.length ? (
+              <Menu className="absolute right-0 top-[calc(100%+4px)] max-h-[360px] overflow-y-auto" items={following.map((id) => ({ icon: "unfollow" as const, label: `Unfollow ${SOURCES[id].name}`, onSelect: () => unfollow(id) }))} />
+            ) : (
+              <div className="absolute right-0 top-[calc(100%+4px)] z-40 w-[240px] rounded-[12px] border border-border-06 bg-surface-primary p-4 text-[14px] text-text-secondary shadow-[0_4px_12px_rgb(0_0_0/0.06)]">You are not following anyone yet.</div>
+            )
+          ) : null}
+        </div>
+      </div>
+
+      <div className="flex items-center gap-4 pb-6 pt-1">
+        <div role="tablist" aria-label="Explore" className="flex h-8 shrink-0 items-center rounded-full bg-[var(--v-btn)] p-0.5">
+          {(["sources", "authors"] as const).map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              role="tab"
+              aria-selected={exploreTab === tab}
+              onClick={() => setExploreTab(tab)}
+              className={`h-7 cursor-pointer rounded-full px-3 text-[14px] leading-[18px] tracking-[-0.4px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--v-accent)] ${exploreTab === tab ? "bg-white text-text-primary shadow-[0_1px_3px_rgb(0_0_0/0.1)]" : "text-text-secondary hover:text-text-primary"}`}
+            >
+              {tab === "sources" ? "Sources" : "Authors"}
+            </button>
+          ))}
+        </div>
+        <div className="relative min-w-0 flex-1">
+          <div ref={chipsRef} className="flex items-center gap-3 overflow-x-auto pr-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {EXPLORE_CATEGORIES.map((c) => (
+              <Pill key={c} active={exploreCat === c} onClick={() => setExploreCat(c)}>
+                {c}
+              </Pill>
+            ))}
+          </div>
+          <span aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-r from-transparent to-white" />
+        </div>
+      </div>
+
+      <div ref={gridRef}>
+        {status === "loading" ? (
+          <div aria-label="Loading" className="flex gap-4">
+            {[1, 1.4, 1, 1.6, 1, 1.3].slice(0, Math.max(2, Math.floor(((gridWidth || 920) + 16) / 216))).map((r, k) => (
+              <div key={k} className="flex min-w-0 flex-1 flex-col gap-2">
+                <span className="rounded-[16px] bg-[var(--v-skeleton)]" style={{ aspectRatio: `1 / ${r}` }} />
+                <span className="h-[14px] w-1/2 rounded-[3px] bg-[var(--v-skeleton)]" />
+              </div>
+            ))}
+          </div>
+        ) : tiles.length === 0 ? (
+          <p className="pt-2 text-[15px] text-text-tertiary">Nothing in {exploreCat} yet.</p>
+        ) : (
+          <div className="flex gap-4">
+            {columns.map((col, ci) => (
+              <ul key={ci} className="flex min-w-0 flex-1 flex-col gap-4">
+                {col.map((t) => {
+                  const on = following.includes(t.id);
+                  return (
+                    <li key={t.id} className="flex flex-col gap-2">
+                      <div className="group/tile relative">
+                        <button
+                          type="button"
+                          onClick={() => toggleFollow(t)}
+                          aria-pressed={on}
+                          aria-label={`${on ? "Unfollow" : "Follow"} ${t.name}`}
+                          className="relative block w-full cursor-pointer overflow-hidden rounded-[16px] outline-none focus-visible:ring-2 focus-visible:ring-[var(--v-accent)] focus-visible:ring-offset-2"
+                          style={{ aspectRatio: `1 / ${t.ratio}`, background: t.bg ?? "#f0f0f0" }}
+                        >
+                          {t.img ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={t.img} alt="" loading="lazy" className={`absolute inset-0 size-full ${t.fit === "contain" ? "object-contain p-[14%]" : "object-cover"}`} />
+                          ) : (
+                            <span className="absolute inset-0 flex items-center justify-center text-[64px] font-medium leading-none" style={{ color: t.fg }}>
+                              {t.letter}
+                            </span>
+                          )}
+                        </button>
+                        <span
+                          aria-hidden
+                          className={`pointer-events-none absolute right-3 top-3 flex h-8 items-center gap-1.5 rounded-full bg-white px-3 text-[13px] font-medium leading-[16px] text-text-primary shadow-[0_2.5px_5px_rgb(0_0_0/0.05),0_0_0_1px_rgb(0_0_0/0.06)] transition-opacity duration-150 ${on ? "opacity-100" : "opacity-0 group-hover/tile:opacity-100 group-focus-within/tile:opacity-100 [@media(hover:none)]:opacity-100"}`}
+                        >
+                          <Icon name={on ? "check" : "plus"} size={14} />
+                          {on ? "Following" : "Follow"}
+                        </span>
+                      </div>
+                      <p className="truncate px-1 text-[14px] font-medium leading-[18px] tracking-[-0.4px] text-text-primary">{t.name}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 
   /* ---- Sidebar ------------------------------------------------------------------------------------ */
   const navItems: { v: View; icon: IconName; label: string; badge?: number }[] = [
@@ -1077,7 +1278,7 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
         </div>
       );
     }
-    if (view.kind === "explore" || (view.kind === "forYou" && feed.length === 0)) {
+    if (view.kind === "forYou" && feed.length === 0) {
       return (
         <div className="flex flex-col gap-10 pt-2">
           <p className="text-[16px] text-text-primary">Nothing new yet. Add a few interests and your feed fills up.</p>
@@ -1395,10 +1596,14 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
         <div className="flex min-w-0 flex-1 flex-col">
           {topBar}
           <div ref={feedRef} className="min-h-0 flex-1 overflow-y-auto pb-32 [scrollbar-width:thin]">
-            <div className={art ? "px-5" : compact ? "px-5" : "mx-auto w-[800px]"}>
-              {head}
-              {body}
-            </div>
+            {exploreOn ? (
+              <div className="px-12">{exploreView}</div>
+            ) : (
+              <div className={art ? "px-5" : compact ? "px-5" : "mx-auto w-[800px]"}>
+                {head}
+                {body}
+              </div>
+            )}
           </div>
         </div>
       )}

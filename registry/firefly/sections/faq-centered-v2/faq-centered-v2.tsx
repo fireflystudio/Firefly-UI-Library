@@ -5,15 +5,15 @@ import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
 import { TwoTone } from "@/components/ui/two-tone";
 
-export type FaqAccordionItem = { question: string; answer: string };
+export type FaqItem = { question: string; answer: string };
 
-export type FaqAccordionProps = {
+export type FaqCenteredProps = {
   /** Section id (anchor) */
   id?: string;
   headline: string;
   /** Grey second half of the headline (same line) */
   headlineMuted?: string;
-  items: FaqAccordionItem[];
+  items: FaqItem[];
   /** Index open on load; null = all closed */
   defaultOpen?: number | null;
   /** Section paddings, default 64 / 96 / 120 (override at a colour change, e.g. before a dark block) */
@@ -21,13 +21,13 @@ export type FaqAccordionProps = {
 };
 
 /**
- * FAQ Accordion v2 (boxed)
- * Same headline and behaviour as v1, but every question sits in its own rounded box with a soft hairline
+ * FAQ Centered v2 (boxed)
+ * Centred two-tone headline, but every question sits in its own rounded box with a soft hairline
  * stroke (surface-muted, the v1 separator colour; no fill), 12px apart. Opening a question grows its box and shows the answer inside it
  * (height eases via grid rows; static under reduced motion). The + turns into – when open.
  * One question open at a time, the first open by default.
  */
-export function FaqAccordion({ id = "faq", headline, headlineMuted, items, defaultOpen = 0, className = "py-16 md:py-24 xl:py-[120px]" }: FaqAccordionProps) {
+export function FaqCentered({ id = "faq", headline, headlineMuted, items, defaultOpen = 0, className = "py-16 md:py-24 xl:py-[120px]" }: FaqCenteredProps) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
   const uid = useId();
   return (

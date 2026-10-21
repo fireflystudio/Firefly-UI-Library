@@ -1,4 +1,4 @@
-import { FaqAccordion } from "./faq-accordion-v2";
+import { FaqCentered } from "./faq-centered-v2";
 
 const ITEMS = [
   { question: "How long does setup take?", answer: "Most teams are running in under a day. Connect your tools, invite the team and the first results arrive the same afternoon." },
@@ -8,5 +8,5 @@ const ITEMS = [
 ];
 
 export default function Preview() {
-  return <FaqAccordion headline="Questions people ask," headlineMuted="answered." items={ITEMS} />;
+  return <FaqCentered headline="Questions people ask," headlineMuted="answered." items={ITEMS} />;
 }
