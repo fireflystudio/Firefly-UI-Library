@@ -345,6 +345,19 @@
       ]
     },
     {
+      "name": "faq-accordion-v1",
+      "type": "registry:block",
+      "title": "FAQ Accordion v1",
+      "description": "Centred two-tone headline over a 900px list of questions with soft hairlines and a turning chevron. One answer open at a time; the shared FAQ for Solve and Verb.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/faq-accordion-v1/faq-accordion-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/faq-accordion-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "faq-split-v1",
       "type": "registry:block",
       "title": "FAQ Split v1",
