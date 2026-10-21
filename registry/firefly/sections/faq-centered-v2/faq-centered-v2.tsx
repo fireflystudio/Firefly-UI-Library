@@ -25,9 +25,9 @@ export type FaqCenteredProps = {
  * Centred two-tone headline, but every question sits in its own rounded box with a soft hairline
  * stroke (surface-muted, the v1 separator colour; no fill), 12px apart. Opening a question grows its box and shows the answer inside it
  * (height eases via grid rows; static under reduced motion). The + turns into – when open.
- * One question open at a time, the first open by default.
+ * One question open at a time, all closed by default.
  */
-export function FaqCentered({ id = "faq", headline, headlineMuted, items, defaultOpen = 0, className = "py-16 md:py-24 xl:py-[120px]" }: FaqCenteredProps) {
+export function FaqCentered({ id = "faq", headline, headlineMuted, items, defaultOpen = null, className = "py-16 md:py-24 xl:py-[120px]" }: FaqCenteredProps) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
   const uid = useId();
   return (

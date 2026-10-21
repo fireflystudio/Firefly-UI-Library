@@ -24,10 +24,10 @@ export type FaqAccordionProps = {
  * FAQ Accordion v1
  * Centred two-tone h2 (28/32/40, left-aligned on mobile), a 900px list of questions with soft
  * hairlines (surface-muted), a chevron that turns on open. One question open at a time, the first
- * open by default, clicking the open one closes it; the question nudges 5px right on hover and the
+ * all closed by default, clicking the open one closes it; the question nudges 5px right on hover and the
  * answer fades and rises in. Questions 16/17/18 medium, answers 15/16 tertiary. Used on Solve and Verb.
  */
-export function FaqAccordion({ id = "faq", headline, headlineMuted, items, defaultOpen = 0, className = "py-16 md:py-24 xl:py-[120px]" }: FaqAccordionProps) {
+export function FaqAccordion({ id = "faq", headline, headlineMuted, items, defaultOpen = null, className = "py-16 md:py-24 xl:py-[120px]" }: FaqAccordionProps) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
   const uid = useId();
   return (

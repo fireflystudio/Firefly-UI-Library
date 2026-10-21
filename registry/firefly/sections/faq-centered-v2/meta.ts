@@ -12,7 +12,7 @@ export const meta: CatalogueItem = {
     { name: "headline", type: "string", description: "First part of the heading." },
     { name: "headlineMuted", type: "string", description: "Grey second half of the heading (same line)." },
     { name: "items", type: "{ question: string; answer: string }[]", description: "Questions in order." },
-    { name: "defaultOpen", type: "number | null", default: "0", description: "Open on load; null = all closed." },
+    { name: "defaultOpen", type: "number | null", default: "null", description: "Open on load; null = all closed." },
     { name: "id", type: "string", default: '"faq"', description: "Section id for anchor links." },
     { name: "className", type: "string", default: '"py-16 md:py-24 xl:py-[120px]"', description: "Section paddings (override at a colour change)." },
   ],

@@ -28,7 +28,7 @@ export type FaqSplitProps = {
  * Two-tone headline + ghost CTA on the left (400px on desktop), questions on the right, each in a
  * soft stroked rounded box 12px apart; opening one grows its box with the answer inside.
  * One question open at a time: opening one closes the previous, clicking the open one closes
- * it. The first is open by default. +/– glyph rotates; the answer fades and rises in after
+ * it. All closed by default. +/– glyph rotates; the answer fades and rises in after
  * the first interaction. Section padding 64/96/120px, max width 1200px.
  */
 export function FaqSplit({
@@ -37,7 +37,7 @@ export function FaqSplit({
   headlineMuted,
   cta = { label: "Talk to us", href: "#cta" },
   items,
-  defaultOpen = 0,
+  defaultOpen = null,
   className = "",
 }: FaqSplitProps) {
   const headingId = `${id}-heading`;

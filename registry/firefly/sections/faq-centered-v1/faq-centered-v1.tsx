@@ -30,7 +30,7 @@ export type FaqCenteredProps = {
  * Two-tone headline stacked on two lines on top (left-aligned on mobile, centred from tablet),
  * the accordion below (full width / 640px / 760px, top hairline) and a contact line with a
  * ghost pill at the bottom. Same behaviour as FAQ Split: one question open at a time, the first
- * open by default, clicking the open one closes it, +/– glyph rotates, the answer fades and
+ * all closed by default, clicking the open one closes it, +/– glyph rotates, the answer fades and
  * rises in after the first interaction. Questions 16/17/18px, 24px row padding, 15/16px answers.
  * Section padding 64/96/120px.
  */
@@ -39,7 +39,7 @@ export function FaqCentered({
   headline,
   headlineMuted,
   items,
-  defaultOpen = 0,
+  defaultOpen = null,
   footerText = "Anything else, ask us directly. We reply within a day.",
   cta = { label: "Talk to us", href: "#cta" },
   className = "",

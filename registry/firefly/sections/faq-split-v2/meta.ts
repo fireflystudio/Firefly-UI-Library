@@ -6,14 +6,14 @@ export const meta: CatalogueItem = {
   version: 2,
   category: "faq",
   description:
-    "Two-tone headline and a ghost button on the left, accordion on the right. One question open at a time, the first open by default, with a rotating +/– glyph.",
+    "Two-tone headline and a ghost button on the left, accordion on the right. One question open at a time, all closed by default, with a rotating +/– glyph.",
   interactions: ["Click a question: the previous one closes.", "Click the open question to close it.", "Tab to a question and press Enter."],
   props: [
     { name: "headline", type: "string", description: "First, primary-coloured part of the heading." },
     { name: "headlineMuted", type: "string", description: "Grey second half of the heading." },
     { name: "items", type: "{ question: string; answer: string }[]", description: "Questions and answers, in order." },
     { name: "cta", type: "{ label; href } | null", default: "Talk to us → #cta", description: "Ghost pill under the headline. null hides it." },
-    { name: "defaultOpen", type: "number | null", default: "0", description: "Index of the question open on load; null starts closed." },
+    { name: "defaultOpen", type: "number | null", default: "null", description: "Index of the question open on load; null starts closed." },
     { name: "id", type: "string", default: '"faq"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
