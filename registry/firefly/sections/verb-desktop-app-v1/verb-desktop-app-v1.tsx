@@ -1178,9 +1178,9 @@ export function DesktopApp({ className = "" }: DesktopAppProps) {
               {playBtn(art)}
             </span>
           </div>
-          <div className="mt-8 flex flex-col gap-7">
+          <div className="mt-8 flex flex-col gap-4">
             {(art.body ?? [art.excerpt]).map((p) => (
-              <p key={p.slice(0, 30)} className="text-[20px] leading-[34px] tracking-[-0.2px] text-text-secondary">
+              <p key={p.slice(0, 30)} className="text-[16px] leading-[26px] tracking-[-0.2px] text-text-secondary">
                 {p}
               </p>
             ))}
