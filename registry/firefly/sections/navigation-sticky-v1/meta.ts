@@ -31,6 +31,7 @@ export const meta: CatalogueItem = {
     { version: "1.1", date: "2026-10-19", notes: "Restyled 1:1 after the ElevenLabs bar: 64px, 14px regular links in 36px pills with a grey hover fill (Base NavLink), secondary + primary 36px pills, round hamburger, no scroll compaction." },
     { version: "1.2", date: "2026-10-19", notes: "Wider bar: content up to 1440px with 40px side padding (was 1328px / 64px), so the brand and CTA sit closer to the screen edges." },
     { version: "1.3", date: "2026-10-20", notes: "Parity with Navigation Centered 1.2: overHero mode (transparent over a hero photo, light text, thin divider), prefetch on links, and an optional dropdown per link (`menu`) with link columns, picture tiles, the button shadow and a soft rise-in. Used on Solve." },
+    { version: "1.3.1", date: "2026-10-21", notes: "Links are keyed by label + href, so several placeholder links with the same href (\"#\") no longer collide." },
   ],
   files: [
     {

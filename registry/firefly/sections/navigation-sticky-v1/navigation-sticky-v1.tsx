@@ -197,7 +197,7 @@ export function NavigationSticky({
                 const dropdownId = `${menuId}-dropdown-${i}`;
                 return (
                   <li
-                    key={l.href}
+                    key={`${l.label}-${l.href}`}
                     onPointerEnter={hasDropdown ? () => openDropdown(l.href) : undefined}
                     onPointerLeave={hasDropdown ? closeDropdownSoon : undefined}
                     onFocus={hasDropdown ? () => openDropdown(l.href) : undefined}
@@ -274,7 +274,7 @@ export function NavigationSticky({
             const all = l.menu ? [...l.menu.columns.flatMap((c) => c.links), ...(l.menu.features ?? [])] : [];
             const subLinks = all.filter((s, i) => all.findIndex((t) => t.href === s.href && t.label === s.label) === i);
             return (
-              <li key={l.href}>
+              <li key={`${l.label}-${l.href}`}>
                 <NavLink
                   href={l.href}
                   prefetch={l.prefetch}
