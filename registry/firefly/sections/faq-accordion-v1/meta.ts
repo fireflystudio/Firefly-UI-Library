@@ -19,6 +19,6 @@ export const meta: CatalogueItem = {
   changelog: [{ version: "1.0", date: "2026-10-21", notes: "First release: the Solve Platform FAQ made shared (soft hairlines, chevron), now used on Solve and Verb." }],
   files: [{ path: "registry/firefly/sections/faq-accordion-v1/faq-accordion-v1.tsx", target: "components/sections/faq-accordion-v1.tsx", type: "registry:component" }],
   registryDependencies: ["firefly-base"],
-  usedOn: ["solve", "verb"],
+  usedOn: ["solve"],
   order: 5,
 };

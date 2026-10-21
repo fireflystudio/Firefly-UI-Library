@@ -358,6 +358,19 @@
       ]
     },
     {
+      "name": "faq-accordion-v2",
+      "type": "registry:block",
+      "title": "FAQ Accordion Boxed v2",
+      "description": "Centred two-tone headline over a 900px list where every question sits in its own rounded stroked box; opening one grows the box and shows the answer inside. One answer open at a time.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/faq-accordion-v2/faq-accordion-v2.tsx",
+          "type": "registry:component",
+          "target": "components/sections/faq-accordion-v2.tsx"
+        }
+      ]
+    },
+    {
       "name": "faq-split-v1",
       "type": "registry:block",
       "title": "FAQ Split v1",
