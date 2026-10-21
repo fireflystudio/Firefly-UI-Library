@@ -679,7 +679,7 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
     { v: { kind: "summaries" }, icon: "sparkle", label: "Summaries" },
   ];
   const navRow = (active: boolean) =>
-    `group flex h-10 w-full cursor-pointer items-center gap-3 rounded-[8px] px-3 text-left text-[14px] leading-[18px] tracking-[-0.4px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--v-accent)] ${
+    `group flex h-9 w-full cursor-pointer items-center gap-3 rounded-[8px] px-3 text-left text-[15px] leading-[20px] tracking-[-0.3px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--v-accent)] ${
       active ? "font-medium text-text-primary" : "text-text-secondary hover:bg-black/[0.04] hover:text-text-primary"
     }`;
   const playingIn = (k: string) => (session?.key === k && playing && playerOpen ? <Icon name="bars" size={14} className="ml-auto text-[var(--v-accent)]" /> : null);
@@ -724,7 +724,7 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
         })}
       </nav>
 
-      <p className="mb-1 mt-6 px-3 text-[12px] leading-[16px] tracking-[-0.4px] text-text-quaternary">Interests</p>
+      <p className="mb-1 mt-5 px-3 text-[12px] leading-[16px] tracking-[-0.4px] text-text-quaternary">Interests</p>
       <ul className="flex flex-col gap-0.5">
         {showSidebarList(interests, moreInterests).map((name) => {
           const k = `interest:${name}`;
@@ -753,7 +753,7 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
         </button>
       ) : null}
 
-      <p className="mb-1 mt-6 px-3 text-[12px] leading-[16px] tracking-[-0.4px] text-text-quaternary">Following</p>
+      <p className="mb-1 mt-5 px-3 text-[12px] leading-[16px] tracking-[-0.4px] text-text-quaternary">Following</p>
       <ul className="flex flex-col gap-0.5">
         {showSidebarList(following, moreFollowing).map((id) => (
           <li key={id} className="group relative">
