@@ -45,6 +45,26 @@ function AreaTabs({ area, brandHref }: { area: Where["area"]; brandHref: string 
   );
 }
 
+/** Desktop sidebar: the two library areas as two stacked menu items (same look as Websites / Build site). */
+function AreaNav({ area, brandHref }: { area: Where["area"]; brandHref: string }) {
+  return (
+    <nav aria-label="Library areas" className="flex flex-col gap-0.5">
+      <Link href="/" aria-current={area === "web" ? "page" : undefined} className={`${itemBase} ${area === "web" ? itemOn : itemOff}`}>
+        <span className="flex items-center gap-2.5">
+          <Icon name="sections" />
+          Web sections
+        </span>
+      </Link>
+      <Link href={brandHref} aria-current={area === "app" ? "page" : undefined} className={`${itemBase} ${area === "app" ? itemOn : itemOff}`}>
+        <span className="flex items-center gap-2.5">
+          <Icon name="app" />
+          UI Components
+        </span>
+      </Link>
+    </nav>
+  );
+}
+
 const itemBase =
   "group flex items-center justify-between gap-3 rounded-tile px-3 py-[7px] text-[14px] font-medium leading-[normal] transition-[background-color,color,box-shadow] duration-200 ease-out";
 const itemOn = "bg-surface-primary text-text-primary shadow-[0_1px_2px_0_#0000000f,0_0_0_1px_#0000000a]";
@@ -95,8 +115,9 @@ export function Sidebar({ categories, total, brands, itemInfo }: MenuProps) {
           })}
         </nav>
       ) : (
-        <div className="flex flex-col gap-4">
-          <AreaTabs area={where.area ?? "web"} brandHref={brandHref} />
+        <div className="flex flex-col gap-3">
+          <AreaNav area={where.area} brandHref={brandHref} />
+          <div aria-hidden className="mx-3 h-px bg-border-10" />
           {where.area === "app" ? (
             <nav aria-label="Brands" className="flex flex-col gap-0.5">
               {brands.map((b) => {
@@ -174,7 +195,7 @@ function CategoryLink({ href, active, count, children, nested = false }: { href:
   );
 }
 
-function Icon({ name }: { name: "websites" | "build" | "design-system" }) {
+function Icon({ name }: { name: "websites" | "build" | "design-system" | "app" | "sections" }) {
   const common = { width: 16, height: 16, viewBox: "0 0 16 16", fill: "none", "aria-hidden": true } as const;
   switch (name) {
     case "websites":
@@ -188,6 +209,22 @@ function Icon({ name }: { name: "websites" | "build" | "design-system" }) {
       return (
         <svg {...common}>
           <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+        </svg>
+      );
+    case "sections":
+      return (
+        <svg {...common}>
+          {/* Stacked page sections */}
+          <rect x="2.5" y="2.5" width="11" height="4.5" rx="1.25" stroke="currentColor" strokeWidth="1.4" />
+          <rect x="2.5" y="9" width="11" height="4.5" rx="1.25" stroke="currentColor" strokeWidth="1.4" />
+        </svg>
+      );
+    case "app":
+      return (
+        <svg {...common}>
+          {/* A phone: product UI */}
+          <rect x="4.5" y="1.75" width="7" height="12.5" rx="1.75" stroke="currentColor" strokeWidth="1.4" />
+          <path d="M7 11.75h2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
         </svg>
       );
     case "design-system":

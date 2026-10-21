@@ -117,6 +117,57 @@ const SAMPLE_ITEMS: PlayerItem[] = [
   },
 ];
 
+/* Lists behind the Trending chips (sample copy, not in Figma; no covers, so the source mark shows). */
+const src = {
+  guardian: `${IMG}/source-guardian.png`,
+  row: `${IMG}/source-rest-of-world.png`,
+  hn: `${IMG}/source-hacker-news.png`,
+  atc: `${IMG}/source-above-the-crowd.png`,
+  huberman: `${IMG}/source-huberman.jpg`,
+};
+const topicItem = (id: string, title: string, source: keyof typeof src, sourceName: string, age: string, duration: number, excerpt: string, topic: string): PlayerItem => ({
+  id,
+  title,
+  source: sourceName,
+  sourceSrc: src[source],
+  age,
+  duration,
+  excerpt,
+  topic,
+});
+const SAMPLE_TOPICS: Record<string, PlayerItem[]> = {
+  Science: [
+    topicItem("sci-1", "A new map of the brain's wiring shows how memories are stored", "guardian", "The Guardian", "3h", 95, "Researchers traced every connection in a cubic millimetre of cortex and found far more links than expected.", "Science"),
+    topicItem("sci-2", "Why sleep resets the brain for learning", "huberman", "Andrew Huberman", "1d", 150, "Deep sleep clears the day's noise so new skills stick; a later bedtime costs more than an early alarm.", "Science"),
+    topicItem("sci-3", "The quiet progress of fusion experiments", "hn", "Hacker News", "2d", 70, "Two labs held a stable plasma for minutes, not seconds, but power plants are still decades away.", "Science"),
+  ],
+  "Electric cars": [
+    topicItem("ev-1", "Cheaper batteries are finally reaching small cars", "row", "Rest of World", "2h", 80, "Sodium-ion cells cut the price of city cars below their petrol rivals in three markets.", "Electric cars"),
+    topicItem("ev-2", "Charging networks are the real competition now", "guardian", "The Guardian", "1d", 110, "Drivers pick a car by the chargers on their route; reliability matters more than speed.", "Electric cars"),
+    topicItem("ev-3", "What fleets learned from five years of electric vans", "hn", "Hacker News", "3d", 60, "Maintenance fell by a third; winter range is the one surprise operators still plan around.", "Electric cars"),
+  ],
+  Climate: [
+    topicItem("cl-1", "Heat pumps outsold gas boilers for the first time", "guardian", "The Guardian", "4h", 75, "Subsidies helped, but quieter units and installers trained at scale did most of the work.", "Climate"),
+    topicItem("cl-2", "Cities that cooled their streets with trees", "row", "Rest of World", "1d", 90, "Shade lowered street temperatures by up to six degrees and cut hospital visits during heatwaves.", "Climate"),
+    topicItem("cl-3", "Carbon removal has a measurement problem", "atc", "Above The Crowd", "2d", 120, "Buyers pay for tonnes nobody can verify; the market needs auditing before it needs money.", "Climate"),
+  ],
+  "Formula 1": [
+    topicItem("f1-1", "How the new engine rules change the 2026 grid", "guardian", "The Guardian", "1h", 85, "Half the power now comes from batteries, so energy management becomes a race skill.", "Formula 1"),
+    topicItem("f1-2", "Inside a pit stop that takes two seconds", "hn", "Hacker News", "1d", 55, "Twenty people, one rehearsed sequence and sensors on every wheel gun.", "Formula 1"),
+    topicItem("f1-3", "Why rookies struggle in their first season", "row", "Rest of World", "3d", 100, "Simulators teach the tracks, not the tyres; most rookies lose time in the second half of a stint.", "Formula 1"),
+  ],
+  Robotics: [
+    topicItem("rb-1", "Warehouse robots learn new items from one example", "hn", "Hacker News", "2h", 70, "A foundation model lets pickers handle products they have never seen before.", "Robotics"),
+    topicItem("rb-2", "Humanoid robots meet the factory floor", "guardian", "The Guardian", "1d", 130, "Pilots show they work, slowly; the business case still depends on night shifts.", "Robotics"),
+    topicItem("rb-3", "Surgical robots and the shortage of surgeons", "row", "Rest of World", "4d", 90, "Remote operations are moving from trials to rural hospitals.", "Robotics"),
+  ],
+  Gaming: [
+    topicItem("gm-1", "Small studios are winning with shorter games", "atc", "Above The Crowd", "5h", 65, "Players finish ten-hour games and recommend them; long ones get abandoned at the halfway mark.", "Gaming"),
+    topicItem("gm-2", "Cloud gaming finally works on trains", "hn", "Hacker News", "2d", 50, "Better codecs hide latency spikes, though competitive play still needs a cable.", "Gaming"),
+    topicItem("gm-3", "What game design teaches about habits", "huberman", "Andrew Huberman", "3d", 140, "Small rewards at the right moment keep people going; the same loop works for exercise.", "Gaming"),
+  ],
+};
+
 const SPEEDS = [1, 1.25, 1.5, 2, 3] as const;
 const LOADING_MS = 900;
 
@@ -460,6 +511,8 @@ export type MobilePlayerProps = {
   title?: string;
   /** Interest chips under "Trending". */
   trending?: string[];
+  /** The list a chip shows when it is selected (chip label → summaries). */
+  topics?: Record<string, PlayerItem[]>;
   /** Avatar in the app bar. */
   avatarSrc?: string;
   /** Length shown on the "New" button. Defaults to the sum of the feed. */
@@ -474,11 +527,12 @@ export function MobilePlayer({
   queue: startQueue = ["time-saved", "eu-ai-act", "design-systems"],
   title = "For you",
   trending = ["Science", "Electric cars", "Climate", "Formula 1", "Robotics", "Gaming"],
+  topics = SAMPLE_TOPICS,
   avatarSrc = `${IMG}/avatar-user.jpg`,
   newLabel = "12m",
   className = "",
 }: MobilePlayerProps) {
-  const byId = useMemo(() => new Map(items.map((i) => [i.id, i])), [items]);
+  const byId = useMemo(() => new Map([...items, ...Object.values(topics).flat()].map((i) => [i.id, i])), [items, topics]);
 
   const [currentId, setCurrentId] = useState<string | null>(startId);
   const [elapsed, setElapsed] = useState(startAt);
@@ -490,7 +544,9 @@ export function MobilePlayer({
   const [menu, setMenu] = useState<OpenMenu>(null);
   const [snack, setSnack] = useState<Snack | null>(null);
   const [failed, setFailed] = useState<Set<string>>(() => new Set());
-  const [chips, setChips] = useState<Set<string>>(() => new Set());
+  const [topic, setTopic] = useState<string | null>(null);
+  const chipsRef = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ x: number; left: number; moved: boolean } | null>(null);
   const [openExcerpts, setOpenExcerpts] = useState<Set<string>>(() => new Set());
   const [reduced, setReduced] = useState(false);
   const loadTimer = useRef<number | undefined>(undefined);
@@ -503,6 +559,21 @@ export function MobilePlayer({
       window.clearTimeout(loadTimer.current);
       window.clearTimeout(snackTimer.current);
     };
+  }, []);
+
+  // A vertical mouse wheel over the chips scrolls them sideways (non-passive, so the feed does not move too).
+  useEffect(() => {
+    const el = chipsRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if ((e.deltaY < 0 && el.scrollLeft <= 0) || (e.deltaY > 0 && el.scrollLeft >= max)) return;
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
   }, []);
 
   const current = currentId ? byId.get(currentId) ?? null : null;
@@ -660,23 +731,41 @@ export function MobilePlayer({
             Add interest
           </button>
         </div>
-        <div className="-mx-5 flex items-center gap-3 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {/* Chips scroll sideways: trackpad, wheel (turned sideways) or drag with the mouse. */}
+        <div
+          ref={chipsRef}
+          onPointerDown={(e) => {
+            if (e.pointerType !== "mouse" || !chipsRef.current) return;
+            drag.current = { x: e.clientX, left: chipsRef.current.scrollLeft, moved: false };
+          }}
+          onPointerMove={(e) => {
+            const d = drag.current;
+            if (!d || !chipsRef.current) return;
+            const dx = e.clientX - d.x;
+            if (Math.abs(dx) > 4) d.moved = true;
+            chipsRef.current.scrollLeft = d.left - dx;
+          }}
+          onPointerUp={() => {
+            window.setTimeout(() => (drag.current = null), 0);
+          }}
+          onPointerLeave={() => (drag.current = null)}
+          onClickCapture={(e) => {
+            if (drag.current?.moved) {
+              e.stopPropagation();
+              e.preventDefault();
+            }
+          }}
+          className="-mx-5 flex cursor-grab select-none items-center gap-3 overflow-x-auto overscroll-x-contain px-5 active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           <span className="shrink-0 text-[12px] leading-[16px] tracking-[-0.4px] text-text-tertiary">Trending</span>
           {trending.map((t) => {
-            const on = chips.has(t);
+            const on = topic === t;
             return (
               <button
                 key={t}
                 type="button"
                 aria-pressed={on}
-                onClick={() =>
-                  setChips((c) => {
-                    const n = new Set(c);
-                    if (n.has(t)) n.delete(t);
-                    else n.add(t);
-                    return n;
-                  })
-                }
+                onClick={() => setTopic(on ? null : t)}
                 className={`h-8 shrink-0 cursor-pointer rounded-full border px-3 text-[13px] leading-[16px] tracking-[-0.4px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--v-accent)] ${
                   on ? "border-text-primary bg-text-primary text-white" : "border-border-10 text-text-secondary hover:bg-surface-secondary"
                 }`}
@@ -685,16 +774,41 @@ export function MobilePlayer({
               </button>
             );
           })}
+          <span aria-hidden className="w-2 shrink-0" />
         </div>
       </div>
 
       {/* Summaries */}
-      <ul className="flex flex-col gap-6 px-5">
-        {items.map((item) => {
+      {topic ? (
+        <div className="flex items-center justify-between px-5 pb-2">
+          <p className="text-[14px] font-medium leading-[18px] tracking-[-0.4px] text-text-secondary">Trending in {topic}</p>
+          <button
+            type="button"
+            onClick={() => setTopic(null)}
+            className="h-8 cursor-pointer rounded-[8px] px-2 text-[13px] leading-[16px] tracking-[-0.4px] text-text-tertiary outline-none transition-colors hover:bg-[var(--v-btn)] focus-visible:ring-2 focus-visible:ring-[var(--v-accent)]"
+          >
+            Back to {title}
+          </button>
+        </div>
+      ) : null}
+      <ul key={topic ?? "all"} className="flex flex-col gap-1 px-2 motion-safe:animate-[feature-in_0.35s_ease-out_both]">
+        {(topic ? topics[topic] ?? [] : items).map((item) => {
           const isCurrent = item.id === currentId;
           return (
-            <li key={item.id} className="flex items-start gap-4">
-              <div className="flex min-w-0 flex-1 flex-col gap-2">
+            <li
+              key={item.id}
+              className={`group relative flex items-start gap-4 rounded-[12px] px-3 py-3 transition-colors duration-150 hover:bg-surface-secondary ${
+                isCurrent ? "bg-surface-secondary" : ""
+              }`}
+            >
+              {/* The whole row plays the summary (or pauses it when it is already playing). */}
+              <button
+                type="button"
+                onClick={() => playFromFeed(item.id)}
+                aria-label={isCurrent ? `${playing ? "Pause" : "Play"}: ${item.title}` : `Play: ${item.title}`}
+                className="absolute inset-0 cursor-pointer rounded-[12px] outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--v-accent)]"
+              />
+              <div className="pointer-events-none relative flex min-w-0 flex-1 flex-col gap-2">
                 <h3 className="line-clamp-2 text-[18px] font-medium leading-[22px] tracking-[-0.45px] text-text-primary">{item.title}</h3>
                 <p className="flex items-center gap-2 text-[13px] leading-[16px] tracking-[-0.4px]">
                   <SourceMark src={item.sourceSrc} size={16} />
@@ -710,7 +824,7 @@ export function MobilePlayer({
                       <button
                         type="button"
                         onClick={() => setOpenExcerpts((o) => new Set(o).add(item.id))}
-                        className="cursor-pointer text-[var(--v-accent)] outline-none hover:underline"
+                        className="pointer-events-auto relative cursor-pointer text-[var(--v-accent)] outline-none hover:underline"
                       >
                         See more
                       </button>
@@ -720,7 +834,7 @@ export function MobilePlayer({
                   )}
                 </p>
               </div>
-              <div className="flex w-[112px] shrink-0 flex-col items-end gap-4">
+              <div className="pointer-events-none relative flex w-[112px] shrink-0 flex-col items-end gap-4">
                 <div className="relative h-[56.25px] w-full overflow-clip rounded-[3.75px] bg-surface-secondary">
                   {item.cover ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -736,7 +850,7 @@ export function MobilePlayer({
                     </span>
                   ) : null}
                 </div>
-                <div className="relative flex w-full items-start justify-between">
+                <div className="pointer-events-auto relative flex w-full items-start justify-between">
                   {isCurrent ? (
                     <span />
                   ) : (

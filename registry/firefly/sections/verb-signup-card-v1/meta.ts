@@ -27,7 +27,7 @@ export const meta: CatalogueItem = {
     },
   ],
   registryDependencies: ["firefly-base"],
-  usedOn: [],
+  usedOn: ["verb"],
   order: 30,
   previewAlign: "center",
   previewDevice: 834,

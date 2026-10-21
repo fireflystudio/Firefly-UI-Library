@@ -22,7 +22,7 @@ export default function Preview() {
     return () => window.clearInterval(id);
   }, [playing]);
   return (
-    <div className="flex justify-center bg-surface-muted px-5 py-16" style={{ "--v-accent": "#4d63fd", "--v-btn": "rgb(0 0 0 / 0.06)" } as React.CSSProperties}>
+    <div className="flex justify-center bg-surface-page px-5 py-16" style={{ "--v-accent": "#4d63fd", "--v-btn": "rgb(0 0 0 / 0.06)" } as React.CSSProperties}>
       <div className="w-full max-w-[358px]">
         <MiniPlayer item={ITEM} playing={playing} progress={t / ITEM.duration} onOpen={() => {}} onToggle={() => setPlaying((p) => !p)} onNext={() => setT(0)} canNext />
       </div>

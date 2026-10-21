@@ -1,13 +1,11 @@
 import { MobilePlayer } from "./verb-mobile-player-v1";
 
-/** The flow on a phone: a 390 × 844 screen inside a simple device bezel. */
+/** The flow on its own: the 390 × 844 screen on the page background, with a hairline so its edge shows. */
 export default function Preview() {
   return (
-    <div className="flex justify-center bg-surface-muted px-5 py-12 md:py-16">
-      <div className="rounded-[56px] bg-surface-inverse p-[10px] shadow-[0_30px_80px_rgb(0_0_0/0.18)]">
-        <div className="overflow-hidden rounded-[46px]">
-          <MobilePlayer />
-        </div>
+    <div className="flex justify-center bg-surface-page px-5 py-12 md:py-16">
+      <div className="overflow-hidden rounded-[24px] border border-border-10">
+        <MobilePlayer />
       </div>
     </div>
   );

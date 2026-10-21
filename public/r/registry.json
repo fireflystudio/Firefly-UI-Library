@@ -620,19 +620,6 @@
       ]
     },
     {
-      "name": "verb-creators-grid-v1",
-      "type": "registry:block",
-      "title": "Creators Grid v1",
-      "description": "A grid of 13 rounded tiles of creator portraits and publisher logos (rows of 4, 5 and 4). Tiles grow a little on hover and the neighbours overlap; the hover cell never moves, so there is no flicker.",
-      "files": [
-        {
-          "path": "registry/firefly/sections/verb-creators-grid-v1/verb-creators-grid-v1.tsx",
-          "type": "registry:component",
-          "target": "components/app/verb-creators-grid-v1.tsx"
-        }
-      ]
-    },
-    {
       "name": "verb-mobile-player-v1",
       "type": "registry:block",
       "title": "Mobile Player v1",
