@@ -20,7 +20,7 @@ const SAMPLE_TILES: readonly string[] = [
 export type CreatorsGridProps = {
   /** Image URLs for the 13 tiles in reading order (rows of 4, 5 and 4). Defaults to sample portraits and publisher logos. */
   tiles?: readonly string[];
-  /** Accessible description of the whole grid. */
+  /** Accessible description of the whole grid. Pass an empty string when the host already describes it (the grid is then hidden from screen readers). */
   label?: string;
   className?: string;
 };
@@ -32,7 +32,7 @@ export type CreatorsGridProps = {
  */
 export function CreatorsGrid({ tiles = SAMPLE_TILES, label = "A grid of creator portraits and publisher logos", className = "" }: CreatorsGridProps) {
   return (
-    <div role="img" aria-label={label} className={`relative w-full ${className}`} style={{ aspectRatio: `${GRID_W} / ${GRID_H}` }}>
+    <div role={label ? "img" : undefined} aria-label={label || undefined} aria-hidden={label ? undefined : true} className={`relative w-full ${className}`} style={{ aspectRatio: `${GRID_W} / ${GRID_H}` }}>
       <div aria-hidden="true" className="absolute inset-0">
         {POSITIONS.map(([x, y], i) => (
           <div
