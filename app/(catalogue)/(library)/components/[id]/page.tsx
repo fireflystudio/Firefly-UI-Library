@@ -41,7 +41,7 @@ export default async function ComponentPage({ params }: { params: Params }) {
           <h1 className="text-[34px] font-normal leading-[1.04] tracking-[-0.03em] text-text-primary md:text-[44px]">
             {item.name}
           </h1>
-          <ViewSwitch />
+          {item.area === "app" ? null : <ViewSwitch />}
         </div>
         {item.usedOn?.length ? (
           <div {...reveal}>
@@ -54,11 +54,12 @@ export default async function ComponentPage({ params }: { params: Params }) {
         <ComponentPreview
           src={`/preview/${item.id}`}
           title={item.name}
+          defaultDevice={item.previewDevice === 390 ? "mobile" : item.previewDevice === 834 ? "tablet" : "desktop"}
           scrollInside={item.previewScroll}
           exampleSrc={
             item.hasExample ? `/preview/${item.id}/example` : undefined
           }
-          actions={<AddToBuild id={item.id} name={item.name} compact />}
+          actions={item.area === "app" ? undefined : <AddToBuild id={item.id} name={item.name} compact />}
         />
       </div>
     </article>

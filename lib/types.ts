@@ -12,7 +12,9 @@ export type CategoryId =
   | "cta"
   | "popups"
   | "careers"
-  | "footer";
+  | "footer"
+  | "app-elements"
+  | "app-flows";
 
 export type Category = {
   id: CategoryId;
@@ -83,6 +85,10 @@ export type CatalogueItem = {
   previewScroll?: boolean;
   /** Websites (ids from lib/websites.ts) that use this component; shown as a small label on the card and page */
   usedOn?: string[];
+  /** "web" (default): a section for marketing sites. "app": a piece of product UI (single element or flow) that belongs to a brand. */
+  area?: "web" | "app";
+  /** App items only: the brand (id from lib/brands.ts) whose product UI this is. */
+  brand?: string;
   /** Set by the catalogue: the folder has an example.tsx (final design example with real content) */
   hasExample?: boolean;
 };

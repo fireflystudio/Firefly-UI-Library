@@ -11,9 +11,12 @@ import { ViewSwitch } from "./view-mode";
 export function Dashboard({
   items,
   categories,
+  showViewSwitch = true,
 }: {
   items: CatalogueItem[];
   categories: Category[];
+  /** Wireframe / Final switch: only for web sections (app UI has one version). */
+  showViewSwitch?: boolean;
 }) {
   const params = useSearchParams();
   const filter = params.get("category") ?? "all";
@@ -53,7 +56,7 @@ export function Dashboard({
                 {g.items.length}
               </span>
             </div>
-            {i === 0 ? <ViewSwitch /> : null}
+            {i === 0 && showViewSwitch ? <ViewSwitch /> : null}
           </div>
           <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
             {g.items.map((item) => (

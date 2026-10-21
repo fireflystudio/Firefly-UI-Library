@@ -58,16 +58,20 @@ export function ComponentCard({ item }: { item: CatalogueItem }) {
             <span className="block truncate">{item.name}</span>
           </Link>
         </h3>
-        <label className="relative z-10 flex shrink-0 cursor-pointer items-center gap-2 text-[13px] font-medium text-text-nav">
-          <input
-            type="checkbox"
-            className="catalogue-checkbox"
-            checked={checked}
-            onChange={() => toggle(item.id)}
-            aria-label={`Add ${item.name} v${item.version} to the build`}
-          />
-          {checked ? "In build" : "Add to build"}
-        </label>
+        {item.area === "app" ? (
+          <span className="shrink-0 font-mono text-[11px] text-text-quaternary">v{item.version}</span>
+        ) : (
+          <label className="relative z-10 flex shrink-0 cursor-pointer items-center gap-2 text-[13px] font-medium text-text-nav">
+            <input
+              type="checkbox"
+              className="catalogue-checkbox"
+              checked={checked}
+              onChange={() => toggle(item.id)}
+              aria-label={`Add ${item.name} v${item.version} to the build`}
+            />
+            {checked ? "In build" : "Add to build"}
+          </label>
+        )}
       </div>
     </article>
   );

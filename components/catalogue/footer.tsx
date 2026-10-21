@@ -5,10 +5,13 @@ export function CatalogueFooter() {
     <footer className="border-t border-border-06">
       <div className="flex flex-col gap-3 px-5 py-8 text-[13px] text-text-nav md:flex-row md:items-center md:justify-between md:px-8 xl:px-10">
         <p>
-          <span className="font-medium text-text-primary">Firefly UI Library</span> · content-free, versioned sections for Firefly websites.
+          <span className="font-medium text-text-primary">Firefly UI Library</span> · versioned sections for websites and product UI for Firefly brands.
         </p>
         <nav aria-label="Footer" className="flex flex-wrap gap-5">
           <Link href="/" className="transition-opacity duration-200 ease-out hover:opacity-60">
+            Web sections
+          </Link>
+          <Link href="/ui" className="transition-opacity duration-200 ease-out hover:opacity-60">
             UI Components
           </Link>
           <Link href="/websites" className="transition-opacity duration-200 ease-out hover:opacity-60">

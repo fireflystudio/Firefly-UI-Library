@@ -7,7 +7,7 @@ import { FireflyLogo } from "./firefly-logo";
 import { useSelection } from "./selection";
 
 const TABS = [
-  { href: "/", label: "UI Components", short: "Components", match: (p: string) => p === "/" || p.startsWith("/components") },
+  { href: "/", label: "Library", short: "Library", match: (p: string) => p === "/" || p.startsWith("/components") || p.startsWith("/ui") },
   { href: "/websites", label: "Websites", short: "Sites", match: (p: string) => p.startsWith("/websites") },
   { href: "/design-system/buttons", label: "Design system", short: "Design", match: (p: string) => p.startsWith("/design-system") },
 ];

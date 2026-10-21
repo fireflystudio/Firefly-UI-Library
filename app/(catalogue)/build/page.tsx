@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BuildPage() {
-  const items = await getItems();
+  const items = (await getItems()).filter((i) => i.area !== "app");
   return (
     <>
       <div className="pb-6 md:pb-8">

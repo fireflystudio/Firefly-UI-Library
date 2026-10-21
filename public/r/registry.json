@@ -553,6 +553,71 @@
           "target": "components/sections/footer-v1.tsx"
         }
       ]
+    },
+    {
+      "name": "verb-audio-queue-v1",
+      "type": "registry:block",
+      "title": "Audio Queue v1",
+      "description": "Verb Reader's audio queue with the player under it: five summaries, hover and click to load a row, a progress bar that runs, pause, skip and speed. Sized by its own width, so it works on a marketing page and inside the app.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/verb-audio-queue-v1/verb-audio-queue-v1.tsx",
+          "type": "registry:component",
+          "target": "components/app/verb-audio-queue-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "verb-interests-picker-v1",
+      "type": "registry:block",
+      "title": "Interests Picker v1",
+      "description": "The Verb Reader sign-up step \"Pick your interests\": toggle chips with a live counter. Chips keep their size when toggled, so the card never jumps.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/verb-interests-picker-v1/verb-interests-picker-v1.tsx",
+          "type": "registry:component",
+          "target": "components/app/verb-interests-picker-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "verb-signup-card-v1",
+      "type": "registry:block",
+      "title": "Sign-up Card v1",
+      "description": "The Verb Reader account card: the mark, a title, an e-mail field and a Subscribe button. A working mock: the field takes input, the button and Enter call back.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/verb-signup-card-v1/verb-signup-card-v1.tsx",
+          "type": "registry:component",
+          "target": "components/app/verb-signup-card-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "verb-feed-sidebar-v1",
+      "type": "registry:block",
+      "title": "Feed Sidebar v1",
+      "description": "The Verb Reader sidebar: the sidebar is the feed. Hover a row and press the bin to remove an interest or a channel; Add interest opens a field to type a new one.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/verb-feed-sidebar-v1/verb-feed-sidebar-v1.tsx",
+          "type": "registry:component",
+          "target": "components/app/verb-feed-sidebar-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "verb-creators-grid-v1",
+      "type": "registry:block",
+      "title": "Creators Grid v1",
+      "description": "A grid of 13 rounded tiles of creator portraits and publisher logos (rows of 4, 5 and 4). Tiles grow a little on hover and the neighbours overlap; the hover cell never moves, so there is no flicker.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/verb-creators-grid-v1/verb-creators-grid-v1.tsx",
+          "type": "registry:component",
+          "target": "components/app/verb-creators-grid-v1.tsx"
+        }
+      ]
     }
   ]
 }

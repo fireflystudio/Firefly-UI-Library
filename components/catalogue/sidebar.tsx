@@ -8,14 +8,41 @@ import type { CategoryId } from "@/lib/types";
 import { FireflyLogo } from "./firefly-logo";
 import { useSelection } from "./selection";
 
-function useActiveCategory(itemCategories: Record<string, CategoryId>): CategoryId | "all" | null {
+type Where = { area: "web" | "app" | null; brand: string | null; category: CategoryId | "all" | null };
+
+/** Which tab, brand and category the current URL belongs to. */
+function useWhere(itemInfo: MenuProps["itemInfo"], brands: MenuProps["brands"]): Where {
   const pathname = usePathname();
   const params = useSearchParams();
+  const filter = params.get("category");
   const match = pathname.match(/^\/components\/([^/]+)/);
-  if (match) return itemCategories[match[1]] ?? "all";
-  if (pathname !== "/") return null;
-  const c = params.get("category");
-  return c && c !== "all" ? (c as CategoryId) : "all";
+  if (match) {
+    const info = itemInfo[match[1]];
+    if (!info) return { area: "web", brand: null, category: "all" };
+    return { area: info.area, brand: info.brand ?? null, category: info.category };
+  }
+  const ui = pathname.match(/^\/ui(?:\/([^/]+))?/);
+  if (ui) return { area: "app", brand: ui[1] ?? brands[0]?.id ?? null, category: filter && filter !== "all" ? (filter as CategoryId) : "all" };
+  if (pathname !== "/") return { area: null, brand: null, category: null };
+  return { area: "web", brand: null, category: filter && filter !== "all" ? (filter as CategoryId) : "all" };
+}
+
+/** Web sections | UI Components: the two areas of the library. */
+function AreaTabs({ area, brandHref }: { area: Where["area"]; brandHref: string }) {
+  const tab = (isActive: boolean) =>
+    `flex-1 whitespace-nowrap rounded-pill px-3 py-1.5 text-center text-[13px] font-medium leading-none transition-[background-color,color,box-shadow] duration-200 ease-out ${
+      isActive ? "bg-surface-primary text-text-primary shadow-[0_1px_2px_0_#0000000f,0_0_0_1px_#0000000a]" : "text-text-nav hover:text-text-primary"
+    }`;
+  return (
+    <div role="tablist" aria-label="Library areas" className="flex items-center rounded-pill border border-border-06 bg-surface-muted p-[3px]">
+      <Link role="tab" aria-selected={area === "web"} href="/" className={tab(area === "web")}>
+        Web sections
+      </Link>
+      <Link role="tab" aria-selected={area === "app"} href={brandHref} className={tab(area === "app")}>
+        UI Components
+      </Link>
+    </div>
+  );
 }
 
 const itemBase =
@@ -29,9 +56,11 @@ const itemOff = "text-text-nav hover:bg-surface-primary/70 hover:text-text-prima
  * bottom under a hairline. Inside /design-system the categories give way to the design-system
  * pages with a back link above them.
  */
-export function Sidebar({ categories, total, itemCategories }: MenuProps) {
+export function Sidebar({ categories, total, brands, itemInfo }: MenuProps) {
   const pathname = usePathname();
-  const active = useActiveCategory(itemCategories);
+  const where = useWhere(itemInfo, brands);
+  const active = where.category;
+  const brandHref = `/ui/${brands[0]?.id ?? ""}`;
   const { selected, ready } = useSelection();
   const count = ready ? selected.length : 0;
   const onWebsites = pathname.startsWith("/websites");
@@ -66,16 +95,41 @@ export function Sidebar({ categories, total, itemCategories }: MenuProps) {
           })}
         </nav>
       ) : (
-        <nav aria-label="Categories" className="flex flex-col gap-0.5">
-          <CategoryLink href="/" active={active === "all"} count={total}>
-            All components
-          </CategoryLink>
-          {categories.map((c) => (
-            <CategoryLink key={c.id} href={`/?category=${c.id}`} active={active === c.id} count={c.count}>
-              {c.name}
-            </CategoryLink>
-          ))}
-        </nav>
+        <div className="flex flex-col gap-4">
+          <AreaTabs area={where.area ?? "web"} brandHref={brandHref} />
+          {where.area === "app" ? (
+            <nav aria-label="Brands" className="flex flex-col gap-0.5">
+              {brands.map((b) => {
+                const isBrand = where.brand === b.id;
+                return (
+                  <div key={b.id} className="flex flex-col gap-0.5">
+                    <CategoryLink href={`/ui/${b.id}`} active={isBrand && active === "all"} count={b.count}>
+                      {b.name}
+                    </CategoryLink>
+                    {isBrand
+                      ? b.categories.map((c) => (
+                          <CategoryLink key={c.id} href={`/ui/${b.id}?category=${c.id}`} active={active === c.id} count={c.count} nested>
+                            {c.name}
+                          </CategoryLink>
+                        ))
+                      : null}
+                  </div>
+                );
+              })}
+            </nav>
+          ) : (
+            <nav aria-label="Categories" className="flex flex-col gap-0.5">
+              <CategoryLink href="/" active={where.area === "web" && active === "all"} count={total}>
+                All components
+              </CategoryLink>
+              {categories.map((c) => (
+                <CategoryLink key={c.id} href={`/?category=${c.id}`} active={where.area === "web" && active === c.id} count={c.count}>
+                  {c.name}
+                </CategoryLink>
+              ))}
+            </nav>
+          )}
+        </div>
       )}
 
       <nav aria-label="Other areas" className="mt-auto flex flex-col gap-0.5 pt-6">
@@ -111,9 +165,9 @@ export function Sidebar({ categories, total, itemCategories }: MenuProps) {
   );
 }
 
-function CategoryLink({ href, active, count, children }: { href: string; active: boolean; count: number; children: React.ReactNode }) {
+function CategoryLink({ href, active, count, children, nested = false }: { href: string; active: boolean; count: number; children: React.ReactNode; nested?: boolean }) {
   return (
-    <Link href={href} aria-current={active ? "page" : undefined} className={`${itemBase} ${active ? itemOn : itemOff}`}>
+    <Link href={href} aria-current={active ? "page" : undefined} className={`${itemBase} ${active ? itemOn : itemOff} ${nested ? "ml-3" : ""}`}>
       <span className="truncate transition-[translate] duration-200 ease-out group-hover:translate-x-[3px] motion-reduce:transition-none">{children}</span>
       <span className={`font-mono text-[11px] ${active ? "text-text-tertiary" : "text-text-quaternary"}`}>{count}</span>
     </Link>
@@ -147,24 +201,46 @@ function Icon({ name }: { name: "websites" | "build" | "design-system" }) {
   }
 }
 
-/** Same categories as a horizontal row for tablet and mobile (no room for a side menu). */
-export function CategoryBar({ categories, total, itemCategories }: MenuProps) {
-  const active = useActiveCategory(itemCategories);
+/** Area tabs + the same categories (or brand sections) as a horizontal row for tablet and mobile. */
+export function CategoryBar({ categories, total, brands, itemInfo }: MenuProps) {
+  const where = useWhere(itemInfo, brands);
+  const active = where.category;
   const pill = (isActive: boolean) =>
     `inline-flex h-8 shrink-0 items-center gap-1.5 rounded-pill border px-3.5 text-[13px] font-medium leading-none transition-[background-color,color,border-color] duration-200 ease-out ${
       isActive ? "border-button-primary bg-button-primary text-button-content-primary" : "border-border-light bg-surface-primary text-text-nav hover:text-text-primary"
     }`;
+  const brand = brands.find((b) => b.id === where.brand) ?? brands[0];
   return (
-    <nav aria-label="Categories" className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] md:-mx-8 md:px-8 [&::-webkit-scrollbar]:hidden">
-      <Link href="/" aria-current={active === "all" ? "page" : undefined} className={pill(active === "all")}>
-        All <span className="font-mono text-[11px] opacity-70">{total}</span>
-      </Link>
-      {categories.map((c) => (
-        <Link key={c.id} href={`/?category=${c.id}`} aria-current={active === c.id ? "page" : undefined} className={pill(active === c.id)}>
-          {c.name} <span className="font-mono text-[11px] opacity-70">{c.count}</span>
-        </Link>
-      ))}
-    </nav>
+    <div className="flex flex-col gap-3">
+      <div className="max-w-[320px]">
+        <AreaTabs area={where.area ?? "web"} brandHref={`/ui/${brands[0]?.id ?? ""}`} />
+      </div>
+      <nav aria-label="Categories" className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] md:-mx-8 md:px-8 [&::-webkit-scrollbar]:hidden">
+        {where.area === "app" && brand ? (
+          <>
+            <Link href={`/ui/${brand.id}`} aria-current={active === "all" ? "page" : undefined} className={pill(active === "all")}>
+              All <span className="font-mono text-[11px] opacity-70">{brand.count}</span>
+            </Link>
+            {brand.categories.map((c) => (
+              <Link key={c.id} href={`/ui/${brand.id}?category=${c.id}`} aria-current={active === c.id ? "page" : undefined} className={pill(active === c.id)}>
+                {c.name} <span className="font-mono text-[11px] opacity-70">{c.count}</span>
+              </Link>
+            ))}
+          </>
+        ) : (
+          <>
+            <Link href="/" aria-current={active === "all" ? "page" : undefined} className={pill(active === "all")}>
+              All <span className="font-mono text-[11px] opacity-70">{total}</span>
+            </Link>
+            {categories.map((c) => (
+              <Link key={c.id} href={`/?category=${c.id}`} aria-current={active === c.id ? "page" : undefined} className={pill(active === c.id)}>
+                {c.name} <span className="font-mono text-[11px] opacity-70">{c.count}</span>
+              </Link>
+            ))}
+          </>
+        )}
+      </nav>
+    </div>
   );
 }
 
