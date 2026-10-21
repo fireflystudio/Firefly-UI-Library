@@ -568,6 +568,19 @@
       ]
     },
     {
+      "name": "verb-mini-player-v1",
+      "type": "registry:block",
+      "title": "Mini Player v1",
+      "description": "The floating Verb Reader mini player (Figma player v3, mobile 358 × 58): source mark, title and source, play / pause and next, a 4px progress line. Part of the Mobile Player flow and shipped in the same file.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/verb-mobile-player-v1/verb-mobile-player-v1.tsx",
+          "type": "registry:component",
+          "target": "components/app/verb-mobile-player-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "verb-interests-picker-v1",
       "type": "registry:block",
       "title": "Interests Picker v1",
@@ -616,6 +629,19 @@
           "path": "registry/firefly/sections/verb-creators-grid-v1/verb-creators-grid-v1.tsx",
           "type": "registry:component",
           "target": "components/app/verb-creators-grid-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "verb-mobile-player-v1",
+      "type": "registry:block",
+      "title": "Mobile Player v1",
+      "description": "The Verb Reader mobile player flow from Figma, working end to end: feed → mini player → full player with scrubber, speed list, summary, queue, menus and snackbars. All 16 designed states are reachable by clicking.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/verb-mobile-player-v1/verb-mobile-player-v1.tsx",
+          "type": "registry:component",
+          "target": "components/app/verb-mobile-player-v1.tsx"
         }
       ]
     }

@@ -28,6 +28,11 @@ Rules live in the Firefly Web Guide Book: `../Firefly web guide book/FIREFLY-WEB
 - Keys: `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` (Vercel env + `.env.local`). `AI_MOCK=1` or missing keys in development → `lib/plan/mock-plan.ts` and gradient images, so the UI can be tested offline.
 - When a component's props change, update its entry in `catalogue-schema.ts` and the mapping in `render.tsx`.
 
+## Two areas (2026-10-21)
+- **Web sections** (`/`): content-free sections for marketing sites. Everything below under "Working rules" applies.
+- **UI Components** (`/ui/<brand>`): a brand's product UI. Same folder layout (`registry/firefly/sections/<brand>-<name>-v1/`), with `area: "app"`, `brand` (id from `lib/brands.ts`) and `category: "app-elements"` (single elements) or `"app-flows"` (whole clickable flows). Exceptions to the content rule: these **are** the brand's UI, so defaults are the brand's Figma sample content and assets live in `public/images/<…>`; brand colours are set as CSS variables on the component root (`VERB_VARS`), not as new tokens. Flows are built only from a complete Figma flow with all states (user rule); they export their parts so single elements can point at the same file (`files` → the flow file, like Footer Light).
+- Sites install app items to `components/app/<id>.tsx` and copy the images they reference.
+
 ## Working rules
 - Components never contain client content, brands or logos. Props for everything, `<Placeholder>` for every visual by default.
 - Never hardcode hex in components — token utilities only (`text-text-primary`, `bg-surface-page` …). Tokens are defined once in `registry/firefly/styles/firefly.css`.
