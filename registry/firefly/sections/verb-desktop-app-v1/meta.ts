@@ -16,8 +16,11 @@ export const meta: CatalogueItem = {
     "Audio: Playing · Xm left pauses the session (Resume); New on another feed starts it and offers Restore previous queue; at the end Continue or All caught up.",
     "Player: click the title for the queue (play a row, ⋮ Remove / Save / Open summary, Clear with Undo), 1× for speeds, ⋮ for Save / Copy / Open original / Unfollow / Share feedback / Close player, click the bar to seek.",
   ],
-  props: [{ name: "className", type: "string", description: "Extra classes on the 1280 × 800 screen. Content is the Figma sample." }],
-  changelog: [{ version: "1.0", date: "2026-10-21", notes: "First release from Figma Verb – Reader v2: For You · 1280 (13 frames), 3.1 Desktop Player (12), 3.2 Audio queue desktop (14)." }],
+  props: [
+    { name: "width / height", type: "number", default: "1280 / 800", description: "Screen size. Use 1728 / 1080 (the Figma desktop frame) when the app is scaled down on a marketing page: everything reads smaller and calmer." },
+    { name: "className", type: "string", description: "Extra classes on the screen. Content is the Figma sample." },
+  ],
+  changelog: [{ version: "1.1", date: "2026-10-21", notes: "width / height props (Verb hero renders it at 1728 × 1080); type sizes from Figma; article body 16/26." }, { version: "1.0", date: "2026-10-21", notes: "First release from Figma Verb – Reader v2: For You · 1280 (13 frames), 3.1 Desktop Player (12), 3.2 Audio queue desktop (14)." }],
   files: [
     {
       path: "registry/firefly/sections/verb-desktop-app-v1/verb-desktop-app-v1.tsx",
@@ -26,6 +29,7 @@ export const meta: CatalogueItem = {
     },
   ],
   registryDependencies: ["firefly-base"],
+  usedOn: ["verb"],
   order: 5,
   previewDevice: 1440,
   previewAlign: "top",

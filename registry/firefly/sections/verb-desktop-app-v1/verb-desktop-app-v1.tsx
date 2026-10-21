@@ -422,9 +422,14 @@ type Menu =
   | { kind: "bell" }
   | null;
 
-export type DesktopAppProps = { className?: string };
+export type DesktopAppProps = {
+  /** Screen size in px. Default 1280 × 800 (Figma "For You · 1280"); 1728 × 1080 is the Figma desktop frame, which reads smaller when scaled down on a page. */
+  width?: number;
+  height?: number;
+  className?: string;
+};
 
-export function DesktopApp({ className = "" }: DesktopAppProps) {
+export function DesktopApp({ width = 1280, height = 800, className = "" }: DesktopAppProps) {
   /* Navigation + feed */
   const [view, setView] = useState<View>({ kind: "forYou" });
   const [layout, setLayout] = useState<"excerpt" | "compact">("excerpt");
@@ -1384,7 +1389,7 @@ export function DesktopApp({ className = "" }: DesktopAppProps) {
     ) : null;
 
   return (
-    <div className={`relative flex h-[800px] w-[1280px] overflow-hidden bg-surface-primary font-sans text-text-primary ${className}`} style={VERB_VARS}>
+    <div className={`relative flex overflow-hidden bg-surface-primary font-sans text-text-primary ${className}`} style={{ ...VERB_VARS, width, height }}>
       {sidebar}
       {articleFull ? null : (
         <div className={`flex min-w-0 flex-col ${art ? "w-[530px] shrink-0" : "flex-1"}`}>
