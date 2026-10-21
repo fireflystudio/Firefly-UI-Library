@@ -19,6 +19,6 @@ export const meta: CatalogueItem = {
   changelog: [{ version: "2.0", date: "2026-10-21", notes: "Boxed FAQ Centered (from the Verb homepage): each question in a soft stroked rounded box that expands with the answer, +/– toggle. v1 (hairline rows, contact line) stays." }],
   files: [{ path: "registry/firefly/sections/faq-centered-v2/faq-centered-v2.tsx", target: "components/sections/faq-centered-v2.tsx", type: "registry:component" }],
   registryDependencies: ["firefly-base"],
-  usedOn: ["verb"],
+  usedOn: ["verb", "solve"],
   order: 6,
 };
