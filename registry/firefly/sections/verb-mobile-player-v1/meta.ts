@@ -26,6 +26,7 @@ export const meta: CatalogueItem = {
     { name: "title", type: "string", default: '"For you"', description: "Feed header." },
     { name: "trending", type: "string[]", default: "6 topics", description: "Chips next to Trending." },
     { name: "avatarSrc", type: "string", default: "sample portrait", description: "Avatar in the app bar." },
+    { name: "address", type: "string", default: '"verb.com"', description: "Address in the browser bar." },
     { name: "newLabel", type: "string", default: '"12m"', description: "Length on the New button (play everything new)." },
     { name: "className", type: "string", description: "Extra classes on the 390 × 844 screen." },
   ],

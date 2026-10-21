@@ -451,7 +451,7 @@ export function MiniPlayer({
 /* Phone chrome (iOS status bar + Safari address bar)                                               */
 /* ------------------------------------------------------------------------------------------------ */
 
-function PhoneChrome() {
+function PhoneChrome({ address }: { address: string }) {
   return (
     <div className="relative z-20 shrink-0 border-b border-border-06 bg-surface-primary">
       <div className="flex h-[62px] items-center justify-between px-4">
@@ -478,7 +478,7 @@ function PhoneChrome() {
       <div className="p-[9px]">
         <div className="flex h-[35px] items-center rounded-[8px] bg-[var(--v-chrome)] px-[7px]">
           <Icon name="tabs" size={20} className="text-text-primary" />
-          <span className="flex-1 text-center text-[16px] leading-[22px] tracking-[-0.2px] text-text-primary">website.com</span>
+          <span className="flex-1 text-center text-[16px] leading-[22px] tracking-[-0.2px] text-text-primary">{address}</span>
           <Icon name="reload" size={20} className="text-text-primary" />
         </div>
       </div>
@@ -515,6 +515,8 @@ export type MobilePlayerProps = {
   topics?: Record<string, PlayerItem[]>;
   /** Avatar in the app bar. */
   avatarSrc?: string;
+  /** Address shown in the browser bar. */
+  address?: string;
   /** Length shown on the "New" button. Defaults to the sum of the feed. */
   newLabel?: string;
   className?: string;
@@ -530,6 +532,7 @@ export function MobilePlayer({
   topics = SAMPLE_TOPICS,
   avatarSrc = `${IMG}/avatar-user.jpg`,
   newLabel = "12m",
+  address = "verb.com",
   className = "",
 }: MobilePlayerProps) {
   const byId = useMemo(() => new Map([...items, ...Object.values(topics).flat()].map((i) => [i.id, i])), [items, topics]);
@@ -1117,7 +1120,7 @@ export function MobilePlayer({
       className={`relative flex h-[844px] w-[390px] flex-col overflow-hidden bg-surface-primary font-sans text-text-primary ${className}`}
       style={VERB_VARS}
     >
-      <PhoneChrome />
+      <PhoneChrome address={address} />
       {feed}
 
       {/* Click-away layer for any open menu */}
