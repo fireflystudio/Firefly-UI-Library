@@ -20,6 +20,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: three card tones, 1/2/4-column grid with a 3-column variant, hover lift, stretched links." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 48/36/28), headline → grid 64/56/40, grid gap 24/20 (was 16/12), card titles 20/19/18, card copy 16/15." }],
+  usedOn: ["startupmap"],
   files: [
     {
       path: "registry/firefly/sections/bento-cards-v1/bento-cards-v1.tsx",

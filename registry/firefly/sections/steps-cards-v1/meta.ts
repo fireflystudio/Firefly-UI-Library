@@ -17,6 +17,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release, rebuilt from the Founders timeline pattern." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 48/32/26), section padding 120/96/64 (was 80/72/56), lead intro 20/18/17, headline → cards 64/56/40, card gap 24, step titles 18/17/16, step copy 16/15 (was 13)." }],
+  usedOn: ["startupmap"],
   files: [
     {
       path: "registry/firefly/sections/steps-cards-v1/steps-cards-v1.tsx",

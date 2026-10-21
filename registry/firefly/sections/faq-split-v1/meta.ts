@@ -18,6 +18,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: single-open accordion, animated answer, two-tone headline." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 44/30/26), section padding 120/96/64 (was 160/96/64), headline → CTA 40/40/32, questions 18/17/16, answers 16/15." }],
+  usedOn: ["startupmap"],
   files: [
     {
       path: "registry/firefly/sections/faq-split-v1/faq-split-v1.tsx",

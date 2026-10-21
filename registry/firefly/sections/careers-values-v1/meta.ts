@@ -15,6 +15,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"how-we-work"', description: "Section id." },
   ],
   changelog: [{ version: "1.5", date: "2026-10-20", notes: "Content column is now 1200px at 1440 (was 1072: max-w 1200 included the side padding). Same as the other library sections." }, { version: "1.4", date: "2026-10-20", notes: "Headline 24/28/32 (was 28/32/40); headline → grid 24/32px (was 40/48/56)." }, { version: "1.3", date: "2026-10-20", notes: "Default column back to max-w 1200 + 20/40/64px padding (the full footer width read too wide on the client's review); containerClassName still lets a site change it." }, { version: "1.2", date: "2026-10-20", notes: "containerClassName prop; the content column now defaults to the footer width (max-w 1440 + 20/40px padding) instead of 1200/1072px." }, { version: "1.1", date: "2026-10-20", notes: "Half section padding (32/48/60px) and headline→grid 40/48/56." }, { version: "1.0", date: "2026-10-20", notes: "First release (distilled from the Verb careers page)." }],
+  usedOn: ["startupmap", "solve", "verb"],
   files: [{ path: "registry/firefly/sections/careers-values-v1/careers-values-v1.tsx", target: "components/sections/careers-values-v1.tsx", type: "registry:component" }],
   registryDependencies: ["firefly-base"],
   order: 30,

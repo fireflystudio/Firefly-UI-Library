@@ -20,6 +20,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release, rebuilt from the Founders hero pattern." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Display h1 64/48/34 (was 64/40/32), lead 20/18/17, headline → lead 20/20/16, lead → buttons 40/40/32, hero rhythm: top nav 64 + 120/80/56 (was nav + 32/24/20), bottom 96/80/64." }],
+  usedOn: ["startupmap"],
   files: [
     {
       path: "registry/firefly/sections/hero-portrait-v1/hero-portrait-v1.tsx",

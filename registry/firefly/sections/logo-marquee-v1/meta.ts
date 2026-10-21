@@ -22,6 +22,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: CSS marquee, one or two rows, light/dark tone, placeholder tiles." }],
+  usedOn: ["startupmap"],
   files: [
     {
       path: "registry/firefly/sections/logo-marquee-v1/logo-marquee-v1.tsx",

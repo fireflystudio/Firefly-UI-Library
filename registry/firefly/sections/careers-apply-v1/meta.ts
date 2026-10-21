@@ -23,6 +23,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"apply"', description: "Section id (the Careers Job Apply pill links to #apply)." },
   ],
   changelog: [{ version: "1.3", date: "2026-10-20", notes: "Bottom padding 64/96/120px (top stays 32/48/60) so the space to the footer equals the space between sections." }, { version: "1.2", date: "2026-10-20", notes: "Headline 24/28/32 (was 28/32/40); headline → form 24/32px." }, { version: "1.1", date: "2026-10-20", notes: "Half section padding (32/48/60px); headline→form 40/48/56." }, { version: "1.0", date: "2026-10-20", notes: "First release (distilled from the Verb careers page). The anchor offset under a fixed nav comes from the site's global scroll-padding-top (Web Guide Book §4), not from the component." }],
+  usedOn: ["startupmap", "solve", "verb"],
   files: [{ path: "registry/firefly/sections/careers-apply-v1/careers-apply-v1.tsx", target: "components/sections/careers-apply-v1.tsx", type: "registry:component" }],
   registryDependencies: ["firefly-base"],
   order: 60,

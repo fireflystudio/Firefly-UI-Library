@@ -27,6 +27,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: dark/light tone, optional quote, hairline stat grid with hover nudge." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 48/36/28), stat numbers 48/40/32 (was 64/48/44), quote 28/24/22 regular (was 32/28/24 light), header → grid 64/56/40, grid gap 24/20." }],
+  usedOn: ["startupmap"],
   files: [
     {
       path: "registry/firefly/sections/stats-grid-v1/stats-grid-v1.tsx",

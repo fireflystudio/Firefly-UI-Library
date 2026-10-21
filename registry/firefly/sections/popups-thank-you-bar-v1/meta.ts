@@ -23,5 +23,5 @@ export const meta: CatalogueItem = {
   registryDependencies: ["firefly-base"],
   order: 30,
   previewDevice: 834,
-  usedOn: ["solve"],
+  usedOn: ["startupmap", "solve", "verb"],
 };

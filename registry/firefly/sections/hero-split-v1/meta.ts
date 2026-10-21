@@ -27,6 +27,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: 5/7 split, reverse option, mono note, exit parallax on the visual." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Display h1 64/48/34 (was 56/44/34), lead 20/18/17 (was 18/17/16), headline → lead 20/20/16, lead → buttons 40/40/32, bottom padding 96/80/64." }],
+  usedOn: ["startupmap"],
   files: [
     {
       path: "registry/firefly/sections/hero-split-v1/hero-split-v1.tsx",

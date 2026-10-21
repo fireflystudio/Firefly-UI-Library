@@ -43,5 +43,5 @@ export const meta: CatalogueItem = {
   previewScroll: true,
   previewDevice: 834,
   order: 10,
-  usedOn: ["startupmap", "solve"],
+  usedOn: ["startupmap", "solve", "verb"],
 };

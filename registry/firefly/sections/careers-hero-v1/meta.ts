@@ -20,6 +20,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"careers-hero"', description: "Section id; the heading id is `${id}-heading`." },
   ],
   changelog: [{ version: "1.6", date: "2026-10-20", notes: "Content column is now 1200px at 1440 (was 1072: max-w 1200 included the side padding). Same as the other library sections." }, { version: "1.5", date: "2026-10-20", notes: "Lead paragraph (body) and a primary CTA that scrolls to #open-roles (See open roles), as on the ElevenLabs careers page." }, { version: "1.4", date: "2026-10-20", notes: "Subpage headline size 30/40/48 (was 34/48/64); photo 32/40/48 below it." }, { version: "1.3", date: "2026-10-20", notes: "Default column back to max-w 1200 + 20/40/64px padding (the full footer width read too wide on the client's review); containerClassName still lets a site change it." }, { version: "1.2", date: "2026-10-20", notes: "containerClassName prop; the content column now defaults to the footer width (max-w 1440 + 20/40px padding) instead of 1200/1072px." }, { version: "1.1", date: "2026-10-20", notes: "Bottom padding 32/48/60px to match the half rhythm of the other careers sections." }, { version: "1.0", date: "2026-10-20", notes: "First release (distilled from the Verb careers page)." }],
+  usedOn: ["startupmap", "solve", "verb"],
   files: [{ path: "registry/firefly/sections/careers-hero-v1/careers-hero-v1.tsx", target: "components/sections/careers-hero-v1.tsx", type: "registry:component" }],
   registryDependencies: ["firefly-base"],
   order: 10,

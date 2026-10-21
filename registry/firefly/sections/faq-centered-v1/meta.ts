@@ -24,6 +24,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: centred layout, single-open accordion, animated answer, contact line." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 48/32/26), headline → accordion 64/56/40, questions 18/17/16, answers 16/15." }],
+  usedOn: ["startupmap"],
   files: [
     {
       path: "registry/firefly/sections/faq-centered-v1/faq-centered-v1.tsx",
