@@ -620,6 +620,19 @@
       ]
     },
     {
+      "name": "verb-desktop-app-v1",
+      "type": "registry:block",
+      "title": "Desktop App v1",
+      "description": "The Verb Reader desktop app from Figma (For You · 1280, Desktop Player, Audio queue), working end to end at 1280 × 800: sidebar, feed in Excerpt and Compact layouts, article side panel, topic feeds, Add interest, loading / error / empty states, the floating player with queue, speed, menus and snackbars.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/verb-desktop-app-v1/verb-desktop-app-v1.tsx",
+          "type": "registry:component",
+          "target": "components/app/verb-desktop-app-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "verb-mobile-player-v1",
       "type": "registry:block",
       "title": "Mobile Player v1",
