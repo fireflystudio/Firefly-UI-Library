@@ -374,7 +374,7 @@
       "name": "faq-split-v1",
       "type": "registry:block",
       "title": "FAQ Split v1",
-      "description": "Two-tone headline and a ghost button on the left, accordion on the right. One question open at a time, the first open by default, with a rotating +/– glyph.",
+      "description": "Two-tone headline and a ghost button on the left, accordion on the right. One question open at a time, all closed by default, with a rotating +/– glyph.",
       "dependencies": [
         "motion"
       ],
@@ -390,7 +390,7 @@
       "name": "faq-split-v2",
       "type": "registry:block",
       "title": "FAQ Split v2",
-      "description": "Two-tone headline and a ghost button on the left, accordion on the right. One question open at a time, the first open by default, with a rotating +/– glyph.",
+      "description": "Two-tone headline and a ghost button on the left, accordion on the right. One question open at a time, all closed by default, with a rotating +/– glyph.",
       "dependencies": [
         "motion"
       ],
@@ -406,7 +406,7 @@
       "name": "faq-centered-v1",
       "type": "registry:block",
       "title": "FAQ Centered v1",
-      "description": "Two-tone headline on top, a centred accordion (640px tablet / 760px desktop) below and a contact line with a ghost pill at the bottom. One question open at a time, the first open by default, with a rotating +/– glyph.",
+      "description": "Two-tone headline on top, a centred accordion (640px tablet / 760px desktop) below and a contact line with a ghost pill at the bottom. One question open at a time, all closed by default, with a rotating +/– glyph.",
       "dependencies": [
         "motion"
       ],

@@ -12,7 +12,7 @@ import type { CSSProperties, ReactNode } from "react";
  * - Feed: Excerpt and Compact layouts (toggle top right), hover rows with ▶ and ⋮ (Save / Add to queue /
  *   Copy; "Playing now" on the playing row), See more, Trending chips (scroll, open a topic feed), interest
  *   feeds (Remove from Interests), Add interest with suggestions, loading skeleton, error with Retry
- *   (Politics, first time), the empty state with suggestions (empty For you).
+ *   (Politics interest, first time), the empty state with suggestions (empty For you).
  * - Explore (Figma "Explore grid – Desktop"): "Pick your sources" / "Pick your people" (Sources | Authors), category
  *   chips, a masonry grid that follows the screen width; click a tile (or its Follow pill) to follow / unfollow, the
  *   source appears at the top of the sidebar's Following list; "Following · N" lists them with Unfollow (Undo).
@@ -228,7 +228,8 @@ const EXTRA: Record<string, DesktopItem[]> = {
 const ALL_ITEMS = [...FOR_YOU, ...Object.values(EXTRA).flat()];
 const BY_ID = new Map(ALL_ITEMS.map((i) => [i.id, i]));
 
-const TRENDING = ["Science", "Climate", "Formula 1", "Gaming", "Politics", "Electric cars", "Robotics", "Photography"];
+/* Trending chips (Figma): clicking one adds it to Interests (top of the list, blue "new" dot) and the row refills from this pool. */
+const TRENDING = ["Science", "Climate", "Formula 1", "Gaming", "Politics", "Electric cars", "Robotics", "Photography", "Crypto", "Cycling", "Space", "Sleep science", "Urbanism", "Film & TV", "Fintech", "Typography"];
 const START_INTERESTS = ["Productivity", "AI", "Design", "Finance", "Healthcare", "Climate", "Startups", "Nutrition", "Architecture"];
 const START_FOLLOWING = ["guardian", "row", "verge", "huberman", "hn", "atc"];
 const SUGGESTIONS = ["Figma UI", "Figma plugins", "Figma variables", "Figma vs Sketch", "Film & TV", "Fintech", "Fitness", "Film festivals", "Space", "Startups", "Sustainability", "Sleep science", "Typography", "UX research", "Urbanism"];
@@ -484,6 +485,7 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
   const [status, setStatus] = useState<"ready" | "loading" | "error">("ready");
   const [failedOnce, setFailedOnce] = useState<Set<string>>(() => new Set());
   const [interests, setInterests] = useState(START_INTERESTS);
+  const [fresh, setFresh] = useState<Set<string>>(() => new Set());
   const [following, setFollowing] = useState(START_FOLLOWING);
   const [moreInterests, setMoreInterests] = useState(false);
   const [moreFollowing, setMoreFollowing] = useState(false);
@@ -543,7 +545,7 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
   const cur = current ? BY_ID.get(current) ?? null : null;
   const key = viewKey(view);
 
-  /* Navigate with the Figma loading skeleton; Politics fails the first time (error + Retry). */
+  /* Navigate with the Figma loading skeleton; the Politics interest feed fails the first time (error + Retry). */
   const go = useCallback(
     (v: View) => {
       setView(v);
@@ -556,7 +558,7 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
       setStatus("loading");
       const k = viewKey(v);
       loadTimer.current = window.setTimeout(() => {
-        if (k === "trending:Politics" && !failedOnce.has(k)) {
+        if (k === "interest:Politics" && !failedOnce.has(k)) {
           setFailedOnce((f) => new Set(f).add(k));
           setStatus("error");
         } else setStatus("ready");
@@ -694,6 +696,24 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
     setFollowing((l) => l.filter((x) => x !== id));
     showSnack(`Unfollowed ${SOURCES[id].name}`, { label: "Undo", run: () => setFollowing(before) });
   };
+  /** Trending chip → Interests: goes to the top of the list with a "new" dot; Undo puts it back. */
+  const addTrending = (name: string) => {
+    if (interests.includes(name)) return;
+    setInterests((l) => [name, ...l]);
+    setFresh((f) => new Set(f).add(name));
+    showSnack(`Added ${name}`, {
+      label: "Undo",
+      run: () => {
+        setInterests((l) => l.filter((x) => x !== name));
+        setFresh((f) => {
+          const n = new Set(f);
+          n.delete(name);
+          return n;
+        });
+      },
+    });
+  };
+
   const addInterest = (name: string) => {
     const n = name.trim();
     if (!n) return;
@@ -931,8 +951,21 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
           const k = `interest:${name}`;
           return (
             <li key={name} className="group relative">
-              <button type="button" onClick={() => go({ kind: "interest", name })} aria-current={k === key ? "page" : undefined} className={`${navRow(k === key)} pr-9`}>
+              <button
+                type="button"
+                onClick={() => {
+                  setFresh((f) => {
+                    const n = new Set(f);
+                    n.delete(name);
+                    return n;
+                  });
+                  go({ kind: "interest", name });
+                }}
+                aria-current={k === key ? "page" : undefined}
+                className={`${navRow(k === key)} pr-9`}
+              >
                 <span className="truncate">{name}</span>
+                {fresh.has(name) ? <span aria-label="new" className="ml-auto size-1.5 shrink-0 rounded-full bg-[var(--v-accent)] group-hover:opacity-0" /> : null}
                 {playingIn(k)}
               </button>
               <button
@@ -1110,8 +1143,8 @@ export function DesktopApp({ width = 1280, height = 800, className = "" }: Deskt
       ) : view.kind !== "interest" && view.kind !== "saved" && view.kind !== "summaries" ? (
         <div ref={chipsRef} className="-mx-1 flex items-center gap-3 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <span className="shrink-0 text-[12px] leading-[16px] text-text-tertiary">Trending</span>
-          {TRENDING.map((t) => (
-            <Pill key={t} active={view.kind === "trending" && view.name === t} onClick={() => go(view.kind === "trending" && view.name === t ? { kind: "forYou" } : { kind: "trending", name: t })}>
+          {TRENDING.filter((t) => !interests.includes(t)).map((t) => (
+            <Pill key={t} label={`Add ${t} to Interests`} onClick={() => addTrending(t)}>
               {t}
             </Pill>
           ))}
