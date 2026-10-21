@@ -71,7 +71,7 @@ function Row({
       <div className="min-h-0 overflow-hidden">
         <div
           className="group flex items-center justify-between text-text-secondary transition-colors duration-150 hover:bg-[var(--v-card)] hover:text-text-primary focus-within:bg-[var(--v-card)]"
-          style={{ height: v(34), borderRadius: v(9), padding: `0 ${v(8)} 0 ${v(12)}`, fontSize: v(15) }}
+          style={{ height: v(34), borderRadius: v(9), padding: `0 ${v(6)} 0 ${v(10)}`, fontSize: v(15) }}
         >
           <span className="flex min-w-0 items-center" style={{ gap: v(10) }}>
             {entry.initials ? (
@@ -142,9 +142,9 @@ export function FeedSidebar({ interests: startInterests = SAMPLE_INTERESTS, foll
     <div className={`@container w-full ${className}`} style={VERB_VARS}>
       <div
         className="flex flex-col bg-surface-primary shadow-[var(--v-shadow)]"
-        style={{ minHeight: v(424), padding: v(14), borderRadius: v(16) }}
+        style={{ minHeight: v(404), padding: v(6), borderRadius: v(14) }}
       >
-        <p className="text-text-tertiary" style={{ fontSize: v(13), padding: `${v(4)} ${v(12)} ${v(6)}` }}>
+        <p className="text-text-tertiary" style={{ fontSize: v(13), padding: `${v(6)} ${v(10)} ${v(4)}` }}>
           Interests
         </p>
         <ul style={{ display: "flex", flexDirection: "column", gap: v(2) }}>
@@ -160,7 +160,7 @@ export function FeedSidebar({ interests: startInterests = SAMPLE_INTERESTS, foll
               commit();
             }}
             className="flex items-center text-text-primary"
-            style={{ height: v(34), padding: `0 ${v(12)}`, fontSize: v(15), gap: v(8), marginTop: v(2) }}
+            style={{ height: v(34), padding: `0 ${v(10)}`, fontSize: v(15), gap: v(8), marginTop: v(2) }}
           >
             <span className="leading-none text-text-tertiary" style={{ fontSize: v(18) }}>
               +
@@ -188,7 +188,7 @@ export function FeedSidebar({ interests: startInterests = SAMPLE_INTERESTS, foll
             type="button"
             onClick={() => setAdding(true)}
             className="flex cursor-pointer items-center text-text-tertiary outline-none transition-colors duration-150 hover:text-text-primary focus-visible:ring-2 focus-visible:ring-[var(--v-accent)]"
-            style={{ height: v(34), padding: `0 ${v(12)}`, fontSize: v(15), gap: v(8), marginTop: v(2), borderRadius: v(9) }}
+            style={{ height: v(34), padding: `0 ${v(10)}`, fontSize: v(15), gap: v(8), marginTop: v(2), borderRadius: v(9) }}
           >
             <span className="leading-none" style={{ fontSize: v(18) }}>
               +
@@ -197,7 +197,7 @@ export function FeedSidebar({ interests: startInterests = SAMPLE_INTERESTS, foll
           </button>
         )}
 
-        <p className="text-text-tertiary" style={{ fontSize: v(13), padding: `${v(14)} ${v(12)} ${v(6)}` }}>
+        <p className="text-text-tertiary" style={{ fontSize: v(13), padding: `${v(12)} ${v(10)} ${v(4)}` }}>
           Following
         </p>
         <ul style={{ display: "flex", flexDirection: "column", gap: v(2) }}>

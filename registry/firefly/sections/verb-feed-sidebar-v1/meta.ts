@@ -16,7 +16,10 @@ export const meta: CatalogueItem = {
     { name: "maxInterests", type: "number", default: "6", description: "\"Add interest\" disappears at this number." },
     { name: "className", type: "string", description: "Extra classes on the root." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-21", notes: "First release, moved from the Verb site where it was built and approved." }],
+  changelog: [
+    { version: "1.1", date: "2026-10-21", notes: "Tighter paddings (panel 6, rows 10) so it looks like the sidebar of the Verb app." },
+    { version: "1.0", date: "2026-10-21", notes: "First release, moved from the Verb site where it was built and approved." },
+  ],
   files: [
     {
       path: "registry/firefly/sections/verb-feed-sidebar-v1/verb-feed-sidebar-v1.tsx",
