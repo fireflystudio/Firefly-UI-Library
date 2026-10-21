@@ -22,8 +22,8 @@ export type FaqAccordionProps = {
 
 /**
  * FAQ Accordion v2 (boxed)
- * Same headline and behaviour as v1, but every question sits in its own rounded box with a hairline
- * stroke (no fill), 12px apart. Opening a question grows its box and shows the answer inside it
+ * Same headline and behaviour as v1, but every question sits in its own rounded box with a soft hairline
+ * stroke (surface-muted, the v1 separator colour; no fill), 12px apart. Opening a question grows its box and shows the answer inside it
  * (height eases via grid rows; static under reduced motion). The + turns into – when open.
  * One question open at a time, the first open by default.
  */
@@ -49,7 +49,7 @@ export function FaqAccordion({ id = "faq", headline, headlineMuted, items, defau
               <li
                 key={item.question}
                 {...reveal}
-                className={`rounded-frame border transition-colors duration-200 ease-out ${isOpen ? "border-border-16" : "border-border-10 hover:border-border-16"}`}
+                className={`rounded-frame border transition-colors duration-200 ease-out ${isOpen ? "border-border-10" : "border-surface-muted hover:border-border-10"}`}
               >
                 <h3>
                   <button
