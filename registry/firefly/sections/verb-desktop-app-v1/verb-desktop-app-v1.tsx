@@ -381,7 +381,7 @@ function Menu({ items, className = "", width = 240, style }: { items: MenuItem[]
           role="menuitem"
           disabled={m.disabled}
           onClick={m.onSelect}
-          className="flex h-10 cursor-pointer items-center gap-3 rounded-[8px] px-3 text-left text-[15px] leading-[20px] tracking-[-0.3px] text-text-secondary outline-none transition-colors hover:bg-surface-secondary hover:text-text-primary focus-visible:bg-surface-secondary disabled:cursor-default disabled:hover:bg-transparent disabled:hover:text-text-secondary"
+          className="flex h-10 cursor-pointer items-center gap-3 rounded-[8px] px-3 text-left text-[16px] leading-[20px] tracking-[-0.3px] text-text-secondary outline-none transition-colors hover:bg-surface-secondary hover:text-text-primary focus-visible:bg-surface-secondary disabled:cursor-default disabled:hover:bg-transparent disabled:hover:text-text-secondary"
         >
           {m.icon ? <Icon name={m.icon} size={16} className="text-icon-secondary" /> : null}
           <span className="truncate">{m.label}</span>
@@ -674,7 +674,7 @@ export function DesktopApp({ className = "" }: DesktopAppProps) {
     { v: { kind: "summaries" }, icon: "sparkle", label: "Summaries" },
   ];
   const navRow = (active: boolean) =>
-    `group flex h-10 w-full cursor-pointer items-center gap-3 rounded-[8px] px-3 text-left text-[15px] leading-[20px] tracking-[-0.3px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--v-accent)] ${
+    `group flex h-10 w-full cursor-pointer items-center gap-3 rounded-[8px] px-3 text-left text-[14px] leading-[18px] tracking-[-0.4px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--v-accent)] ${
       active ? "font-medium text-text-primary" : "text-text-secondary hover:bg-black/[0.04] hover:text-text-primary"
     }`;
   const playingIn = (k: string) => (session?.key === k && playing && playerOpen ? <Icon name="bars" size={14} className="ml-auto text-[var(--v-accent)]" /> : null);
@@ -719,7 +719,7 @@ export function DesktopApp({ className = "" }: DesktopAppProps) {
         })}
       </nav>
 
-      <p className="mb-1 mt-6 px-3 text-[12px] leading-[16px] text-text-tertiary">Interests</p>
+      <p className="mb-1 mt-6 px-3 text-[12px] leading-[16px] tracking-[-0.4px] text-text-quaternary">Interests</p>
       <ul className="flex flex-col gap-0.5">
         {showSidebarList(interests, moreInterests).map((name) => {
           const k = `interest:${name}`;
@@ -748,7 +748,7 @@ export function DesktopApp({ className = "" }: DesktopAppProps) {
         </button>
       ) : null}
 
-      <p className="mb-1 mt-6 px-3 text-[12px] leading-[16px] text-text-tertiary">Following</p>
+      <p className="mb-1 mt-6 px-3 text-[12px] leading-[16px] tracking-[-0.4px] text-text-quaternary">Following</p>
       <ul className="flex flex-col gap-0.5">
         {showSidebarList(following, moreFollowing).map((id) => (
           <li key={id} className="group relative">
@@ -1020,11 +1020,11 @@ export function DesktopApp({ className = "" }: DesktopAppProps) {
     const showActions = menu?.kind === "row" && menu.id === i.id;
     const active = article === i.id;
     return (
-      <li key={i.id} className={`group relative flex h-11 items-center gap-4 rounded-[8px] px-2 transition-colors hover:bg-surface-secondary ${showActions || active ? "bg-surface-secondary" : ""}`}>
+      <li key={i.id} className={`group relative flex h-9 items-center gap-4 rounded-[8px] px-2 transition-colors hover:bg-surface-secondary ${showActions || active ? "bg-surface-secondary" : ""}`}>
         <button type="button" onClick={() => openArticle(i.id)} aria-label={`Open: ${i.title}`} className="absolute inset-0 cursor-pointer rounded-[8px] outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--v-accent)]" />
-        <p className="pointer-events-none relative min-w-0 flex-1 truncate text-[15px] leading-[20px] tracking-[-0.3px]">
+        <p className="pointer-events-none relative min-w-0 flex-1 truncate text-[14px] font-medium leading-[18px] tracking-[-0.4px]">
           <span className={read.has(i.id) && !active ? "text-text-tertiary" : "text-text-primary"}>{i.title}</span>
-          {art ? null : <span className="ml-3 text-text-tertiary">{i.excerpt}</span>}
+          {art ? null : <span className="ml-3 font-normal text-text-tertiary">{i.excerpt}</span>}
         </p>
         {isCur && playing ? <Icon name="bars" size={14} className="relative text-[var(--v-accent)]" /> : null}
         <div className={`relative flex items-center gap-1 ${showActions ? "" : "hidden group-hover:flex group-focus-within:flex"}`}>
@@ -1128,7 +1128,7 @@ export function DesktopApp({ className = "" }: DesktopAppProps) {
     if (feed.length === 0) {
       return <p className="pt-2 text-[15px] text-text-tertiary">{view.kind === "saved" ? "Nothing saved yet. Use Save on any summary." : "Nothing here yet."}</p>;
     }
-    return compact ? <ul className="flex flex-col">{feed.map(compactRow)}</ul> : <ul className="-mx-4 flex flex-col gap-2">{feed.map(excerptRow)}</ul>;
+    return compact ? <ul className="flex flex-col gap-2">{feed.map(compactRow)}</ul> : <ul className="-mx-4 flex flex-col gap-2">{feed.map(excerptRow)}</ul>;
   })();
 
   /* ---- Article panel ------------------------------------------------------------------------------ */
@@ -1165,10 +1165,10 @@ export function DesktopApp({ className = "" }: DesktopAppProps) {
           <Icon name="close" size={16} className="text-icon-secondary" />
         </Ghost>
       </div>
-      <div className="min-h-0 flex-1 overflow-y-auto px-10 pb-32 pt-6 [scrollbar-width:thin]">
+      <div className="min-h-0 flex-1 overflow-y-auto px-10 pb-32 pt-8 [scrollbar-width:thin]">
         <div className={articleFull ? "mx-auto max-w-[680px]" : ""}>
-          <h2 className="text-[26px] font-medium leading-[34px] tracking-[-0.6px] text-text-primary">{art.title}</h2>
-          <div className="mt-6 flex items-center gap-2 text-[13px] text-text-tertiary">
+          <h2 className="text-[24px] font-medium leading-[34px] text-text-primary">{art.title}</h2>
+          <div className="mt-5 flex items-center gap-2 text-[13px] tracking-[-0.4px] text-text-tertiary">
             <Mark source={art.source} size={20} />
             <span className="text-text-secondary">{SOURCES[art.source].name}</span>·<span>{art.age}</span>·<span>{art.topic}</span>
             <span className="ml-auto flex items-center gap-1">
@@ -1178,9 +1178,9 @@ export function DesktopApp({ className = "" }: DesktopAppProps) {
               {playBtn(art)}
             </span>
           </div>
-          <div className="mt-8 flex flex-col gap-6">
+          <div className="mt-8 flex flex-col gap-7">
             {(art.body ?? [art.excerpt]).map((p) => (
-              <p key={p.slice(0, 30)} className="text-[20px] leading-[34px] tracking-[-0.3px] text-text-secondary">
+              <p key={p.slice(0, 30)} className="text-[20px] leading-[34px] tracking-[-0.2px] text-text-secondary">
                 {p}
               </p>
             ))}
