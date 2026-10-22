@@ -23,6 +23,11 @@ export type IconGridProps = {
   items: IconGridItem[];
   /** Headline max width; pages with a long headline can widen it. */
   headlineClassName?: string;
+  /**
+   * When a `tileBackground` shows. "always" (default) paints it straight away; "hover" keeps the
+   * tile plain like the rest and fades the background in when the item is hovered or focused.
+   */
+  tileBackgroundOn?: "always" | "hover";
   className?: string;
 };
 
@@ -33,7 +38,7 @@ export type IconGridProps = {
  * and no card borders — the lightest way to show six capabilities without six boxes.
  *
  * One item may carry `tileBackground` (a photo or gradient behind its mark), which gives the grid
- * a single point of colour. The title nudges 5px right on hover, like every other list row in the
+ * a single point of colour — painted straight away, or faded in on hover with `tileBackgroundOn`. The title nudges 5px right on hover, like every other list row in the
  * house style; everything rises in on scroll, staggered.
  *
  * Seeded from the Solve "problems" section (2026-10-22) and generalised: no copy, no brand, icons
@@ -46,6 +51,7 @@ export function IconGrid({
   intro,
   items,
   headlineClassName = "max-w-[900px]",
+  tileBackgroundOn = "always",
   className = "",
 }: IconGridProps) {
   const headingId = `${id}-heading`;
@@ -78,8 +84,21 @@ export function IconGrid({
           {items.map((item) => (
             <li key={item.title} {...reveal} className="group flex flex-col items-start">
               {item.tileBackground ? (
-                <div className="relative flex size-20 items-center justify-center overflow-clip rounded-icon-tile bg-surface-muted">
-                  <div aria-hidden className="absolute inset-0">{item.tileBackground}</div>
+                <div
+                  className={`relative flex size-20 items-center justify-center overflow-clip rounded-icon-tile ${
+                    tileBackgroundOn === "hover" ? "border border-border-10" : "bg-surface-muted"
+                  }`}
+                >
+                  <div
+                    aria-hidden
+                    className={`absolute inset-0 ${
+                      tileBackgroundOn === "hover"
+                        ? "opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-within:opacity-100 motion-reduce:transition-none"
+                        : ""
+                    }`}
+                  >
+                    {item.tileBackground}
+                  </div>
                   <div className="relative">{item.icon}</div>
                 </div>
               ) : (
