@@ -20,6 +20,8 @@ export type FeatureRowInteractiveProps = {
   headline: string;
   /** Grey second half of the headline */
   headlineMuted?: string;
+  /** Optional lead under the headline; without it the component looks exactly as before. */
+  intro?: string;
   items: FeatureStep[];
   /** Visual on the left on tablet/desktop (mobile is always copy first) */
   reverse?: boolean;
@@ -40,6 +42,7 @@ export function FeatureRowInteractive({
   id = "feature-row",
   headline,
   headlineMuted,
+  intro,
   items,
   reverse = false,
   defaultActive = 0,
@@ -65,6 +68,12 @@ export function FeatureRowInteractive({
           >
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
+
+          {intro ? (
+            <p {...reveal} className="-mt-4 max-w-[420px] text-pretty text-[15px] leading-[1.55] text-text-nav md:-mt-4 md:text-[16px]">
+              {intro}
+            </p>
+          ) : null}
 
           <ul {...reveal} className="flex w-full flex-col">
             {items.map((item, i) => {
