@@ -212,6 +212,19 @@
       ]
     },
     {
+      "name": "icon-grid-v1",
+      "type": "registry:block",
+      "title": "Icon Grid v1",
+      "description": "A two-tone headline over a grid of plain items: an 80px rounded tile with a mark, a title and two lines. Three columns on desktop, two on tablet, one on mobile, no card borders — six capabilities without six boxes. One tile can carry a photo or gradient background as the single point of colour.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/icon-grid-v1/icon-grid-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/icon-grid-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "feature-row-checks-v1",
       "type": "registry:block",
       "title": "Feature Row Checks v1",
