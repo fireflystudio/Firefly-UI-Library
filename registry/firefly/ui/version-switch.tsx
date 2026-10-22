@@ -15,6 +15,8 @@ type Props = {
   storageKey: string;
   /** false ships only the default version and hides the control. Wire it to the site's own flag. */
   enabled?: boolean;
+  /** Called with the shown version's index on load (after the remembered pick) and on every switch, e.g. so the nav can follow a light / dark hero. */
+  onChange?: (index: number) => void;
 };
 
 /**
@@ -52,7 +54,7 @@ export function VersionSwitch(props: Props) {
   return <Switch {...props} />;
 }
 
-function Switch({ label, versions, defaultIndex = 0, storageKey }: Props) {
+function Switch({ label, versions, defaultIndex = 0, storageKey, onChange }: Props) {
   const [active, setActive] = useState(defaultIndex);
   const [onScreen, setOnScreen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -66,6 +68,11 @@ function Switch({ label, versions, defaultIndex = 0, storageKey }: Props) {
       if (Number.isInteger(saved) && saved >= 0 && saved < versions.length) setActive(saved);
     } catch {}
   }, [storageKey, versions.length]);
+
+  // Report the shown version (initial pick included).
+  useEffect(() => {
+    onChange?.(active);
+  }, [active, onChange]);
 
   // The control shows only while the section is on screen.
   useEffect(() => {

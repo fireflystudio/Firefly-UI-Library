@@ -30,6 +30,7 @@ export const meta: CatalogueItem = {
     { name: "<Popup>", type: "component", default: 'width "max-w-[440px]"', description: "Modal popup shell on a native <dialog>: focus trap, inert page, Escape, focus restore; overlay fade + panel rise-in from motion (instant under reduced motion); × button built in. Props: open, onClose, labelledBy, closeLabel, width, className. Mark the control to focus with data-autofocus. Also exports CloseIcon and CheckIcon." },
   ],
   changelog: [
+    { version: "1.4", date: "2026-10-22", notes: "VersionSwitch: optional onChange(index) on load and on every switch (Solve uses it so the nav turns dark over a white hero version)." },
     { version: "1.2", date: "2026-10-22", notes: "VersionSwitch: the review control that puts several versions of a section behind a floating 1 2 3 pill (all mounted, instant swap, remembered per browser, `enabled={false}` ships only the default). Built on Verb, generalised here for Solve." },
     { version: "1.3", date: "2026-10-20", notes: "Popup atom: modal shell on a native <dialog> (focus trap, Escape, focus restore) with the overlay fade and panel rise-in; the Pop-ups category builds on it." },
     { version: "1.0", date: "2026-10-16", notes: "First release, distilled from the Startupmap build and the Firefly Web Guide Book." },
