@@ -91,6 +91,11 @@
           "path": "registry/firefly/ui/popup.tsx",
           "type": "registry:ui",
           "target": "components/ui/popup.tsx"
+        },
+        {
+          "path": "registry/firefly/ui/version-switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/version-switch.tsx"
         }
       ]
     },
