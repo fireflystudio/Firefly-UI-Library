@@ -34,7 +34,7 @@ export function StepsCards({ id = "steps", headline, headlineMuted, intro, steps
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
       <Reveal className="mx-auto w-full max-w-[1312px]">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8 xl:max-w-[1200px] xl:items-start">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8 xl:max-w-content xl:items-start">
           <h2
             {...reveal}
             id={headingId}

@@ -17,6 +17,7 @@ export const meta: CatalogueItem = {
     { name: "tone", type: '"dark" | "light"', default: '"dark"', description: "dark = bg-surface-dark with light text; light = page background with ink text." },
     { name: "headline", type: "string", description: "First, primary-coloured part of the optional heading." },
     { name: "headlineMuted", type: "string", description: "Grey second half of the heading (white/60 on dark)." },
+    { name: "intro", type: "string", description: "Short lead beside the headline (under it on mobile). Not combined with quote." },
     {
       name: "quote",
       type: "{ text: string; author: string; role?: string }",
@@ -26,7 +27,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"results"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: dark/light tone, optional quote, hairline stat grid with hover nudge." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 48/36/28), stat numbers 48/40/32 (was 64/48/44), quote 28/24/22 regular (was 32/28/24 light), header → grid 64/56/40, grid gap 24/20." }],
+  changelog: [{ version: "1.2", date: "2026-10-26", notes: "Width follows max-w-content; new `intro` lead beside the headline; 5–6 stats in three columns (TrendMD shows six)." }, { version: "1.0", date: "2026-10-16", notes: "First release: dark/light tone, optional quote, hairline stat grid with hover nudge." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 48/36/28), stat numbers 48/40/32 (was 64/48/44), quote 28/24/22 regular (was 32/28/24 light), header → grid 64/56/40, grid gap 24/20." }],
   usedOn: ["startupmap", "trendmd"],
   files: [
     {

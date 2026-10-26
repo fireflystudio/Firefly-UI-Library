@@ -21,7 +21,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"cta"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: dark/light tone, pill tag, CTA pair, note, parallax visual slot." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Statement h2 48/40/30 (was 56/40/32, max width 1000px), section padding 120/96/64 (was 160/128/96), lead 20/18/17, headline → lead 20/20/16, visual 64/56/40 below the buttons." }],
+  changelog: [{ version: "1.2", date: "2026-10-26", notes: "Width follows max-w-content (the site token --container-content, default 1200px), so a site can switch to a wider layout in one place. No visual change at the default." }, { version: "1.0", date: "2026-10-16", notes: "First release: dark/light tone, pill tag, CTA pair, note, parallax visual slot." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Statement h2 48/40/30 (was 56/40/32, max width 1000px), section padding 120/96/64 (was 160/128/96), lead 20/18/17, headline → lead 20/20/16, visual 64/56/40 below the buttons." }],
   usedOn: ["startupmap", "trendmd"],
   files: [
     {

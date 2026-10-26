@@ -47,7 +47,7 @@ export function FeatureRowChecks({
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
       <Reveal
-        className={`mx-auto flex w-full max-w-[1200px] flex-col gap-10 md:items-center md:gap-[22px] xl:items-stretch xl:gap-10 ${
+        className={`mx-auto flex w-full max-w-content flex-col gap-10 md:items-center md:gap-[22px] xl:items-stretch xl:gap-10 ${
           reverse ? "md:flex-row-reverse" : "md:flex-row"
         }`}
       >

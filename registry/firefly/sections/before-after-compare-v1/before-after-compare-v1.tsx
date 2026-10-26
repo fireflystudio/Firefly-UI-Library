@@ -54,7 +54,7 @@ export function BeforeAfterCompare({
 
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
-      <Reveal className="mx-auto flex max-w-[1200px] flex-col gap-10 md:gap-14 xl:gap-16">
+      <Reveal className="mx-auto flex max-w-content flex-col gap-10 md:gap-14 xl:gap-16">
         <div className="flex max-w-[720px] flex-col items-start gap-4 md:gap-5">
           <h2
             {...reveal}

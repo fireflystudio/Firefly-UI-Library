@@ -27,6 +27,8 @@ export type HeroSplitProps = {
   visual?: ReactNode;
   /** CSS aspect-ratio of the visual frame, e.g. "720 / 560" */
   visualRatio?: string;
+  /** Desktop split: "narrow" = copy 5/12 + visual 7/12 (default), "wide" = 6/12 each (long headlines, wide content widths). */
+  split?: "narrow" | "wide";
   /** Put the visual on the left (tablet and up). Mobile always stacks copy first. */
   reverse?: boolean;
   className?: string;
@@ -34,7 +36,7 @@ export type HeroSplitProps = {
 
 /**
  * Hero Split v1
- * Two columns from tablet up inside the 1200px content width (copy 6/12, then 5/12 on desktop; visual takes the rest), stacked
+ * Two columns from tablet up inside the content width (copy 6/12, then 5/12 on desktop or 6/12 with split="wide"; visual takes the rest), stacked
  * on mobile with the copy first. Left-aligned two-tone h1 at 34/48/64px, lead (17/18/20px), CTA pair and an
  * optional mono note. The copy reveals on load (100ms stagger); the visual follows 300ms later
  * and drifts down up to 60px as it scrolls out. `reverse` swaps the columns on tablet and up.
@@ -51,6 +53,7 @@ export function HeroSplit({
   note,
   visual,
   visualRatio = "720 / 560",
+  split = "narrow",
   reverse = false,
   className = "",
 }: HeroSplitProps) {
@@ -62,9 +65,9 @@ export function HeroSplit({
       aria-labelledby={headingId}
       className={`bg-surface-page px-5 pb-16 pt-[calc(64px+56px)] md:px-10 md:pb-20 md:pt-[calc(64px+80px)] xl:px-16 xl:pb-24 xl:pt-[calc(64px+120px)] ${className}`}
     >
-      <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-8 xl:gap-12">
+      <div className="mx-auto grid max-w-content grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-8 xl:gap-12">
         {/* Copy */}
-        <Reveal stagger={100} className="flex min-w-0 flex-col items-start gap-8 md:col-span-6 md:gap-10 xl:col-span-5">
+        <Reveal stagger={100} className={`flex min-w-0 flex-col items-start gap-8 md:col-span-6 md:gap-10 ${split === "wide" ? "xl:col-span-6" : "xl:col-span-5"}`}>
           <div className="flex flex-col items-start gap-4 md:gap-5">
             {eyebrow ? (
               <p {...reveal} className="font-mono text-[12px] uppercase leading-[normal] tracking-[0.08em] text-text-quaternary">
@@ -97,7 +100,7 @@ export function HeroSplit({
         </Reveal>
 
         {/* Visual */}
-        <Reveal delay={300} className={`min-w-0 md:col-span-6 xl:col-span-7 ${reverse ? "md:order-first" : ""}`}>
+        <Reveal delay={300} className={`min-w-0 md:col-span-6 ${split === "wide" ? "xl:col-span-6" : "xl:col-span-7"} ${reverse ? "md:order-first" : ""}`}>
           <div {...reveal}>
             <Parallax distance={60} mode="exit">
               <div className="relative w-full overflow-clip rounded-frame" style={{ aspectRatio: visualRatio }}>

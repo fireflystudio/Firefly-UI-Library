@@ -71,7 +71,7 @@ export function CtaDemoPill({
 
   return (
     <section id={id} aria-labelledby={headingId} className={`${t.section} overflow-clip px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
-      <Reveal className="mx-auto flex w-full max-w-[1200px] flex-col items-center text-center">
+      <Reveal className="mx-auto flex w-full max-w-content flex-col items-center text-center">
         {tag ? (
           <p
             {...reveal}

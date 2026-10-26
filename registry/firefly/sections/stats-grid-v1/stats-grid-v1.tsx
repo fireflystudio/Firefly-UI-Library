@@ -22,9 +22,11 @@ export type StatsGridProps = {
   headline?: string;
   /** Grey second half of the headline */
   headlineMuted?: string;
+  /** Short lead paragraph (≈ 20–40 words). Sits beside the headline from tablet up (under it on mobile); not combined with `quote`. */
+  intro?: string;
   /** Large quote shown beside the heading (or on its own) */
   quote?: StatsGridQuote;
-  /** 3–4 stats. From tablet up the grid has as many columns as stats (max 4); 2 columns on mobile. */
+  /** 3–6 stats. From tablet up: 3 or 4 → one row; 5–6 → three columns (two rows). 2 columns on mobile. */
   stats: Stat[];
   className?: string;
 };
@@ -44,9 +46,9 @@ const tones = {
 
 /**
  * Stats Grid v1
- * A dark (or light) section with an optional two-tone heading, an optional large quote with
- * attribution, and a grid of 3–4 big numbers (32/40/48px) with a hairline above each. Values nudge 5px right
- * on hover (translate only). Heading, quote and every stat reveal on scroll, staggered.
+ * A dark (or light) section with an optional two-tone heading, an optional lead or large quote beside it,
+ * and a grid of 3–6 big numbers (32/40/48px) with a hairline above each (5–6 → three columns). Values nudge
+ * 5px right on hover (translate only). Heading, lead / quote and every stat reveal on scroll, staggered.
  */
 export function StatsGrid({
   id = "results",
@@ -54,19 +56,22 @@ export function StatsGrid({
   eyebrow,
   headline,
   headlineMuted,
+  intro,
   quote,
   stats,
   className = "",
 }: StatsGridProps) {
   const headingId = `${id}-heading`;
   const t = tones[tone];
-  const twoColumnHeader = Boolean(headline && quote);
-  const hasHeader = Boolean(eyebrow || headline || quote);
-  const columns = stats.length <= 2 ? "md:grid-cols-2" : stats.length === 3 ? "md:grid-cols-3" : "md:grid-cols-4";
+  const side = quote ? undefined : intro;
+  const twoColumnHeader = Boolean(headline && (quote || side));
+  const hasHeader = Boolean(eyebrow || headline || quote || side);
+  const columns =
+    stats.length <= 2 ? "md:grid-cols-2" : stats.length === 3 || stats.length > 4 ? "md:grid-cols-3" : "md:grid-cols-4";
 
   return (
     <section id={id} aria-labelledby={headingId} className={`${t.section} px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
-      <Reveal className="mx-auto flex max-w-[1200px] flex-col gap-10 md:gap-14 xl:gap-16">
+      <Reveal className="mx-auto flex max-w-content flex-col gap-10 md:gap-14 xl:gap-16">
         {headline ? null : (
           <h2 id={headingId} className="sr-only">
             {eyebrow ?? "Key figures"}
@@ -92,6 +97,15 @@ export function StatsGrid({
                   </h2>
                 ) : null}
               </div>
+            ) : null}
+
+            {side ? (
+              <p
+                {...reveal}
+                className={`text-pretty text-[17px] leading-[1.4] tracking-[-0.01em] md:text-[18px] xl:text-[20px] ${t.muted} ${twoColumnHeader ? "md:pt-1" : "max-w-[600px]"}`}
+              >
+                {side}
+              </p>
             ) : null}
 
             {quote ? (

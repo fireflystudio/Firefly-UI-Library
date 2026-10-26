@@ -16,7 +16,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"faq"', description: "Section id for anchor links." },
     { name: "className", type: "string", default: '"py-16 md:py-24 xl:py-[120px]"', description: "Section paddings (override at a colour change)." },
   ],
-  changelog: [{ version: "2.0", date: "2026-10-21", notes: "Boxed FAQ Centered (from the Verb homepage): each question in a soft stroked rounded box that expands with the answer, +/– toggle. v1 (hairline rows, contact line) stays." }],
+  changelog: [{ version: "2.1", date: "2026-10-26", notes: "Width follows max-w-content (the site token --container-content, default 1200px), so a site can switch to a wider layout in one place. No visual change at the default." }, { version: "2.0", date: "2026-10-21", notes: "Boxed FAQ Centered (from the Verb homepage): each question in a soft stroked rounded box that expands with the answer, +/– toggle. v1 (hairline rows, contact line) stays." }],
   files: [{ path: "registry/firefly/sections/faq-centered-v2/faq-centered-v2.tsx", target: "components/sections/faq-centered-v2.tsx", type: "registry:component" }],
   registryDependencies: ["firefly-base"],
   usedOn: ["verb", "solve"],

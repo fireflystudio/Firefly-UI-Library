@@ -20,7 +20,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"testimonial"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: dark/light tone, avatar and logo slots, staggered reveal." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Quote at the sub-headline size 28/24/22, line height 1.3 (was 36/28/24)." }],
+  changelog: [{ version: "1.2", date: "2026-10-26", notes: "Width follows max-w-content (the site token --container-content, default 1200px), so a site can switch to a wider layout in one place. No visual change at the default." }, { version: "1.0", date: "2026-10-16", notes: "First release: dark/light tone, avatar and logo slots, staggered reveal." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Quote at the sub-headline size 28/24/22, line height 1.3 (was 36/28/24)." }],
   usedOn: ["startupmap"],
   files: [
     {

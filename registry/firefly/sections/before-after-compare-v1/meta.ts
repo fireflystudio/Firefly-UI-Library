@@ -27,7 +27,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"compare"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: neutral/dark panels, dash and check markers, visual slots, 2px lift." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 48/36/28), lead intro 20/18/17, panel grid gap 24/20 (was 24/16), panel titles 20/19/18, points 16/15." }],
+  changelog: [{ version: "1.2", date: "2026-10-26", notes: "Width follows max-w-content (the site token --container-content, default 1200px), so a site can switch to a wider layout in one place. No visual change at the default." }, { version: "1.0", date: "2026-10-16", notes: "First release: neutral/dark panels, dash and check markers, visual slots, 2px lift." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Section h2 40/32/28 (was 48/36/28), lead intro 20/18/17, panel grid gap 24/20 (was 24/16), panel titles 20/19/18, points 16/15." }],
   usedOn: ["startupmap"],
   files: [
     {

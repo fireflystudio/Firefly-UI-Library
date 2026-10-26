@@ -27,7 +27,7 @@ export const meta: CatalogueItem = {
     { name: "tone", type: '"dark" | "light"', default: '"dark"', description: "Dark surface with light text (default) or the page surface with ink text and light hairlines." },
     { name: "className", type: "string", description: "Extra classes on the <footer>." },
   ],
-  changelog: [
+  changelog: [{ version: "1.7", date: "2026-10-26", notes: "New containerClassName prop (default unchanged: 1440px, 40px padding) so the footer lines up with a site's sections and nav, e.g. a wide layout (TrendMD)." }, 
     { version: "1.6", date: "2026-10-20", notes: "Bottom hairline and legal line removed (house decision); bottom padding 80/96/112px instead of 64 so the footer does not end right under the form. legal / legalLinks props removed." },
     { version: "1.5", date: "2026-10-20", notes: "Smaller, unified text: column links 16/17px (was 20), Policies sub-links 15/16px, e-mail field 16/17px (was 20/24); label 12px unchanged." },
     { version: "1.4", date: "2026-10-20", notes: "Column links accept nested `links`: the item becomes a “Policies ▾” disclosure (mouse hover opens while the pointer stays; click, tap, Enter pin it open; Escape closes). Sign-up column narrowed to 360px so two link columns fit beside it." },

@@ -67,9 +67,9 @@ export function LensesList({
   const listSide = reverse ? "md:col-start-1" : "md:col-start-2";
 
   return (
-    <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-[120px] xl:py-[120px] ${className}`}>
+    <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
       <Reveal
-        className={`mx-auto flex w-full max-w-[1200px] flex-col gap-10 md:grid md:gap-x-10 md:gap-y-0 md:grid-rows-[auto_1fr] xl:gap-x-16 ${
+        className={`mx-auto flex w-full max-w-content flex-col gap-10 md:grid md:gap-x-10 md:gap-y-0 md:grid-rows-[auto_1fr] xl:gap-x-16 ${
           reverse ? "md:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[560px_minmax(0,1fr)]" : "md:grid-cols-[300px_minmax(0,1fr)] xl:grid-cols-[minmax(0,1fr)_560px]"
         }`}
       >

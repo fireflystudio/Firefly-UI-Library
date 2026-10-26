@@ -22,11 +22,12 @@ export const meta: CatalogueItem = {
     { name: "note", type: "string", description: "Small mono line under the buttons, e.g. “No credit card needed”." },
     { name: "visual", type: "ReactNode", default: "<Placeholder label=\"Hero visual\" />", description: "Visual in the second column, in a clipped rounded frame. Pass your <Image fill> or mockup." },
     { name: "visualRatio", type: "string", default: '"720 / 560"', description: "CSS aspect-ratio of the visual frame." },
+    { name: "split", type: '"narrow" | "wide"', default: '"narrow"', description: "Desktop split: narrow = copy 5/12 + visual 7/12, wide = 6/12 each." },
     { name: "reverse", type: "boolean", default: "false", description: "Visual on the left from tablet up." },
     { name: "id", type: "string", default: '"hero"', description: "Section id for anchor links; the heading id is <id>-heading." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: 5/7 split, reverse option, mono note, exit parallax on the visual." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Display h1 64/48/34 (was 56/44/34), lead 20/18/17 (was 18/17/16), headline → lead 20/20/16, lead → buttons 40/40/32, bottom padding 96/80/64." }, { version: "1.2", date: "2026-10-26", notes: "Content width 1200px (the 2026-10-21 standard, was 1312px), so the hero lines up with every other section at 120 / 1320 on a 1440 screen." }],
+  changelog: [{ version: "1.3", date: "2026-10-26", notes: "Width follows max-w-content (site token, default 1200px); new `split` prop: “wide” gives copy and visual 6/12 each on desktop (TrendMD)." }, { version: "1.0", date: "2026-10-16", notes: "First release: 5/7 split, reverse option, mono note, exit parallax on the visual." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Display h1 64/48/34 (was 56/44/34), lead 20/18/17 (was 18/17/16), headline → lead 20/20/16, lead → buttons 40/40/32, bottom padding 96/80/64." }, { version: "1.2", date: "2026-10-26", notes: "Content width 1200px (the 2026-10-21 standard, was 1312px), so the hero lines up with every other section at 120 / 1320 on a 1440 screen." }],
   usedOn: ["startupmap", "trendmd"],
   files: [
     {

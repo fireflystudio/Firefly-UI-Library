@@ -17,7 +17,7 @@ export const meta: CatalogueItem = {
     { name: "id", type: "string", default: '"feature-checks"', description: "Section id for anchor links." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
-  changelog: [
+  changelog: [{ version: "1.4", date: "2026-10-26", notes: "Width follows max-w-content (the site token --container-content, default 1200px), so a site can switch to a wider layout in one place. No visual change at the default." }, 
     { version: "1.3", date: "2026-10-21", notes: "Headline now follows the type scale (Section h2 28/32/40, was 22/24/28); copy column 440px at xl with a 40px gap; stat figures 32/32/44 and captions 16/17, as in Startupmap." },
     { version: "1.2", date: "2026-10-21", notes: "Optional value on an item: renders a stat row (figure + one line, hairline above) instead of the ✓. Used by Verb for time-saved figures." },{ version: "1.0", date: "2026-10-16", notes: "First release: static check list, shared parallax visual." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Sub-headline h2 28/24/22 (was 32/24/26), item titles 18/17/16, item copy 16/15, headline → content 40 on mobile." }],
   usedOn: ["startupmap"],

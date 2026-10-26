@@ -32,7 +32,7 @@ export function FaqAccordion({ id = "faq", headline, headlineMuted, items, defau
   const uid = useId();
   return (
     <section id={id} aria-labelledby={`${id}-heading`} className={`bg-surface-page px-5 md:px-10 xl:px-16 ${className}`}>
-      <Reveal className="mx-auto max-w-[1200px]">
+      <Reveal className="mx-auto max-w-content">
         <h2
           id={`${id}-heading`}
           {...reveal}

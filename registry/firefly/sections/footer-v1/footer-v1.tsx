@@ -41,6 +41,8 @@ export type FooterProps = {
   signup?: FooterSignup | null;
   /** "dark" (default): dark surface, light text. "light": page surface, ink text, light hairlines. */
   tone?: FooterTone;
+  /** Width + side padding of the footer content, so it lines up with the site's sections and nav. */
+  containerClassName?: string;
   className?: string;
 };
 
@@ -91,6 +93,7 @@ export function Footer({
   columns,
   signup = { label: "Sign up for updates" },
   tone = "dark",
+  containerClassName = "max-w-[1440px] px-5 md:px-10",
   className = "",
 }: FooterProps) {
   const t = TONES[tone];
@@ -99,13 +102,13 @@ export function Footer({
     <footer className={`${t.footer} ${className}`}>
       <style href="firefly-footer-disclosure" precedence="default">{DISCLOSURE_CSS}</style>
       {/* Top hairline, 64px above the content, 80/96/112px below it (no bottom hairline or legal line) */}
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+      <div className={`mx-auto ${containerClassName}`}>
         <div aria-hidden className={`h-px w-full ${t.hairline}`} />
       </div>
       <Reveal
         {...reveal}
         amount={0.1}
-        className="mx-auto flex max-w-[1440px] flex-col gap-10 px-5 pb-20 pt-16 md:gap-12 md:px-10 md:pb-24 xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,360px)] xl:gap-x-10 xl:gap-y-16 xl:pb-28"
+        className={`mx-auto flex flex-col gap-10 pb-20 pt-16 md:gap-12 md:pb-24 xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,360px)] xl:gap-x-10 xl:gap-y-16 xl:pb-28 ${containerClassName}`}
       >
 
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-8 xl:contents">

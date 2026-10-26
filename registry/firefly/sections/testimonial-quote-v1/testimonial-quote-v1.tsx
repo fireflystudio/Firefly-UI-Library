@@ -69,7 +69,7 @@ export function TestimonialQuote({
       aria-label={eyebrow ? undefined : "Testimonial"}
       className={`${t.section} px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}
     >
-      <Reveal className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-6 text-center md:gap-8">
+      <Reveal className="mx-auto flex w-full max-w-content flex-col items-center gap-6 text-center md:gap-8">
         {eyebrow ? (
           <h2
             {...reveal}

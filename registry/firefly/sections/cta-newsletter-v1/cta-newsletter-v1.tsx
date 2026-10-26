@@ -96,7 +96,7 @@ export function CtaNewsletter({
 
   return (
     <section id={id} aria-labelledby={headingId} className={`${t.section} px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
-      <Reveal className="mx-auto flex w-full max-w-[1200px] flex-col items-center text-center">
+      <Reveal className="mx-auto flex w-full max-w-content flex-col items-center text-center">
         {eyebrow ? (
           <p {...reveal} className={`mb-5 font-mono text-[12px] font-normal uppercase leading-[normal] tracking-[0.08em] md:mb-6 ${t.eyebrow}`}>
             {eyebrow}

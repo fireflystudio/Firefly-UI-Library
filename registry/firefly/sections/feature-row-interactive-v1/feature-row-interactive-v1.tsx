@@ -32,8 +32,9 @@ export type FeatureRowInteractiveProps = {
 
 /**
  * Feature Row Interactive v1
- * Copy column (two-tone sub-headline h2 at 22/24/28px at the top, step list at the bottom; 400px on desktop, 300px on
- * tablet) next to a 720×560 visual frame with a 30px parallax. The steps are an accordion:
+ * Copy column (two-tone Section h2 at 28/32/40px at the top, step list at the bottom; 300px on tablet, on desktop
+ * whatever the content width leaves next to the 720px frame: 400px at 1200, more on wide sites) next to a 720×560
+ * visual frame with a 30px parallax. The steps are an accordion:
  * one open at a time (black title + body fading in), the others grey (black on hover with a
  * small arrow sliding in). Opening a step crossfades the frame to that step's `visual`
  * (opacity + slight rise/scale, 500ms; hidden layers are inert).
@@ -55,16 +56,16 @@ export function FeatureRowInteractive({
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
       <Reveal
-        className={`mx-auto flex w-full max-w-[1200px] flex-col gap-10 md:items-center md:gap-[22px] xl:items-stretch xl:gap-20 ${
+        className={`mx-auto flex w-full max-w-content flex-col gap-10 md:items-center md:gap-[22px] xl:items-stretch xl:gap-20 ${
           reverse ? "md:flex-row-reverse" : "md:flex-row"
         }`}
       >
         {/* Copy */}
-        <div className="flex w-full flex-col justify-between gap-10 pt-2 md:w-[300px] md:shrink-0 md:gap-8 xl:w-[400px]">
+        <div className="flex w-full flex-col justify-between gap-10 pt-2 md:w-[300px] md:shrink-0 md:gap-8 xl:w-auto xl:min-w-0 xl:flex-1">
           <h2
             {...reveal}
             id={headingId}
-            className="text-pretty text-[22px] font-normal leading-[1.3] tracking-[-0.02em] text-text-primary md:pr-6 md:text-[24px] xl:pr-8 xl:text-[28px]"
+            className="text-balance text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:pr-8 xl:text-[40px]"
           >
             <TwoTone text={headline} muted={headlineMuted} />
           </h2>
@@ -106,7 +107,7 @@ export function FeatureRowInteractive({
                   <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!open}>
                     <p
                       key={open ? "open" : "closed"}
-                      className="max-w-[400px] text-pretty pb-4 text-[15px] font-normal leading-[1.55] text-text-nav motion-safe:animate-[feature-in_0.45s_var(--ease-out-soft)_both] md:text-[16px]"
+                      className="max-w-[480px] text-pretty pb-4 text-[15px] font-normal leading-[1.55] text-text-nav motion-safe:animate-[feature-in_0.45s_var(--ease-out-soft)_both] md:text-[16px]"
                     >
                       {item.body}
                     </p>

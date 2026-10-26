@@ -72,6 +72,9 @@
   --color-status-warning: #b94020;
   --color-status-warning-bg: #fff1ec;
 
+  /* Content width (max-w-content): 1200px is the house default (Web Guide Book §4, 2026-10-21). A site may override it in its own @theme, e.g. 1440px for a wide layout; every library section follows. */
+  --container-content: 1200px;
+
   /* Radii (named to avoid clashing with Tailwind's rounded-s / rounded-l side utilities) */
   --radius-chip: 6px;
   --radius-tile: 8px;

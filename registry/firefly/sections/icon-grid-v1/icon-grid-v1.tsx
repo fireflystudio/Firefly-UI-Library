@@ -62,7 +62,7 @@ export function IconGrid({
       aria-labelledby={headingId}
       className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}
     >
-      <Reveal className="mx-auto max-w-[1200px]">
+      <Reveal className="mx-auto max-w-content">
         <h2
           id={headingId}
           {...reveal}

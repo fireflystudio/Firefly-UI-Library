@@ -48,8 +48,8 @@ export function FaqSplit({
   };
 
   return (
-    <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-[120px] xl:py-[120px] ${className}`}>
-      <Reveal className="mx-auto flex max-w-[1200px] flex-col items-start gap-10 md:flex-row xl:gap-[120px]">
+    <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 py-16 md:px-10 md:py-24 xl:px-16 xl:py-[120px] ${className}`}>
+      <Reveal className="mx-auto flex max-w-content flex-col items-start gap-10 md:flex-row xl:gap-[120px]">
         <div className="flex w-full flex-col items-start gap-8 pt-6 md:w-[260px] md:shrink-0 md:gap-10 xl:w-[400px]">
           <h2
             {...reveal}
