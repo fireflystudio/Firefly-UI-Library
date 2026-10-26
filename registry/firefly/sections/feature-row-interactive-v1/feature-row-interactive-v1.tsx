@@ -20,6 +20,8 @@ export type FeatureRowInteractiveProps = {
   headline: string;
   /** Grey second half of the headline */
   headlineMuted?: string;
+  /** Put the grey half on its own line (as Steps Cards does), instead of running it on. */
+  headlineStack?: boolean;
   /** Optional lead under the headline; without it the component looks exactly as before. */
   intro?: string;
   items: FeatureStep[];
@@ -43,6 +45,7 @@ export function FeatureRowInteractive({
   id = "feature-row",
   headline,
   headlineMuted,
+  headlineStack = false,
   intro,
   items,
   reverse = false,
@@ -67,7 +70,7 @@ export function FeatureRowInteractive({
             id={headingId}
             className="text-balance text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:pr-8 xl:text-[40px]"
           >
-            <TwoTone text={headline} muted={headlineMuted} />
+            <TwoTone text={headline} muted={headlineMuted} stack={headlineStack} />
           </h2>
 
           {intro ? (

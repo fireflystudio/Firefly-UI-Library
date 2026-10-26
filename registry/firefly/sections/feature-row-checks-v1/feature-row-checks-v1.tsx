@@ -18,6 +18,10 @@ export type FeatureRowChecksProps = {
   headline: string;
   /** Grey second half of the headline */
   headlineMuted?: string;
+  /** Put the grey half on its own line (as Steps Cards does), instead of running it on. */
+  headlineStack?: boolean;
+  /** Optional lead under the headline; without it the component looks exactly as before. */
+  intro?: string;
   items: FeatureCheck[];
   /** Fills the 720×560 frame. Defaults to a Placeholder; pass an <Image fill> or your own mockup. */
   visual?: ReactNode;
@@ -29,14 +33,18 @@ export type FeatureRowChecksProps = {
 /**
  * Feature Row Checks v1
  * The static sibling of Feature Row Interactive: a two-tone section h2 (28/32/40px) at the top of the copy
- * column, a list of ✓ + title + body items at the bottom (every item open, no dividers,
+ * column with an optional lead under it, a list of ✓ + title + body items at the bottom (every item open, no dividers,
  * 48px apart; 32px on tablet), and one shared 720×560 visual with a 30px parallax.
- * Copy column 400px on desktop, 300px on tablet.
+ * Copy column 300px on tablet; on desktop it takes whatever the content width leaves beside the
+ * 720px frame, never less than 440 (440 at a 1200 container, more on a wider site), exactly like
+ * Feature Row Interactive — so the two siblings line up when they sit on the same page.
  */
 export function FeatureRowChecks({
   id = "feature-checks",
   headline,
   headlineMuted,
+  headlineStack = false,
+  intro,
   items,
   visual,
   reverse = false,
@@ -52,14 +60,20 @@ export function FeatureRowChecks({
         }`}
       >
         {/* Copy */}
-        <div className="flex w-full flex-col justify-between gap-10 pt-2 md:w-[300px] md:shrink-0 md:gap-8 xl:w-[440px] xl:gap-14">
+        <div className="flex w-full flex-col justify-between gap-10 pt-2 md:w-[300px] md:shrink-0 md:gap-8 xl:w-auto xl:min-w-[440px] xl:flex-1 xl:gap-14">
           <h2
             {...reveal}
             id={headingId}
             className="text-pretty text-[28px] font-normal leading-[1.2] tracking-[-0.02em] text-text-primary md:text-[32px] xl:text-[40px]"
           >
-            <TwoTone text={headline} muted={headlineMuted} />
+            <TwoTone text={headline} muted={headlineMuted} stack={headlineStack} />
           </h2>
+
+          {intro ? (
+            <p {...reveal} className="-mt-4 max-w-[420px] text-pretty text-[15px] leading-[1.55] text-text-nav md:-mt-4 md:text-[16px]">
+              {intro}
+            </p>
+          ) : null}
 
           <ul className={`flex flex-col ${items.some((i) => i.value) ? "" : "gap-12 md:gap-8 xl:gap-12"}`}>
             {items.map((item) =>

@@ -4,11 +4,16 @@ import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
 import { TwoTone } from "@/components/ui/two-tone";
 
+/** A point is either a plain line, or a figure with the line that explains it. */
+export type ComparePoint = string | { value: string; label: string };
+
 export type ComparePanel = {
   /** Short lead line above the list (card title: 18 / 19 / 20px medium) */
   title?: string;
   /** 3–5 short points */
-  points: string[];
+  points: ComparePoint[];
+  /** Closing line under the list, in the panel's quiet colour. */
+  footnote?: string;
   /** Visual above the list. Defaults to a 4:3 Placeholder in the panel's tone; pass null to leave it out. */
   visual?: ReactNode;
 };
@@ -35,7 +40,9 @@ export type BeforeAfterCompareProps = {
  * Two-tone headline above two rounded panels, side by side from tablet up and stacked on
  * mobile. The "before" panel is neutral (muted surface, dash markers, grey copy); the "after"
  * panel is dark (check markers, light copy). Each panel has a mono label, an optional visual
- * (Placeholder by default), an optional lead line and 3–5 hairline-separated points. Panels
+ * (Placeholder by default), an optional lead line, 3–5 hairline-separated points and an optional
+ * closing line. A point can be a plain sentence or a `{ value, label }` figure row, which gives the
+ * panel the density of a results table rather than a bullet list. Panels
  * lift 2px on hover (translate only). Headline, intro and both panels reveal on scroll, the
  * after panel one step later.
  */
@@ -100,20 +107,37 @@ function Panel({ id, label, panel, dark }: { id: string; label: string; panel: C
         <div className="flex flex-col gap-4">
           {panel.title ? <p className="text-pretty text-[18px] font-medium leading-[1.3] tracking-[-0.01em] md:text-[19px] xl:text-[20px]">{panel.title}</p> : null}
           <ul className="flex flex-col">
-            {panel.points.map((point) => (
-              <li
-                key={point}
-                className={`flex items-start gap-3 border-t py-3 text-pretty text-[15px] leading-[1.55] first:border-t-0 md:text-[16px] first:pt-0 last:pb-0 ${
-                  dark ? "border-border-dark text-text-on-dark" : "border-border-light text-text-nav"
-                }`}
-              >
-                <span aria-hidden className={`mt-[3px] flex size-4 shrink-0 items-center justify-center ${dark ? "text-text-on-dark" : "text-text-quaternary"}`}>
-                  {dark ? <CheckIcon /> : <DashIcon />}
-                </span>
-                <span className="min-w-0">{point}</span>
-              </li>
-            ))}
+            {panel.points.map((point) => {
+              const figure = typeof point === "object";
+              const key = figure ? point.value + point.label : point;
+              return (
+                <li
+                  key={key}
+                  className={`flex items-start gap-3 border-t py-3 text-pretty text-[15px] leading-[1.55] first:border-t-0 md:text-[16px] first:pt-0 last:pb-0 ${
+                    dark ? "border-border-dark text-text-on-dark" : "border-border-light text-text-nav"
+                  }`}
+                >
+                  <span aria-hidden className={`mt-[3px] flex size-4 shrink-0 items-center justify-center ${dark ? "text-text-on-dark" : "text-text-quaternary"}`}>
+                    {dark ? <CheckIcon /> : <DashIcon />}
+                  </span>
+                  {figure ? (
+                    /* Figure rows: the number carries the weight, the line beside it explains it. */
+                    <span className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-4">
+                      <span className={`shrink-0 text-[20px] font-medium leading-[1.2] tracking-[-0.02em] tabular-nums sm:w-[108px] xl:text-[22px] ${dark ? "text-text-on-dark" : "text-text-primary"}`}>
+                        {point.value}
+                      </span>
+                      <span className="min-w-0">{point.label}</span>
+                    </span>
+                  ) : (
+                    <span className="min-w-0">{point}</span>
+                  )}
+                </li>
+              );
+            })}
           </ul>
+          {panel.footnote ? (
+            <p className={`text-pretty text-[14px] leading-[1.5] ${dark ? "text-text-on-dark/60" : "text-text-quaternary"}`}>{panel.footnote}</p>
+          ) : null}
         </div>
       </article>
     </div>
