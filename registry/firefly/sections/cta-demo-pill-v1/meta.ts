@@ -22,7 +22,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [{ version: "1.0", date: "2026-10-16", notes: "First release: dark/light tone, pill tag, CTA pair, note, parallax visual slot." }, { version: "1.1", date: "2026-10-20", notes: "Type scale + vertical rhythm (2026-10-20), sizes desktop / tablet / mobile: Statement h2 48/40/30 (was 56/40/32, max width 1000px), section padding 120/96/64 (was 160/128/96), lead 20/18/17, headline → lead 20/20/16, visual 64/56/40 below the buttons." }],
-  usedOn: ["startupmap"],
+  usedOn: ["startupmap", "trendmd"],
   files: [
     {
       path: "registry/firefly/sections/cta-demo-pill-v1/cta-demo-pill-v1.tsx",

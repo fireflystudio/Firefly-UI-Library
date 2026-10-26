@@ -18,6 +18,7 @@ export const meta: CatalogueItem = {
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [{ version: "2.0", date: "2026-10-21", notes: "Boxed FAQ Split: each question in a soft stroked rounded box that expands with the answer (same look as FAQ Centered v2). v1 (hairline rows) stays." }],
+  usedOn: ["trendmd"],
   files: [
     {
       path: "registry/firefly/sections/faq-split-v2/faq-split-v2.tsx",
