@@ -654,6 +654,32 @@
       ]
     },
     {
+      "name": "verb-interests-picker-v2",
+      "type": "registry:block",
+      "title": "Interests Picker v2",
+      "description": "The Verb Reader onboarding step as the product actually works: you type the interest in your own words, and under the field sit the lines people in your country are reading right now. v1 (a dozen category chips to toggle) is kept.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/verb-interests-picker-v2/verb-interests-picker-v2.tsx",
+          "type": "registry:component",
+          "target": "components/app/verb-interests-picker-v2.tsx"
+        }
+      ]
+    },
+    {
+      "name": "verb-follow-sources-v1",
+      "type": "registry:block",
+      "title": "Follow Sources v1",
+      "description": "The Verb Reader \"Subscribe\" step: a row of well-known channels with a Follow button each. The step subscribes you to content sources, not to a Verb account — in the app this is the Explore page.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/verb-follow-sources-v1/verb-follow-sources-v1.tsx",
+          "type": "registry:component",
+          "target": "components/app/verb-follow-sources-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "verb-signup-card-v1",
       "type": "registry:block",
       "title": "Sign-up Card v1",
