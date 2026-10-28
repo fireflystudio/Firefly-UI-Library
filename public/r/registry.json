@@ -589,6 +589,45 @@
       ]
     },
     {
+      "name": "news-featured-v1",
+      "type": "registry:block",
+      "title": "News Featured v1",
+      "description": "The lead story of a news page: one wide card with the category, the read time and the headline at the bottom left and a round arrow in the corner. With a photo it is an image card with white copy; without one it is a quiet surface with a soft brand wash, so a site with no photography still opens on a headline.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/news-featured-v1/news-featured-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/news-featured-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "news-index-v1",
+      "type": "registry:block",
+      "title": "News Index v1",
+      "description": "The body of a news page: category filters, a grid / list switch and the stories. Grid is three cards across on desktop with an optional 16:9 image; list is full-width rows with the headline on the left and the category on the right, for skimming a lot of stories.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/news-index-v1/news-index-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/news-index-v1.tsx"
+        }
+      ]
+    },
+    {
+      "name": "news-article-v1",
+      "type": "registry:block",
+      "title": "News Article v1",
+      "description": "The story page: back link, category and read time, the h1, an optional \"Listen\" pill and artwork, then the body — paragraphs, sub-headings, bullet lists and pull quotes. The column is 760px, the same as the careers role page.",
+      "files": [
+        {
+          "path": "registry/firefly/sections/news-article-v1/news-article-v1.tsx",
+          "type": "registry:component",
+          "target": "components/sections/news-article-v1.tsx"
+        }
+      ]
+    },
+    {
       "name": "footer-v1",
       "type": "registry:block",
       "title": "Footer v1",

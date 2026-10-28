@@ -12,6 +12,7 @@ export type CategoryId =
   | "cta"
   | "popups"
   | "careers"
+  | "news"
   | "footer"
   | "app-elements"
   | "app-flows";

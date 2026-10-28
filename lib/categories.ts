@@ -19,6 +19,7 @@ export const CATEGORIES: Category[] = [
   { id: "cta", name: "CTA", description: "Closing calls to action: demo pills and newsletter sign-up." },
   { id: "popups", name: "Pop-ups", description: "Modal sign-up popup, a thank-you popup (V1) and a thank-you bar that slides from the top (V2)." },
   { id: "careers", name: "Careers", description: "Careers page kit: intro, culture values, open-roles list, job detail and an application form." },
+  { id: "news", name: "News", description: "News page kit: a featured story, a filterable index that switches between grid and list, and the article page." },
   { id: "footer", name: "Footer", description: "Dark footers with link columns and an email sign-up." },
   { id: "app-elements", name: "Single elements", description: "Working pieces of a product's interface: players, pickers, cards, sidebars." },
   { id: "app-flows", name: "Flows", description: "Whole product flows built from those elements, clickable like the real app with every state." },
