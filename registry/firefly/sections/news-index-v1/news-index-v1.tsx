@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
 import { TwoTone } from "@/components/ui/two-tone";
@@ -145,25 +145,11 @@ export function NewsIndex({
 
             {switchable ? (
               <div className="ml-auto flex shrink-0 items-center gap-1">
-                {/* How many fit across. Only at xl, where the row is wide enough to tell 3 from 5. */}
+                {/* How many fit across. One button that draws the current width; the options are
+                    behind it. Only at xl, where the row is wide enough to tell 3 from 5. */}
                 {resizable && view === "grid" ? (
                   <>
-                    <div className="hidden items-center gap-0.5 xl:flex" role="group" aria-label="Cards per row">
-                      {([3, 4, 5] as const).map((n) => (
-                        <button
-                          key={n}
-                          type="button"
-                          aria-pressed={cols === n}
-                          aria-label={`${n} per row`}
-                          onClick={() => setCols(n)}
-                          className={`flex size-9 cursor-pointer items-center justify-center rounded-pill text-[13px] leading-none transition-colors duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-interactive ${
-                            cols === n ? "bg-surface-muted text-text-primary" : "text-text-quaternary hover:text-text-primary"
-                          }`}
-                        >
-                          {n}
-                        </button>
-                      ))}
-                    </div>
+                    <ColumnsMenu cols={cols} onPick={setCols} />
                     <span aria-hidden className="mx-2 hidden h-5 w-px bg-border-10 xl:block" />
                   </>
                 ) : null}
@@ -272,5 +258,96 @@ function ViewButton({ label, on, onClick, children }: { label: string; on: boole
     >
       {children}
     </button>
+  );
+}
+
+/** The row width, drawn: three wide bars, four, or five narrow ones. */
+function ColumnsIcon({ n, size = 18 }: { n: NewsColumns; size?: number }) {
+  const gap = 1.8;
+  const span = 18;
+  const w = (span - gap * (n - 1)) / n;
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false">
+      {Array.from({ length: n }, (_, i) => (
+        <rect key={i} x={3 + i * (w + gap)} y={5.5} width={w} height={13} rx={1} fill="currentColor" />
+      ))}
+    </svg>
+  );
+}
+
+/**
+ * The 3 / 4 / 5 picker: one icon button showing the width that is on, and the other two behind it.
+ * Closes on a pick, on Escape and on a click anywhere else.
+ */
+function ColumnsMenu({ cols, onPick }: { cols: NewsColumns; onPick: (n: NewsColumns) => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: PointerEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div ref={ref} className="relative hidden xl:block">
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label={`Cards per row: ${cols}`}
+        onClick={() => setOpen((o) => !o)}
+        className={`flex size-9 cursor-pointer items-center justify-center rounded-pill transition-colors duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-interactive ${
+          open ? "bg-surface-muted text-text-primary" : "text-text-quaternary hover:text-text-primary"
+        }`}
+      >
+        <ColumnsIcon n={cols} />
+      </button>
+
+      {open ? (
+        <div
+          role="menu"
+          aria-label="Cards per row"
+          className="absolute right-0 top-[calc(100%+8px)] z-20 w-[164px] rounded-card bg-surface-primary p-1.5 shadow-[var(--shadow-card-drop),0_0_0_0.5px_var(--color-border-16)]"
+        >
+          {([3, 4, 5] as const).map((n) => {
+            const on = cols === n;
+            return (
+              <button
+                key={n}
+                type="button"
+                role="menuitemradio"
+                aria-checked={on}
+                onClick={() => {
+                  onPick(n);
+                  setOpen(false);
+                }}
+                className={`flex w-full cursor-pointer items-center gap-3 rounded-s px-2.5 py-2 text-left text-[14px] leading-[1.2] transition-colors duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-border-interactive ${
+                  on ? "bg-surface-muted text-text-primary" : "text-text-secondary hover:bg-surface-muted"
+                }`}
+              >
+                <ColumnsIcon n={n} size={16} />
+                <span>{n} per row</span>
+                {on ? (
+                  <svg viewBox="0 0 24 24" width="15" height="15" className="ml-auto" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12.5l4.5 4.5L19 7.5" />
+                  </svg>
+                ) : null}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+    </div>
   );
 }
