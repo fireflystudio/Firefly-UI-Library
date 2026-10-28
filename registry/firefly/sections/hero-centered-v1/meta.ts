@@ -22,10 +22,12 @@ export const meta: CatalogueItem = {
     { name: "visual", type: "ReactNode", default: "<Placeholder label=\"Hero visual\" />", description: "Visual under the copy, in a clipped rounded frame. Pass your <Image fill> or mockup." },
     { name: "visualRatio", type: "string", default: '"1392 / 720"', description: "CSS aspect-ratio of the visual frame." },
     { name: "visualRatioMobile", type: "string", default: "visualRatio", description: "Taller frame below 768px, e.g. \"350 / 420\". Pair it with an art-directed <picture> so phones get their own crop." },
+    { name: "visualClassName", type: "string", default: '"max-w-[1392px]"', description: "Width of the visual's frame. Pass the site's own content column when its sections are narrower than 1392px, or the hero hangs past every edge below it." },
     { name: "id", type: "string", default: '"hero"', description: "Section id for anchor links; the heading id is <id>-heading." },
     { name: "className", type: "string", description: "Extra classes on the <section>." },
   ],
   changelog: [
+    { version: "1.1", date: "2026-10-28", notes: "New `visualClassName`: the frame no longer has to be 1392px. A site whose sections stop at a narrower column can pass that column, instead of the hero sticking out past the nav and every section under it on a wide screen (found on Verb 2.0, whose column is 1312)." },
     { version: "1.0", date: "2026-10-16", notes: "First release: stacked two-tone h1, staggered load reveal, exit parallax on the visual." },
     { version: "1.1", date: "2026-10-19", notes: "Optional visualRatioMobile for a taller phone crop (default look unchanged)." },
     { version: "1.4", date: "2026-10-20", notes: "Headline 34/44/56px (52 read too small on review)." },

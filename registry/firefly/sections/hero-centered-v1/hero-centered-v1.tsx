@@ -26,6 +26,12 @@ export type HeroCenteredProps = {
   visualRatio?: string;
   /** Optional taller frame below 768px, e.g. "350 / 420" (pass an art-directed <picture> as visual). Defaults to visualRatio. */
   visualRatioMobile?: string;
+  /**
+   * Width of the visual's frame. The default 1392px is wider than a 1200px content column on
+   * purpose; a site whose sections stop at a narrower column should pass that column here, or the
+   * hero hangs past every edge below it on a wide screen.
+   */
+  visualClassName?: string;
   className?: string;
 };
 
@@ -35,6 +41,10 @@ export type HeroCenteredProps = {
  * large visual underneath in a clipped rounded frame. On load the copy reveals line by line
  * (100ms stagger), the visual follows 300ms later and drifts down up to 60px as it scrolls
  * out. Top padding leaves room for a fixed nav (64px); bottom padding 64/80/96px. Renders the page's only h1.
+ *
+ * The frame is 1392px wide by default, which is wider than a 1200px content column. On a site
+ * whose sections stop at a narrower column, pass that column as `visualClassName`, otherwise the
+ * hero sticks out past the nav and every section under it once the screen is wider than the frame.
  */
 /** Body limit: 2 lines at 600px / 20px (~60 characters per line). */
 export const BODY_MAX = 120;
@@ -50,6 +60,7 @@ export function HeroCentered({
   visual,
   visualRatio = "1392 / 720",
   visualRatioMobile,
+  visualClassName = "max-w-[1392px]",
   className = "",
 }: HeroCenteredProps) {
   const headingId = `${id}-heading`;
@@ -94,7 +105,7 @@ export function HeroCentered({
       </Reveal>
 
       {/* Visual */}
-      <Reveal delay={300} className="mx-auto mt-10 w-full max-w-[1392px] md:mt-14 xl:mt-16">
+      <Reveal delay={300} className={`mx-auto mt-10 w-full md:mt-14 xl:mt-16 ${visualClassName}`}>
         <div {...reveal}>
           <Parallax distance={60} mode="exit">
             <div
