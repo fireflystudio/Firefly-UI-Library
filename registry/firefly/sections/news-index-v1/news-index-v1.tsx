@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Reveal } from "@/components/ui/reveal";
 import { reveal } from "@/components/ui/reveal-attr";
@@ -40,6 +41,9 @@ export type NewsIndexProps = {
   columns?: NewsColumns;
   /** Hide the 3 / 4 / 5 picker and stay at `columns`. */
   resizable?: boolean;
+  /** How many stories are shown before "Load more". 0 shows every one of them. */
+  pageSize?: number;
+  loadMoreLabel?: string;
   /** Shown instead of the items when a filter matches nothing. */
   emptyText?: string;
   /** Width + side padding of the content column (match the site's other sections). */
@@ -74,8 +78,11 @@ const TITLE: Record<NewsColumns, string> = {
  * Hovering only pushes the picture in by 3%: nothing about the type moves, so a row of headlines
  * stays still while the reader runs down it.
  *
- * Filtering, the view and the row width are client state, and the list is re-revealed on every
- * change (a keyed <Reveal>), so filtered-in stories fade in instead of staying at opacity 0.
+ * Long indexes open at `pageSize` stories with a Load more under them; a new filter starts its
+ * list again at the top.
+ *
+ * Filtering, the view and the row width are client state, and the list re-reveals whatever has
+ * just appeared (<Reveal watch>), so stories fade in instead of staying at opacity 0.
  */
 export function NewsIndex({
   id = "news",
@@ -88,6 +95,8 @@ export function NewsIndex({
   switchable = true,
   columns = 5,
   resizable = true,
+  pageSize = 12,
+  loadMoreLabel = "Load more",
   emptyText = "Nothing here yet. Try another category.",
   containerClassName = "max-w-content",
   className = "",
@@ -97,8 +106,17 @@ export function NewsIndex({
   const [view, setView] = useState<NewsView>(defaultView);
   const [cols, setCols] = useState<NewsColumns>(columns);
 
-  const shown = useMemo(() => (active ? items.filter((i) => i.category === active) : items), [active, items]);
+  const [page, setPage] = useState(1);
+  const matching = useMemo(() => (active ? items.filter((i) => i.category === active) : items), [active, items]);
+  const shown = pageSize > 0 ? matching.slice(0, page * pageSize) : matching;
+  const left = matching.length - shown.length;
   const hasControls = categories.length > 0 || switchable;
+
+  /** A new filter starts at the top of its own list. */
+  const filterBy = (cat: string | null) => {
+    setActive(cat);
+    setPage(1);
+  };
 
   return (
     <section id={id} aria-labelledby={headingId} className={`bg-surface-page px-5 md:px-10 xl:px-16 ${className}`}>
@@ -129,7 +147,7 @@ export function NewsIndex({
                     <button
                       type="button"
                       aria-pressed={on}
-                      onClick={() => setActive(cat)}
+                      onClick={() => filterBy(cat)}
                       className={`cursor-pointer rounded-pill border px-4 py-2 text-[13px] leading-[1.2] transition-colors duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-interactive md:text-[14px] ${
                         on
                           ? "border-text-primary bg-text-primary text-text-on-dark"
@@ -174,10 +192,10 @@ export function NewsIndex({
           </div>
         ) : null}
 
-        {/* Keyed so a filter, a view or a width change remounts the reveal and the new stories
-            fade in. Without the key they would render with the hidden state and never be told
-            to come back. */}
-        <Reveal key={`${view}-${cols}-${active ?? "all"}`} stagger={45} amount={0}>
+        {/* `watch` so that stories which arrive later — after a filter, a view change or a press
+            of Load more — are revealed too. Without it they would render in the hidden state and
+            never be told to come back, and the page would look empty. */}
+        <Reveal watch={`${view}-${cols}-${active ?? "all"}-${page}`} stagger={45} amount={0}>
           {shown.length === 0 ? (
             <p className="mt-10 text-[16px] leading-[1.55] text-text-tertiary md:mt-14">{emptyText}</p>
           ) : view === "grid" ? (
@@ -240,6 +258,14 @@ export function NewsIndex({
             </ul>
           )}
         </Reveal>
+
+        {left > 0 ? (
+          <div className="mt-10 flex justify-center md:mt-12">
+            <Button variant="secondary" size="lg" onClick={() => setPage((p) => p + 1)}>
+              {loadMoreLabel}
+            </Button>
+          </div>
+        ) : null}
       </Reveal>
     </section>
   );

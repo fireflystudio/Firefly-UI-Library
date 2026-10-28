@@ -10,6 +10,7 @@ export const meta: CatalogueItem = {
   interactions: [
     "Click a category to filter; \"All\" clears it.",
     "The switch top right changes between grid and list; both views hold the same stories.",
+    "Load more adds another page of stories under the ones already there; a new filter starts again at the top.",
     "The bars icon (grid view, wide screens) opens 3 / 4 / 5 per row; it draws the width that is on.",
     "On hover only the picture pushes in by 3%; no type moves.",
   ],
@@ -23,6 +24,8 @@ export const meta: CatalogueItem = {
     { name: "switchable", type: "boolean", default: "true", description: "false hides the switch and keeps `defaultView`." },
     { name: "columns", type: "3 | 4 | 5", default: "5", description: "Cards per row on a wide screen. The template is drawn at 5." },
     { name: "resizable", type: "boolean", default: "true", description: "false hides the 3 / 4 / 5 picker and keeps `columns`." },
+    { name: "pageSize", type: "number", default: "12", description: "Stories shown before \"Load more\". 0 shows all of them." },
+    { name: "loadMoreLabel", type: "string", default: '"Load more"', description: "Label of the button under the list." },
     { name: "emptyText", type: "string", default: '"Nothing here yet. Try another category."', description: "Shown when a filter matches nothing." },
     { name: "containerClassName", type: "string", default: '"max-w-content"', description: "Width of the content column." },
     { name: "id", type: "string", default: '"news"', description: "Section id." },
@@ -31,6 +34,7 @@ export const meta: CatalogueItem = {
   changelog: [
     { version: "1.0", date: "2026-10-28", notes: "First release. Built with the Verb news page from the client's Figma news template (grid and list are the two options drawn there)." },
     { version: "1.1", date: "2026-10-28", notes: "List rows carry the story's artwork as a 2:1 thumbnail (96 / 160 / 200px), as drawn in the template. Rows without an image are unchanged." },
+    { version: "1.4", date: "2026-10-28", notes: "Long indexes open at 12 stories with a Load more under them (`pageSize`). Needed <Reveal> to learn `watch`: it now reveals whatever has appeared since its last run and leaves the rest alone, so loaded-in stories are not invisible and the ones already there do not replay." },
     { version: "1.3", date: "2026-10-28", notes: "The row-width control is one icon button that draws the current width, with the three options behind it (closes on a pick, on Escape and on an outside click). Three digits sitting on the bar said nothing and never went away." },
     { version: "1.2", date: "2026-10-28", notes: "Grid cards lost their frame: picture, then category, headline and read time straight on the page, as in the template. Rows can be 3, 4 or 5 across (new `columns`, picker beside the view switch, headline size follows), and headlines no longer shift on hover \u2014 only the picture moves. Fixes stories staying invisible after a filter click (the reveal is keyed now) and a hover border that used an undefined token." },
   ],

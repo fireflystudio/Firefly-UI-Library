@@ -28,6 +28,9 @@ type RevealProps<T extends ElementType> = {
   delay?: number;
   /** fraction of the element that must be visible (default 0.2) */
   amount?: number;
+  /** Change this when the children change (a filter, a page of "load more"). Anything that has
+   *  appeared since the last run is given a delay and revealed; what is already in stays in. */
+  watch?: unknown;
 } & Omit<ComponentPropsWithoutRef<T>, "as" | "children">;
 
 export function Reveal<T extends ElementType = "div">({
@@ -36,6 +39,7 @@ export function Reveal<T extends ElementType = "div">({
   stagger = 90,
   delay = 0,
   amount = 0.2,
+  watch,
   ...rest
 }: RevealProps<T>) {
   const Tag = (as ?? "div") as ElementType;
@@ -47,7 +51,10 @@ export function Reveal<T extends ElementType = "div">({
     document.documentElement.dataset.revealReady = "";
 
     const items = Array.from(root.querySelectorAll<HTMLElement>("[data-reveal]"));
-    const targets = root.hasAttribute("data-reveal") ? [root, ...items] : items;
+    const all = root.hasAttribute("data-reveal") ? [root, ...items] : items;
+    /* Only what has not been revealed yet, so a re-run never replays the ones already in. */
+    const targets = all.filter((el) => !el.hasAttribute("data-in"));
+    if (!targets.length) return;
     targets.forEach((el, i) => {
       el.style.setProperty("--reveal-delay", `${delay + i * stagger}ms`);
     });
@@ -59,7 +66,7 @@ export function Reveal<T extends ElementType = "div">({
       },
       { amount }
     );
-  }, [amount, delay, stagger]);
+  }, [amount, delay, stagger, watch]);
 
   return (
     <Tag ref={ref} {...rest}>
