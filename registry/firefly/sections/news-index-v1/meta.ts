@@ -10,7 +10,7 @@ export const meta: CatalogueItem = {
   interactions: [
     "Click a category to filter; \"All\" clears it.",
     "The switch top right changes between grid and list; both views hold the same stories.",
-    "3 / 4 / 5 (grid view, wide screens) sets how many cards fit across.",
+    "The bars icon (grid view, wide screens) opens 3 / 4 / 5 per row; it draws the width that is on.",
     "On hover only the picture pushes in by 3%; no type moves.",
   ],
   props: [
@@ -31,6 +31,7 @@ export const meta: CatalogueItem = {
   changelog: [
     { version: "1.0", date: "2026-10-28", notes: "First release. Built with the Verb news page from the client's Figma news template (grid and list are the two options drawn there)." },
     { version: "1.1", date: "2026-10-28", notes: "List rows carry the story's artwork as a 2:1 thumbnail (96 / 160 / 200px), as drawn in the template. Rows without an image are unchanged." },
+    { version: "1.3", date: "2026-10-28", notes: "The row-width control is one icon button that draws the current width, with the three options behind it (closes on a pick, on Escape and on an outside click). Three digits sitting on the bar said nothing and never went away." },
     { version: "1.2", date: "2026-10-28", notes: "Grid cards lost their frame: picture, then category, headline and read time straight on the page, as in the template. Rows can be 3, 4 or 5 across (new `columns`, picker beside the view switch, headline size follows), and headlines no longer shift on hover \u2014 only the picture moves. Fixes stories staying invisible after a filter click (the reveal is keyed now) and a hover border that used an undefined token." },
   ],
   usedOn: ["verb"],
