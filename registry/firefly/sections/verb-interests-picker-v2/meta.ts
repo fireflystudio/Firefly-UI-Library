@@ -29,6 +29,12 @@ export const meta: CatalogueItem = {
   ],
   changelog: [
     {
+      version: "2.2",
+      date: "2026-10-28",
+      notes:
+        "Field focus and chip hover use border-24. They were set to a token the base does not define, so on a site without that variable they fell back to currentColor and went black.",
+    },
+    {
       version: "2.1",
       date: "2026-10-27",
       notes:

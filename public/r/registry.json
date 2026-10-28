@@ -605,7 +605,7 @@
       "name": "news-index-v1",
       "type": "registry:block",
       "title": "News Index v1",
-      "description": "The body of a news page: category filters, a grid / list switch and the stories. Grid is three cards across on desktop with an optional 16:9 image; list is full-width rows with a 2:1 thumbnail, the headline and the category on the right, for skimming a lot of stories.",
+      "description": "The body of a news page: category filters, a grid / list switch and the stories. Grid is three to five pictures across with the category, the headline and the read time under each one — no frame; list is full-width rows with a 2:1 thumbnail, the headline and the category on the right, for skimming a lot of stories.",
       "files": [
         {
           "path": "registry/firefly/sections/news-index-v1/news-index-v1.tsx",

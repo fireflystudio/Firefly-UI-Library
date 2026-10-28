@@ -28,6 +28,12 @@ export const meta: CatalogueItem = {
       notes:
         "First release. Built with the Verb news page. The design's 1050px column was narrowed to the house 760px (at 1050 a line of 17px type runs past 110 characters) and body type is 16/17/17, a step above the house body size, because this is the one page people read top to bottom.",
     },
+    {
+      version: "1.1",
+      date: "2026-10-28",
+      notes:
+        "The pull-quote rule uses border-16. It was set to a token the base does not define, so on a site without that variable it fell back to currentColor and came out black.",
+    },
   ],
   usedOn: ["verb"],
   files: [{ path: "registry/firefly/sections/news-article-v1/news-article-v1.tsx", target: "components/sections/news-article-v1.tsx", type: "registry:component" }],

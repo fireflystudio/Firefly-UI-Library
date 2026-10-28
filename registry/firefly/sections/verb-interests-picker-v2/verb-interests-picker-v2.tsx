@@ -142,7 +142,7 @@ export function InterestsPickerV2({
           {/* A real field: the card writes the demo phrase itself, and from the first keystroke it
               is the reader's (client, 2026-10-27). */}
           <label
-            className="flex cursor-text items-center overflow-hidden border border-border-10 transition-colors duration-150 ease-out focus-within:border-border-20"
+            className="flex cursor-text items-center overflow-hidden border border-border-10 transition-colors duration-150 ease-out focus-within:border-border-24"
             style={{ borderRadius: u(10), padding: `${u(13)} ${u(14)}`, minHeight: u(46) }}
           >
             {/* The field is as wide as what is in it (the hidden twin sets the width), so the drawn
@@ -194,7 +194,7 @@ export function InterestsPickerV2({
                   className={`cursor-pointer rounded-full border leading-none transition-colors duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--v-ink)] ${
                     on
                       ? "border-[var(--v-ink)] bg-[var(--v-ink)] text-white"
-                      : "border-border-10 text-text-tertiary hover:border-border-20 hover:text-text-primary"
+                      : "border-border-10 text-text-tertiary hover:border-border-24 hover:text-text-primary"
                   }`}
                   style={{ padding: `${u(9)} ${u(14)}`, fontSize: fu(13) }}
                 >

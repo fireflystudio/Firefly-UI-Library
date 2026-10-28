@@ -150,7 +150,7 @@ export function NewsArticle({
             }
             if (block.type === "quote") {
               return (
-                <figure key={`${i}-quote`} {...reveal} className="mt-8 border-l-2 border-border-20 pl-5 md:mt-10 md:pl-6">
+                <figure key={`${i}-quote`} {...reveal} className="mt-8 border-l-2 border-border-16 pl-5 md:mt-10 md:pl-6">
                   <blockquote className="text-pretty text-[20px] leading-[1.4] tracking-[-0.02em] text-text-primary md:text-[22px]">
                     {block.text}
                   </blockquote>
