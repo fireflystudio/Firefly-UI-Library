@@ -13,7 +13,8 @@ export type NewsItem = {
   category?: string;
   /** Read time or date, e.g. "3 min read" */
   meta?: string;
-  /** 16:9 artwork for the grid card (an <Image fill>). Without it the card is type only. */
+  /** Artwork (an <Image fill>). 16:9 on the grid card, cropped to 2:1 as the list row thumbnail.
+   *  Without it the card and the row are type only. */
   image?: ReactNode;
 };
 
@@ -46,8 +47,8 @@ export type NewsIndexProps = {
  * The body of a news page: a row of category filters, a grid / list switch, and the stories in
  * whichever view is on. Grid = three cards across on desktop (two on tablet, one on a phone), each
  * with an optional 16:9 image, the category, the headline and the read time. List = full-width
- * rows separated by hairlines, the headline on the left and the category on the right, which is
- * the view for skimming a lot of stories.
+ * rows separated by hairlines, a 2:1 thumbnail, the headline, and the category on the right, which
+ * is the view for skimming a lot of stories.
  *
  * Filtering and the switch are client state; both views render the same items, so nothing is lost
  * when the reader switches. Cards lift 3px on hover and row titles nudge 5px right, like every
@@ -171,8 +172,15 @@ export function NewsIndex({
               <li key={item.href} {...reveal}>
                 <Link
                   href={item.href}
-                  className="group flex items-start gap-6 border-t border-border-10 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-interactive md:py-6"
+                  className="group flex items-center gap-4 border-t border-border-10 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-interactive md:gap-6 md:py-6"
                 >
+                  {item.image ? (
+                    <span className="relative block aspect-[2/1] w-[96px] shrink-0 overflow-hidden rounded-tile bg-surface-muted md:w-[160px] xl:w-[200px]">
+                      <span className="absolute inset-0 block transition-[scale] duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none">
+                        {item.image}
+                      </span>
+                    </span>
+                  ) : null}
                   <span className="flex min-w-0 flex-1 flex-col">
                     <span className="text-pretty text-[16px] font-medium leading-[1.4] tracking-[-0.01em] text-text-primary transition-[translate] duration-200 ease-out group-hover:translate-x-[5px] motion-reduce:transition-none md:text-[17px] xl:text-[18px]">
                       {item.title}
